@@ -33,16 +33,6 @@ create table ProductTypes
 )
 go
 
-create table Brands
-(
-	brandId varchar(10) primary key,
-	typeId varchar(10) foreign key references ProductTypes(typeId),
-	brandName nvarchar(100),
-	brandIcon varchar(100),
-	brandStatus bit 
-)
-go
-
 create table Users
 (
 	userId varchar(10) primary key,
@@ -99,6 +89,16 @@ create table Products
 	isApproved bit,
 	datePosted datetime not null default getdate(),
 	productStatus bit
+)
+go
+
+create table Brands
+(
+	brandId varchar(10) primary key,
+	productId varchar(10) foreign key references Products(productId),
+	brandName nvarchar(100),
+	brandIcon varchar(100),
+	brandStatus bit 
 )
 go
 

@@ -49,9 +49,9 @@ public class Brands implements Serializable {
     private String brandIcon;
     @Column(name = "brandStatus")
     private Boolean brandStatus;
-    @JoinColumn(name = "typeId", referencedColumnName = "typeId")
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
     @ManyToOne
-    private ProductTypes typeId;
+    private Products productId;
 
     public Brands() {
     }
@@ -92,12 +92,12 @@ public class Brands implements Serializable {
         this.brandStatus = brandStatus;
     }
 
-    public ProductTypes getTypeId() {
-        return typeId;
+    public Products getProductId() {
+        return productId;
     }
 
-    public void setTypeId(ProductTypes typeId) {
-        this.typeId = typeId;
+    public void setProductId(Products productId) {
+        this.productId = productId;
     }
 
     @Override
