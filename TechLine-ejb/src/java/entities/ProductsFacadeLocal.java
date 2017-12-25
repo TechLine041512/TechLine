@@ -29,5 +29,9 @@ public interface ProductsFacadeLocal {
     List<Products> findRange(int[] range);
 
     int count();
+
+    List<Products> getListProductByDatePost();
+
+    List<Products> getListProductByDiscount();
     
 }
