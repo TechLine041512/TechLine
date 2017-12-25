@@ -103,7 +103,7 @@
                     <div class="modal-footer">
                         <div class="forgot login-footer">
                             <span>Looking to 
-                                <a href="javascript: showRegisterForm();">Đăng Ký</a>
+                                <a href="javascript: showRegisterForm();">Register</a>
                                 ?</span>
                         </div>
                         <div class="forgot register-footer" style="display:none">
@@ -132,7 +132,7 @@
             </section>	
             <section class="header_text sub">
                 <img class="pageBanner" src="resource/themes/images/pageBanner.png" alt="New products" >
-                <h4><span>(Title) Categories Detail</span></h4>
+                <h4><span>${category.categoryName}</span></h4>
             </section>
             <section class="main-content">
 
@@ -143,9 +143,8 @@
                                 <li class="span3">
                                     <div class="product-box">
                                         <span class="sale_tag"></span>												
-                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/9.jpg"></a><br/>
-                                        <a href="product_detail.html" class="title">${item.productName}</a><br/>
-                                        <a href="#" class="category">Phasellus consequat</a>
+                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="resource/themes/images/ladies/9.jpg"></a><br/>
+                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title">${item.productName}</a><br/>
                                         <p class="price">${item.productPrice}</p>
                                     </div>
                                 </li>       

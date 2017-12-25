@@ -33,7 +33,7 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST" class="search_form">
+                    <form method="POST">
                         <input type="text" class="input-block-level search-query" Placeholder="eg. Sony">
                     </form>
                 </div>
@@ -179,7 +179,6 @@
                                                             <span class="sale_tag"></span>
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="resource/themes/images/ladies/1.jpg" alt="" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title">${item.productName}</a><br/>
-                                                            <a href="#" class="category">Commodo consequat</a>
                                                             <p class="price">${item.productPrice}</p>
                                                         </div>
                                                     </li>
@@ -191,9 +190,8 @@
                                                 <c:forEach items="${ListProductByDatePost2}" var="item2">
                                                     <li class="span3">
                                                         <div class="product-box">
-                                                            <p><a href="productDetail.jsp"><img src="resource/themes/images/ladies/5.jpg" alt="" /></a></p>
-                                                            <a href="productDetail.jsp" class="title">${item2.productName}</a><br/>
-                                                            <a href="products.html" class="category">Quis nostrud</a>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="resource/themes/images/ladies/5.jpg" alt="" /></a></p>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title">${item2.productName}</a><br/>
                                                             <p class="price">${item2.productPrice}</p>
                                                         </div>
                                                     </li>
@@ -222,10 +220,9 @@
                                                     <li class="span3">
                                                         <div class="product-box">
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="productDetail.jsp"><img src="resource/themes/images/cloth/bootstrap-women-ware2.jpg" alt="" /></a></p>
-                                                            <a href="productDetail.jsp" class="title">${itemDiscount.productName}</a><br/>
-                                                            <a href="products.html" class="category">Commodo consequat</a>
-                                                            <p class="price"${itemDiscount.productPrice}</p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="resource/themes/images/cloth/bootstrap-women-ware2.jpg" alt="" /></a></p>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title">${itemDiscount.productName}</a><br/>
+                                                            <p class="price">${itemDiscount.productPrice}</p>
                                                         </div>
                                                     </li>
                                                 </c:forEach>    
@@ -236,9 +233,8 @@
                                                 <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
                                                     <li class="span3">
                                                         <div class="product-box">
-                                                            <p><a href="productDetail.jsp"><img src="resource/themes/images/cloth/bootstrap-women-ware4.jpg" alt="" /></a></p>
-                                                            <a href="productDetail.jsp" class="title">${itemDiscount2.productName}</a><br/>
-                                                            <a href="products.html" class="category">Quis nostrud</a>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="resource/themes/images/cloth/bootstrap-women-ware4.jpg" alt="" /></a></p>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">${itemDiscount2.productPrice}</p>
                                                         </div>
                                                     </li>     

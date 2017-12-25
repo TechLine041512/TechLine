@@ -56,6 +56,7 @@ public class viewServlet extends HttpServlet {
                         listProduct.addAll(productTypes.getProductsCollection());
                     }
                     request.setAttribute("listProduct", listProduct);
+                    request.setAttribute("category", categories);
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
                     break;
