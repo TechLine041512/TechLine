@@ -10,10 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author nth15
- */
 @Stateless
 public class ProductsEditHistoryFacade extends AbstractFacade<ProductsEditHistory> implements ProductsEditHistoryFacadeLocal {
     @PersistenceContext(unitName = "TechLine-ejbPU")

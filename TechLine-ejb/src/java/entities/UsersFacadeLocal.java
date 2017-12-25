@@ -9,10 +9,6 @@ package entities;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
- *
- * @author nth15
- */
 @Local
 public interface UsersFacadeLocal {
 
@@ -30,4 +26,5 @@ public interface UsersFacadeLocal {
 
     int count();
     
+    Users checkLogin(String userID, String pwd);
 }

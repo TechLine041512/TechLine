@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -66,31 +67,18 @@
                     <a href="index.html" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
-                            <li><a href="categoryDetail.jsp">Woman</a>					
-                                <ul>
-                                    <li><a href="typeDetail.jsp">Lacinia nibh</a></li>									
-                                    <li><a href="typeDetail.jsp">Eget molestie</a></li>
-                                    <li><a href="typeDetail.jsp">Varius purus</a></li>									
-                                </ul>
-                            </li>															
-                            <li><a href="categoryDetail.jsp">Man</a></li>			
-                            <li><a href="categoryDetail.jsp">Sport</a>
-                                <ul>									
-                                    <li><a href="typeDetail.jsp">Gifts and Tech</a></li>
-                                    <li><a href="typeDetail.jsp">Ties and Hats</a></li>
-                                    <li><a href="typeDetail.jsp">Cold Weather</a></li>
-                                </ul>
-                            </li>							
-                            <li><a href="categoryDetail.jsp">Hangbag</a></li>
-                            <li><a href="categoryDetail.jsp">Best Seller</a></li>
-                            <li><a href="categoryDetail.jsp">Top Seller</a></li>
+                            <c:forEach items="${listCategories}" var="item">
+                                <li>
+                                    <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>					
+                                </li>
+                            </c:forEach>
                         </ul>
                     </nav>
                 </div>
             </section>
             <section class="header_text sub">
                 <img class="pageBanner" src="resource/themes/images/pageBanner.png" alt="New products" >
-                <h4><span>Sony TXT-166 (Title Product)</span></h4>
+                <h4><span>${product.productName}</span></h4>
             </section>
             <section class="main-content">				
                 <div class="row">						
@@ -115,16 +103,16 @@
                             </div>
                             <div class="span5">
                                 <address>
-                                    <strong>Product Code:</strong> <span>Product 14</span><br>
-                                    <strong>Brand:</strong> <span>Apple</span><br>
-                                    <strong>Weight:</strong> <span>100(cm)</span><br>
-                                    <strong>Width:</strong> <span>50(cm)</span><br>
-                                    <strong>Heigth:</strong> <span>50(cm)</span><br>
-                                    <strong>Length:</strong> <span>50(cm)</span><br>
+                                    <strong>Product Code:</strong> <span>${product.productId}</span><br>
+                                    <strong>Brand:</strong> <span>${product.brandId.brandName}</span><br>
+                                    <strong>Weight:</strong> <span>${product.productWeight}(cm)</span><br>
+                                    <strong>Width:</strong> <span>${product.productWidth}(cm)</span><br>
+                                    <strong>Heigth:</strong> <span>${product.productHeigth}(cm)</span><br>
+                                    <strong>Length:</strong> <span>${product.productLength}(cm)</span><br>
                                     <strong>Rating Points:</strong> <span style="color: yellow"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span><br>
-                                    <strong>Availability:</strong> <span style="color: red;">Out Of Stock -</span><span style="color: green;">- Còn Hàng</span><br>								
+                                    <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
                                 </address>									
-                                <h4>Price: <strong style="color: red;"> $587.50</strong> <strong><strike> $587.50</strike></strong></h4>
+                                <h4>Price: <strong style="color: red;"> ${product.productPrice}</strong> <strong><strike> $587.50</strike></strong></h4>
                             </div>
                             <div class="span5">
                                 <form class="form-inline">                                    
@@ -141,47 +129,36 @@
                                     <li class=""><a href="#profile">Summary</a></li>
                                 </ul>							 
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="home">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem</div>
-                                    <div class="tab-pane" id="profile">
-                                        <table class="table table-striped shop_attributes">	
-                                            <tbody>
-                                                <tr class="">
-                                                    <th>Size</th>
-                                                    <td>Large, Medium, Small, X-Large</td>
-                                                </tr>		
-                                                <tr class="alt">
-                                                    <th>Colour</th>
-                                                    <td>Orange, Yellow</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <div class="tab-pane active" id="home">${product.productDesc}</div>
+                                    <div class="tab-pane" id="profile">${product.productSummary}</div>
                                 </div>							
                             </div>
                             <div class="span9">
                                 <h4 class="title">
-                                    <span class="pull-left"><span class="text"><strong>Bình</strong> Luận</span></span>
+                                    <span class="pull-left"><span class="text"><strong>Comment</strong></span></span>
                                     <span class="pull-right">
                                     </span>
                                 </h4>
                                 <div class="accordion-panel"><!---.accordion-panel--->
                                     <div id="comments-section"><!---Start #comments-section Binh luan cua khach hang ve san pham--->
-                                        <h4>tien@gmail.com</h4>
-                                        <p>Sản phẩm tốt, chất lượng cao</p>
+                                        <c:forEach items="${product.productsCommentCollection}" var="productComment">
+                                            <h4>${productComment.userId.userId}</h4>
+                                            <p>${productComment.commentContent}</p>
+                                        </c:forEach>
                                     </div><!---End #comments-section--->
                                     <div id="write-review-rating"><!---Start #write-review-rating Phan viet binh luan va cham sao cho product--->
                                         <form method="post" action="BookServlet">
-                                            <input type="hidden" name="bookDetailID" value="${bookDetail.bookID}">
-                                            <h4>Bình luận</h4>
+                                            <input type="hidden" name="bookDetailID" value="${product.productId}">
+                                            <h4>Comment</h4>
                                             <h5>Giới hạn bình luận là 500 chữ</h5>
                                             <textarea name="comment" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;"></textarea>
                                             <div class="clearfix"></div>
-                                            <button type="submit" id="submit-review" style="height:50px;" value="Comment" name="action"><i class="fa fa-check-circle"></i> Gửi bình luận</button>
+                                            <button type="submit" id="submit-review" style="height:50px;" value="Comment" name="action"><i class="fa fa-check-circle"></i> Send Comment</button>
                                         </form>
                                     </div><br>  <!---End #write-review-rating--->
                                 </div><!---.accordion-panel end--->       
                             </div>  
-                            <div class="span9">	
+                            <div class="span12">	
                                 <br>
                                 <h4 class="title">
                                     <span class="pull-left"><span class="text"><strong>Related</strong> Products</span></span>
@@ -218,7 +195,15 @@
                                                         <a href="#" class="category">Erat gravida</a>
                                                         <p class="price">$28</p>
                                                     </div>
-                                                </li>												
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="product-box">												
+                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/4.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title">Praesent tempor sem</a><br/>
+                                                        <a href="#" class="category">Erat gravida</a>
+                                                        <p class="price">$28</p>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="item">
@@ -231,7 +216,16 @@
                                                         <a href="#" class="category">Phasellus consequat</a>
                                                         <p class="price">$341</p>
                                                     </div>
-                                                </li>       
+                                                </li>
+                                                <li class="span3">
+                                                    <div class="product-box">
+                                                        <span class="sale_tag"></span>												
+                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
+                                                        <a href="#" class="category">Phasellus consequat</a>
+                                                        <p class="price">$341</p>
+                                                    </div>
+                                                </li>
                                                 <li class="span3">
                                                     <div class="product-box">												
                                                         <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/2.jpg"></a><br/>

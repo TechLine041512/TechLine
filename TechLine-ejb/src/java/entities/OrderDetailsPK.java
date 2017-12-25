@@ -13,10 +13,6 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author nth15
- */
 @Embeddable
 public class OrderDetailsPK implements Serializable {
     @Basic(optional = false)
