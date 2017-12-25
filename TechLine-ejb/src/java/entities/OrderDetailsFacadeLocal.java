@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author nth15
+ * @author Tien
  */
 @Local
 public interface OrderDetailsFacadeLocal {

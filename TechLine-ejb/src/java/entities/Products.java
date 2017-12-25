@@ -27,10 +27,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author nth15
- */
 @Entity
 @Table(name = "Products", catalog = "TechLine", schema = "dbo")
 @XmlRootElement
@@ -108,14 +104,15 @@ public class Products implements Serializable {
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     @ManyToOne
     private ProductTypes typeId;
+    @JoinColumn(name = "brandId", referencedColumnName = "brandId")
+    @ManyToOne
+    private Brands brandId;
     @OneToMany(mappedBy = "productId")
     private Collection<ProductsComment> productsCommentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Collection<OrderDetails> orderDetailsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Collection<ProductRating> productRatingCollection;
-    @OneToMany(mappedBy = "productId")
-    private Collection<Brands> brandsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Collection<ProductsEditHistory> productsEditHistoryCollection;
 
@@ -283,6 +280,14 @@ public class Products implements Serializable {
         this.typeId = typeId;
     }
 
+    public Brands getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Brands brandId) {
+        this.brandId = brandId;
+    }
+
     @XmlTransient
     public Collection<ProductsComment> getProductsCommentCollection() {
         return productsCommentCollection;
@@ -308,15 +313,6 @@ public class Products implements Serializable {
 
     public void setProductRatingCollection(Collection<ProductRating> productRatingCollection) {
         this.productRatingCollection = productRatingCollection;
-    }
-
-    @XmlTransient
-    public Collection<Brands> getBrandsCollection() {
-        return brandsCollection;
-    }
-
-    public void setBrandsCollection(Collection<Brands> brandsCollection) {
-        this.brandsCollection = brandsCollection;
     }
 
     @XmlTransient

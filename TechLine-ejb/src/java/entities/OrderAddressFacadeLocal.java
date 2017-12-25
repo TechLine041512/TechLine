@@ -9,10 +9,6 @@ package entities;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
- *
- * @author nth15
- */
 @Local
 public interface OrderAddressFacadeLocal {
 

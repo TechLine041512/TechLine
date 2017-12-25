@@ -7,23 +7,20 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author nth15
- */
 @Entity
 @Table(name = "Brands", catalog = "TechLine", schema = "dbo")
 @XmlRootElement
@@ -49,9 +46,8 @@ public class Brands implements Serializable {
     private String brandIcon;
     @Column(name = "brandStatus")
     private Boolean brandStatus;
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
-    @ManyToOne
-    private Products productId;
+    @OneToMany(mappedBy = "brandId")
+    private Collection<Products> productsCollection;
 
     public Brands() {
     }
@@ -92,12 +88,13 @@ public class Brands implements Serializable {
         this.brandStatus = brandStatus;
     }
 
-    public Products getProductId() {
-        return productId;
+    @XmlTransient
+    public Collection<Products> getProductsCollection() {
+        return productsCollection;
     }
 
-    public void setProductId(Products productId) {
-        this.productId = productId;
+    public void setProductsCollection(Collection<Products> productsCollection) {
+        this.productsCollection = productsCollection;
     }
 
     @Override

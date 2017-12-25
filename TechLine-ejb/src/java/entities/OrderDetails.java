@@ -17,10 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author nth15
- */
 @Entity
 @Table(name = "OrderDetails", catalog = "TechLine", schema = "dbo")
 @XmlRootElement

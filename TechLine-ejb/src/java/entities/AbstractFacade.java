@@ -9,10 +9,6 @@ package entities;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author nth15
- */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
 

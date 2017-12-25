@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -120,24 +121,11 @@
                     <a href="index.html" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
-                            <li><a href="categoryDetail.jsp">Woman</a>					
-                                <ul>
-                                    <li><a href="typeDetail.jsp">Lacinia nibh</a></li>									
-                                    <li><a href="typeDetail.jsp">Eget molestie</a></li>
-                                    <li><a href="typeDetail.jsp">Varius purus</a></li>									
-                                </ul>
-                            </li>															
-                            <li><a href="categoryDetail.jsp">Man</a></li>			
-                            <li><a href="categoryDetail.jsp">Sport</a>
-                                <ul>									
-                                    <li><a href="typeDetail.jsp">Gifts and Tech</a></li>
-                                    <li><a href="typeDetail.jsp">Ties and Hats</a></li>
-                                    <li><a href="typeDetail.jsp">Cold Weather</a></li>
-                                </ul>
-                            </li>							
-                            <li><a href="categoryDetail.jsp">Hangbag</a></li>
-                            <li><a href="categoryDetail.jsp">Best Seller</a></li>
-                            <li><a href="categoryDetail.jsp">Top Seller</a></li>
+                            <c:forEach items="${listCategories}" var="item">
+                                <li>
+                                    <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>					
+                                </li>
+                            </c:forEach>
                         </ul>
                     </nav>
                 </div>
@@ -151,81 +139,17 @@
                 <div class="row">						
                     <div class="span9">								
                         <ul class="thumbnails listing-products">
-                            <li class="span3">
-                                <div class="product-box">
-                                    <span class="sale_tag"></span>												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/9.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                    <a href="#" class="category">Phasellus consequat</a>
-                                    <p class="price">$341</p>
-                                </div>
-                            </li>       
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/8.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Praesent tempor sem</a><br/>
-                                    <a href="#" class="category">Erat gravida</a>
-                                    <p class="price">$28</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">
-                                    <span class="sale_tag"></span>												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/7.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Wuam ultrices rutrum</a><br/>
-                                    <a href="#" class="category">Suspendisse aliquet</a>
-                                    <p class="price">$341</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <span class="sale_tag"></span>
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/6.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Praesent tempor sem sodales</a><br/>
-                                    <a href="#" class="category">Nam imperdiet</a>
-                                    <p class="price">$49</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">                                        												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                    <a href="#" class="category">Congue diam congue</a>
-                                    <p class="price">$35</p>
-                                </div>
-                            </li>       
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/2.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                    <a href="#" class="category">Gravida placerat</a>
-                                    <p class="price">$61</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/3.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Quam ultrices rutrum</a><br/>
-                                    <a href="#" class="category">Orci et nisl iaculis</a>
-                                    <p class="price">$233</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/4.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                    <a href="#" class="category">Urna nec lectus mollis</a>
-                                    <p class="price">$134</p>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="product-box">												
-                                    <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/5.jpg"></a><br/>
-                                    <a href="product_detail.html" class="title">Luctus quam ultrices</a><br/>
-                                    <a href="#" class="category">Suspendisse aliquet</a>
-                                    <p class="price">$261</p>
-                                </div>
-                            </li>
+                            <c:forEach items="${listProduct}" var="item">
+                                <li class="span3">
+                                    <div class="product-box">
+                                        <span class="sale_tag"></span>												
+                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/9.jpg"></a><br/>
+                                        <a href="product_detail.html" class="title">${item.productName}</a><br/>
+                                        <a href="#" class="category">Phasellus consequat</a>
+                                        <p class="price">${item.productPrice}</p>
+                                    </div>
+                                </li>       
+                            </c:forEach>
                         </ul>								
                         <hr>
                         <div class="pagination pagination-small pagination-centered">

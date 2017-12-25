@@ -10,10 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author nth15
- */
 @Stateless
 public class SellerFacade extends AbstractFacade<Seller> implements SellerFacadeLocal {
     @PersistenceContext(unitName = "TechLine-ejbPU")

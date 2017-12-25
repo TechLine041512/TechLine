@@ -32,11 +32,12 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            request.setAttribute("ListProductByDatePost1", productsFacade.getListProductByDatePost().subList(0, 3));
-            request.setAttribute("ListProductByDatePost2", productsFacade.getListProductByDatePost().subList(4, 7));
+        
+            request.setAttribute("ListProductByDatePost1", productsFacade.getListProductByDatePost().subList(0, 4));
+            request.setAttribute("ListProductByDatePost2", productsFacade.getListProductByDatePost().subList(5, 9));
             
-            request.setAttribute("ListProductByDiscount1", productsFacade.getListProductByDiscount().subList(0, 3));
-            request.setAttribute("ListProductByDiscount2", productsFacade.getListProductByDiscount().subList(4, 7));
+            request.setAttribute("ListProductByDiscount1", productsFacade.getListProductByDiscount().subList(0, 4));
+            request.setAttribute("ListProductByDiscount2", productsFacade.getListProductByDiscount().subList(5, 9));
             
             request.setAttribute("listCategories", categoriesFacade.findAll());
             

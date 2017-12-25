@@ -20,10 +20,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author nth15
- */
 @Entity
 @Table(name = "Customers", catalog = "TechLine", schema = "dbo")
 @XmlRootElement

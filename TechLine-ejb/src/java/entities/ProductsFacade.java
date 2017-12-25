@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entities;
 
 import java.util.List;
@@ -11,13 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author nth15
- */
+
 @Stateless
 public class ProductsFacade extends AbstractFacade<Products> implements ProductsFacadeLocal {
-
     @PersistenceContext(unitName = "TechLine-ejbPU")
     private EntityManager em;
 
@@ -29,7 +26,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
     public ProductsFacade() {
         super(Products.class);
     }
-
+    
     @Override
     public List<Products> getListProductByDatePost() {
         try { 
@@ -51,6 +48,4 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         }
         return null;
     }
-    
-    
 }
