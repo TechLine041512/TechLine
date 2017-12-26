@@ -27,6 +27,4 @@ public interface UsersFacadeLocal {
     int count();
     
     Users checkLogin(String userID, String pwd);
-    
-    List<Users> getUserByRoleNStatus(String role, boolean status);
 }

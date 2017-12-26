@@ -5,7 +5,6 @@
  */
 package entities;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,17 +36,5 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
             e.printStackTrace();
         }
         return (Users) q.getSingleResult();
-    }
-
-    @Override
-    public List<Users> getUserByRoleNStatus(String role, boolean status) {
-        Query q = em.createQuery("SELECT u FROM Users u WHERE u.role = :role and u.userStatus = :userStatus");
-        try {
-            q.setParameter("role", role);
-            q.setParameter("userStatus", status);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return q.getResultList();
     }
 }

@@ -6,13 +6,8 @@
 
 package servlets;
 
-import entities.BrandsFacadeLocal;
-import entities.CategoriesFacadeLocal;
-import entities.ProductTypesFacadeLocal;
-import entities.ProductsFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,47 +28,20 @@ public class searchProductsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    @EJB
-    ProductsFacadeLocal productsFacadeLocal;
-    
-    @EJB
-    BrandsFacadeLocal brandsFacadeLocal;
-    
-    @EJB
-    ProductTypesFacadeLocal typesFacadeLocal;
-    
-    @EJB
-    CategoriesFacadeLocal categoriesFacadeLocal;
-    
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = request.getParameter("action");
-            switch (action) {
-                case "ProductList": 
-                    request.setAttribute("lsProductEnabble", productsFacadeLocal.findAll().subList(0, 9));
-                    request.setAttribute("lsProductDisable", productsFacadeLocal.findAll().subList(0, 9));
-                    request.getRequestDispatcher("admin/product.jsp").forward(request, response);
-                    break;
-                 case "CategoriesList": 
-                    request.setAttribute("lsCategoryEnabble", categoriesFacadeLocal.findAll().subList(0, 9));
-                    request.setAttribute("lsCategoryDisable", categoriesFacadeLocal.findAll().subList(0, 9));
-                    request.setAttribute("lsBrandEnable", brandsFacadeLocal.findAll().subList(0, 9));
-                    request.setAttribute("lsBrandDisable", brandsFacadeLocal.findAll().subList(0, 9));
-                    request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
-                    break; 
-                 case "ProductTypeList": 
-                    request.setAttribute("listPrdTypeEnable", typesFacadeLocal.findAll().subList(0, 9));
-                    request.setAttribute("listPrdTypeDisable", typesFacadeLocal.findAll().subList(0, 9));
-                    request.getRequestDispatcher("admin/type.jsp").forward(request, response);
-                    break;       
-                 
-                default : break;
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet searchProductsServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet searchProductsServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

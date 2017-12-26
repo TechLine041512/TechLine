@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,98 +16,19 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
-    <script>
-        function openCreateProductForm(){
-            //showCreateProductForm();
-            setTimeout(function(){
-                $('#createProductModal').modal('show');    
-            }, 230);
-        }
-        
-        function showCreateProductForm(){
-            $('#loginModal .registerBox').fadeOut('fast',function(){
-                $('.loginBox').fadeIn('fast');
-                $('.register-footer').fadeOut('fast',function(){
-                    $('.login-footer').fadeIn('fast');    
-                });
-
-                $('.modal-title').html('Login with');
-            });       
-             $('.error').removeClass('alert alert-danger').html(''); 
-        }
-    </script>
     <body>
-        
-         <!--Start Add new Product-->
-        <div class="modal fade login" id="createProductModal">
-            <div class="modal-dialog login animated">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">ADD NEW PRODUCT</h4>
-                    </div>
-                    
-                    <div class="modal-body">  
-                        <div class="box">
-                            <div class="content">
-                                <div class="error"></div>
-                                <div class="form loginBox">
-                                    <form method="post" action="viewServlet">
-                                        <table>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td><input id="username" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Description</td>
-                                                <td><input id="password" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sumary</td>
-                                                <td><input id="username" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Description</td>
-                                                <td><input id="password" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"></td>
-                                            </tr>
-                                            
-                                        </table>
-                                         
-                                        <input class="btn btn-inverse" style="width:100px;" type="submit" name="action" value="Add">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>Looking to 
-                                <a href="javascript: showRegisterForm();">Đăng Ký</a>
-                                ?</span>
-                        </div>
-                        <div class="forgot register-footer" style="display:none">
-                            <span>Already have an account?</span>
-                            <a href="javascript: showLoginForm();">Login</a>
-                        </div>
-                    </div>        
-                </div>
-            </div>
-        </div>
-        <!-- End Add new Product-->
 
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
@@ -128,43 +48,43 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="viewServlet?action=admin">
+                            <a href="dashboard.html">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li  >
-                            <a href="viewServlet?action=viewUser">
+                        <li>
+                            <a href="customer.jsp">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="searchProductsServlet?action=ProductList">
+                            <a href="table.html">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="searchProductsServlet?action=CategoriesList">
+                            <a href="categories.jsp">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="searchProductsServlet?action=ProductTypeList">
+                            <a href="type.jsp">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="admin/maps.html">
+                            <a href="maps.html">
                                 <i class="material-icons">location_on</i>
                                 <p>Maps</p>
                             </a>
                         </li>
                         <li>
-                            <a href="admin/notifications.html">
+                            <a href="notifications.html">
                                 <i class="material-icons text-gray">notifications</i>
                                 <p>Notifications</p>
                             </a>
@@ -227,19 +147,16 @@
                         </div>
                     </div>
                 </nav>
-                
-                
-              
+
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
                             <button class="btn-instagram btn" value="Block" name="action" type="submit">Xóa Sản Phẩm</button>    
-                            <button class="btn-instagram btn" value="permissions" onclick="openCreateProductForm();">Thêm Sản Phẩm</button>
+                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Thêm Sản Phẩm</button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                      <!--product Start-->
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product List</h4>
                                         <p class="category">Tech Line</p>
@@ -247,28 +164,48 @@
                                     <div class="card-content table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                            <th></th>
-                                            <th>Id</th>
-                                            <th>Type</th>
-                                            <th>Brand</th>
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            <th>Salary</th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${lsProductEnabble}" var="product">
-                                                    <tr>
-                                                        <td><input type="checkbox" value="" name="cbkPrdId"/></td>
-                                                        <td>${product.productId}</td>
-                                                        <td>Type</td>
-                                                        <td>User</td>
-                                                        <td>Brand</td>
-                                                        <td>${product.productName}</td>
-                                                        <td>${product.productPrice}</td>
-                                                        <td>${product.productQuantity}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                                
+                                                <tr>
+                                                    <td>Dakota Rice</td>
+                                                    <td>Niger</td>
+                                                    <td>Oud-Turnhout</td>
+                                                    <td class="text-primary">$36,738</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Minerva Hooper</td>
+                                                    <td>Curaçao</td>
+                                                    <td>Sinaai-Waas</td>
+                                                    <td class="text-primary">$23,789</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sage Rodriguez</td>
+                                                    <td>Netherlands</td>
+                                                    <td>Baileux</td>
+                                                    <td class="text-primary">$56,142</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Philip Chaney</td>
+                                                    <td>Korea, South</td>
+                                                    <td>Overland Park</td>
+                                                    <td class="text-primary">$38,735</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Doris Greene</td>
+                                                    <td>Malawi</td>
+                                                    <td>Feldkirchen in Kärnten</td>
+                                                    <td class="text-primary">$63,542</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mason Porter</td>
+                                                    <td>Chile</td>
+                                                    <td>Gloucester</td>
+                                                    <td class="text-primary">$78,615</td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
@@ -279,34 +216,61 @@
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product is disable</h4>
-                                        <p class="category">Here is a Product is disable</p>
+                                        <h4 class="title">Table on Plain Background</h4>
+                                        <p class="category">Here is a subtitle for this table</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
-                                            <thead class="text-primary">
-                                            <th></th>
-                                            <th>Id</th>
-                                            <th>Type</th>
-                                            <th>Brand</th>
+                                            <thead>
+                                            <th>ID</th>
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th>Salary</th>
+                                            <th>Country</th>
+                                            <th>City</th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${lsProductDisable}" var="product">
-                                                    <tr>
-                                                        <td><input type="checkbox" value="" name="cbkPrdId"/></td>
-                                                        <td>${product.productId}</td>
-                                                        <td>Type</td>
-                                                        <td>User</td>
-                                                        <td>Brand</td>
-                                                        <td>${product.productName}</td>
-                                                        <td>${product.productPrice}</td>
-                                                        <td>${product.productQuantity}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                                
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Dakota Rice</td>
+                                                    <td>$36,738</td>
+                                                    <td>Niger</td>
+                                                    <td>Oud-Turnhout</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Minerva Hooper</td>
+                                                    <td>$23,789</td>
+                                                    <td>Curaçao</td>
+                                                    <td>Sinaai-Waas</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Sage Rodriguez</td>
+                                                    <td>$56,142</td>
+                                                    <td>Netherlands</td>
+                                                    <td>Baileux</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Philip Chaney</td>
+                                                    <td>$38,735</td>
+                                                    <td>Korea, South</td>
+                                                    <td>Overland Park</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Doris Greene</td>
+                                                    <td>$63,542</td>
+                                                    <td>Malawi</td>
+                                                    <td>Feldkirchen in Kärnten</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>Mason Porter</td>
+                                                    <td>$78,615</td>
+                                                    <td>Chile</td>
+                                                    <td>Gloucester</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -338,23 +302,23 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="resource/assets/js/chartist.min.js"></script>
+    <script src="../resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="resource/assets/js/bootstrap-notify.js"></script>
+    <script src="../resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="resource/assets/js/material-dashboard.js"></script>
+    <script src="../resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="resource/assets/js/demo.js"></script>
+    <script src="../resource/assets/js/demo.js"></script>
 
 </html>
