@@ -15,13 +15,13 @@
         <meta name="viewport" content="width=device-width" />
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -40,50 +40,50 @@
 
                 <div class="logo">
                     <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="viewServlet?action=admin">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="customer.jsp">
+                        <li  >
+                            <a href="viewServlet?action=viewUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="searchProductsServlet?action=ProductList">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
+                            <a href="searchProductsServlet?action=CategoriesList">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="type.jsp">
+                            <a href="searchProductsServlet?action=ProductTypeList">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="maps.html">
+                            <a href="admin/maps.html">
                                 <i class="material-icons">location_on</i>
                                 <p>Maps</p>
                             </a>
                         </li>
                         <li>
-                            <a href="notifications.html">
+                            <a href="admin/notifications.html">
                                 <i class="material-icons text-gray">notifications</i>
                                 <p>Notifications</p>
                             </a>
@@ -547,24 +547,24 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
+    <script src="resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
     <script type="text/javascript">
                                 $(document).ready(function() {

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,13 +17,13 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -48,43 +49,43 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="viewServlet?action=admin">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="customer.jsp">
+                        <li  class="active">
+                            <a href="viewServlet?action=viewUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="searchProductsServlet?action=ProductList">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
+                            <a href="searchProductsServlet?action=CategoriesList">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="type.jsp">
+                            <a href="searchProductsServlet?action=ProductTypeList">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="maps.html">
+                            <a href="admin/maps.html">
                                 <i class="material-icons">location_on</i>
                                 <p>Maps</p>
                             </a>
                         </li>
                         <li>
-                            <a href="notifications.html">
+                            <a href="admin/notifications.html">
                                 <i class="material-icons text-gray">notifications</i>
                                 <p>Notifications</p>
                             </a>
@@ -155,6 +156,8 @@
                             <button class="btn-instagram btn" value="permissions" name="action" type="submit">Cấp Quyền</button>
                         </div>
                         <div class="row">
+                            <!--Customer start-->
+                            <!--Customer is active-->
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
@@ -165,60 +168,36 @@
                                         <table class="table">
                                             <thead class="text-primary">
                                             <th></th>
+                                            <th>UserId</th>
                                             <th>Name</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Salary</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                    <td class="text-primary">$36,738</td>
-                                                </tr>
-                                                <tr>
+                                                <c:forEach items="${listCustomerEnable}" var="user">
+                                                    <tr>
+                                                        <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                        <td>${user.userId}</td>
+                                                        <td>${user.fullname}</td>
+                                                        <td>${user.email}</td>
+                                                        <td class="text-primary">${user.phone}</td>
+                                                    </tr>
+                                                </c:forEach>
+<!--                                                <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
                                                     <td>Minerva Hooper</td>
                                                     <td>Curaçao</td>
                                                     <td>Sinaai-Waas</td>
                                                     <td class="text-primary">$23,789</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                    <td class="text-primary">$56,142</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                    <td class="text-primary">$38,735</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Doris Greene</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                    <td class="text-primary">$63,542</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Mason Porter</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                    <td class="text-primary">$78,615</td>
-                                                </tr>
+                                                </tr>-->
                                             </tbody>
                                         </table>
 
                                     </div>
                                 </div>
                             </div>
-
+                            
+                            <!--Customer is banned-->
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
@@ -236,59 +215,91 @@
                                             <th>City</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>1</td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr>
+                                                <c:forEach items="${listCustomerBanned}" var="user">
+                                                    <tr>
+                                                        <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                        <td>${user.userId}</td>
+                                                        <td>${user.fullname}</td>
+                                                        <td>${user.email}</td>
+                                                        <td class="text-primary">${user.phone}</td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                            <!--Customer end-->
+                            
+                            <!--Seller start-->
+                            <!--Seller is active-->
+                            <div class="col-md-12">
+                                <div class="card card-plain">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">User Block</h4>
+                                        <p class="category">Line Tech</p>
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <th></th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Salary</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            </thead>
+                                            <tbody>
+                                                <!--Customer is Banned-->
+                                                <c:forEach items="${listSellerEnable}" var="user">
+                                                    <tr>
+                                                        <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                        <td>${user.userId}</td>
+                                                        <td>${user.fullname}</td>
+                                                        <td>${user.email}</td>
+                                                        <td class="text-primary">${user.phone}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                             <!--Seller is banned-->
+                            <div class="col-md-12">
+                                <div class="card card-plain">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">User Block</h4>
+                                        <p class="category">Line Tech</p>
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <th></th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Salary</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            </thead>
+                                            <tbody>
+                                                <!--Customer is Banned-->
+                                                <c:forEach items="${listSellerBanned}" var="user">
+                                                    <tr>
+                                                        <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                        <td>${user.userId}</td>
+                                                        <td>${user.fullname}</td>
+                                                        <td>${user.email}</td>
+                                                        <td class="text-primary">${user.phone}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--Seller end-->
                         </div>
                     </div>
                 </div>
@@ -315,23 +326,23 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
+    <script src="resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
 </html>
