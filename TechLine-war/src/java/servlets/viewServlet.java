@@ -40,6 +40,9 @@ public class viewServlet extends HttpServlet {
     private ProductsFacadeLocal productsFacade;
     @EJB
     private ProductTypesFacadeLocal productTypesFacade;
+    
+    @EJB
+    private UsersFacadeLocal usersFacadeLocal;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,6 +85,16 @@ public class viewServlet extends HttpServlet {
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
+                case "viewUser":
+                    request.setAttribute("listCustomerEnable", usersFacadeLocal.getUserByRoleNStatus("customer", true));
+                    request.setAttribute("listCustomerBanned", usersFacadeLocal.getUserByRoleNStatus("customer", false));
+                    request.setAttribute("listSellerEnable", usersFacadeLocal.getUserByRoleNStatus("seller", true));
+                    request.setAttribute("listSellerBanned", usersFacadeLocal.getUserByRoleNStatus("seller", false));
+                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
+                    break;
+                case "admin":
+                    request.getRequestDispatcher("admin/home.jsp").forward(request, response);
+                    break;    
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
