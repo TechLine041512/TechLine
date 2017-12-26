@@ -39,8 +39,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -48,7 +48,7 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="table.html">
+                            <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
@@ -78,15 +78,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="maps.html">
+                            <a href="orders.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Maps</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="notifications.html">
-                                <i class="material-icons text-gray">notifications</i>
-                                <p>Notifications</p>
+                                <p>Orders</p>
                             </a>
                         </li>
                     </ul>
@@ -102,8 +96,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Product List (Chọn 1 trong 2 loại Bảng rồi nói em)</a>                            
+                            </button>                      
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -151,61 +144,58 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Xóa Sản Phẩm</button>    
-                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Thêm Sản Phẩm</button>
+                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
+                            <a class="btn-instagram btn" value="permissions" href="addProduct.jsp">Add</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product List</h4>
-                                        <p class="category">Tech Line</p>
+                                        <p class="category">Products in store</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
-                                            <th>Name</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Salary</th>
+                                            <th></th>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Brand</th>
+                                            <th>Image</th>
+                                            <th>Quantity</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Dakota Rice</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                    <td class="text-primary">$36,738</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                    <td class="text-primary">$23,789</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                    <td class="text-primary">$56,142</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Philip Chaney</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                    <td class="text-primary">$38,735</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doris Greene</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                    <td class="text-primary">$63,542</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Mason Porter</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                    <td class="text-primary">$78,615</td>
-                                                </tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                             </tbody>
                                         </table>
 
@@ -216,61 +206,56 @@
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Table on Plain Background</h4>
-                                        <p class="category">Here is a subtitle for this table</p>
+                                        <h4 class="title">Product List</h4>
+                                        <p class="category">Product's seller</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
-                                            <thead>
+                                            <thead class="text-primary">
+                                            <th></th>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Salary</th>
-                                            <th>Country</th>
-                                            <th>City</th>
+                                            <th>Seller</th>
+                                            <th>Title</th>
+                                            <th>Brand</th>
+                                            <th>Image</th>
+                                            <th>Quantity</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>ringu</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>taidy</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>ringu</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>PRO001</td>
+                                                    <td>taidy</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
                                             </tbody>
                                         </table>
                                     </div>

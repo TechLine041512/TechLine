@@ -37,7 +37,7 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST" class="search_form">
+                    <form method="POST">
                         <input type="text" class="input-block-level search-query" Placeholder="eg. Sony">
                     </form>
                 </div>
@@ -143,9 +143,9 @@
                                 <li class="span3">
                                     <div class="product-box">
                                         <span class="sale_tag"></span>												
-                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="resource/themes/images/ladies/9.jpg"></a><br/>
-                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title">${item.productName}</a><br/>
-                                        <p class="price">${item.productPrice}</p>
+                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
+                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
+                                        <p class="price">&#36;${item.productPrice}</p>
                                     </div>
                                 </li>       
                             </c:forEach>
@@ -177,9 +177,8 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>												
-                                                    <img alt="" src="resource/themes/images/ladies/1.jpg"><br/>
-                                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                    <a href="#" class="category">Suspendisse aliquet</a>
+                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
+                                                    <a href="product_detail.html" class="title" style="height: 60px;">Kingston DataTraveler 100 G3</a><br/>
                                                     <p class="price">$261</p>
                                                 </div>
                                             </li>
@@ -189,9 +188,8 @@
                                         <ul class="thumbnails listing-products">
                                             <li class="span3">
                                                 <div class="product-box">												
-                                                    <img alt="" src="resource/themes/images/ladies/2.jpg"><br/>
-                                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                                    <a href="#" class="category">Urna nec lectus mollis</a>
+                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
+                                                    <a href="product_detail.html" class="title" style="height: 60px;">Ring Video Doorbell Pro</a><br/>
                                                     <p class="price">$134</p>
                                                 </div>
                                             </li>
@@ -205,19 +203,19 @@
                             <ul class="small-product">
                                 <li>
                                     <a href="#" title="Praesent tempor sem sodales">
-                                        <img src="resource/themes/images/ladies/3.jpg" alt="Praesent tempor sem sodales">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Praesent tempor sem sodales">
                                     </a>
                                     <a href="#">Praesent tempor sem</a>
                                 </li>
                                 <li>
                                     <a href="#" title="Luctus quam ultrices rutrum">
-                                        <img src="resource/themes/images/ladies/4.jpg" alt="Luctus quam ultrices rutrum">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Luctus quam ultrices rutrum">
                                     </a>
                                     <a href="#">Luctus quam ultrices rutrum</a>
                                 </li>
                                 <li>
                                     <a href="#" title="Fusce id molestie massa">
-                                        <img src="resource/themes/images/ladies/5.jpg" alt="Fusce id molestie massa">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Fusce id molestie massa">
                                     </a>
                                     <a href="#">Fusce id molestie massa</a>
                                 </li>   
