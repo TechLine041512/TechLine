@@ -39,8 +39,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -48,24 +48,24 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="customer.jsp">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="categories.jsp">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
@@ -78,15 +78,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="maps.html">
+                            <a href="orders.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Maps</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="notifications.html">
-                                <i class="material-icons text-gray">notifications</i>
-                                <p>Notifications</p>
+                                <p>Orders</p>
                             </a>
                         </li>
                     </ul>
@@ -102,8 +96,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">User List (Chọn 1 trong 2 loại Bảng rồi nói em)</a>                            
+                            </button>                         
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -151,138 +144,54 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Add Category</button>                            </div>
+                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Add</button>                            
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
+                                <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Categories</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
-                                        <table class="table">
+                                        <table class="table table-hover">
                                             <thead class="text-primary">
+                                            <th>ID</th>
                                             <th>Name</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Salary</th>
+                                            <th>Description</th>
+                                            <th>Icon</th>
                                             <th>Action</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Dakota Rice</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                    <td class="text-primary">$36,738</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                    <td class="text-primary">$23,789</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                    <td class="text-primary">$56,142</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Philip Chaney</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                    <td class="text-primary">$38,735</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doris Greene</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                    <td class="text-primary">$63,542</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Mason Porter</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                    <td class="text-primary">$78,615</td>
-                                                    <td><button value="Block" name="txtBlock"/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                    <td>CAT001</td>
+                                                    <td>Computers</td>
+                                                    <td>Tool and devices for computers</td>
+                                                    <td><img src="http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="card card-plain">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">User Block</h4>
-                                        <p class="category">Line Tech</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Salary</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>1</td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
                                                 </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr>
+                                                 <tr>
+                                                    <td>CAT002</td>
+                                                    <td>Laptops</td>
+                                                    <td>Tool and devices for computers</td>
+                                                    <td><img src="http://graphiccave.com/wp-content/uploads/2015/04/Laptop-Illustration-PNG-Graphic-Cave.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>CAT003</td>
+                                                    <td>Cellphones</td>
+                                                    <td>Accessories for cellphones</td>
+                                                    <td><img src="https://cdn2.iconfinder.com/data/icons/gadget-linicons/100/iPhone-512.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>CAT004</td>
+                                                    <td>Smart Home</td>
+                                                    <td>Automation tool for smart home</td>
+                                                    <td><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/132885-200.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>

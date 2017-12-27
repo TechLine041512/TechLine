@@ -39,8 +39,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -48,7 +48,7 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
+                            <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
@@ -78,15 +78,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="maps.html">
+                            <a href="orders.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Maps</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="notifications.html">
-                                <i class="material-icons text-gray">notifications</i>
-                                <p>Notifications</p>
+                                <p>Orders</p>
                             </a>
                         </li>
                     </ul>
@@ -102,8 +96,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">User List (Chọn 1 trong 2 loại Bảng rồi nói em)</a>                            
+                            </button>                         
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -158,59 +151,46 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">User Activity</h4>
+                                        <h4 class="title">Customers</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">
                                             <th></th>
+                                            <th>ID</th>
                                             <th>Name</th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Salary</th>
+                                            <th>Gender</th>
+                                            <th>Address</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
-                                                    <td class="text-primary">$36,738</td>
+                                                    <td>tuyetbitch</td>
+                                                    <td>Tuyết</td>
+                                                    <td>Female</td>
+                                                    <td>07 Phan Đăng Lưu q.Bình Thạnh</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                    <td class="text-primary">$23,789</td>
+                                                    <td>tungchaien</td>
+                                                    <td>Tùng</td>
+                                                    <td>Male</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                    <td class="text-primary">$56,142</td>
+                                                    <td>ducchau</td>
+                                                    <td>Đức</td>
+                                                    <td>Male</td>
+                                                    <td>172 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                    <td class="text-primary">$38,735</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>Doris Greene</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                    <td class="text-primary">$63,542</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Mason Porter</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                    <td class="text-primary">$78,615</td>
+                                                    <td>thixuka</td>
+                                                    <td>Thi</td>
+                                                    <td>Female</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -222,7 +202,7 @@
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">User Block</h4>
+                                        <h4 class="title">Sellers</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
@@ -231,58 +211,37 @@
                                             <th></th>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Salary</th>
-                                            <th>Country</th>
-                                            <th>City</th>
+                                            <th>Phone</th>
+                                            <th>Store Address</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>1</td>
-                                                    <td>Dakota Rice</td>
-                                                    <td>$36,738</td>
-                                                    <td>Niger</td>
-                                                    <td>Oud-Turnhout</td>
+                                                    <td>ringu</td>
+                                                    <td>Reajas Company</td>
+                                                    <td>121245939</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
+                                                    <td>taidy</td>
+                                                    <td>ABC Technology</td>
+                                                    <td>121245939</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
+                                                    <td>ringu</td>
+                                                    <td>Reajas Company</td>
+                                                    <td>121245939</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
+                                                    <td>taidy</td>
+                                                    <td>ABC Technology</td>
+                                                    <td>121245939</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
                                             </tbody>
                                         </table>
