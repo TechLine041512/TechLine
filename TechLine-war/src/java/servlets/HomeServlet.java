@@ -7,16 +7,21 @@
 package servlets;
 
 
+import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.Products;
 import entities.ProductsFacadeLocal;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.ProductIndexModel;
 
 /**
  *
@@ -33,13 +38,21 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-            request.setAttribute("ListProductByDatePost1", productsFacade.getListProductByDatePost().subList(0, 4));
-            request.setAttribute("ListProductByDatePost2", productsFacade.getListProductByDatePost().subList(5, 9));
-            
-            request.setAttribute("ListProductByDiscount1", productsFacade.getListProductByDiscount().subList(0, 4));
-            request.setAttribute("ListProductByDiscount2", productsFacade.getListProductByDiscount().subList(5, 9));
-            
-            request.setAttribute("listCategories", categoriesFacade.findAll());
+            List<Products> listProduct;
+            listProduct = productsFacade.getListProductByDatePost();
+            if (listProduct != null) {
+                request.setAttribute("ListProductByDatePost1", buidProductIndexModel(listProduct.subList(0, 4)));
+                request.setAttribute("ListProductByDatePost2", buidProductIndexModel(listProduct.subList(5, 9)));
+            }
+            listProduct = productsFacade.getListProductByDiscount();
+            if (listProduct != null) {
+                request.setAttribute("ListProductByDiscount1", buidProductIndexModel(listProduct.subList(0, 4)));
+                request.setAttribute("ListProductByDiscount1", buidProductIndexModel(listProduct.subList(5, 9)));
+            }
+            List<Categories> listCategorieses = categoriesFacade.findAll();
+            if (listCategorieses != null) {
+                request.setAttribute("listCategories", categoriesFacade.findAll());
+            }
             
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -82,5 +95,22 @@ public class HomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private List<ProductIndexModel> buidProductIndexModel(List<Products> listProduct) {
+        List<ProductIndexModel> listResult = new ArrayList<>();
+        for (Products item: listProduct) {
+            ProductIndexModel model = new ProductIndexModel();
+            model.setProductId(item.getProductId());
+            model.setProductName(item.getProductName());
+            model.setProductPrice(item.getProductPrice());
+            String[] productImages = item.getProductImage().split(",");
+            model.setProductImage(productImages[0]);
+            listResult.add(model);
+        }
+        if (!listResult.isEmpty()) {
+            return listResult;
+        }
+        return null;
+    }
 
 }

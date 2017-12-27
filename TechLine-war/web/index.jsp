@@ -125,7 +125,7 @@
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
-                    <a href="index.html" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
+                    <a href="HomeServlet" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
                             <c:forEach items="${listCategories}" var="item">
@@ -180,7 +180,7 @@
                                                     <li class="span3">
                                                         <div class="product-box">
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="${item.productImage}" alt="${item.productName}" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
                                                             <p class="price">&#36;${item.productPrice}</p>
                                                         </div>
@@ -193,7 +193,7 @@
                                                 <c:forEach items="${ListProductByDatePost2}" var="item2">
                                                     <li class="span3">
                                                         <div class="product-box">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage}" alt="${item2.productName}" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
                                                             <p class="price">&#36;${item2.productPrice}</p>
                                                         </div>
@@ -223,7 +223,7 @@
                                                     <li class="span3">
                                                         <div class="product-box">
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage}" alt="${itemDiscount.productName}" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount.productPrice}</p>
                                                         </div>
@@ -236,7 +236,7 @@
                                                 <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
                                                     <li class="span3">
                                                         <div class="product-box">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage}" alt="${itemDiscount2.productName}" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount2.productPrice}</p>
                                                         </div>
