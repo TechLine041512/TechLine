@@ -5,7 +5,6 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,13 +32,16 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST">
-                        <input type="text" class="input-block-level search-query" Placeholder="eg. Sony">
+                    <form method="POST" action="BookServlet">
+                        <input type="text" name="txtTitle" class="search-query" Placeholder="tiêu đề sách">
+                        <button value="Search" name="action" class="btn-success">Tìm Kiếm</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
+                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                            <li><a class="btn" href="search.jsp">Search</a></li>
                             <li><a class="btn" href="admin/home.jsp">Go Admin Page</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
@@ -52,15 +54,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                    <li><a href="admin/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <li><a href="admin/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
-                        
-                                <c:if test="${user.role=='seller'}">
-                                   <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
-                        
-                                <c:if test="${user.role=='customer'}">
-                                   <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -175,7 +177,7 @@
                                             <ul class="thumbnails">	
                                                 <c:forEach items="${ListProductByDatePost1}" var="item">
                                                     <%
-                                                        
+
                                                     %>
                                                     <li class="span3" style="line-height: none">
                                                         <div class="product-box" >

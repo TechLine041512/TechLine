@@ -50,15 +50,9 @@
                         <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
+                                <p>Profile</p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="customer.jsp">
-                                <i class="material-icons">person</i>
-                                <p>User List</p>
-                            </a>
-                        </li>
+                        </li>   
                         <li class="active">
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
@@ -66,21 +60,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
-                                <i class="material-icons">library_books</i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="type.jsp">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Type Product</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="orders.jsp">
+                            <a href="sell.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Orders</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>
@@ -143,8 +125,7 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
+                        <div class="row" style="text-align: center;"> 
                             <a class="btn-instagram btn" value="permissions" href="addProduct.jsp">Add</a>
                         </div>
                         <div class="row">
@@ -152,115 +133,56 @@
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product List</h4>
-                                        <p class="category">Products in store</p>
+                                        <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table">
-                                            <thead class="text-primary">
-                                            <th></th>
+                                            <thead class="text-primary">                                       
                                             <th>ID</th>
                                             <th>Title</th>
                                             <th>Brand</th>
                                             <th>Image</th>
                                             <th>Quantity</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="card card-plain">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product List</h4>
-                                        <p class="category">Product's seller</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
                                             <th></th>
-                                            <th>ID</th>
-                                            <th>Seller</th>
-                                            <th>Title</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                <tr>                                                   
                                                     <td>PRO001</td>
-                                                    <td>ringu</td>
                                                     <td>WD My Passport Ultra 3TB Portable External</td>
                                                     <td>Western Digital</td>
                                                     <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                     <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>taidy</td>
+                                                    <td>PRO002</td>
                                                     <td>WD My Passport Ultra 3TB Portable External</td>
                                                     <td>Western Digital</td>
                                                     <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                     <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>ringu</td>
+                                                    <td>PRO003</td>
                                                     <td>WD My Passport Ultra 3TB Portable External</td>
                                                     <td>Western Digital</td>
                                                     <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                     <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>PRO001</td>
-                                                    <td>taidy</td>
+                                                    <td>PRO004</td>
                                                     <td>WD My Passport Ultra 3TB Portable External</td>
                                                     <td>Western Digital</td>
                                                     <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                     <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
-                            </div>
+                            </div>                     
                         </div>
                     </div>
                 </div>

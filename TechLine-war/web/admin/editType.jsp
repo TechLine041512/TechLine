@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product Page</title>
+        <title>Add Type Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -26,10 +26,6 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
-        <!--Richtext-->
-        <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-        <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     </head>
     <body>
 
@@ -42,29 +38,47 @@
                 -->
 
                 <div class="logo">
-                    <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                    <a href="http://www.creative-tim.com" class="simple-text">
+                        Creative Tim
                     </a>
                 </div>
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                        <li class="active">
+                        <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Profile</p>
+                                <p>Dashboard</p>
                             </a>
-                        </li>   
+                        </li>
                         <li>
+                            <a href="customer.jsp">
+                                <i class="material-icons">person</i>
+                                <p>User List</p>
+                            </a>
+                        </li>
+                        <li >
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
+                        <li >
+                            <a href="categories.jsp">
+                                <i class="material-icons">library_books</i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="type.jsp">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Type Product</p>
+                            </a>
+                        </li>
                         <li>
-                            <a href="sell.jsp">
+                            <a href="orders.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Order List</p>
+                                <p>Orders</p>
                             </a>
                         </li>
                     </ul>
@@ -72,14 +86,68 @@
             </div>
 
             <div class="main-panel">
+                <nav class="navbar navbar-transparent navbar-absolute">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Profile</a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="material-icons">dashboard</i>
+                                        <p class="hidden-lg hidden-md">Dashboard</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="material-icons">notifications</i>
+                                        <span class="notification">5</span>
+                                        <p class="hidden-lg hidden-md">Notifications</p>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Mike John responded to your email</a></li>
+                                        <li><a href="#">You have 5 new tasks</a></li>
+                                        <li><a href="#">You're now friend with Andrew</a></li>
+                                        <li><a href="#">Another Notification</a></li>
+                                        <li><a href="#">Another One</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="material-icons">person</i>
+                                        <p class="hidden-lg hidden-md">Profile</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group  is-empty">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <span class="material-input"></span>
+                                </div>
+                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                    <i class="material-icons">search</i><div class="ripple-container"></div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+
                 <div class="content"> 
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Profile Seller</h4>
-                                        <p class="category">Tech Line</p>
+                                        <h4 class="title">Type</h4>
+                                        <p class="category">Update Your Own Type</p>
                                     </div>
                                     <div class="card-content">
                                         <form action="AccountServlet" method="post">
@@ -87,71 +155,36 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Email</label>
-                                                        <input type="email" class="form-control" value="ringu@gmail.com" name="txtEmail">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Full Name</label>
-                                                        <input type="text" class="form-control" value="ringu" name="txtName">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Phone</label>
-                                                        <input type="text" class="form-control" value="0909882230" name="txtPhone">
+                                                        <label class="control-label">Category Id</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Store Name</label>
-                                                        <input type="text" class="form-control" value="Reajas Company" name="txtStoreName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <label>Approved Date</label>
-                                                        <input type="datetime-local" class="form-control"  name="txtApprovedDate">
-                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <label>Approved Place</label>
-                                                        <input type="text" class="form-control" value="Reajas Company" name="txtApprovedPlace">
-                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="171 Phạm Văn Đồng q.Gò Vấp" name="txtName">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Store Icon</label>
-                                                        <input type="text" class="form-control" value="" name="txtName">
+                                                        <label class="control-label">Type Name</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Store Summary</label>
-                                                        <textarea name="comment" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;">Công ty RJ - team Active - Leader RaeJas</textarea>
+                                                        <label class="control-label">Type Description</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                    </div>
+                                                </div>
+                                            </div>                
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Category Icon</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
                                                     </div>
                                                 </div>
                                             </div>
+                                                    
                                             <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
                                             <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
                                             <div class="clearfix"></div>
@@ -163,17 +196,17 @@
                                 <div class="card card-profile">                                  
                                     <div class="card-avatar">
                                         <a href="#pablo">
-                                            <img class="img" src="http://simpleicon.com/wp-content/uploads/shop-5-64x64.png" alt="Avatar"/>
+                                            <img class="img" src="client/assetsclient/img/${information.imgAccount}" alt="Avatar"/>
                                         </a>
                                     </div>
 
                                     <div class="content">
                                         <h4 class="card-title">
-                                            Reajas Company<br/>
-                                            <small>171 Phạm Văn Đồng q.Gò Vấp</small>
+                                            ${information.name}<br/>
+                                            <small>${information.userID}</small>
                                         </h4>
                                         <p class="card-content">
-                                            Công ty RJ - team Active - Leader RaeJas
+                                            ${information.biography}
                                         </p>
                                     </div>
                                 </div>
