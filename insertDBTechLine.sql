@@ -1503,3 +1503,51 @@ insert into Products(productId,typeId,userId,brandId,productName,productDesc,pro
 ','The most comprehensive book on preserving every type of collectible -- from the sentimental to the valuable -- from the Smithsonians Senior Conservator. 
 For both the serious collector and the sometimes sentimentalist, Saving Stuff explains -- in plain language -- how you can use the techniques of museum professionals to keep your prized possessions in mint condition. ','Saving Stuff: How to Care for and Preserve Your Collectibles, Heirlooms, and Other Prized Possessions Paperback – June 2, 2005
 ',14.99,'item',3.5,3.5,2.3,2.3,101,'https://images-na.ssl-images-amazon.com/images/I/51JwKTc08wL.jpg',5,4,1,1);
+
+insert into OrderMaster VALUES('ORD001','tuyetbitch',10530,25,'Deliever at weekend','Done','01/11/2017  21:44:00');
+insert into OrderMaster VALUES('ORD002','tungchaien',17570,25,'','Done','02/11/2017  21:00:01');
+insert into OrderMaster VALUES('ORD003','tuyetbitch',12550,25,'Deliever at weekend','Done','03/11/2017  21:44:02');
+insert into OrderMaster VALUES('ORD004','ducchau',250050,25,'','Done','04/11/2017  21:44:03');
+insert into OrderMaster VALUES('ORD005','dieunhi',77500,25,'Deliever at weekend','Done','01/12/2017  21:44:04');
+insert into OrderMaster VALUES('ORD006','thixuka',25060,25,'Deliever at weekend','Done','02/12/2017  21:44:05');
+insert into OrderMaster VALUES('ORD007','tungchaien',21500,25,'Deliever at weekend','Done','03/12/2017  21:00:06');
+insert into OrderMaster VALUES('ORD008','dieunhi',22110,25,'Deliever immediately','Done','03/12/2017  21:44:07');
+insert into OrderMaster VALUES('ORD009','thixuka',21150,25,'','Cancel','04/12/2017  21:44:08');
+insert into OrderMaster VALUES('ORD010','dieunhi',323541,25,'Deliever at weekend','Done','05/12/2017  21:44:09');
+insert into OrderMaster VALUES('ORD011','rainyday',22100,25,'','Done','06/12/2017  21:44:10');
+insert into OrderMaster VALUES('ORD012','tuyetbitch',21215,30,'Deliever at weekend','Done','07/12/2017  21:44:11');
+insert into OrderMaster VALUES('ORD013','tungchaien',25540,25,'Deliever at weekend','Done','07/12/2017  23:04:12');
+insert into OrderMaster VALUES('ORD014','rainyday',15260,25,'Deliever at weekend','Done','08/12/2017  21:44:13');
+insert into OrderMaster VALUES('ORD015','tuyetbitch',22570,25,'','Done','10/12/2017  21:44:14');
+insert into OrderMaster VALUES('ORD016','rainyday',10530,25,'Deliever at weekend','Done','11/12/2017  21:44:15');
+insert into OrderMaster VALUES('ORD017','linhnhi',16530,25,'','Cancel','12/12/2017  21:44:16');
+insert into OrderMaster VALUES('ORD018','ducchau',15500,30,'Deliever at weekend','Done','12/12/2017  21:44:17');
+insert into OrderMaster VALUES('ORD019','tuyetbitch',13750,25,'','Delivery','01/01/2018  08:44:18');
+insert into OrderMaster VALUES('ORD020','ducchau',19000,25,'Deliever at weekend','Processing','03/01/2017  21:44:19');
+
+insert into OrderDetails VALUES('ORD001','PRO003',1);
+insert into OrderDetails VALUES('ORD001','PRO006',2);
+insert into OrderDetails VALUES('ORD001','PRO009',1);
+insert into OrderDetails VALUES('ORD002','PRO015',3);
+insert into OrderDetails VALUES('ORD002','PRO020',1);
+insert into OrderDetails VALUES('ORD003','PRO001',1);
+insert into OrderDetails VALUES('ORD004','PRO100',1);
+insert into OrderDetails VALUES('ORD005','PRO100',2);
+insert into OrderDetails VALUES('ORD006','PRO100',3);
+insert into OrderDetails VALUES('ORD007','PRO100',5);
+insert into OrderDetails VALUES('ORD008','PRO011',1);
+insert into OrderDetails VALUES('ORD009','PRO012',2);
+insert into OrderDetails VALUES('ORD010','PRO013',3);
+insert into OrderDetails VALUES('ORD011','PRO014',4);
+insert into OrderDetails VALUES('ORD012','PRO017',1);
+insert into OrderDetails VALUES('ORD012','PRO018',2);
+insert into OrderDetails VALUES('ORD012','PRO019',1);
+insert into OrderDetails VALUES('ORD013','PRO020',2);
+insert into OrderDetails VALUES('ORD014','PRO021',3);
+insert into OrderDetails VALUES('ORD015','PRO022',4);
+insert into OrderDetails VALUES('ORD016','PRO023',5);
+insert into OrderDetails VALUES('ORD017','PRO024',6);
+insert into OrderDetails VALUES('ORD018','PRO025',7);
+insert into OrderDetails VALUES('ORD019','PRO026',8);
+insert into OrderDetails VALUES('ORD020','PRO027',9);
+
