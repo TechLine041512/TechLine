@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product Page</title>
+        <title>Admin Home Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -34,7 +34,7 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
                 <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -223,9 +223,6 @@
     <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
 
-    <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
-
     <!--  Notifications Plugin    -->
     <script src="../resource/assets/js/bootstrap-notify.js"></script>
 
@@ -238,14 +235,6 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../resource/assets/js/demo.js"></script>
 
-    <script type="text/javascript">
-                                $(document).ready(function() {
-
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                    demo.initDashboardPageCharts();
-
-                                });
-    </script>
 
 </html>
 

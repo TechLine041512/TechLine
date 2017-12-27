@@ -42,8 +42,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -52,15 +52,9 @@
                         <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
+                                <p>Profile</p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="customer.jsp">
-                                <i class="material-icons">person</i>
-                                <p>User List</p>
-                            </a>
-                        </li>
+                        </li>   
                         <li class="active">
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
@@ -68,21 +62,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
-                                <i class="material-icons">library_books</i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="type.jsp">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Type Product</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="orders.jsp">
+                            <a href="sell.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Orders</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>
@@ -151,7 +133,7 @@
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product</h4>
-                                        <p class="category">Create Your Own Product</p>
+                                        <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content">
                                         <form action="AccountServlet" method="post">
@@ -184,7 +166,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Summary</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <textarea rows="10" cols="80" class="form-control" value="${information.name}" name="txtName" >
                                                     </div>
                                                 </div>
                                             </div>

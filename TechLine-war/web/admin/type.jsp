@@ -1,7 +1,7 @@
 <%-- 
-    Document   : addProduct
-    Created on : Dec 27, 2017, 1:42:24 AM
-    Author     : tatyuki1209
+    Document   : customer
+    Created on : Dec 17, 2017, 3:07:56 AM
+    Author     : Tien
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Type Page</title>
+        <title>Users</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
+
 
         <!-- Bootstrap core CSS     -->
         <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -26,25 +27,23 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-        <!--Richtext-->
-        <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-        <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     </head>
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
                 <!--
-                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+            Tip 2: you can also add an image using data-image tag
 
-                Tip 2: you can also add an image using data-image tag
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
+
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
@@ -60,13 +59,13 @@
                                 <p>User List</p>
                             </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="categories.jsp">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
@@ -97,8 +96,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Profile</a>
+                            </button>                         
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -143,64 +141,65 @@
                     </div>
                 </nav>
 
-                <div class="content"> 
+                <div class="content">
                     <div class="container-fluid">
+                        <div class="row" style="text-align: center;">
+                            <a class="btn-instagram btn" value="permissions" href="addType.jsp">Add</a>                        
+                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Update</a>
+                        </div>
                         <div class="row">
-                            <div class="col-md-8">
-                                <div class="card">
+                            <div class="col-md-12">
+                                <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Type</h4>
-                                        <p class="category">Tech Line</p>
+                                        <h4 class="title">Type Product</h4>
+                                        <p class="category">Line Tech</p>
                                     </div>
-                                    <div class="card-content">
-                                        <form action="AccountServlet" method="post">
-                                            <input type="hidden" name="txtUserID" value="${information.userID}"/>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label>Category Name</label>
-                                                        <select class="form-control" name="txtGender">
-                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Computers</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Network Devices</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Laptop Bags</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Type Name</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label>Type Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" value="${information.name}" name="txtName" ></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>                
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Type Icon</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="text-primary">
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Icon</th>
+                                            <th>Action</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>PTY001</td>
+                                                    <td>Storage Devices</td>
+                                                    <td>Devices store data for computer</td>
+                                                    <td><img src="https://www.shareicon.net/data/2016/08/05/807419_refresh_512x512.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
 
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
-                                            <div class="clearfix"></div>
-                                        </form>
+                                                </tr>
+                                                 <tr>
+                                                    <td>PTY002</td>
+                                                    <td>Network Devices</td>
+                                                    <td>Devices connect to internet or create intranet</td>
+                                                    <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScwa5nwWlritFu_v7Z9akiL4rRIy3Ao5fWVwgft25-QalBe1efgw" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>PTY003</td>
+                                                    <td>Peripheral Devices</td>
+                                                    <td>Devices utilize to increases performance and user interactions for computer</td>
+                                                    <td><img src="https://cdn4.iconfinder.com/data/icons/computer-hardware-2/80/Computer_hardware_icons-04-512.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>PTY004</td>
+                                                    <td>Laptop Bags</td>
+                                                    <td>Bag contain laptops</td>
+                                                    <td><img src="https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-3/16/133-512.png" style="width: 80px; height: 80px;"/></td>
+                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                 </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
 
                 <footer class="footer">
@@ -211,26 +210,11 @@
                                     <a href="#">
                                         Home
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Company
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Portfolio
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Blog
-                                    </a>
-                                </li>
+                                </li> 
                             </ul>
                         </nav>
                         <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Line Tech</a>, made with love for a Group TechLine
                         </p>
                     </div>
                 </footer>
@@ -259,14 +243,4 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../resource/assets/js/demo.js"></script>
 
-    <script type="text/javascript">
-                                $(document).ready(function() {
-
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                    demo.initDashboardPageCharts();
-
-                                });
-    </script>
-
 </html>
-
