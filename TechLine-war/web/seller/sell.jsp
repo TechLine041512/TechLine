@@ -53,7 +53,7 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="customer.jsp">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
@@ -65,7 +65,7 @@
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="categories.jsp">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
@@ -144,54 +144,105 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Add</button>                            
+                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Khóa Tài Khoản</button>    
+                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Cấp Quyền</button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">Customers</h4>
+                                        <p class="category">Line Tech</p>
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                        <table class="table">
+                                            <thead class="text-primary">
+                                            <th></th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Gender</th>
+                                            <th>Address</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>tuyetbitch</td>
+                                                    <td>Tuyết</td>
+                                                    <td>Female</td>
+                                                    <td>07 Phan Đăng Lưu q.Bình Thạnh</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>tungchaien</td>
+                                                    <td>Tùng</td>
+                                                    <td>Male</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>ducchau</td>
+                                                    <td>Đức</td>
+                                                    <td>Male</td>
+                                                    <td>172 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>thixuka</td>
+                                                    <td>Thi</td>
+                                                    <td>Female</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Categories</h4>
+                                        <h4 class="title">Sellers</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
-                                            <thead class="text-primary">
+                                            <thead>
+                                            <th></th>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Icon</th>
-                                            <th>Action</th>
+                                            <th>Phone</th>
+                                            <th>Store Address</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>CAT001</td>
-                                                    <td>Computers</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>ringu</td>
+                                                    <td>Reajas Company</td>
+                                                    <td>121245939</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT002</td>
-                                                    <td>Laptops</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://graphiccave.com/wp-content/uploads/2015/04/Laptop-Illustration-PNG-Graphic-Cave.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT003</td>
-                                                    <td>Cellphones</td>
-                                                    <td>Accessories for cellphones</td>
-                                                    <td><img src="https://cdn2.iconfinder.com/data/icons/gadget-linicons/100/iPhone-512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT004</td>
-                                                    <td>Smart Home</td>
-                                                    <td>Automation tool for smart home</td>
-                                                    <td><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/132885-200.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>taidy</td>
+                                                    <td>ABC Technology</td>
+                                                    <td>121245939</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>ringu</td>
+                                                    <td>Reajas Company</td>
+                                                    <td>121245939</td>
+                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
+                                                    <td>taidy</td>
+                                                    <td>ABC Technology</td>
+                                                    <td>121245939</td>
+                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
