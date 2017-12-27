@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.TechLineUtils;
 
 /**
  *
@@ -55,14 +56,14 @@ public class viewServlet extends HttpServlet {
                     for (ProductTypes productTypes : listProductTypes) {
                         listProduct.addAll(productTypes.getProductsCollection());
                     }
-                    request.setAttribute("listProduct", listProduct);
+                    request.setAttribute("listProduct",listProduct);
                     request.setAttribute("category", categories);
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
                     break;
 
                 case "productDetail":
-                    request.setAttribute("product", productsFacade.find(request.getParameter("idProduct")));
+                    request.setAttribute("product", TechLineUtils.buildProduct(productsFacade.find(request.getParameter("idProduct"))));
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;

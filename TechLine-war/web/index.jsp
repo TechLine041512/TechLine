@@ -177,10 +177,10 @@
                                                     <%
                                                         
                                                     %>
-                                                    <li class="span3">
-                                                        <div class="product-box">
+                                                    <li class="span3" style="line-height: none">
+                                                        <div class="product-box" >
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="${item.productImage}" alt="${item.productName}" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="${item.productImage[0]}" alt="${item.productName}" style="width: 150px; height: 150px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
                                                             <p class="price">&#36;${item.productPrice}</p>
                                                         </div>
@@ -191,9 +191,9 @@
                                         <div class="item">
                                             <ul class="thumbnails">
                                                 <c:forEach items="${ListProductByDatePost2}" var="item2">
-                                                    <li class="span3">
+                                                    <li class="span3" style="line-height: none">
                                                         <div class="product-box">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage}" alt="${item2.productName}" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage[0]}" alt="${item2.productName}" style="width: 150px; height: 150px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
                                                             <p class="price">&#36;${item2.productPrice}</p>
                                                         </div>
@@ -220,10 +220,10 @@
                                         <div class="active item">
                                             <ul class="thumbnails">
                                                 <c:forEach items="${ListProductByDiscount1}" var="itemDiscount">
-                                                    <li class="span3">
-                                                        <div class="product-box">
+                                                    <li class="span3" style="line-height: none">
+                                                        <div class="product-box" style="line-height: none">
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage}" alt="${itemDiscount.productName}" /></a></p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage[0]}" alt="${itemDiscount.productName}" style="width: 150px; height: 150px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount.productPrice}</p>
                                                         </div>
@@ -234,9 +234,9 @@
                                         <div class="item">
                                             <ul class="thumbnails">
                                                 <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
-                                                    <li class="span3">
-                                                        <div class="product-box">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage}" alt="${itemDiscount2.productName}" /></a></p>
+                                                    <li class="span3" style="line-height: none">
+                                                        <div class="product-box" >
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage[0]}" alt="${itemDiscount2.productName}" style="width: 150px; height: 150px"/></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount2.productPrice}</p>
                                                         </div>
@@ -261,8 +261,8 @@
                                         <div class="active item">
                                             <ul class="thumbnails">
                                                 <c:forEach items="${ListProductByDiscount1}" var="itemDiscount">
-                                                    <li class="span3">
-                                                        <div class="product-box">
+                                                    <li class="span3" style="line-height: none">
+                                                        <div class="product-box" >
                                                             <span class="sale_tag"></span>
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
@@ -276,7 +276,7 @@
                                             <ul class="thumbnails">
                                                 <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
                                                     <li class="span3">
-                                                        <div class="product-box">
+                                                        <div class="product-box" style="line-height: none">
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount2.productPrice}</p>

@@ -85,26 +85,26 @@
                     <div class="span9">
                         <div class="row">
                             <div class="span4">
-                                <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a>												
+                                <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="${product.productImage[0]}" ></a>												
                                 <ul class="thumbnails small">								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt=""></a>
+                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt=""></a>
+                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>													
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt=""></a>
+                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt=""></a>
+                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="span5">
                                 <address>
                                     <strong>Product Code:</strong> <span>${product.productId}</span><br>
-                                    <strong>Brand:</strong> <span>${product.brandId.brandName}</span><br>
+                                    <strong>Brand:</strong> <span>${product.brandName}</span><br>
                                     <strong>Weight:</strong> <span>${product.productWeight}(cm)</span><br>
                                     <strong>Width:</strong> <span>${product.productWidth}(cm)</span><br>
                                     <strong>Heigth:</strong> <span>${product.productHeigth}(cm)</span><br>
@@ -112,7 +112,7 @@
                                     <strong>Rating Points:</strong> <span style="color: yellow"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span><br>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
                                 </address>									
-                                <h4>Price: <strong style="color: red;">&#36;${product.productPrice}</strong> <strong><strike> $587.50</strike></strong></h4>
+                                <h4>Price: <strong style="color: red;">&#36;${product.productPrice}</strong> <strong><strike> ${product.productDiscount}</strike></strong></h4>
                             </div>
                             <div class="span5">
                                 <form class="form-inline">                                    
@@ -173,30 +173,30 @@
                                                 <li class="span3">
                                                     <div class="product-box">
                                                         <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">Wuam ultrices rutrum</a><br/>
+                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
                                                         <p class="price">$341</p>
                                                     </div>
                                                 </li>
                                                 <li class="span3">
                                                     <div class="product-box">
                                                         <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">Fusce id molestie massa</a><br/>
+                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/61eKsimQtVL._SL1000_.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title" style="height: 60px;">Western Digital Caviar SE (WD3200AAJS)</a><br/>
                                                         <p class="price">$341</p>
                                                     </div>
                                                 </li>       
                                                 <li class="span3">
                                                     <div class="product-box">												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">Praesent tempor sem</a><br/>
+                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
                                                         <p class="price">$28</p>
                                                     </div>
                                                 </li>
                                                 <li class="span3">
                                                     <div class="product-box">												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">Praesent tempor sem</a><br/>
+                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41JjEu7FCkL._AC_US218_.jpg"></a><br/>
+                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD Blue 1TB SATA Desktop Hard Drive</a><br/>
                                                         <p class="price">$28</p>
                                                     </div>
                                                 </li>
@@ -261,8 +261,8 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">Kingston DataTraveler 100 G3</a><br/>
+                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL._SS150_.jpg" ><br/>
+                                                    <a href="product_detail.html" class="title" style="height: 60px;">ZOZO Laptop Power Adapter</a><br/>
                                                     <p class="price">$261</p>
                                                 </div>
                                             </li>
@@ -287,21 +287,21 @@
                             <ul class="small-product">
                                 <li>
                                     <a href="#" title="Praesent tempor sem sodales">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Praesent tempor sem sodales">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" alt="Praesent tempor sem sodales" style="width: 150px; height: 150px">
                                     </a>
-                                    <a href="#">Praesent tempor sem</a>
+                                    <a href="#">Veriya Lightweight Casual Travel School</a>
                                 </li>
                                 <li>
                                     <a href="#" title="Luctus quam ultrices rutrum">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Luctus quam ultrices rutrum">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" alt="Luctus quam ultrices rutrum" style="width: 150px; height: 150px">
                                     </a>
-                                    <a href="#">Luctus quam ultrices rutrum</a>
+                                    <a href="#">Edifier H650 Hi-Fi On-Ear Headphones</a>
                                 </li>
                                 <li>
                                     <a href="#" title="Fusce id molestie massa">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Fusce id molestie massa">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" alt="Fusce id molestie massa" style="width: 150px; height: 150px">
                                     </a>
-                                    <a href="#">Fusce id molestie massa</a>
+                                    <a href="#">Gorsun Lightweight Sport Workout Headphones</a>
                                 </li>   
                             </ul>
                         </div>
