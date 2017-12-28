@@ -32,16 +32,15 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST" action="BookServlet">
-                        <input type="text" name="txtTitle" class="search-query" Placeholder="tiêu đề sách">
-                        <button value="Search" name="action" class="btn-success">Tìm Kiếm</button>
+                    <form method="POST" action="searchProductsServlet">
+                        <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
+                        <button value="Search" name="action" class="btn-success">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="search.jsp">Search</a></li>
-                            <li><a class="btn" href="admin/home.jsp">Go Admin Page</a></li>
+                            <li><a class="btn" href="cart.jsp">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>
@@ -53,7 +52,7 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                <li><a href="admin/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
                             <c:if test="${user.role=='seller'}">
@@ -158,22 +157,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Fusce id molestie massa</td>
-                                    <td><input type="text" placeholder="1" class="input-mini"></td>
-                                    <td>$2,350.00</td>
-                                    <td>Sony</td>
-                                    <td><button class="btn btn-inverse" type="submit" id="checkout">Add</button></td>
-                                </tr>			  
-                                <tr>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Luctus quam ultrices rutrum</td>
-                                    <td><input type="text" placeholder="2" class="input-mini"></td>
-                                    <td>$1,150.00</td>
-                                    <td>SamSung</td>
-                                    <td><button class="btn btn-inverse" type="submit" id="checkout">Add</button></td>
-                                </tr>                         	  
+                                <c:forEach items="${listProductSearch}" var="product">
+                                    <tr>
+                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
+                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
+                                        <td><input type="text" placeholder="1" class="input-mini"></td>
+                                        <td>$${product.productPrice}</td>
+                                        <td>${product.brandId.brandName}</td>
+                                        <td><button class="btn btn-inverse" type="submit" id="checkout">Add</button></td>
+                                    </tr>			  
+                                </c:forEach>                         	  
                             </tbody>
                         </table>			                					
                     </div>

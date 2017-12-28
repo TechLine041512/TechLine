@@ -3,45 +3,128 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import entities.Brands;
+import entities.BrandsFacadeLocal;
+import entities.Categories;
+import entities.CategoriesFacadeLocal;
+import entities.ProductTypes;
+import entities.ProductTypesFacadeLocal;
+import entities.Products;
+import entities.ProductsComment;
+import entities.ProductsCommentFacadeLocal;
+import entities.ProductsFacadeLocal;
+import entities.Users;
+import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author nth15
- */
 public class addProductsServlet extends HttpServlet {
+    @EJB
+    private UsersFacadeLocal usersFacade;
+    @EJB
+    private ProductsCommentFacadeLocal productsCommentFacade;
+    @EJB
+    private CategoriesFacadeLocal categoriesFacade;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private ProductTypesFacadeLocal productTypesFacade;
+    @EJB
+    private BrandsFacadeLocal brandsFacade;
+    @EJB
+    private ProductsFacadeLocal productsFacade;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet addProductsServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet addProductsServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            switch (action) {
+                case "addProduct":
+                    Date today = new Date();
+                    Brands brands = brandsFacade.find(request.getParameter("txtBrand"));
+                    ProductTypes productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
+                    Products products = new Products();
+                    products.setProductId(request.getParameter("txtProductID"));
+                    products.setTypeId(productTypes);
+                    products.setBrandId(brands);
+                    products.setProductName(request.getParameter("txtProductName"));
+                    products.setProductDesc(request.getParameter("txtDescription"));
+                    products.setProductSummary(request.getParameter("txtSummary"));
+                    products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
+                    products.setProductImage(request.getParameter("txtImage"));
+                    products.setProductUnit(request.getParameter("txtUnit"));
+                    products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
+                    products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
+                    products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
+                    products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
+                    products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
+                    products.setProductDiscount(0);
+                    products.setProductRating(0.0);
+                    products.setIsApproved(true);
+                    products.setDatePosted(today);
+                    products.setProductStatus(true);
+                    productsFacade.create(products);
+                    request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                    break;
+                case "cancelProduct":
+                    request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                    break;
+                    
+                case "addCategory":
+                    Categories categories = new Categories();
+                    categories.setCategoryId(request.getParameter("txtCategoryID"));
+                    categories.setCategoryName(request.getParameter("txtCategoryName"));
+                    categories.setCategoryDesc(request.getParameter("txtDescription"));
+                    categories.setCategoryStatus(true);
+                    categories.setCategoryIcon(request.getParameter("txtIcon"));
+                    request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                    break;
+                case "cancelCategories":
+                    request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                    break;
+                    
+                case "addProductType":
+                    Categories categories2 = categoriesFacade.find(request.getParameter("txtCategory"));
+                    ProductTypes productTypes2 = new ProductTypes();
+                    productTypes2.setTypeId(request.getParameter("txtTypeID"));
+                    productTypes2.setCategoryId(categories2);
+                    productTypes2.setTypeName(request.getParameter("txtTypeName"));
+                    productTypes2.setTypeIcon(request.getParameter("txtTypeIcon"));
+                    productTypes2.setTypeDesc(request.getParameter("txtTypeDesc"));
+                    productTypes2.setTypeStatus(true);
+                    productTypesFacade.create(productTypes2);
+                    request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                    break;
+                case "cancelProductType":
+                    request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                    break;
+                case "comment":
+                    String id = request.getParameter("productID");
+                    products = productsFacade.find(id);
+                    Users users = usersFacade.find(session.getAttribute("user"));
+                    ProductsComment productsComment = new ProductsComment();
+                    productsComment.setCommentID("Comment1");
+                    productsComment.setProductId(products);
+                    productsComment.setUserId(users);
+                    productsComment.setCommentContent("txtContent");
+                    productsComment.setCommentStatus(true);
+                    request.getRequestDispatcher("viewServlet?action=showProductType&idProduct="+id).forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    break;
+            }
         }
     }
 

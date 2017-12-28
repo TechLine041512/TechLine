@@ -25,5 +25,7 @@ public interface ProductsCommentFacadeLocal {
     List<ProductsComment> findRange(int[] range);
 
     int count();
+
+    List<ProductsComment> getListComment(String productID);
     
 }

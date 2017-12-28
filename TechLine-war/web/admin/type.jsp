@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,13 +17,13 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -31,7 +32,7 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
             Tip 2: you can also add an image using data-image tag
@@ -40,45 +41,45 @@
 
                 <div class="logo">
                     <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
 
                 <div class="sidebar-wrapper">
-                    <ul class="nav">
-                        <li>
-                            <a href="home.jsp">
+                    <ul>
+                        <li class="active">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="customer.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="product.jsp">
+                            <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
+                            <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="type.jsp">
+                        <li class="nav">
+                            <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="orders.jsp">
+                            <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
                             </a>
@@ -164,35 +165,15 @@
                                             <th>Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>PTY001</td>
-                                                    <td>Storage Devices</td>
-                                                    <td>Devices store data for computer</td>
-                                                    <td><img src="https://www.shareicon.net/data/2016/08/05/807419_refresh_512x512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-
-                                                </tr>
-                                                 <tr>
-                                                    <td>PTY002</td>
-                                                    <td>Network Devices</td>
-                                                    <td>Devices connect to internet or create intranet</td>
-                                                    <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScwa5nwWlritFu_v7Z9akiL4rRIy3Ao5fWVwgft25-QalBe1efgw" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>PTY003</td>
-                                                    <td>Peripheral Devices</td>
-                                                    <td>Devices utilize to increases performance and user interactions for computer</td>
-                                                    <td><img src="https://cdn4.iconfinder.com/data/icons/computer-hardware-2/80/Computer_hardware_icons-04-512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>PTY004</td>
-                                                    <td>Laptop Bags</td>
-                                                    <td>Bag contain laptops</td>
-                                                    <td><img src="https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-3/16/133-512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
+                                                <c:forEach items="${listProductType}" var="type">
+                                                    <tr>
+                                                        <td>${type.typeId}</td>
+                                                        <td>${type.typeName}</td>
+                                                        <td>${type.typeDesc}</td>
+                                                        <td><img src="${type.typeIcon}" style="width: 80px; height: 80px;"/></td>
+                                                        <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                    </tr>
+                                                </c:forEach>        
                                             </tbody>
                                         </table>
                                     </div>
@@ -224,23 +205,23 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
+    <script src="resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
 </html>
