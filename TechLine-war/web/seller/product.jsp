@@ -50,37 +50,19 @@
                         <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
+                                <p>Profile</p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="customer.jsp">
-                                <i class="material-icons">person</i>
-                                <p>User List</p>
-                            </a>
-                        </li>
-                        <li>
+                        </li>   
+                        <li class="active">
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="categories.jsp">
-                                <i class="material-icons">library_books</i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
                         <li>
-                            <a href="type.jsp">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Type Product</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="orders.jsp">
+                            <a href="sell.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Orders</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>
@@ -96,7 +78,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>                         
+                            </button>                      
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -143,61 +125,64 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" value="permissions" href="addCategory.jsp">Add</a>
-                            <a class="btn-instagram btn" value="permissions" href="editCategory.jsp">Update</a>
+                        <div class="row" style="text-align: center;"> 
+                            <a class="btn-instagram btn" value="permissions" href="addProduct.jsp">Add</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card card-plain">
+                                <div class="card">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Categories</h4>
-                                        <p class="category">Line Tech</p>
+                                        <h4 class="title">Product List</h4>
+                                        <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
+                                        <table class="table">
+                                            <thead class="text-primary">                                       
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Icon</th>
-                                            <th>Action</th>
+                                            <th>Title</th>
+                                            <th>Brand</th>
+                                            <th>Image</th>
+                                            <th>Quantity</th>
+                                            <th></th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>CAT001</td>
-                                                    <td>Computers</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-
+                                                <tr>                                                   
+                                                    <td>PRO001</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT002</td>
-                                                    <td>Laptops</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://graphiccave.com/wp-content/uploads/2015/04/Laptop-Illustration-PNG-Graphic-Cave.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT003</td>
-                                                    <td>Cellphones</td>
-                                                    <td>Accessories for cellphones</td>
-                                                    <td><img src="https://cdn2.iconfinder.com/data/icons/gadget-linicons/100/iPhone-512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT004</td>
-                                                    <td>Smart Home</td>
-                                                    <td>Automation tool for smart home</td>
-                                                    <td><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/132885-200.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
+                                                <tr>
+                                                    <td>PRO002</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PRO003</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>PRO004</td>
+                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                    <td>Western Digital</td>
+                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                    <td>10</td>
+                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
-                            </div>
+                            </div>                     
                         </div>
                     </div>
                 </div>
@@ -210,7 +195,7 @@
                                     <a href="#">
                                         Home
                                     </a>
-                                </li> 
+                                </li>
                             </ul>
                         </nav>
                         <p class="copyright pull-right">

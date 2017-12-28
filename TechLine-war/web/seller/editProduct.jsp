@@ -42,8 +42,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="../resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -52,15 +52,9 @@
                         <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
+                                <p>Profile</p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="customer.jsp">
-                                <i class="material-icons">person</i>
-                                <p>User List</p>
-                            </a>
-                        </li>
+                        </li>   
                         <li class="active">
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
@@ -68,21 +62,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
-                                <i class="material-icons">library_books</i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="type.jsp">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Type Product</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="orders.jsp">
+                            <a href="sell.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Orders</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>
@@ -99,6 +81,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
+                            <a class="navbar-brand" href="#">Profile</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -150,7 +133,7 @@
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product</h4>
-                                        <p class="category">Create Your Own Product</p>
+                                        <p class="category">Update Your Own Product</p>
                                     </div>
                                     <div class="card-content">
                                         <form action="AccountServlet" method="post">
@@ -158,24 +141,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label>Product Type</label>
-                                                        <select class="form-control" name="txtGender">
-                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Storage Devices</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Network Devices</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Laptop Bags</option>
-                                                        </select>
+                                                        <label class="control-label">Product Type</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label>Brand Id</label>
-                                                        <select class="form-control" name="txtGender">
-                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Western Digital</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Anker</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Weme</option>
-                                                        </select>
+                                                        <label class="control-label">Brand Id</label>
+                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,7 +166,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Summary</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <textarea rows="10" cols="80" class="form-control" value="${information.name}" name="txtName" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,13 +195,68 @@
                                                     </div>
                                                 </div>
                                             </div>
+<!--                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group label-floating">
+                                                        <select class="form-control" name="txtGender">
+                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Nam</option>
+                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Nữ</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Số Điện Thoại</label>
+                                                        <input type="text" class="form-control" name="txtPhone" value="${information.phone}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Địa Chỉ</label>
+                                                        <input type="text" class="form-control" value="${information.address}" name="txtAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>About Me</label>
+                                                        <div class="form-group labxel-floating">
+                                                            <textarea class="form-control" rows="5" placeholder="Hãy giới thiệu 1 chút về bạn đi nào !!">${information.biography}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
                                             <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
                                             <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>
                                 </div>
-                            </div>                      
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card card-profile">                                  
+                                    <div class="card-avatar">
+                                        <a href="#pablo">
+                                            <img class="img" src="client/assetsclient/img/${information.imgAccount}" alt="Avatar"/>
+                                        </a>
+                                    </div>
+
+                                    <div class="content">
+                                        <h4 class="card-title">
+                                            ${information.name}<br/>
+                                            <small>${information.userID}</small>
+                                        </h4>
+                                        <p class="card-content">
+                                            ${information.biography}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>    
                 </div>

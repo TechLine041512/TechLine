@@ -50,15 +50,9 @@
                         <li>
                             <a href="home.jsp">
                                 <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
+                                <p>Profile</p>
                             </a>
-                        </li>
-                        <li>
-                            <a href="customer.jsp">
-                                <i class="material-icons">person</i>
-                                <p>User List</p>
-                            </a>
-                        </li>
+                        </li>   
                         <li>
                             <a href="product.jsp">
                                 <i class="material-icons">content_paste</i>
@@ -66,21 +60,9 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="categories.jsp">
-                                <i class="material-icons">library_books</i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="type.jsp">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Type Product</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="orders.jsp">
+                            <a href="sell.jsp">
                                 <i class="material-icons">location_on</i>
-                                <p>Orders</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>
@@ -143,56 +125,58 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" value="permissions" href="addCategory.jsp">Add</a>
-                            <a class="btn-instagram btn" value="permissions" href="editCategory.jsp">Update</a>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Categories</h4>
+                                        <h4 class="title">Order List</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-primary">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Icon</th>
-                                            <th>Action</th>
+                                            <th>Order ID</th>
+                                            <th>Buyer</th>
+                                            <th>Total Price</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>CAT001</td>
-                                                    <td>Computers</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-
+                                                    <td>OrderMaster001</td>
+                                                    <td>Tuyết</td>
+                                                    <td>$200</td>
+                                                    <td>27/03/2017</td>
+                                                    <td>Delievery</td>
                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT002</td>
-                                                    <td>Laptops</td>
-                                                    <td>Tool and devices for computers</td>
-                                                    <td><img src="http://graphiccave.com/wp-content/uploads/2015/04/Laptop-Illustration-PNG-Graphic-Cave.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT003</td>
-                                                    <td>Cellphones</td>
-                                                    <td>Accessories for cellphones</td>
-                                                    <td><img src="https://cdn2.iconfinder.com/data/icons/gadget-linicons/100/iPhone-512.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
-                                                 <tr>
-                                                    <td>CAT004</td>
-                                                    <td>Smart Home</td>
-                                                    <td>Automation tool for smart home</td>
-                                                    <td><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/132885-200.png" style="width: 80px; height: 80px;"/></td>
-                                                    <td><a class="btn-instagram btn" value="Block">Block</a></td>
-                                                 </tr>
+                                                <tr>
+                                                    <td>OrderMaster002</td>
+                                                    <td>Diệu Nhi</td>
+                                                    <td>$50</td>
+                                                    <td>27/04/2017</td>
+                                                    <td>Delievery</td>
+                                                </tr>
+                                                <tr style="color: green;">
+                                                    <td>OrderMaster003</td>
+                                                    <td>Nhi</td>
+                                                    <td>$300</td>
+                                                    <td>27/05/2017</td>
+                                                    <td>Done</td>
+                                                </tr>
+                                                <tr style="color: green;">
+                                                    <td>OrderMaster004</td>
+                                                    <td>Thi</td>
+                                                    <td>$400</td>
+                                                    <td>27/06/2017</td>
+                                                    <td>Done</td>
+                                                </tr>
+                                                <tr style="color: red;">
+                                                    <td>OrderMaster005</td>
+                                                    <td>Uyên</td>
+                                                    <td>$600</td>
+                                                    <td>27/07/2017</td>
+                                                    <td>Cancelled</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

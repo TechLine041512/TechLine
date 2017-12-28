@@ -144,7 +144,8 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Add Type</button>                            
+                            <a class="btn-instagram btn" value="permissions" href="addType.jsp">Add</a>                        
+                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Update</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
