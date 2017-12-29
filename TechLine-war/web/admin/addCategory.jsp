@@ -46,37 +46,37 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="home.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="customer.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
-                        <li >
-                            <a href="product.jsp">
+                        <li>
+                            <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="categories.jsp">
+                            <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="type.jsp">
+                            <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="orders.jsp">
+                            <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
                             </a>
@@ -147,16 +147,23 @@
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Category</h4>
-                                        <p class="category">Create Your Own Category</p>
+                                        <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content">
-                                        <form action="AccountServlet" method="post">
-                                            <input type="hidden" name="txtUserID" value="${information.userID}"/>
+                                        <form action="addProductsServlet" method="post">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Category ID</label>
+                                                        <input type="text" class="form-control" name="txtCategoryID">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Name</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <input type="text" class="form-control" name="txtCategoryName">
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,7 +171,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Description</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,12 +179,12 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Icon</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <input type="text" class="form-control" name="txtIcon">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>      
+                                            <button type="submit" class="btn btn-primary" value="addCategory">Save</button>
+                                            <button type="submit" class="btn btn-primary" value="cancelCategories">Cancel</button>      
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

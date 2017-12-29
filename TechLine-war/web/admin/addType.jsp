@@ -4,6 +4,7 @@
     Author     : tatyuki1209
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,37 +50,37 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="home.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="customer.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
-                        <li >
-                            <a href="product.jsp">
+                        <li>
+                            <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li >
-                            <a href="categories.jsp">
+                        <li>
+                            <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="type.jsp">
+                            <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="orders.jsp">
+                            <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
                             </a>
@@ -153,16 +154,23 @@
                                         <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content">
-                                        <form action="AccountServlet" method="post">
-                                            <input type="hidden" name="txtUserID" value="${information.userID}"/>
+                                        <form action="addProductsServlet" method="post">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Type ID</label>
+                                                        <input type="text" class="form-control" name="txtTypeID">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Category Name</label>
-                                                        <select class="form-control" name="txtGender">
-                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Computers</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Network Devices</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Laptop Bags</option>
+                                                        <select class="form-control" name="txtCategory">
+                                                            <c:forEach items="${listlistCategory}" var="category">
+                                                                <option value="${category.categoryId}">${category.categoryName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -171,7 +179,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Type Name</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <input type="text" class="form-control" name="txtTypeName">
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,7 +187,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Type Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" value="${information.name}" name="txtName" ></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtTypeDesc" ></textarea>
                                                     </div>
                                                 </div>
                                             </div>                
@@ -187,13 +195,13 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Type Icon</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
+                                                        <input type="text" class="form-control" name="txtTypeIcon">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
+                                            <button type="submit" class="btn btn-primary" value="addProductType">Save</button>
+                                            <button type="submit" class="btn btn-primary" value="cancelProductType">Cancel</button>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

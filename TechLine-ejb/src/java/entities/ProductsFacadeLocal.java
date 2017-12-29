@@ -29,4 +29,10 @@ public interface ProductsFacadeLocal {
     List<Products> getListProductByDatePost();
     
     List<Products> getListProductByDiscount();
+    
+    List<Products> getListProductsByName(String productName);
+    
+    List<Products> getListProductSeller();
+    
+    String newProductID();
 }

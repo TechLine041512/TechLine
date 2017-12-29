@@ -37,16 +37,20 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST">
-                        <input type="text" class="input-block-level search-query" Placeholder="eg. Sony">
+                    <form method="POST" action="searchProductsServlet">
+                        <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
+                        <button value="Search" name="action" class="btn-success">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <%
-                                if (session.getAttribute("user") == null) {
-                            %>
+                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                            <li><a class="btn" href="search.jsp">Search</a></li>
+                            <li><a class="btn" href="admin/home.jsp">Go Admin Page</a></li>
+                                <%
+                                    if (session.getAttribute("user") == null) {
+                                %>
                             <li><a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a></li>
                                 <%
                                     }
@@ -54,8 +58,18 @@
                                 <%
                                     if (session.getAttribute("user") != null) {
                                 %>
-                            <a href="${role=="admin"?"admin/indexadmin.jsp":"AccountServlet?action=accountDetail"}">Xin chào, <%= session.getAttribute("user")%></a></li>                                                              
-                            <li><a class="btn" href="AccountServlet?action=Logout">Log out</a></li>
+                                <c:if test="${user.role=='admin'}">
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+                            <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
                                 %>

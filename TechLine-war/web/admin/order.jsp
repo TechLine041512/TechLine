@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,7 +61,7 @@
                                 <p>User List</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
@@ -78,7 +79,7 @@
                                 <p>Type Product</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
@@ -97,7 +98,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                            </button>                      
+                            </button>                         
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -144,74 +145,39 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
-                            <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=addProduct">Add</a>
+                        <div class="row" style="text-align: center;">                       
+                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Delete</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product List</h4>
-                                        <p class="category">Products in store</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table">
-                                            <thead class="text-primary">                     
-                                            <th>ID</th>
-                                            <th>Product Name</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
-                                            <th></th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listProduct}" var="product">
-                                                    <tr>
-                                                        <td>${product.productId}</td>
-                                                        <td>${product.productName}</td>
-                                                        <td>${product.brandId.brandName}</td>
-                                                        <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                        <td>${product.productQuantity}</td>
-                                                        <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                    </tr>
-                                                </c:forEach>        
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product List</h4>
-                                        <p class="category">Product's seller</p>
+                                        <h4 class="title">Order List</h4>
+                                        <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-primary">
                                             <th></th>
-                                            <th>ID</th>
-                                            <th>Seller</th>
-                                            <th>Product Name</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
+                                            <th>Order ID</th>
+                                            <th>Buyer</th>   
+                                            <th>Date</th>
+                                            <th>Note</th>
+                                            <th>Total Price</th>
+                                            <th>Status</th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${listProductSeller}" var="productSeller">
-                                                    <tr>                                           
-                                                       <td>${productSeller.productId}</td>
-                                                       <td>${productSeller.userId.fullname}</td>
-                                                       <td>${productSeller.productName}</td>
-                                                       <td>${productSeller.brandId.brandName}</td>
-                                                       <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                       <td>${productSeller.productQuantity}</td>
-                                                       <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                <c:forEach items="${listOrder}" var="order">
+                                                    <tr>
+                                                        <td><input type="checkbox" name="cbkCheck"/></td>
+                                                        <td>${order.orderMId}</td>
+                                                        <td>${order.userId.fullname}</td>
+                                                        <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                        <td>${order.orderNote}</td>
+                                                        <td>${order.orderTotalPrice}</td>
+                                                        <td>${order.orderStatus}</td>
                                                     </tr>
-                                                </c:forEach>
+                                                </c:forEach>        
                                             </tbody>
                                         </table>
                                     </div>
@@ -229,7 +195,7 @@
                                     <a href="#">
                                         Home
                                     </a>
-                                </li>
+                                </li> 
                             </ul>
                         </nav>
                         <p class="copyright pull-right">

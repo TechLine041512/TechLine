@@ -7,9 +7,11 @@ package servlets;
 
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
+import entities.ProductsCommentFacadeLocal;
 import entities.ProductsFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
@@ -32,6 +34,11 @@ import utils.TechLineUtils;
  * @author nth15
  */
 public class viewServlet extends HttpServlet {
+    @EJB
+    private ProductsCommentFacadeLocal productsCommentFacade;
+    
+    @EJB
+    private OrderMasterFacadeLocal orderMasterFacade;
 
     @EJB
     private UsersFacadeLocal usersFacade;
@@ -42,6 +49,7 @@ public class viewServlet extends HttpServlet {
     @EJB
     private ProductTypesFacadeLocal productTypesFacade;
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -67,7 +75,38 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;
-
+                    
+                case "showUser":
+                    request.setAttribute("listCustomer", usersFacade.getListCustomer());
+                    request.setAttribute("listSeller", usersFacade.getListSeller());
+                    request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
+                    break;
+                    
+                case "showProductAdmin":
+                    request.setAttribute("listProduct", productsFacade.getListProductByDatePost());
+                    request.setAttribute("listProductSeller", productsFacade.getListProductSeller());        
+                    request.getRequestDispatcher("admin/product.jsp").forward(request, response);
+                    break;
+                    
+                case "showCategories":
+                    request.setAttribute("listCategories", categoriesFacade.findAll());        
+                    request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
+                    break;
+                    
+                case "showProductType":
+                    request.setAttribute("listProductType", productTypesFacade.findAll());  
+                    request.getRequestDispatcher("admin/type.jsp").forward(request, response);
+                    break;
+                    
+                case "showOrder":
+                    request.setAttribute("listOrder", orderMasterFacade.findAll());  
+                    request.getRequestDispatcher("admin/order.jsp").forward(request, response);
+                    break;
+                    
+                case "homeAdmin":
+                    request.getRequestDispatcher("admin/home.jsp").forward(request, response);
+                    break;
+                    
                 case "Login":
                     Users users = usersFacade.checkLogin(request.getParameter("username"), request.getParameter("password"));
                     if (users == null) {
@@ -77,12 +116,14 @@ public class viewServlet extends HttpServlet {
                     session.setAttribute("user", users);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
+                    
                 case "Logout":
                     session = request.getSession();
                     //destroy session
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
+                    
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);

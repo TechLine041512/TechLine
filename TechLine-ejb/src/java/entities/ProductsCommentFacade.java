@@ -6,9 +6,11 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class ProductsCommentFacade extends AbstractFacade<ProductsComment> implements ProductsCommentFacadeLocal {
@@ -23,5 +25,13 @@ public class ProductsCommentFacade extends AbstractFacade<ProductsComment> imple
     public ProductsCommentFacade() {
         super(ProductsComment.class);
     }
+
+    @Override
+    public List<ProductsComment> getListComment(String productID) {
+        Query q = em.createQuery("SELECT p FROM ProductsComment p WHERE p.productId.productId = :productID");
+        q.setParameter("productID", productID);
+        return q.getResultList();
+    }
     
+            
 }

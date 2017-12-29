@@ -72,6 +72,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>servlets.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <servlet-class>servlets.RedirectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>viewServlet</servlet-name>
         <url-pattern>/viewServlet</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/HomeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/RedirectServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
