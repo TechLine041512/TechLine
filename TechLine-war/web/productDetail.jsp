@@ -34,16 +34,18 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST">
-                        <input type="text" class="input-block-level search-query" Placeholder="eg. Sony">
+                    <form method="POST" action="searchProductsServlet">
+                        <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
+                        <button value="Search" name="action" class="btn-success">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <%
-                                if (session.getAttribute("user") == null) {
-                            %>
+                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                                <%
+                                    if (session.getAttribute("user") == null) {
+                                %>
                             <li><a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a></li>
                                 <%
                                     }
@@ -51,8 +53,18 @@
                                 <%
                                     if (session.getAttribute("user") != null) {
                                 %>
-                            <a href="${role=="admin"?"admin/indexadmin.jsp":"AccountServlet?action=accountDetail"}">Xin chào, <%= session.getAttribute("user")%></a></li>                                                              
-                            <li><a class="btn" href="AccountServlet?action=Logout">Log out</a></li>
+                                <c:if test="${user.role=='admin'}">
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+                            <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
                                 %>
@@ -85,19 +97,19 @@
                     <div class="span9">
                         <div class="row">
                             <div class="span4">
-                                <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="${product.productImage[0]}" ></a>												
+                                <a href="${product.productImage[0]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img alt="" src="${product.productImage[0]}" ></a>												
                                 <ul class="thumbnails small">								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[1]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[2]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>													
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[3]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[4]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -147,8 +159,8 @@
                                         </c:forEach>
                                     </div><!---End #comments-section--->
                                     <div id="write-review-rating"><!---Start #write-review-rating Phan viet binh luan va cham sao cho product--->
-                                        <form method="post" action="BookServlet">
-                                            <input type="hidden" name="bookDetailID" value="${product.productId}">
+                                        <form method="post" action="addProductsServlet">
+                                            <input type="hidden" name="productID" value="${product.productId}">
                                             <h4>Comment</h4>
                                             <h5>Comment is limited to 500 words</h5>
                                             <textarea name="comment" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;"></textarea>

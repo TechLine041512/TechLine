@@ -6,53 +6,51 @@
 
 package servlets;
 
-
-import entities.Categories;
+import entities.BrandsFacadeLocal;
 import entities.CategoriesFacadeLocal;
-import entities.Products;
-import entities.ProductsFacadeLocal;
-
+import entities.ProductTypesFacadeLocal;
 import java.io.IOException;
-
-import java.util.List;
-
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.TechLineUtils;
 
 
-public class HomeServlet extends HttpServlet {
+public class RedirectServlet extends HttpServlet {
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
     @EJB
-    private ProductsFacadeLocal productsFacade;
+    private ProductTypesFacadeLocal productTypesFacade;
+    @EJB
+    private BrandsFacadeLocal brandsFacade;
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-            List<Products> listProduct;
-            listProduct = productsFacade.getListProductByDatePost();
-            if (listProduct != null) {
-                request.setAttribute("ListProductByDatePost1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
-                request.setAttribute("ListProductByDatePost2", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
+        try (PrintWriter out = response.getWriter()) {
+            String action = request.getParameter("action");
+            switch(action){
+                case "addProduct":
+                    request.setAttribute("listBrand", brandsFacade.findAll());
+                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.getRequestDispatcher("admin/addProduct.jsp").forward(request, response);
+                    break;
+                case "addCategory":
+                    request.getRequestDispatcher("admin/addCategory.jsp").forward(request, response);
+                    break;
+                case "addProductType":
+                    request.setAttribute("listCategory", categoriesFacade.findAll());
+                    request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    break;
             }
-            listProduct = productsFacade.getListProductByDiscount();
-            if (listProduct != null) {
-                request.setAttribute("ListProductByDiscount1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
-                request.setAttribute("ListProductByDiscount1", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
-            }
-            List<Categories> listCategorieses = categoriesFacade.findAll();
-            if (listCategorieses != null) {
-                request.setAttribute("listCategories", categoriesFacade.findAll());
-            }
-            
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -93,5 +91,4 @@ public class HomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
 }

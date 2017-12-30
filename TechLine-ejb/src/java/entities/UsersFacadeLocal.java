@@ -27,4 +27,8 @@ public interface UsersFacadeLocal {
     int count();
     
     Users checkLogin(String userID, String pwd);
+
+    List<Users> getListSeller();
+    
+    List<Users> getListCustomer();
 }
