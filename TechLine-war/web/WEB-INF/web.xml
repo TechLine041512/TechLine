@@ -76,6 +76,10 @@
         <servlet-name>RedirectServlet</servlet-name>
         <servlet-class>servlets.RedirectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>report</servlet-name>
+        <servlet-class>servlets.report</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>viewServlet</servlet-name>
         <url-pattern>/viewServlet</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>RedirectServlet</servlet-name>
         <url-pattern>/RedirectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>report</servlet-name>
+        <url-pattern>/report</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
