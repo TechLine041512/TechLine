@@ -97,19 +97,19 @@
                     <div class="span9">
                         <div class="row">
                             <div class="span4">
-                                <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="${product.productImage[0]}" ></a>												
+                                <a href="${product.productImage[0]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img alt="" src="${product.productImage[0]}" ></a>												
                                 <ul class="thumbnails small">								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[1]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>								
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[2]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>													
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[3]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                     <li class="span1">
-                                        <a href="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
+                                        <a href="${product.productImage[4]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
                                     </li>
                                 </ul>
                             </div>
