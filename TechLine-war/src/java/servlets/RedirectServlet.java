@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
 import entities.BrandsFacadeLocal;
 import entities.CategoriesFacadeLocal;
 import entities.ProductTypesFacadeLocal;
-import entities.ProductsFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -17,10 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RedirectServlet extends HttpServlet {
 
-    @EJB
-    private ProductsFacadeLocal productsFacade;
+public class RedirectServlet extends HttpServlet {
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
     @EJB
@@ -28,12 +26,13 @@ public class RedirectServlet extends HttpServlet {
     @EJB
     private BrandsFacadeLocal brandsFacade;
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-            switch (action) {
+            switch(action){
                 case "addProduct":
                     request.setAttribute("listBrand", brandsFacade.findAll());
                     request.setAttribute("listType", productTypesFacade.findAll());
@@ -45,13 +44,6 @@ public class RedirectServlet extends HttpServlet {
                 case "addProductType":
                     request.setAttribute("listCategory", categoriesFacade.findAll());
                     request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
-                    break;
-                case "editProduct":
-                    request.setAttribute("listBrand", brandsFacade.findAll());
-                    request.setAttribute("listType", productTypesFacade.findAll());
-                    String productId = request.getParameter("pid");
-                    request.setAttribute("product", productsFacade.find(productId));
-                    request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);

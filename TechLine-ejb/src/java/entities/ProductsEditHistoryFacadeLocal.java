@@ -25,7 +25,5 @@ public interface ProductsEditHistoryFacadeLocal {
     List<ProductsEditHistory> findRange(int[] range);
 
     int count();
-
-    int newVersion(String productId);
     
 }
