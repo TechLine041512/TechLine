@@ -6,11 +6,9 @@
 
 package entities;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 @Stateless
 public class ProductsEditHistoryFacade extends AbstractFacade<ProductsEditHistory> implements ProductsEditHistoryFacadeLocal {
@@ -24,17 +22,6 @@ public class ProductsEditHistoryFacade extends AbstractFacade<ProductsEditHistor
 
     public ProductsEditHistoryFacade() {
         super(ProductsEditHistory.class);
-    }
-
-    //generate version of product history
-    @Override
-    public int newVersion(String productId) {
-        int newVersion = 0;
-        Query q = em.createNamedQuery("ProductsEditHistory.findByProductId");
-        q.setParameter("productId", productId);
-        List<ProductsEditHistory> editHistorys = q.getResultList();
-        newVersion = editHistorys.size() + 1;
-        return newVersion;
     }
     
 }
