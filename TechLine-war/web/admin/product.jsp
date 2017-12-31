@@ -168,7 +168,7 @@
                                             <tbody>
                                                 <c:forEach items="${listProduct}" var="product">
                                                     <tr>
-                                                        <td>${product.productId}</td>
+                                                        <td><a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=editProduct&pid=${product.productId}">${product.productId}</a></td>
                                                         <td>${product.productName}</td>
                                                         <td>${product.brandId.brandName}</td>
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>

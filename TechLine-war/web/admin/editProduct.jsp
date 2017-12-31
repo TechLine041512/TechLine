@@ -4,29 +4,30 @@
     Author     : tatyuki1209
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product Page</title>
+        <title>Update Product Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-        
+
         <!--Richtext-->
         <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
@@ -34,53 +35,54 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
-                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+            Tip 2: you can also add an image using data-image tag
 
-                Tip 2: you can also add an image using data-image tag
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="home.jsp" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
+
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="home.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="customer.jsp">
+                            <a href="viewServlet?action=showUser">
                                 <i class="material-icons">person</i>
                                 <p>User List</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="product.jsp">
+                            <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="categories.jsp">
+                            <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="type.jsp">
+                            <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="orders.jsp">
+                            <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
                             </a>
@@ -154,104 +156,118 @@
                                         <p class="category">Update Your Own Product</p>
                                     </div>
                                     <div class="card-content">
-                                        <form action="AccountServlet" method="post">
-                                            <input type="hidden" name="txtUserID" value="${information.userID}"/>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Type</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Brand Id</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Summary</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" value="${information.name}" name="txtName" >
-                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Image</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Product Discount</label>
-                                                        <input type="text" class="form-control" value="${information.name}" name="txtName">
-                                                    </div>
-                                                </div>
-                                            </div>
-<!--                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <select class="form-control" name="txtGender">
-                                                            <option value="${information.gender}" ${information.gender=='Nam'?'checked':''}>Nam</option>
-                                                            <option value="${information.gender}" ${information.gender!='Nam'?'':'checked'}>Nữ</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Số Điện Thoại</label>
-                                                        <input type="text" class="form-control" name="txtPhone" value="${information.phone}">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Địa Chỉ</label>
-                                                        <input type="text" class="form-control" value="${information.address}" name="txtAddress">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>About Me</label>
-                                                        <div class="form-group labxel-floating">
-                                                            <textarea class="form-control" rows="5" placeholder="Hãy giới thiệu 1 chút về bạn đi nào !!">${information.biography}</textarea>
+                                        <form action="editProductsServlet" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Product ID</label>
+                                                            <input type="text" class="form-control" name="txtProductID" value="${product.productId}" readonly="">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>-->
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
-                                            <div class="clearfix"></div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Product Name</label>
+                                                            <input type="text" class="form-control" name="txtProductName" value="${product.productName}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label>Product Type</label>
+                                                            <select class="form-control" name="txtProductType">
+                                                                <c:forEach items="${listType}" var="type">
+                                                                    <option value="${type.typeId}" ${type.typeId == product.typeId.typeId ? 'selected="selected"' : ''} >${type.typeName}></option>                                 
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label>Brand</label>
+                                                            <select class="form-control" name="txtBrand">
+                                                                <c:forEach items="${listBrand}" var="brand">
+                                                                    <option value="${brand.brandId}" ${brand.brandId == product.brandId.brandId ? 'selected="selected"' : ''}>${brand.brandName}</option>                                 
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>                    
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label>Product Summary</label>
+                                                            <textarea rows="10" cols="80" class="form-control" name="txtSummary" value="${product.productSummary}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label>Product Description</label>
+                                                            <textarea rows="10" cols="80" class="form-control" name="txtDescription" value="${product.productDesc}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Product Price</label>
+                                                            <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Product Image</label>
+                                                            <input type="text" class="form-control" name="txtImage" value="${product.productImage}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Unit</label>
+                                                            <input type="text" class="form-control" name="txtUnit" value="${product.productUnit}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Quantity</label>
+                                                            <input type="number" class="form-control" name="txtQuantity" value="${product.productQuantity}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Weight</label>
+                                                            <input type="text" class="form-control" name="txtWeight" value="${product.productWeight}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Width</label>
+                                                            <input type="text" class="form-control" name="txtWidth" value="${product.productWidth}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Height</label>
+                                                            <input type="text" class="form-control" name="txtHeight" value="${product.productHeigth}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Length</label>
+                                                            <input type="text" class="form-control" name="txtLength" value="${product.productLength}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary" name="action" value="editProduct">Save</button>
+                                                <button type="submit" class="btn btn-primary" name="action" value="cancelProduct">Cancel</button>
+                                                <div class="clearfix"></div>
                                         </form>
                                     </div>
                                 </div>
@@ -316,24 +332,24 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
+    <script src="resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
     <script type="text/javascript">
                                 $(document).ready(function() {
