@@ -160,7 +160,7 @@
                                 <li class="span3">
                                     <div class="product-box">
                                         <span class="sale_tag"></span>												
-                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
+                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="${item.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
                                         <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
                                         <p class="price">&#36;${item.productPrice}</p>
                                     </div>

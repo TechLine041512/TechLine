@@ -25,7 +25,7 @@ public class ProductIndexModel {
     private double productLength;
     private int productQuantity;
     private double productDiscount;
-    public Collection<ProductsComment> getProductsCommentCollection() {
+    public Collection<ProductsComment> getProductsCommentCollection() {  
         return productsCommentCollection;
     }
 

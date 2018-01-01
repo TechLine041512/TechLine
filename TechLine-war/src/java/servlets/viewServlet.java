@@ -69,8 +69,8 @@ public class viewServlet extends HttpServlet {
                     List<ProductTypes> listProductTypes = (List<ProductTypes>) categories.getProductTypesCollection();
                     for (ProductTypes productTypes : listProductTypes) {
                         listProduct.addAll(productTypes.getProductsCollection());
-                    }                   
-                    PageProduct pageProduct = new PageProduct(listProduct);
+                    }                                   
+                    PageProduct pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct));
                     String n = request.getParameter("btn");
                     if (n != null) {
                         if (n.equals("next")) {
