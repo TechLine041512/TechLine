@@ -6,6 +6,7 @@
 package servlets;
 
 import entities.BrandsFacade;
+import entities.BrandsFacadeLocal;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsFacadeLocal;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +38,8 @@ public class editProductsServlet extends HttpServlet {
     private ProductsFacadeLocal productsFacadeLocal;
 
     @EJB
-    private BrandsFacade brandsFacade;
+    private BrandsFacadeLocal brandsFacade;
+    
     @EJB
     private ProductTypesFacadeLocal productTypesFacadeLocal;
 
@@ -52,7 +54,7 @@ public class editProductsServlet extends HttpServlet {
             case "sellerEditProductStatus":
                 productId = request.getParameter("productId");
                 product = productsFacadeLocal.find(productId);
-                if (product.getProductStatus().toString().equals("true")) {
+                if (product.getProductStatus()) {
                     product.setProductStatus(false);
                 } else {
                     product.setProductStatus(true);
