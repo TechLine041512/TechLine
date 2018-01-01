@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.OrderMasterFacadeLocal;
@@ -13,6 +14,7 @@ import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsCommentFacadeLocal;
 import entities.ProductsFacadeLocal;
+import entities.SellerFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 
@@ -48,7 +50,10 @@ public class viewServlet extends HttpServlet {
     private ProductsFacadeLocal productsFacade;
     @EJB
     private ProductTypesFacadeLocal productTypesFacade;
-
+    @EJB
+    private SellerFacadeLocal sellerFacadeLocal;
+    @EJB
+    private BrandsFacadeLocal brandsFacade;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,6 +61,7 @@ public class viewServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
+            Users user = (Users) request.getSession().getAttribute("user");
             switch (action) {
                 case "cateDetail":
                     Categories categories = categoriesFacade.find(request.getParameter("idCate"));
@@ -123,7 +129,25 @@ public class viewServlet extends HttpServlet {
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
-                    
+                case "homeSeller":
+                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    request.getRequestDispatcher("seller/home.jsp").forward(request, response);
+                    break;
+                case "sellerProduct":
+                    List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());
+                    request.setAttribute("lsProduct", sellerProduct);
+                    request.getRequestDispatcher("seller/product.jsp").forward(request, response);
+                    break;
+                case "sellerOrder":
+                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    request.getRequestDispatcher("seller/sell.jsp").forward(request, response);
+                    break;
+                case "sellerProductDetail":
+                    request.setAttribute("listBrand", brandsFacade.findAll());
+                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.setAttribute("productDetail", productsFacade.find(request.getParameter("productId")));
+                    request.getRequestDispatcher("seller/editProduct.jsp").forward(request, response);
+                    break;    
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
