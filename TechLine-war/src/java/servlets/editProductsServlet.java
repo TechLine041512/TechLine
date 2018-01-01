@@ -5,9 +5,10 @@
  */
 package servlets;
 
+
 import entities.Brands;
-import entities.BrandsFacadeLocal;
 import entities.ProductTypes;
+import entities.BrandsFacade;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsEditHistory;
@@ -34,6 +35,7 @@ public class editProductsServlet extends HttpServlet {
     private ProductTypesFacadeLocal productTypesFacade;
     @EJB
     private BrandsFacadeLocal brandsFacade;
+    
     @EJB
     private ProductsFacadeLocal productsFacade;
 
@@ -47,11 +49,10 @@ public class editProductsServlet extends HttpServlet {
         switch (action) {
             case "sellerEditProductStatus":
                 productId = request.getParameter("productId");
-                product = productsFacade.find(productId);
-                if (product.getProductStatus().toString().equals("true")) {
-                    product.setProductStatus(false);
+                product = productsFacadeLocal.find(productId);
+                if (product.getProductStatus()) {
                 } else {
-                    product.setProductStatus(true);
+                    product.setProductStatus(false);
                 }
                 productsFacade.edit(product);
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
