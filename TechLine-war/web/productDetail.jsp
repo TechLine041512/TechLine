@@ -36,7 +36,7 @@
                 <div class="span4">
                     <form method="POST" action="searchProductsServlet">
                         <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
-                        <button value="Search" name="action" class="btn-success">Search</button>
+                        <button value="Search" name="action" class="btn-success btn">Search</button>
                     </form>
                 </div>
                 <div class="span8">
@@ -73,10 +73,60 @@
                 </div>
             </div>
         </div>
+        <!--Phần dialog box Login-->
+        <div class="modal fade login" id="loginModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Login with</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                            <div class="content">
+                                <div class="error"></div>
+                                <div class="form loginBox">
+                                    <form method="post" action="viewServlet">
+                                        <input id="username" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
+                                        <input id="password" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
+                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Login">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="content registerBox" style="display:none;">
+                                <div class="form">
+                                    <form method="post" action="register.html">
+                                        <b style="color: red;" id="note1"></b>
+                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
+                                        <b style="color: red;" id="note2"></b>
+                                        <input id="Regispassword" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
+                                        <input id="Regispassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
+                                        <input class="btn btn-inverse" id="btnRegister" value="Create account" name="action" type="submit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="forgot login-footer">
+                            <span>Looking to 
+                                <a href="javascript: showRegisterForm();">Register</a>
+                                ?</span>
+                        </div>
+                        <div class="forgot register-footer" style="display:none">
+                            <span>Already have an account?</span>
+                            <a href="javascript: showLoginForm();">Login</a>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        </div>
+        <!--Kết thúc dialog box Login-->
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
-                    <a href="index.html" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
                             <c:forEach items="${listCategories}" var="item">
@@ -360,23 +410,23 @@
         </div>
         <script src="resource/themes/js/common.js"></script>
         <script>
-                                $(function() {
-                                    $('#myTab a:first').tab('show');
-                                    $('#myTab a').click(function(e) {
-                                        e.preventDefault();
-                                        $(this).tab('show');
-                                    })
-                                })
-                                $(document).ready(function() {
-                                    $('.thumbnail').fancybox({
-                                        openEffect: 'none',
-                                        closeEffect: 'none'
-                                    });
+                                            $(function() {
+                                                $('#myTab a:first').tab('show');
+                                                $('#myTab a').click(function(e) {
+                                                    e.preventDefault();
+                                                    $(this).tab('show');
+                                                })
+                                            })
+                                            $(document).ready(function() {
+                                                $('.thumbnail').fancybox({
+                                                    openEffect: 'none',
+                                                    closeEffect: 'none'
+                                                });
 
-                                    $('#myCarousel-2').carousel({
-                                        interval: 2500
-                                    });
-                                });
+                                                $('#myCarousel-2').carousel({
+                                                    interval: 2500
+                                                });
+                                            });
         </script>
     </body>
 </html>
