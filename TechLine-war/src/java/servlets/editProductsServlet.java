@@ -7,8 +7,8 @@ package servlets;
 
 
 import entities.Brands;
+import entities.BrandsFacadeLocal;
 import entities.ProductTypes;
-import entities.BrandsFacade;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsEditHistory;
@@ -49,7 +49,7 @@ public class editProductsServlet extends HttpServlet {
         switch (action) {
             case "sellerEditProductStatus":
                 productId = request.getParameter("productId");
-                product = productsFacadeLocal.find(productId);
+                product = productsFacade.find(productId);
                 if (product.getProductStatus()) {
                     product.setProductStatus(false);
                 } else {
