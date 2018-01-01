@@ -23,6 +23,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author nth15
+ */
 @Entity
 @Table(name = "ProductsEditHistory", catalog = "TechLine", schema = "dbo")
 @XmlRootElement
@@ -38,8 +42,8 @@ public class ProductsEditHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductsEditHistoryPK productsEditHistoryPK;
-    @Size(max = 50)
-    @Column(name = "productName", length = 50)
+    @Size(max = 500)
+    @Column(name = "productName", length = 500)
     private String productName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "productPrice", precision = 53)

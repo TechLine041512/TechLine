@@ -60,8 +60,8 @@ create table Seller
 	userId varchar(10) foreign key references Users(userId) primary key,
 	storeName nvarchar(1000),
 	identityCard varchar(20), -- CMND -- unseen on Customer
-	approvedDate varchar(10), -- CMND approved date -- unseen on Customer
-	approvedPlace nvarchar(20), -- CMND approved place -- unseen on Customer
+	approvedDate varchar(50), -- CMND approved date -- unseen on Customer
+	approvedPlace nvarchar(100), -- CMND approved place -- unseen on Customer
 	storeAddress nvarchar(100), -- unseen on Customer
 	storeIcon varchar(200), 
 	storeSummary nvarchar(1000)
@@ -117,7 +117,7 @@ create table ProductsEditHistory
 (
 	productId varchar(10) foreign key references Products(productId),
 	[version] int,
-	productName nvarchar(50),
+	productName nvarchar(500),
 	productPrice float,
 	productDiscount int,
 	editTime datetime not null default getdate(),
