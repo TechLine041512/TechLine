@@ -39,7 +39,7 @@
                 <div class="span4">
                     <form method="POST" action="searchProductsServlet">
                         <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
-                        <button value="Search" name="action" class="btn-success">Search</button>
+                        <button value="Search" name="action" class="btn-success btn">Search</button>
                     </form>
                 </div>
                 <div class="span8">
@@ -91,10 +91,10 @@
                             <div class="content">
                                 <div class="error"></div>
                                 <div class="form loginBox">
-                                    <form method="post" action="AccountServlet">
+                                    <form method="post" action="viewServlet">
                                         <input id="username" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
                                         <input id="password" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
-                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Login" onclick="checkLogin();">
+                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Login">
                                     </form>
                                 </div>
                             </div>
@@ -104,11 +104,11 @@
                                 <div class="form">
                                     <form method="post" action="register.html">
                                         <b style="color: red;" id="note1"></b>
-                                        <input id="email" class="form-control" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
+                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
                                         <b style="color: red;" id="note2"></b>
-                                        <input id="Regispassword" class="form-control" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
-                                        <input id="Regispassword_confirmation" class="form-control" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
-                                        <input class="btn btn-default btn-register" id="btnRegister" value="Create account" name="action" type="submit">
+                                        <input id="Regispassword" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
+                                        <input id="Regispassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
+                                        <input class="btn btn-inverse" id="btnRegister" value="Create account" name="action" type="submit">
                                     </form>
                                 </div>
                             </div>
@@ -132,7 +132,6 @@
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
-                    <a href="index.html" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
                             <c:forEach items="${listCategories}" var="item">

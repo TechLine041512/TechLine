@@ -28,6 +28,14 @@ function showLoginForm(){
     });       
      $('.error').removeClass('alert alert-danger').html(''); 
 }
+function showPasswordForm(){
+    $('#PasswordModal .registerBox').fadeOut('fast',function(){
+        $('.loginBox').fadeIn('fast');
+        
+        $('.modal-title').html('Login with');
+    });       
+     $('.error').removeClass('alert alert-danger').html(''); 
+}
 
 function openLoginModal(){
     showLoginForm();
@@ -40,6 +48,14 @@ function openRegisterModal(){
     showRegisterForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    
+    }, 230);
+    
+}
+
+function openPasswordModal(){
+    showPasswordForm();
+    setTimeout(function(){
+        $('#PasswordModal').modal('show');    
     }, 230);
     
 }

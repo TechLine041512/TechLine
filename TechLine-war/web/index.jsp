@@ -34,12 +34,13 @@
                 <div class="span4">
                     <form method="POST" action="searchProductsServlet">
                         <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
-                        <button value="Search" name="action" class="btn-success">Search</button>
+                        <button value="Search" name="action" class="btn-success btn">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
+                            <li><a class="btn" href="customer.jsp">Customer</a></li>
                             <li><a class="btn" href="cart.jsp">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
@@ -97,11 +98,11 @@
                                 <div class="form">
                                     <form method="post" action="register.html">
                                         <b style="color: red;" id="note1"></b>
-                                        <input id="email" class="form-control" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
+                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
                                         <b style="color: red;" id="note2"></b>
-                                        <input id="Regispassword" class="form-control" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
-                                        <input id="Regispassword_confirmation" class="form-control" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
-                                        <input class="btn btn-default btn-register" id="btnRegister" value="Create account" name="action" type="submit">
+                                        <input id="Regispassword" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
+                                        <input id="Regispassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
+                                        <input class="btn btn-inverse" id="btnRegister" value="Create account" name="action" type="submit">
                                     </form>
                                 </div>
                             </div>
@@ -110,7 +111,7 @@
                     <div class="modal-footer">
                         <div class="forgot login-footer">
                             <span>Looking to 
-                                <a href="javascript: showRegisterForm();">Đăng Ký</a>
+                                <a href="javascript: showRegisterForm();">Register</a>
                                 ?</span>
                         </div>
                         <div class="forgot register-footer" style="display:none">
@@ -125,7 +126,6 @@
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
-                    <a href="HomeServlet" class="logo pull-left"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
                             <c:forEach items="${listCategories}" var="item">
@@ -174,9 +174,6 @@
                                         <div class="active item">
                                             <ul class="thumbnails">	
                                                 <c:forEach items="${ListProductByDatePost1}" var="item">
-                                                    <%
-
-                                                    %>
                                                     <li class="span3" style="line-height: none">
                                                         <div class="product-box" >
                                                             <span class="sale_tag"></span>
@@ -269,10 +266,10 @@
                                 <h4 class="title">
                                     <span class="pull-left"><span class="text"><span class="line">Seller <strong>Products</strong></span></span></span>
                                     <span class="pull-right">
-                                        <a class="left button" href="#myCarousel-2" data-slide="prev"></a><a class="right button" href="#myCarousel-2" data-slide="next"></a>
+                                        <a class="left button" href="#myCarousel-3" data-slide="prev"></a><a class="right button" href="#myCarousel-3" data-slide="next"></a>
                                     </span>
                                 </h4>
-                                <div id="myCarousel-2" class="myCarousel carousel slide">
+                                <div id="myCarousel-3" class="myCarousel carousel slide">
                                     <div class="carousel-inner">
                                         <div class="active item">
                                             <ul class="thumbnails">
