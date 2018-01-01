@@ -3,15 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import entities.Brands;
+import entities.BrandsFacadeLocal;
+import entities.ProductTypes;
+import entities.ProductTypesFacadeLocal;
+import entities.Products;
+import entities.ProductsEditHistory;
+import entities.ProductsEditHistoryFacadeLocal;
+import entities.ProductsEditHistoryPK;
+import entities.ProductsFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,29 +30,68 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class editProductsServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @EJB
+    private ProductsEditHistoryFacadeLocal productsEditHistoryFacade;
+    @EJB
+    private ProductTypesFacadeLocal productTypesFacade;
+    @EJB
+    private BrandsFacadeLocal brandsFacade;
+    @EJB
+    private ProductsFacadeLocal productsFacade;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet editProductsServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet editProductsServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            switch (action) {
+                case "editProduct":
+                    String productId = request.getParameter("txtProductID");
+                    ProductsEditHistoryPK editHistoryPK = new ProductsEditHistoryPK(productId, 1);
+                    ProductsEditHistory editHistory = productsEditHistoryFacade.find(editHistoryPK);
+                    //Check whether this product has eidt history or not. If not, create new
+                    if (editHistory != null) {
+                        int version = productsEditHistoryFacade.newVersion(productId);
+                        editHistoryPK = new ProductsEditHistoryPK(productId, version);
+                    }
+                    editHistory = new ProductsEditHistory(editHistoryPK);
+                    //Save current information of product to history
+                    Products products = productsFacade.find(productId);
+                    java.sql.Date today = new java.sql.Date(new Date().getTime());//return current time
+                    editHistory.setProductName(products.getProductName());
+                    editHistory.setProductPrice(products.getProductPrice());
+                    editHistory.setProductDiscount(products.getProductDiscount());
+                    editHistory.setEditTime(today);
+                    productsEditHistoryFacade.create(editHistory);
+                    //Edit product
+                    Brands brands = brandsFacade.find(request.getParameter("txtBrand"));
+                    ProductTypes productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
+                    products.setTypeId(productTypes);
+                    products.setBrandId(brands);
+                    products.setProductName(request.getParameter("txtProductName"));
+                    products.setProductDesc(request.getParameter("txtDescription"));
+                    products.setProductSummary(request.getParameter("txtSummary"));
+                    products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
+                    products.setProductUnit(request.getParameter("txtUnit"));
+                    products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
+                    products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
+                    products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
+                    products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
+                    products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
+                    products.setProductImage(request.getParameter("txtImage"));
+                    products.setProductDiscount(Integer.parseInt(request.getParameter("txtDiscount")));
+                    productsFacade.edit(products);
+                    request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                    
+                    break;
+                case "cancelProduct":
+                    request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    break;
+            }
         }
     }
 
