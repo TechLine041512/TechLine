@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Users</title>
+        <title>Product List</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -167,7 +167,8 @@
                                             <tbody>
                                                 <c:forEach items="${listProduct}" var="product">
                                                     <tr>
-                                                        <td><a href="#">${product.productId}</a></td>
+                                                        <td><a href="RedirectServlet?action=editProduct&pid=${product.productId}">${product.productId}</a></td>
+                                                        <td>${product.productName}</td>
                                                         <td>${product.brandId.brandName}</td>
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.productQuantity}</td>
