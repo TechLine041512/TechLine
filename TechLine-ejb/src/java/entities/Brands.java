@@ -42,7 +42,7 @@ public class Brands implements Serializable {
     @Column(name = "brandName", length = 100)
     private String brandName;
     @Size(max = 100)
-    @Column(name = "brandIcon", length = 100)
+    @Column(name = "brandIcon", length = 200)
     private String brandIcon;
     @Column(name = "brandStatus")
     private Boolean brandStatus;

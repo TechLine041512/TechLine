@@ -1,25 +1,25 @@
 <%-- 
-    Document   : search
-    Created on : Dec 27, 2017, 11:27:31 PM
+    Document   : customer
+    Created on : Jan 1, 2018, 1:35:08 PM
     Author     : tatyuki1209
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search Page</title>
+        <title>Order's Customer</title>
         <link href="resource/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
         <link href="resource/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 
         <link href="resource/themes/css/bootstrappage.css" rel="stylesheet"/>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
         <!-- global styles -->
         <link href="resource/themes/css/flexslider.css" rel="stylesheet"/>
         <link href="resource/themes/css/main.css" rel="stylesheet"/>
-
+        <link href="resource/themes/css/my-style.css" rel="stylesheet"/>    
         <!-- scripts -->
         <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
         <script src="resource/bootstrap/js/bootstrap.min.js"></script>				
@@ -51,17 +51,17 @@
                                 <%
                                     if (session.getAttribute("user") != null) {
                                 %>
-                                <c:if test="${user.role=='admin'}">
+                            <c:if test="${user.role=='admin'}">
                                 <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
-                                </c:if>
+                            </c:if>
 
                             <c:if test="${user.role=='seller'}">
                                 <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
-                                </c:if>
+                            </c:if>
 
                             <c:if test="${user.role=='customer'}">
                                 <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
-                                </c:if>
+                            </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
@@ -121,7 +121,41 @@
                 </div>
             </div>
         </div>
-        <!--Kết thúc dialog box Login-->          
+        <!--Kết thúc dialog box Login-->
+        
+        <!--Phần dialog box Change Password-->
+        <div class="modal fade login" id="PasswordModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Change Password</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                            <div class="content">
+                                <div class="error"></div>
+                                <div class="form loginBox">
+                                    <form method="post" action="viewServlet">
+                                        <input id="ChagePassword" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
+                                        <input id="ChagePassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
+                                        <input id="NewPassowrd" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
+                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Change Password">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="forgot login-footer">
+                            <span>Note: Change the password remember</span>
+                        </div>
+
+                    </div>        
+                </div>
+            </div>
+        </div>
+        <!--Kết thúc dialog box Change Password-->
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
@@ -135,81 +169,76 @@
                         </ul>
                     </nav>
                 </div>
-            </section>				
-            <section class="header_text sub">
-                <img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
-                <h4><span>Search</span></h4>
             </section>
-            <section class="main-content">				
+            <section class="main-content">
                 <div class="row">
-                    <div class="span9">					
-                        <h4 class="title"><span class="text"><strong>Search</strong> Product</span></h4>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Brand</th>
-                                    <th>Add to Cart</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${listProductSearch}" var="product">
-                                    <tr>
-                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
-                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
-                                        <td><input type="text" placeholder="1" class="input-mini"></td>
-                                        <td>$${product.productPrice}</td>
-                                        <td>${product.brandId.brandName}</td>
-                                        <td><button class="btn btn-inverse" type="submit" id="checkout">Add</button></td>
-                                    </tr>			  
-                                </c:forEach>                         	  
-                            </tbody>
-                        </table>			                					
+                    <div class="span12">
+                        <div class="my-main"><!-----!!!!!!!!!!!!!!!!!!!!!!!!.my-main Phan than noi dung trang!!!!!!!!!!!!!!!!!!!!!!!!!!!!----->
+                <div class="table-cart"><!----- Table cart ----->
+                    <h3>Danh sách đặt hàng</h3>
+                    <div id="order-list-customer-info">
+                        <h4>Name: Tiến</h4>
+                    </div>               
+                    <div class="clearfix"></div>
+
+                    <div id="order-date-select">
+                        <p>Find By Date: <input type="text" id="datepicker" onchange="searchOMbyDate($(this).val());" readonly="" autocomplete=off /> <br>or</p>
+                        <p>All Order <input type="button" id="view-all-order" value="All Order" onclick="searchOMbyDate(''); $(this).parent().siblings().children().val('');"></p>																
                     </div>
-                    <div class="span3 col">      
-                        <div class="block">
-                            <h4 class="title">
-                                <span class="pull-left"><span class="text">Randomize</span></span>
-                                <span class="pull-right">
-                                    <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
-                                </span>
-                            </h4>
-                            <div id="myCarousel" class="carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="active item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">
-                                                    <span class="sale_tag"></span>												
-                                                    <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                    <a href="#" class="category">Suspendisse aliquet</a>
-                                                    <p class="price">$261</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">												
-                                                    <a href="product_detail.html"><img alt="" src="themes/images/ladies/4.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                                    <a href="#" class="category">Urna nec lectus mollis</a>
-                                                    <p class="price">$134</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>						
+                    <div class="clearfix"></div>
+                    <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
+                        <table class="orderlist-table">
+                            <caption>Infomation Order</caption> 
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date Order</th>
+                                <th>Hour Order</th>
+                                <th>Status</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>                            
+                            <tbody class="oMView">
+                            <tr>
+                                <td class="order-number"><p><a href="#">asdasdasd</a></p></td>
+                                <td><p>asdasd</p></td>
+                                <td><p>asdasdasd</p></td>
+                                <td><p>asdasdasd</p></td>
+                                <td><p>asdasdasd</p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-----   .my-orderlist-table end   ------>
+                </div><!----- Table Cart end -----> 
+                <div class="clearfix"></div>
+
+            </div><!-----.my-main end----->
                     </div>
                 </div>
-            </section>			
+            </section>
+            <section class="our_client">
+                <h4 class="title"><span class="text">Manufactures</span></h4>
+                <div class="row">					
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/14.png"></a>
+                    </div>
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/35.png"></a>
+                    </div>
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/1.png"></a>
+                    </div>
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/2.png"></a>
+                    </div>
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/3.png"></a>
+                    </div>
+                    <div class="span2">
+                        <a href="#"><img alt="" src="resource/themes/images/clients/4.png"></a>
+                    </div>
+                </div>
+            </section>
             <section id="footer-bar">
                 <div class="row">
                     <div class="span3">
@@ -232,7 +261,7 @@
                         </ul>
                     </div>
                     <div class="span5">
-                        <p class="logo"><img src="themes/images/logo.png" class="site_logo" alt=""></p>
+                        <p class="logo"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></p>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
                         <br/>
                         <span class="social_icons">
@@ -248,13 +277,22 @@
                 <span>Copyright 2013 bootstrappage template  All right reserved.</span>
             </section>
         </div>
-        <script src="themes/js/common.js"></script>
-        <script>
-                                            $(document).ready(function() {
-                                                $('#checkout').click(function(e) {
-                                                    document.location.href = "checkout.html";
-                                                })
+        <script src="resource/themes/js/common.js"></script>
+        <script src="resource/themes/js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript">
+                                            $(function() {
+                                                $(document).ready(function() {
+                                                    $('.flexslider').flexslider({
+                                                        animation: "fade",
+                                                        slideshowSpeed: 4000,
+                                                        animationSpeed: 600,
+                                                        controlNav: false,
+                                                        directionNav: true,
+                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                    });
+                                                });
                                             });
-        </script>		
+        </script>
     </body>
 </html>
+
