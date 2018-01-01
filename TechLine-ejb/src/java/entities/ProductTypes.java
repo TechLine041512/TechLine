@@ -49,8 +49,8 @@ public class ProductTypes implements Serializable {
     @Size(max = 300)
     @Column(name = "typeDesc", length = 300)
     private String typeDesc;
-    @Size(max = 100)
-    @Column(name = "typeIcon", length = 100)
+    @Size(max = 200)
+    @Column(name = "typeIcon", length = 200)
     private String typeIcon;
     @Column(name = "typeStatus")
     private Boolean typeStatus;
