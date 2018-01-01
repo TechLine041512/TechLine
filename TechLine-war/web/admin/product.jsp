@@ -171,6 +171,7 @@
                                                         <td>${product.brandId.brandName}</td>
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.productQuantity}</td>
+                                                        <td><a class="btn-instagram btn" href="#">Edit History</a></td>
                                                         <td><a class="btn-instagram btn" href="#">Block</a></td>
                                                     </tr>
                                                 </c:forEach>        
