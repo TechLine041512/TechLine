@@ -47,8 +47,8 @@ public class Categories implements Serializable {
     private String categoryDesc;
     @Column(name = "categoryStatus")
     private Boolean categoryStatus;
-    @Size(max = 100)
-    @Column(name = "categoryIcon", length = 100)
+    @Size(max = 200)
+    @Column(name = "categoryIcon", length = 200)
     private String categoryIcon;
     @OneToMany(mappedBy = "categoryId")
     private Collection<ProductTypes> productTypesCollection;

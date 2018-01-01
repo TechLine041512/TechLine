@@ -47,17 +47,17 @@ public class Seller implements Serializable {
     @Size(max = 20)
     @Column(name = "identityCard", length = 20)
     private String identityCard;
-    @Size(max = 10)
-    @Column(name = "approvedDate", length = 10)
+    @Size(max = 50)
+    @Column(name = "approvedDate", length = 50)
     private String approvedDate;
-    @Size(max = 20)
-    @Column(name = "approvedPlace", length = 20)
+    @Size(max = 100)
+    @Column(name = "approvedPlace", length = 100)
     private String approvedPlace;
     @Size(max = 100)
     @Column(name = "storeAddress", length = 100)
     private String storeAddress;
-    @Size(max = 100)
-    @Column(name = "storeIcon", length = 100)
+    @Size(max = 200)
+    @Column(name = "storeIcon", length = 200)
     private String storeIcon;
     @Size(max = 1000)
     @Column(name = "storeSummary", length = 1000)

@@ -57,7 +57,7 @@ public class Products implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "productId", nullable = false, length = 10)
     private String productId;
-    @Size(max = 50)
+    @Size(max = 500)
     @Column(name = "productName", length = 500)
     private String productName;
     @Size(max = 3500)
@@ -82,7 +82,7 @@ public class Products implements Serializable {
     private Double productLength;
     @Column(name = "productQuantity")
     private Integer productQuantity;
-    @Size(max = 200)
+    @Size(max = 4000)
     @Column(name = "productImage", length = 4000)
     private String productImage;
     @Column(name = "productDiscount")
