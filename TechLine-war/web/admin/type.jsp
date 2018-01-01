@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Users</title>
+        <title>Product Type</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -47,8 +47,8 @@
 
 
                 <div class="sidebar-wrapper">
-                    <ul>
-                        <li class="active">
+                    <ul class="nav">
+                        <li>
                             <a href="viewServlet?action=showUser">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
@@ -72,7 +72,7 @@
                                 <p>Categories</p>
                             </a>
                         </li>
-                        <li class="nav">
+                        <li class="active">
                             <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>

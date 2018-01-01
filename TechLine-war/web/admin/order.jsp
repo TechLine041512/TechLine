@@ -158,7 +158,6 @@
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-primary">
-                                            <th></th>
                                             <th>Order ID</th>
                                             <th>Buyer</th>   
                                             <th>Date</th>
@@ -168,15 +167,46 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listOrder}" var="order">
-                                                    <tr>
-                                                        <td><input type="checkbox" name="cbkCheck"/></td>
-                                                        <td>${order.orderMId}</td>
-                                                        <td>${order.userId.fullname}</td>
-                                                        <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
-                                                        <td>${order.orderNote}</td>
-                                                        <td>${order.orderTotalPrice}</td>
-                                                        <td>${order.orderStatus}</td>
-                                                    </tr>
+                                                    <c:if test="${order.orderStatus eq 'Done'}">
+                                                        <tr style="background-color: #33ff33; color: #ffffff;"> 
+                                                            <td>${order.orderMId}</td>
+                                                            <td>${order.userId.fullname}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
+                                                        </tr>
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Processing'}">
+                                                        <tr style="background-color: yellow; color: #ffffff;"> 
+                                                            <td>${order.orderMId}</td>
+                                                            <td>${order.userId.fullname}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
+                                                        </tr>
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Delivery'}">
+                                                        <tr style="background-color: blue; color: #ffffff;"> 
+                                                            <td>${order.orderMId}</td>
+                                                            <td>${order.userId.fullname}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
+                                                        </tr>
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Cancel'}">
+                                                        <tr style="background-color: red; color: #ffffff;"> 
+                                                            <td>${order.orderMId}</td>
+                                                            <td>${order.userId.fullname}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
+                                                        </tr>
+                                                    </c:if>     
                                                 </c:forEach>        
                                             </tbody>
                                         </table>

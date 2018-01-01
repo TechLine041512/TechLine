@@ -145,7 +145,6 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
                             <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=addProduct">Add</a>
                         </div>
                         <div class="row">
@@ -168,8 +167,7 @@
                                             <tbody>
                                                 <c:forEach items="${listProduct}" var="product">
                                                     <tr>
-                                                        <td>${product.productId}</td>
-                                                        <td>${product.productName}</td>
+                                                        <td><a href="#">${product.productId}</a></td>
                                                         <td>${product.brandId.brandName}</td>
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.productQuantity}</td>

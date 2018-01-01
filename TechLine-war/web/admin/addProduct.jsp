@@ -224,13 +224,19 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Discount</label>
+                                                        <input type="number" class="form-control" name="txtDiscount">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Unit</label>
                                                         <input type="text" class="form-control" name="txtUnit">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Quantity</label>
                                                         <input type="number" class="form-control" name="txtQuantity">
