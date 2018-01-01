@@ -145,8 +145,8 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Khóa Tài Khoản</button>    
-                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Cấp Quyền</button>
+                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
+                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -172,7 +172,7 @@
                                                     <td><input type="checkbox" value="" name="cbkCusID"/></td>
                                                     <td>${customer.userId}</td>
                                                     <td>${customer.fullname}</td>
-                                                    <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${customer.customers.dob}"/></td>
+                                                    <td>${customer.customers.dob}</td>
                                                     <td>${customer.customers.gender}</td>
                                                     <td>${customer.customers.address}</td>
                                                     <td>${customer.customers.point}</td>

@@ -2,61 +2,63 @@
 go
 
 -- Users
-insert into Users VALUES('admin','admin','tatyuki@gmail.com','Tiến','0909882230','admin',1);
-insert into Users VALUES('raejas','raejas','nth151293@gmail.com','Huân','0937752028','admin',1);
-insert into Users VALUES('venky','venky','venky@gmail.com','Vương','0909882230','admin',1);
-insert into Users VALUES('uypoko','uypoko','uypoko@gmail.com','Uy','0909882230','admin',1);
-insert into Users VALUES('tuyetbich','123456','tuyetbich@mailinator.com','Tuyết','0909882231','customer',1);
-insert into Users VALUES('tungchaien','123456','tungchaien@mailinator.com','Tùng','0909882232','customer',1);
-insert into Users VALUES('ducchau','123456','ducchau@mailinator.com','Đức','0909882233','customer',1);
-insert into Users VALUES('dieunhi','123456','dieunhi@mailinator.com','Nhi','0909882234','customer',1);
-insert into Users VALUES('thixuka','123456','thixuka@mailinator.com','Thi','0909882235','customer',1);
-insert into Users VALUES('rainyday','123456','rainyday@mailinator.com','Danny','0909882236','customer',1);
-insert into Users VALUES('linhnhi','123456','linhnhinhanh@mailinator.com','Linh','0909882237','customer',1);
-insert into Users VALUES('tuanka','123456','tuanka@mailinator.com','Tuấn','0909882238','customer',1);
-insert into Users VALUES('HungDung','123456','hung@mailinator.com','Hùng','0909882239','customer',1);
-insert into Users VALUES('Thanh','123456','thanh@mailinator.com','Thành','0909882240','customer',1);
-insert into Users VALUES('Giangnhi','123456','giang@mailinator.com','Giang','0909882241','customer',1);
-insert into Users VALUES('dave','123456','david@mailinator.com','David','0909882242','customer',1);
-insert into Users VALUES('josh','123456','joshua@mailinator.com','Joshua','0909882243','customer',1);
-insert into Users VALUES('quocanh','123abca','quocanh@mailinator.com','Quốc Anh','0909882244','seller',1);
-insert into Users VALUES('tienminh','123abca','tienminh@mailinator.com','Minh Tiến','0909882245','seller',1);
-insert into Users VALUES('thanhlong','123abca','thanhlong@mailinator.com','Long Thành','0909882246','seller',1);
-insert into Users VALUES('lylienkiet','123abca','lylienkiet@mailinator.com','Thành Kiệt','0909882247','seller',1);
-insert into Users VALUES('uyenle','123abca','uyenle@mailinator.com','Lê Uyên','0909882248','seller',1);
-insert into Users VALUES('andy','123abca','andy@mailinator.com','Andy','0909882249','seller',1);
-insert into Users VALUES('kenny','123abca','kenny@mailinator.com','Kenny','0909882250','seller',1);
-insert into Users VALUES('sonmai','123abca','sonmai@mailinator.com','Mai Sơn','0909882251','seller',1);
-insert into Users VALUES('ringu','123abca','ringu@mailinator.com','Ring','0909882252','seller',1);
-insert into Users VALUES('taidy','123abca','taidy@mailinator.com','Tai','0909882253','seller',1);
+insert into Users VALUES('admin','admin','tatyuki@gmail.com',N'Tiến','0909882230','admin',1);
+insert into Users VALUES('raejas','raejas','nth151293@gmail.com',N'Huân','0937752028','admin',1);
+insert into Users VALUES('venky','venky','venky@gmail.com',N'Vương','0909882230','admin',1);
+insert into Users VALUES('uypoko','uypoko','uypoko@gmail.com',N'Uy','0909882230','admin',1);
+insert into Users VALUES('tuyetbich','123456','tuyetbich@mailinator.com',N'Tuyết','0909882231','customer',1);
+insert into Users VALUES('tungchaien','123456','tungchaien@mailinator.com',N'Tùng','0909882232','customer',1);
+insert into Users VALUES('ducchau','123456','ducchau@mailinator.com',N'Đức','0909882233','customer',1);
+insert into Users VALUES('dieunhi','123456','dieunhi@mailinator.com',N'Nhi','0909882234','customer',1);
+insert into Users VALUES('thixuka','123456','thixuka@mailinator.com',N'Thi','0909882235','customer',1);
+insert into Users VALUES('rainyday','123456','rainyday@mailinator.com',N'Danny','0909882236','customer',1);
+insert into Users VALUES('linhnhi','123456','linhnhinhanh@mailinator.com',N'Linh','0909882237','customer',1);
+insert into Users VALUES('tuanka','123456','tuanka@mailinator.com',N'Tuấn','0909882238','customer',1);
+insert into Users VALUES('HungDung','123456','hung@mailinator.com',N'Hùng','0909882239','customer',1);
+insert into Users VALUES('Thanh','123456','thanh@mailinator.com',N'Thành','0909882240','customer',1);
+insert into Users VALUES('Giangnhi','123456','giang@mailinator.com',N'Giang','0909882241','customer',1);
+insert into Users VALUES('dave','123456','david@mailinator.com',N'David','0909882242','customer',1);
+insert into Users VALUES('josh','123456','joshua@mailinator.com',N'Joshua','0909882243','customer',1);
+insert into Users VALUES('quocanh','123abca','quocanh@mailinator.com',N'Quốc Anh','0909882244','seller',1);
+insert into Users VALUES('tienminh','123abca','tienminh@mailinator.com',N'Minh Tiến','0909882245','seller',1);
+insert into Users VALUES('thanhlong','123abca','thanhlong@mailinator.com',N'Long Thành','0909882246','seller',1);
+insert into Users VALUES('lylienkiet','123abca','lylienkiet@mailinator.com',N'Thành Kiệt','0909882247','seller',1);
+insert into Users VALUES('uyenle','123abca','uyenle@mailinator.com',N'Lê Uyên','0909882248','seller',1);
+insert into Users VALUES('andy','123abca','andy@mailinator.com',N'Andy','0909882249','seller',1);
+insert into Users VALUES('kenny','123abca','kenny@mailinator.com',N'Kenny','0909882250','seller',1);
+insert into Users VALUES('sonmai','123abca','sonmai@mailinator.com',N'Mai Sơn','0909882251','seller',1);
+insert into Users VALUES('ringu','123abca','ringu@mailinator.com',N'Ring','0909882252','seller',1);
+insert into Users VALUES('taidy','123abca','taidy@mailinator.com',N'Tai','0909882253','seller',1);
+
 
 -- Customers
-insert into Customers VALUES('tuyetbich','10/05/1990','female','07 Phan Đăng Lưu q.Bình Thạnh',135);
-insert into Customers VALUES('tungchaien','12/12/1993','male','171 Phạm Văn Đồng q.Gò Vấp',29);
-insert into Customers VALUES('ducchau','10/05/1990','male','172 Phạm Văn Đồng q.Gò Vấp',78);
-insert into Customers VALUES('dieunhi','08/28/1993','female','173 Phạm Văn Đồng q.Gò Vấp',27);
-insert into Customers VALUES('thixuka','08/05/1987','female','174 Phạm Văn Đồng q.Gò Vấp',70);
-insert into Customers VALUES('rainyday','02/17/1989','male','175 Phạm Văn Đồng q.Gò Vấp',54);
-insert into Customers VALUES('linhnhi','07/12/1990','female','176 Phạm Văn Đồng q.Gò Vấp',55);
-insert into Customers VALUES('tuanka','04/22/1994','male','177 Phạm Văn Đồng q.Gò Vấp',45);
-insert into Customers VALUES('HungDung','11/02/1990','male','178 Phạm Văn Đồng q.Gò Vấp',34);
-insert into Customers VALUES('Thanh','12/13/1990','female','179 Phạm Văn Đồng q.Gò Vấp',58);
-insert into Customers VALUES('Giangnhi','07/16/1990','female','180 Phạm Văn Đồng q.Gò Vấp',11);
-insert into Customers VALUES('dave','12/18/1990','male','181 Phạm Văn Đồng q.Gò Vấp',67);
-insert into Customers VALUES('josh','05/09/1990','male','182 Phạm Văn Đồng q.Gò Vấp',72);
+insert into Customers VALUES('tuyetbich','10/05/1990','female',N'07 Phan Đăng Lưu q.Bình Thạnh',135);
+insert into Customers VALUES('tungchaien','12/12/1993','male',N'171 Phạm Văn Đồng q.Gò Vấp',29);
+insert into Customers VALUES('ducchau','10/05/1990','male',N'172 Phạm Văn Đồng q.Gò Vấp',78);
+insert into Customers VALUES('dieunhi','08/28/1993','female',N'173 Phạm Văn Đồng q.Gò Vấp',27);
+insert into Customers VALUES('thixuka','08/05/1987','female',N'174 Phạm Văn Đồng q.Gò Vấp',70);
+insert into Customers VALUES('rainyday','02/17/1989','male',N'175 Phạm Văn Đồng q.Gò Vấp',54);
+insert into Customers VALUES('linhnhi','07/12/1990','female',N'176 Phạm Văn Đồng q.Gò Vấp',55);
+insert into Customers VALUES('tuanka','04/22/1994','male',N'177 Phạm Văn Đồng q.Gò Vấp',45);
+insert into Customers VALUES('HungDung','11/02/1990','male',N'178 Phạm Văn Đồng q.Gò Vấp',34);
+insert into Customers VALUES('Thanh','12/13/1990','female',N'179 Phạm Văn Đồng q.Gò Vấp',58);
+insert into Customers VALUES('Giangnhi','07/16/1990','female',N'180 Phạm Văn Đồng q.Gò Vấp',11);
+insert into Customers VALUES('dave','12/18/1990','male',N'181 Phạm Văn Đồng q.Gò Vấp',67);
+insert into Customers VALUES('josh','05/09/1990','male',N'182 Phạm Văn Đồng q.Gò Vấp',72);
 
 
 -- Seller
-insert into Seller VALUES('quocanh','Quoc Anh store','121245939','08/28/1993','TP.HCM','300 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Quoc Anh store - Selling beautiful and useful stuffs');
-insert into Seller VALUES('tienminh','Venky company','121245940','08/05/1987','TP.HCM','301 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Venky company - Selling beautiful and useful stuffs');
-insert into Seller VALUES('thanhlong','Longthanh Company','121245941','02/17/1989','TP.HCM','302 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Longthanh Company - Selling beautiful and useful stuffs');
-insert into Seller VALUES('lylienkiet','LLK Technology','121245942','07/12/1990','TP.HCM','303 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','LLK Technology - Selling beautiful and useful stuffs');
-insert into Seller VALUES('uyenle','UL Corp','121245943','04/22/1994','TP.HCM','304 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','UL Corp - Selling beautiful and useful stuffs');
-insert into Seller VALUES('andy','NamemaN Corp','121245944','11/02/1990','TP.HCM','305 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','NamemaN Corp - Selling beautiful and useful stuffs');
-insert into Seller VALUES('kenny','Kenny shop','121245945','12/13/1990','TP.HCM','306 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Kenny shop - Selling beautiful and useful stuffs');
-insert into Seller VALUES('sonmai','Son gift','121245946','07/16/1990','TP.HCM','307 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Son gift - Selling beautiful and useful stuffs');
-insert into Seller VALUES('ringu','Reajas Company','121245947','12/18/1990','TP.HCM','308 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Reajas Company - Selling beautiful and useful stuffs');
-insert into Seller VALUES('taidy','ABC Technology','121245948','12/12/1993','TP.HCM','309 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','ABC Technology - Selling beautiful and useful stuffs');
+insert into Seller VALUES('quocanh','Quoc Anh store','121245939','08/28/1993','TP.HCM',N'300 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Quoc Anh store - Selling beautiful and useful stuffs');
+insert into Seller VALUES('tienminh','Venky company','121245940','08/05/1987','TP.HCM',N'301 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Venky company - Selling beautiful and useful stuffs');
+insert into Seller VALUES('thanhlong','Longthanh Company','121245941','02/17/1989','TP.HCM',N'302 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Longthanh Company - Selling beautiful and useful stuffs');
+insert into Seller VALUES('lylienkiet','LLK Technology','121245942','07/12/1990','TP.HCM',N'303 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','LLK Technology - Selling beautiful and useful stuffs');
+insert into Seller VALUES('uyenle','UL Corp','121245943','04/22/1994','TP.HCM',N'304 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','UL Corp - Selling beautiful and useful stuffs');
+insert into Seller VALUES('andy','NamemaN Corp','121245944','11/02/1990','TP.HCM',N'305 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','NamemaN Corp - Selling beautiful and useful stuffs');
+insert into Seller VALUES('kenny','Kenny shop','121245945','12/13/1990','TP.HCM',N'306 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Kenny shop - Selling beautiful and useful stuffs');
+insert into Seller VALUES('sonmai','Son gift','121245946','07/16/1990','TP.HCM',N'307 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Son gift - Selling beautiful and useful stuffs');
+insert into Seller VALUES('ringu','Reajas Company','121245947','12/18/1990','TP.HCM',N'308 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Reajas Company - Selling beautiful and useful stuffs');
+insert into Seller VALUES('taidy','ABC Technology','121245948','12/12/1993','TP.HCM',N'309 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','ABC Technology - Selling beautiful and useful stuffs');
+
 
 
 insert into Categories values('CAT001','Computers','Tool and devices for computers',1,'http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png'),
