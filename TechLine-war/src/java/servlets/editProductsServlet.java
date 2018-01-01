@@ -51,8 +51,9 @@ public class editProductsServlet extends HttpServlet {
                 productId = request.getParameter("productId");
                 product = productsFacadeLocal.find(productId);
                 if (product.getProductStatus()) {
-                } else {
                     product.setProductStatus(false);
+                } else {
+                    product.setProductStatus(true);
                 }
                 productsFacade.edit(product);
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
