@@ -78,4 +78,11 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         }
         return ProductID;
     }
+
+    @Override
+    public List<Products> getListProductBySeller(String seller) {
+        Query q = em.createQuery("SELECT p FROM Products p WHERE p.userId.userId = :userId");
+        q.setParameter("userId", seller);
+        return q.getResultList();
+    }
 }

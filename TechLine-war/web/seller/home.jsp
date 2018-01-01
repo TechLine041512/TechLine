@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,13 +16,13 @@
         <meta name="viewport" content="width=device-width" />
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -43,26 +44,26 @@
 
                 <div class="logo">
                     <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li class="active">
-                            <a href="home.jsp">
+                            <a href="viewServlet?action=homeSeller">
                                 <i class="material-icons">dashboard</i>
                                 <p>Profile</p>
                             </a>
                         </li>   
                         <li>
-                            <a href="product.jsp">
+                            <a href="viewServlet?action=sellerProduct">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="sell.jsp">
+                            <a href="viewServlet?action=sellerOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Order List</p>
                             </a>
@@ -82,13 +83,13 @@
                                         <p class="category">Tech Line</p>
                                     </div>
                                     <div class="card-content">
-                                        <form action="AccountServlet" method="post">
-                                            <input type="hidden" name="txtUserID" value="${information.userID}"/>
+                                        <form action="editSellerServlet" method="post" accept-charset="utf-8">
+                                            <input type="hidden" name="txtUserID" value="${user.userId}"/>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Email</label>
-                                                        <input type="email" class="form-control" value="ringu@gmail.com" name="txtEmail">
+                                                            <input type="email" class="form-control" value="${user.email}" name="txtEmail">
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,36 +97,42 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" class="form-control" value="ringu" name="txtName">
+                                                        <input type="text" class="form-control" value="${user.fullname}" name="txtName">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Phone</label>
-                                                        <input type="text" class="form-control" value="0909882230" name="txtPhone">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Store Name</label>
-                                                        <input type="text" class="form-control" value="Reajas Company" name="txtStoreName">
+                                                        <input type="text" class="form-control" value="${user.phone}" name="txtPhone">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
+                                                        <label class="control-label">Store Name</label>
+                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Identity Card</label>
+                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard">
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group label-floating">
                                                         <label>Approved Date</label>
-                                                        <input type="datetime-local" class="form-control"  name="txtApprovedDate">
+                                                        <input type="datetime-local" class="form-control" value="${user.seller.approvedDate}"  name="txtApprovedDate">
                                                         </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Place</label>
-                                                        <input type="text" class="form-control" value="Reajas Company" name="txtApprovedPlace">
+                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace">
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -134,13 +141,13 @@
                                                 <div class="col-md-8">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="171 Phạm Văn Đồng q.Gò Vấp" name="txtName">
+                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Icon</label>
-                                                        <input type="text" class="form-control" value="" name="txtName">
+                                                        <img src="${user.seller.storeIcon}" alt="store Icon" style="width: 80px; height: 80px;"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,12 +155,12 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Summary</label>
-                                                        <textarea name="comment" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;">Công ty RJ - team Active - Leader RaeJas</textarea>
+                                                        <textarea name="txtStoreSummary" rows="9" cols="200" style="margin: 0px 0px 10px; width: 605px; height: 181px;">${user.seller.storeSummary}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="updateProfile">Cancel</button>
+                                            <button type="submit" name="action" class="btn btn-primary" value="updateSellerProfile">Save</button>
+                                            <button type="submit" class="btn btn-primary" value="Cancel">Cancel</button>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>
@@ -163,17 +170,17 @@
                                 <div class="card card-profile">                                  
                                     <div class="card-avatar">
                                         <a href="#pablo">
-                                            <img class="img" src="http://simpleicon.com/wp-content/uploads/shop-5-64x64.png" alt="Avatar"/>
+                                            <img class="img" src="${user.seller.storeIcon}" alt="Avatar"/>
                                         </a>
                                     </div>
 
                                     <div class="content">
                                         <h4 class="card-title">
-                                            Reajas Company<br/>
-                                            <small>171 Phạm Văn Đồng q.Gò Vấp</small>
+                                            ${user.seller.storeName}<br/>
+                                            <small>${user.seller.storeAddress}</small>
                                         </h4>
                                         <p class="card-content">
-                                            Công ty RJ - team Active - Leader RaeJas
+                                            ${user.seller.storeSummary}
                                         </p>
                                     </div>
                                 </div>
@@ -219,21 +226,21 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
 
 </html>

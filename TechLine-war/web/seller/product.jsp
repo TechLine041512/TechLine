@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,13 +17,13 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="../resource/assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!--  Material Dashboard CSS    -->
-        <link href="../resource/assets/css/material-dashboard.css" rel="stylesheet"/>
+        <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../resource/assets/css/demo.css" rel="stylesheet" />
+        <link href="resource/assets/css/demo.css" rel="stylesheet" />
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -40,27 +41,27 @@
 
                 <div class="logo">
                     <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                        <li>
-                            <a href="home.jsp">
+                        <li >
+                            <a href="viewServlet?action=homeSeller">
                                 <i class="material-icons">dashboard</i>
                                 <p>Profile</p>
                             </a>
                         </li>   
                         <li class="active">
-                            <a href="product.jsp">
+                            <a href="viewServlet?action=sellerProduct">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="sell.jsp">
+                        <li >
+                            <a href="viewServlet?action=sellerOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Order List</p>
                             </a>
@@ -126,7 +127,7 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;"> 
-                            <a class="btn-instagram btn" value="permissions" href="addProduct.jsp">Add</a>
+                            <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=sellerAddProduct">Add</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -143,40 +144,30 @@
                                             <th>Brand</th>
                                             <th>Image</th>
                                             <th>Quantity</th>
+                                            <th>Status</th>
+                                            <th>Edit</th>
                                             <th></th>
                                             </thead>
                                             <tbody>
-                                                <tr>                                                   
-                                                    <td>PRO001</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO002</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO003</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO004</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                    <td>10</td>
-                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                <c:forEach items="${lsProduct}" var="item">
+                                                    <tr>
+                                                        <td>${item.productId}</td>
+                                                        <td>${item.productName}</td>
+                                                        <td>${item.brandId.brandName}</td>
+                                                        <td><img src="${item.productImage}" style="width: 80px; height: 80px;"/></td>
+                                                        <td>${item.productQuantity}</td>
+                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=sellerEditProductStatus&productId=${item.productId}">${item.productStatus=='true'?'Block':'Enable'}</a></td>
+                                                        <td><a class="btn-instagram btn" href="viewServlet?action=sellerProductDetail&productId=${item.productId}">Edit</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                                <!--                                                <tr>                                                   
+                                                                                                    <td>PRO001</td>
+                                                                                                    <td>WD My Passport Ultra 3TB Portable External</td>
+                                                                                                    <td>Western Digital</td>
+                                                                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
+                                                                                                    <td>10</td>
+                                                                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                                                                </tr>-->
                                             </tbody>
                                         </table>
 
@@ -209,23 +200,23 @@
     </body>
 
     <!--   Core JS Files   -->
-    <script src="../resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../resource/assets/js/material.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
 
     <!--  Charts Plugin -->
-    <script src="../resource/assets/js/chartist.min.js"></script>
+    <script src="resource/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="../resource/assets/js/bootstrap-notify.js"></script>
+    <script src="resource/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
-    <script src="../resource/assets/js/material-dashboard.js"></script>
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/demo.js"></script>
 
 </html>

@@ -49,12 +49,17 @@ public class addProductsServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
+            Date today = null;
+            Brands brands = null;
+            ProductTypes productTypes = null;
+            Products products = null;
+            Users user = (Users) request.getSession().getAttribute("user");
             switch (action) {
                 case "addProduct":
-                    Date today = new Date();
-                    Brands brands = brandsFacade.find(request.getParameter("txtBrand"));
-                    ProductTypes productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
-                    Products products = new Products();
+                    today = new Date();
+                    brands = brandsFacade.find(request.getParameter("txtBrand"));
+                    productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
+                    products = new Products();
                     products.setProductId(request.getParameter("txtProductID"));
                     products.setTypeId(productTypes);
                     products.setBrandId(brands);
@@ -121,6 +126,38 @@ public class addProductsServlet extends HttpServlet {
                     productsComment.setCommentStatus(true);
                     request.getRequestDispatcher("viewServlet?action=showProductType&idProduct="+id).forward(request, response);
                     break;
+                case "sellerAddProduct":
+                    today = new Date();
+                    brands = brandsFacade.find(request.getParameter("txtBrand"));
+                    productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
+                    products = new Products();
+                    products.setProductId(request.getParameter("txtProductID"));
+                    products.setUserId(user);
+                    products.setTypeId(productTypes);
+                    products.setBrandId(brands);
+                    products.setProductName(request.getParameter("txtProductName"));
+                    products.setProductDesc(request.getParameter("txtDescription"));
+                    products.setProductSummary(request.getParameter("txtSummary"));
+                    products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
+                    products.setProductImage(request.getParameter("txtImage"));
+                    products.setProductUnit(request.getParameter("txtUnit"));
+                    products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
+                    products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
+                    products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
+                    products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
+                    products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
+                    products.setProductDiscount(0);
+                    products.setProductRating(0.0);
+                    products.setIsApproved(true);
+                    products.setDatePosted(today);
+                    products.setProductStatus(true);
+                    productsFacade.create(products);
+                    user.getProductsCollection().add(products);
+                    request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
+                    break;
+                case "sellerCancelProduct":
+                    request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
+                    break;    
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
