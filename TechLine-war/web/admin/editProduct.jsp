@@ -169,7 +169,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}">
+                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters minimum">
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary">${product.productSummary}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000" required title="Maximum 1000 characters">${product.productSummary}></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +207,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription">${product.productDesc}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500" required title="Maximum 1000 characters">${product.productDesc}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +215,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Price</label>
-                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}">
+                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}" min="0.001" max="1000000" step="any">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -229,19 +229,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Discount</label>
-                                                        <input type="number" class="form-control" name="txtDiscount" value="${product.productDiscount}">
+                                                        <input type="number" class="form-control" name="txtDiscount" value="${product.productDiscount}" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Unit</label>
-                                                        <input type="text" class="form-control" name="txtUnit" value="${product.productUnit}">
+                                                        <input type="text" class="form-control" name="txtUnit" value="${product.productUnit}" input pattern=".{0,50}" required title="Maximum 50 characters">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Quantity</label>
-                                                        <input type="number" class="form-control" name="txtQuantity" value="${product.productQuantity}">
+                                                        <input type="number" class="form-control" name="txtQuantity" value="${product.productQuantity}" min="0" max="100000">
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,25 +249,25 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="text" class="form-control" name="txtWeight" value="${product.productWeight}">
+                                                        <input type="number" class="form-control" name="txtWeight" value="${product.productWeight}" min="0" max="100" step="any">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Width</label>
-                                                        <input type="text" class="form-control" name="txtWidth" value="${product.productWidth}">
+                                                        <input type="number" class="form-control" name="txtWidth" value="${product.productWidth}" min="0" max="100000" step="any">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Height</label>
-                                                        <input type="text" class="form-control" name="txtHeight" value="${product.productHeigth}">
+                                                        <input type="number" class="form-control" name="txtHeight" value="${product.productHeigth}" min="0" max="100000" step="any">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Length</label>
-                                                        <input type="text" class="form-control" name="txtLength" value="${product.productLength}">
+                                                        <input type="number" class="form-control" name="txtLength" value="${product.productLength}" min="0" max="100000" step="any">
                                                     </div>
                                                 </div>
                                             </div>

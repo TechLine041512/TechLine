@@ -57,7 +57,7 @@
                                 </c:if>
 
                             <c:if test="${user.role=='seller'}">
-                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
                             <c:if test="${user.role=='customer'}">

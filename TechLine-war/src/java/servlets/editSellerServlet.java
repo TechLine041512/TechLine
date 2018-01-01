@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import entities.Seller;
+import entities.SellerFacadeLocal;
+import entities.Users;
+import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,21 +32,43 @@ public class editSellerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    @EJB
+    private SellerFacadeLocal sellerFacadeLocal;
+    
+    @EJB
+    private UsersFacadeLocal usersFacadeLocal;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet editSellerServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet editSellerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");
+        Users user = (Users) request.getSession().getAttribute("user");
+        switch (action) {
+            case "updateSellerProfile":
+                Seller seller = sellerFacadeLocal.find(user.getUserId());
+                seller.setStoreName(request.getParameter("txtStoreName"));
+                seller.setIdentityCard(request.getParameter("txtIdentityCard"));
+                seller.setApprovedDate(request.getParameter("txtApprovedDate"));
+                seller.setApprovedPlace(request.getParameter("txtApprovedPlace"));
+                seller.setStoreAddress(request.getParameter("txtStoreAddress"));
+                seller.setStoreSummary(request.getParameter("txtStoreSummary"));
+                sellerFacadeLocal.edit(seller);
+                
+                Users users = usersFacadeLocal.find(user.getUserId());
+                users.setEmail(request.getParameter("txtEmail"));
+                users.setFullname(request.getParameter("txtName"));
+                users.setPhone(request.getParameter("txtPhone"));
+                usersFacadeLocal.edit(users);
+                request.getRequestDispatcher("viewServlet?action=homeSeller").forward(request, response);
+                
+                break;
+            default:
+                request.setAttribute("error", "Page not found");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+                break;
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -35,4 +35,6 @@ public interface ProductsFacadeLocal {
     List<Products> getListProductSeller();
     
     String newProductID();
+    
+    List<Products> getListProductBySeller(String seller);//get product is posted by seller
 }
