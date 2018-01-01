@@ -20,7 +20,11 @@ public class ProductIndexModel {
     private String productDesc;
     private String productSummary;
     private Collection<ProductsComment> productsCommentCollection;
-
+    private double productWidth;
+    private double productHeigth;
+    private double productLength;
+    private int productQuantity;
+    private double productDiscount;
     public Collection<ProductsComment> getProductsCommentCollection() {
         return productsCommentCollection;
     }
@@ -75,11 +79,6 @@ public class ProductIndexModel {
     public void setProductLength(double productLength) {
         this.productLength = productLength;
     }
-    private double productWidth;
-    private double productHeigth;
-    private double productLength;
-    private int productQuantity;
-    private double productDiscount;
 
     public List<String> getProductImage() {
         return productImage;

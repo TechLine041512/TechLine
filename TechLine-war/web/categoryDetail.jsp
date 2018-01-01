@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -152,7 +153,10 @@
                 <div class="row">						
                     <div class="span9">								
                         <ul class="thumbnails listing-products">
-                            <c:forEach items="${listProduct}" var="item">
+                            <%
+                                PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
+                            %>
+                            <c:forEach items="<%=pageProduct.getModel()%>" var="item">
                                 <li class="span3">
                                     <div class="product-box">
                                         <span class="sale_tag"></span>												
@@ -166,12 +170,19 @@
                         <hr>
                         <div class="pagination pagination-small pagination-centered">
                             <ul>
-                                <li><a href="#">Prev</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">Next</a></li>
+                                <li><a href="viewServlet?action=cateDetail&btn=prev&idCate=${category.categoryId}">Prev</a></li>
+                                <%
+
+                                    int pages = pageProduct.getPages();
+                                    for (int i = 1; i <= pages; i++) {
+                                %>
+
+                                <li><a href="viewServlet?action=cateDetail&page=<%=i%>&idCate=${category.categoryId}"><%=i%></a></li>
+
+                                <%
+                                    }
+                                %>
+                                <li><a href="viewServlet?action=cateDetail&btn=next&idCate=${category.categoryId}">Next</a></li>
                             </ul>
                         </div>
                     </div>

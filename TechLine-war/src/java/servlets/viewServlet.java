@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.TechLineUtils;
-
+import utils.PageProduct;
 /**
  *
  * @author nth15
@@ -69,13 +69,29 @@ public class viewServlet extends HttpServlet {
                     List<ProductTypes> listProductTypes = (List<ProductTypes>) categories.getProductTypesCollection();
                     for (ProductTypes productTypes : listProductTypes) {
                         listProduct.addAll(productTypes.getProductsCollection());
+                    }                   
+                    PageProduct pageProduct = new PageProduct(listProduct);
+                    String n = request.getParameter("btn");
+                    if (n != null) {
+                        if (n.equals("next")) {
+                            pageProduct.next();
+                        }
+                        if (n.equals("prev")) {
+                            pageProduct.prev();
+                        }
                     }
+                    String pages = request.getParameter("page");
+                    if(pages != null){
+                        int m = Integer.parseInt(pages);
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
+                    }
+                    request.setAttribute("pageProduct", pageProduct);
                     request.setAttribute("listProduct",listProduct);
                     request.setAttribute("category", categories);
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
                     break;
-
                 case "productDetail":
                     request.setAttribute("product", TechLineUtils.buildProduct(productsFacade.find(request.getParameter("idProduct"))));
                     request.setAttribute("listCategories", categoriesFacade.findAll());
