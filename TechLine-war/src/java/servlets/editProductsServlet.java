@@ -114,16 +114,35 @@ public class editProductsServlet extends HttpServlet {
                 products.setProductSummary(request.getParameter("txtSummary"));
                 products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
                 products.setProductUnit(request.getParameter("txtUnit"));
-                products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
-                products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
-                products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
-                products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
+                String weight = request.getParameter("txtWeight");
+                if(weight.equals("")){
+                    weight = "0";
+                }
+                products.setProductWeight(Double.parseDouble(weight));
+                String width = request.getParameter("txtWidth");
+                if(width.equals("")){
+                    width = "0";
+                }
+                products.setProductWidth(Double.parseDouble(width));
+                String height = request.getParameter("txtHeight");
+                if(height.equals("")){
+                    height = "0";
+                }
+                products.setProductHeigth(Double.parseDouble(height));
+                String length = request.getParameter("txtLength");
+                if(length.equals("")){
+                    length = "0";
+                }
+                products.setProductLength(Double.parseDouble(length));
                 products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
                 products.setProductImage(request.getParameter("txtImage"));
-                products.setProductDiscount(Integer.parseInt(request.getParameter("txtDiscount")));
+                String discount = request.getParameter("txtDiscount");
+                if(discount.equals("")){
+                    discount = "0";
+                }
+                products.setProductDiscount(Integer.parseInt(discount));
                 productsFacade.edit(products);
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
-
                 break;
             default:
                 request.setAttribute("error", "Page not found");

@@ -169,7 +169,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters minimum">
+                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters">
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000" required title="Maximum 1000 characters">${product.productSummary}></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000">${product.productSummary}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +207,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500" required title="Maximum 1000 characters">${product.productDesc}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500">${product.productDesc}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +215,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Price</label>
-                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}" min="0.001" max="1000000" step="any">
+                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}" min="0.001" max="1000000" step="0.001" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -235,13 +235,16 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Unit</label>
-                                                        <input type="text" class="form-control" name="txtUnit" value="${product.productUnit}" input pattern=".{0,50}" required title="Maximum 50 characters">
+                                                        <select class="form-control" name="txtUnit">
+                                                            <option value="item" ${product.productUnit == 'item' ? 'selected' : ''}>Item</option>
+                                                            <option value="set" ${product.productUnit == 'set' ? 'selected' : ''}>Set</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Quantity</label>
-                                                        <input type="number" class="form-control" name="txtQuantity" value="${product.productQuantity}" min="0" max="100000">
+                                                        <input type="number" class="form-control" name="txtQuantity" value="${product.productQuantity}" min="0" max="100000" required="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,25 +252,25 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="number" class="form-control" name="txtWeight" value="${product.productWeight}" min="0" max="100" step="any">
+                                                        <input type="number" class="form-control" name="txtWeight" value="${product.productWeight}" min="0" max="1000" step="0.01">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Width</label>
-                                                        <input type="number" class="form-control" name="txtWidth" value="${product.productWidth}" min="0" max="100000" step="any">
+                                                        <input type="number" class="form-control" name="txtWidth" value="${product.productWidth}" min="0" max="100000" step="0.01">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Height</label>
-                                                        <input type="number" class="form-control" name="txtHeight" value="${product.productHeigth}" min="0" max="100000" step="any">
+                                                        <input type="number" class="form-control" name="txtHeight" value="${product.productHeigth}" min="0" max="100000" step="0.01">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Length</label>
-                                                        <input type="number" class="form-control" name="txtLength" value="${product.productLength}" min="0" max="100000" step="any">
+                                                        <input type="number" class="form-control" name="txtLength" value="${product.productLength}" min="0" max="100000" step="0.01">
                                                     </div>
                                                 </div>
                                             </div>
