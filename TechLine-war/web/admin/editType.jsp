@@ -104,7 +104,7 @@
                                                     <label>Category</label>
                                                     <select class="form-control" name="txtCategory">
                                                         <c:forEach items="${listCategory}" var="category">
-                                                            <option value="${category.categoryId}">${category.categoryName}</option>
+                                                            <option value="${category.categoryId}" ${category.categoryId == type.categoryId.categoryId ? 'selected="selected"' : ''}>${category.categoryName}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
