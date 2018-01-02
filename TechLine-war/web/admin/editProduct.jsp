@@ -169,7 +169,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters minimum">
+                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters">
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000" required title="Maximum 1000 characters">${product.productSummary}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000">${product.productSummary}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +207,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500" required title="Maximum 3500 characters">${product.productDesc}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500">${product.productDesc}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
