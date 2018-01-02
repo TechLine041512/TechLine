@@ -53,6 +53,12 @@ public class RedirectServlet extends HttpServlet {
                     request.setAttribute("product", productsFacade.find(productId));
                     request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
+                case "editProductType":
+                    request.setAttribute("listCategory", categoriesFacade.findAll());
+                    String typeId = request.getParameter("typeId");
+                    request.setAttribute("type", productTypesFacade.find(typeId));
+                    request.getRequestDispatcher("admin/editType.jsp").forward(request, response);
+                    break;
                 case "sellerAddProduct":
                     request.setAttribute("listBrand", brandsFacade.findAll());
                     request.setAttribute("listType", productTypesFacade.findAll());

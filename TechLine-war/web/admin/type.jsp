@@ -167,7 +167,7 @@
                                             <tbody>
                                                 <c:forEach items="${listProductType}" var="type">
                                                     <tr>
-                                                        <td>${type.typeId}</td>
+                                                        <td><a href="RedirectServlet?action=editProductType&typeId=${type.typeId}">${type.typeId}</a></td>
                                                         <td>${type.typeName}</td>
                                                         <td>${type.typeDesc}</td>
                                                         <td><img src="${type.typeIcon}" style="width: 80px; height: 80px;"/></td>

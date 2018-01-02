@@ -8,6 +8,8 @@ package servlets;
 
 import entities.Brands;
 import entities.BrandsFacadeLocal;
+import entities.Categories;
+import entities.CategoriesFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
+    @EJB
+    private CategoriesFacadeLocal categoriesFacade;
 
     @EJB
     private ProductsEditHistoryFacadeLocal productsEditHistoryFacade;
@@ -38,7 +42,7 @@ public class editProductsServlet extends HttpServlet {
     
     @EJB
     private ProductsFacadeLocal productsFacade;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -143,6 +147,25 @@ public class editProductsServlet extends HttpServlet {
                 products.setProductDiscount(Integer.parseInt(discount));
                 productsFacade.edit(products);
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                break;
+            case "cancelProduct":
+                request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                break;
+            //admin edit product type
+            case "editProductType":
+                String typeId = request.getParameter("txtTypeId");
+                ProductTypes type = productTypesFacade.find(typeId);
+                type.setTypeName(request.getParameter("txtTypeName"));
+                Categories cat = categoriesFacade.find(request.getParameter("txtCategory"));
+                type.setCategoryId(cat);
+                type.setTypeDesc(request.getParameter("txtTypeDesc"));
+                type.setTypeIcon(request.getParameter("txtTypeIcon"));
+                productTypesFacade.edit(type);
+                request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                break;
+            //admin cancel product type
+            case "cancelProductType":
+                request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             default:
                 request.setAttribute("error", "Page not found");
