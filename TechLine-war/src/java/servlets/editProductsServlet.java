@@ -125,6 +125,17 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
 
                 break;
+            case "cancelProduct":
+                request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                break;
+            //admin edit product type
+            case "editProductType":
+                
+                break;
+            //admin cancel product type
+            case "cancelProductType":
+                request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                break;
             default:
                 request.setAttribute("error", "Page not found");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
