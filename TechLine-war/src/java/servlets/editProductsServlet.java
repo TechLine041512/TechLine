@@ -63,9 +63,24 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
                 break;
             case "sellerEditProductDetail":
-                productId = request.getParameter("productId");
+                productId = request.getParameter("txtProductID");
+                ProductsEditHistoryPK editHistoryPKE = new ProductsEditHistoryPK(productId, 1);
+                ProductsEditHistory editHistoryE = productsEditHistoryFacade.find(editHistoryPKE);
+                //Check whether this product has eidt history or not. If not, create new
+                if (editHistoryE != null) {
+                    int version = productsEditHistoryFacade.newVersion(productId);
+                    editHistoryPKE = new ProductsEditHistoryPK(productId, version);
+                }
+                editHistoryE = new ProductsEditHistory(editHistoryPKE);
+                //Save current information of product to history
                 product = productsFacade.find(productId);
-                today = new Date();
+                java.sql.Date getTodayE = new java.sql.Date(new Date().getTime());//return current time
+                editHistoryE.setProductName(product.getProductName());
+                editHistoryE.setProductPrice(product.getProductPrice());
+                editHistoryE.setProductDiscount(product.getProductDiscount());
+                editHistoryE.setEditTime(getTodayE);
+                productsEditHistoryFacade.create(editHistoryE);
+                
                 product.setTypeId(productTypesFacade.find(request.getParameter("txtProductType")));
                 product.setBrandId(brandsFacade.find(request.getParameter("txtBrand")));
                 product.setProductName(request.getParameter("txtProductName"));
@@ -75,14 +90,35 @@ public class editProductsServlet extends HttpServlet {
                 product.setProductImage(request.getParameter("txtImage"));
                 product.setProductUnit(request.getParameter("txtUnit"));
                 product.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
+                String weightE = request.getParameter("txtWeight");
+                if(weightE.equals("")){
+                    weightE = "0";
+                }
                 product.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
+                String widthE = request.getParameter("txtWidth");
+                if(widthE.equals("")){
+                    widthE = "0";
+                }
+                product.setProductWidth(Double.parseDouble(widthE));
+                String heightE = request.getParameter("txtHeight");
+                if(heightE.equals("")){
+                    heightE = "0";
+                }
+                product.setProductHeigth(Double.parseDouble(heightE));
+                String lengthE = request.getParameter("txtLength");
+                if(lengthE.equals("")){
+                    lengthE = "0";
+                }
+                product.setProductLength(Double.parseDouble(lengthE));
+                
                 product.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
                 product.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
                 product.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
-                product.setProductDiscount(Integer.parseInt(request.getParameter("txtDiscount")));
-                product.setIsApproved(true);
-                product.setDatePosted(today);
-                product.setProductStatus(true);
+                String discountE = request.getParameter("txtDiscount");
+                if(discountE.equals("")){
+                    discountE = "0";
+                }
+                product.setProductDiscount(Integer.parseInt(discountE));
                 productsFacade.edit(product);
 
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
