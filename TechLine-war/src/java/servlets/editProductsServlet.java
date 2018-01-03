@@ -167,6 +167,20 @@ public class editProductsServlet extends HttpServlet {
             case "cancelProductType":
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
+            //admin edit category
+            case "editCategory":
+                String catId = request.getParameter("txtCategoryId");
+                Categories catEdit = categoriesFacade.find(catId);
+                catEdit.setCategoryName(request.getParameter("txtCategoryName"));
+                catEdit.setCategoryDesc(request.getParameter("txtDescription"));
+                catEdit.setCategoryIcon(request.getParameter("txtIcon"));
+                categoriesFacade.edit(catEdit);
+                request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                break;
+            //admin cancel category
+            case "cancelCategory":
+                request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                break;
             default:
                 request.setAttribute("error", "Page not found");
                 request.getRequestDispatcher("error.jsp").forward(request, response);

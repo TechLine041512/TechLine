@@ -122,7 +122,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label>Type Description</label>
-                                                    <textarea rows="10" cols="80" class="form-control" name="txtTypeDesc" maxlength="1000">${type.typeDesc}</textarea>
+                                                    <textarea rows="10" cols="80" class="form-control" name="txtTypeDesc" maxlength="300">${type.typeDesc}</textarea>
                                                 </div>
                                             </div>
                                         </div>                
