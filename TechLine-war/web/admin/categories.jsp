@@ -166,7 +166,7 @@
                                             <tbody>
                                                 <c:forEach items="${listCategories}" var="category">
                                                     <tr>
-                                                        <td>${category.categoryId}</td>
+                                                        <td><a href="RedirectServlet?action=editCategory&catId=${category.categoryId}">${category.categoryId}</a></td>
                                                         <td>${category.categoryName}</td>
                                                         <td>${category.categoryDesc}</td>
                                                         <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
