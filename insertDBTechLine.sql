@@ -59,8 +59,7 @@ insert into Seller VALUES('sonmai','Son gift','121245946','07/16/1990','TP.HCM',
 insert into Seller VALUES('ringu','Reajas Company','121245947','12/18/1990','TP.HCM',N'308 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','Reajas Company - Selling beautiful and useful stuffs');
 insert into Seller VALUES('taidy','ABC Technology','121245948','12/12/1993','TP.HCM',N'309 Điện Biên Phủ, phường 15, quận Bình Thạnh','http://simpleicon.com/wp-content/uploads/shop-5-64x64.png','ABC Technology - Selling beautiful and useful stuffs');
 
-
-
+-- Categories
 insert into Categories values('CAT001','Computers','Tool and devices for computers',1,'http://computeraid.org/wp-content/uploads/2017/01/open-laptop-computer.png'),
 								('CAT002','Laptops','Devices support for compiters',1,'http://graphiccave.com/wp-content/uploads/2015/04/Laptop-Illustration-PNG-Graphic-Cave.png'),
 								('CAT003','Cellphones','Accessories for cellphones',1,'https://cdn2.iconfinder.com/data/icons/gadget-linicons/100/iPhone-512.png'),
@@ -69,6 +68,7 @@ insert into Categories values('CAT001','Computers','Tool and devices for compute
 								('CAT006','Others','Other stuffs',1,'http://pngimages.net/sites/default/files/question-mark-logo-png-image-80272.png')
 go
 
+-- Product Types
 insert into ProductTypes values('PTY001','CAT001','Storage Devices',N'Devices store data for computer','https://www.shareicon.net/data/2016/08/05/807419_refresh_512x512.png',1),
 							  ('PTY002','CAT001','Network Devices',N'Devices connect to internet or create intranet','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScwa5nwWlritFu_v7Z9akiL4rRIy3Ao5fWVwgft25-QalBe1efgw',1),
 							  ('PTY003','CAT001','Peripheral Devices',N'Devices utilize to increases performance and user interactions for computer','https://cdn4.iconfinder.com/data/icons/computer-hardware-2/80/Computer_hardware_icons-04-512.png',1),
@@ -88,6 +88,7 @@ insert into ProductTypes values('PTY001','CAT001','Storage Devices',N'Devices st
 							  ('PTY017','CAT006','Others',N'Others stuffs','http://pngimages.net/sites/default/files/question-mark-logo-png-image-80272.png',1)
 go
 
+-- Brands
 insert into Brands values
 ('BRN001','Western Digital','https://rocketdock.com/images/screenshots/Untitled-8.png',1),
 ('BRN002','Transcend','http://freelogo2016cdn.b-cdn.net/wp-content/uploads/2016/12/transcend-logo.png',1),
@@ -138,8 +139,9 @@ insert into Brands values
 ('BRN047','Cardtorial','http://fpttelecom.online/wp-content/uploads/2017/05/Newicon-tinh.png',1)
 go
 
+-- Products
 insert into Products values     
-('PRO001','PTY001',null,'BRN001',N'WD My Passport Ultra 3TB Portable External',N'<div><h3>Product Details</h3><div></div></div>
+('PRO001','PTY001','admin','BRN001',N'WD My Passport Ultra 3TB Portable External',N'<div><h3>Product Details</h3><div></div></div>
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				<tbody>
 				<tr>
@@ -204,7 +206,7 @@ insert into Products values
 	</div>
 ',N'This Western Digital My Passport Ultra drive is an excellent storage solution for users who travel often. The My Passport Ultra model offers 3 TB storage space for digital content and data backup. This external drive connects and powers through USB 2.0 and USB 3.0 interfaces. It offers cloud storage and can be charged via a USB port. This disk is designed for PC. The dimensions of this storage unit are 0.83 inch height, 3.21 inch width, 4.33 inch depth, and its weight is 0.5 lb. ',450,'item', 5.0, 8.0, 34.0, 65.0, 8,'https://cdn.pbrd.co/images/GZU9Ysu.jpg,https://cdn.pbrd.co/images/GZUax1x.jpg,https://cdn.pbrd.co/images/GZUaLPF.jpg,https://cdn.pbrd.co/images/GZUbknt.jpg, https://cdn.pbrd.co/images/GZUbxqh.jpg',0,3.0,1,'20171204 10:34:09',1),
 
-('PRO002','PTY001',null,'BRN002',N'Transcend 1TB StoreJet 25H3 USB 3.0 HDD External',N'<div ><ul><li>Wireless storage for cameras and drones</li> <li>One-touch SD card copy</li> <li>4K streaming over 802.11ac Wi-Fi</li> <li>All-day battery life (up to 10 hours)</li> <li>USB port to import from card readers</li> <li>Built-in power bank to charge devices</li> <li>Works with PC and Mac computers</li> <li>My Cloud mobile app to access content<br></li></ul></div>
+('PRO002','PTY001','admin','BRN002',N'Transcend 1TB StoreJet 25H3 USB 3.0 HDD External',N'<div ><ul><li>Wireless storage for cameras and drones</li> <li>One-touch SD card copy</li> <li>4K streaming over 802.11ac Wi-Fi</li> <li>All-day battery life (up to 10 hours)</li> <li>USB port to import from card readers</li> <li>Built-in power bank to charge devices</li> <li>Works with PC and Mac computers</li> <li>My Cloud mobile app to access content<br></li></ul></div>
         <div >
             <h5>
                 Strong Wi-Fi Performance
@@ -221,7 +223,7 @@ insert into Products values
         </div>
 ',N'Wireless storage for cameras and drones.',470 ,'item', 5.1, 2.3, 4.6, 3.7, 10, 'https://cdn.pbrd.co/images/GZUenZ3.jpg,https://cdn.pbrd.co/images/GZUeANq.jpg,https://cdn.pbrd.co/images/GZUeSRh.jpg,https://cdn.pbrd.co/images/GZUf1QV.jpg,https://cdn.pbrd.co/images/GZUfaPa.jpg', 0, 4.5, 1,'20171204 10:40:09',1),
 
-('PRO003','PTY001',null,'BRN003',N'Kingston DataTraveler 100 G3',N'<div>
+('PRO003','PTY001','admin','BRN003',N'Kingston DataTraveler 100 G3',N'<div>
             <h1>DataTraveler 100 G3</h1>
             <div>
                 <p>Kingston&rsquo;s DataTraveler&reg; 100 G3 (DT100G3) USB Flash drive is compliant with next-generation USB 3.0 specifications to take advantage of technology in newer notebooks, desktop PCs and digital devices. DT100G3 makes storing and transferring documents, presentations, music, video and more quicker and easier than ever<br /><br />DT100G3 features a sleek, cost-effective design to make the transition to a satisfying USB 3.0 experience a minimal investment. Available in capacities from 16GB&ndash;128GB, DT100G3 is backward compatible with USB 2.0 and has five-year warranty. Future-proof your portable storage now!</p>
@@ -245,7 +247,7 @@ insert into Products values
                 <p><span>Compatible with</span>: Windows&reg;&nbsp;10, Windows 8.1, Windows 8, Windows 7 (SP1), Mac OS X v.10.9.x+, Linux v.2.6.x+, Chrome OS&trade;</p></div></div>
 ',N'USB Flash drive is compliant with next-generation USB 3.0 specifications to take advantage of technology in newer notebooks, desktop PCs and digital devices. DT100G3 makes storing and transferring documents, presentations, music, video and more quicker and easier than ever',65 ,'item', 3.7, 1.2, 2.2, 4.6, 15, 'https://cdn.pbrd.co/images/GZUlEp8.jpg,https://cdn.pbrd.co/images/GZUlMHx.jpg,https://cdn.pbrd.co/images/GZUlW4x.jpg', 0, 4.5, 1,'20171204 10:45:09',1),
 
-('PRO004','PTY002',null,'BRN004',N'LinkSprinter Network Tester',N'<div>
+('PRO004','PTY002','admin','BRN004',N'LinkSprinter Network Tester',N'<div>
 
 		<div>
 			<strong>Power Over Ethernet (PoE) Tester</strong><br />
@@ -291,7 +293,7 @@ insert into Products values
           </div></div>
 ',N'The LinkSprinter test results can be accessed through the browser of any mobile device with its built-in low-power Wi-Fi access point. By utilizing your mobile device and any web browser you can instantly see your test results without having to download a mobile application. This low-power Wi-Fi access point will not allow access to the internet like a hot spot, and it&rsquo;s range is less than 10 feet.',220 ,'item', 4.2, 2.2, 3.5, 4.3, 7, 'https://cdn.pbrd.co/images/GZUmgZ3.jpg, https://cdn.pbrd.co/images/GZUmtqk.jpg,https://cdn.pbrd.co/images/GZUmERC.jpg,https://cdn.pbrd.co/images/GZUmPYz.jpg', 0, 4.0, 1,'20171204 10:52:09',1),
 
-('PRO005','PTY002',null,'BRN005',N'Anker 3-Port USB 3.0 Aluminum Portable Data Hub',N'<div >
+('PRO005','PTY002','admin','BRN005',N'Anker 3-Port USB 3.0 Aluminum Portable Data Hub',N'<div >
             <p ><span ><span ><strong>Anker Unibody 3-Port USB 3.0 and Ethernet Hub</strong></span></span></p>
 
             <p ><span><span >Sync and connect through more ports at speed.</span></span></p>
@@ -359,7 +361,7 @@ insert into Products values
         </div>
 ',N'See, hear and speak to anyone at your door from your smartphone, tablet or PC.',260 ,'item', 3.7, 3.3, 3.6, 12.5, 5, 'https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL.jpg, https://images-na.ssl-images-amazon.com/images/I/41ahkM%2Bo2CL.jpg,https://images-na.ssl-images-amazon.com/images/I/41Z4AR56Q2L.jpg,https://images-na.ssl-images-amazon.com/images/I/51YQC47UauL.jpg', 0, 4.5, 1,'20171204 11:12:09',1),
 
-('PRO007','PTY003',null,'BRN007',N'IOGEAR 3.0/4 Port Peripheral Sharing Switch',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+('PRO007','PTY003','admin','BRN007',N'IOGEAR 3.0/4 Port Peripheral Sharing Switch',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
 
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
@@ -401,7 +403,7 @@ insert into Products values
         </div>
 ',N'Share four USB peripheral devices between four computers',350 ,'item', 3.7, 3.3, 3.6, 12.5, 5, 'https://images-na.ssl-images-amazon.com/images/I/31i4PL4941L.jpg,https://images-na.ssl-images-amazon.com/images/I/31ep8exwQWL.jpg,https://images-na.ssl-images-amazon.com/images/I/41wYx9uj0UL.jpg', 0, 4.0, 1,'20171204 11:15:09',1),
 
-('PRO008','PTY003',null,'BRN008',N'USB Extension Cable, Weme Active USB',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+('PRO008','PTY003','admin','BRN008',N'USB Extension Cable, Weme Active USB',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         USB 3.0 active extension cable extends the connection between a computer or Windows tablet and USB 3.0 or USB 2.0 peripherals such as keyboard, mouse, hard drives, USB hub, USB card reader, flash drives, printers, and more
@@ -432,7 +434,7 @@ insert into Products values
         </div>
 ',N'USB 3.0 active extension cable extends the connection between a computer or Windows tablet and USB 3.0 or USB 2.0 peripherals such as keyboard, mouse, hard drives, USB hub, USB card reader, flash drives, printers, and more',65 ,'item', 1.2, 0.5, 0.5, 100, 20, 'https://images-na.ssl-images-amazon.com/images/I/41h7-Rrc6BL.jpg,https://images-na.ssl-images-amazon.com/images/I/410LUqhP8HL.jpg,https://images-na.ssl-images-amazon.com/images/I/41t8a8BaNmL.jpg,https://images-na.ssl-images-amazon.com/images/I/31NCyG8J5jL.jpg', 0, 3.5, 1,'20171204 11:20:09',1),
 
-('PRO009','PTY003',null,'BRN009',N'UGREEN USB Switch Selector',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+('PRO009','PTY003','admin','BRN009',N'UGREEN USB Switch Selector',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         This 4 Port USB Sharing Switch allows one button swapping between 2 computers to share 4 USB 2.0 peripheral devices without constantly swapping cables or set up complicated network sharing software;
@@ -493,7 +495,7 @@ insert into Products values
         </div>
 ',N'15.6-Inch Laptop shoulder bag dimension: 15.8 x 0.6 x 11.8 Inch (LxWxH), compatible with 14" 14.1" 15" 15.4" 15.6 Inch laptop and macbook pro 15',20 ,'item', 1.2, 1.1, 4.2, 20.5, 15, 'https://images-na.ssl-images-amazon.com/images/I/51zgr4rzrML.jpg,https://images-na.ssl-images-amazon.com/images/I/31UyRoV4v9L.jpg,https://images-na.ssl-images-amazon.com/images/I/51twwn3VXfL.jpg,https://images-na.ssl-images-amazon.com/images/I/5180fWNWf1L.jpg,https://images-na.ssl-images-amazon.com/images/I/41QoXtQjInL.jpg', 0, 4.0, 1,'20171204 11:27:09',1),
 
-('PRO011','PTY004',null,'BRN011',N'Mosiso Quatrefoil Style Canvas Fabric Laptop Sleeve Case Cover Bag with Shoulder Strap',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+('PRO011','PTY004','admin','BRN011',N'Mosiso Quatrefoil Style Canvas Fabric Laptop Sleeve Case Cover Bag with Shoulder Strap',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Internal Dimensions: 15.16 x 0.79 x 10.63 inches (L x W x H); External Dimensions: 15.75 x 0.79 x 11.22 inches (L x W x H). Suitable for Macbook Pro Retina 15 inch A1398 (Mid 2012-Mid 2015), Dell Inspiron 15.6 inch 2 in 1 and most popular 15-15.6 Inch Laptops / Notebooks / Ultrabooks; may not snugly fit all computers due to variations in the sizes of different models.
@@ -523,7 +525,7 @@ insert into Products values
         </div>
 ',N'Internal Dimensions: 15.16 x 0.79 x 10.63 inches (L x W x H); External Dimensions: 15.75 x 0.79 x 11.22 inches (L x W x H). Suitable for Macbook Pro Retina 15 inch A1398 (Mid 2012-Mid 2015), Dell Inspiron 15.6 inch 2 in 1 and most popular 15-15.6 Inch Laptops / Notebooks / Ultrabooks; may not snugly fit all computers due to variations in the sizes of different models',18 ,'item', 1.3, 1.1, 4.2, 20.5, 13, 'https://images-na.ssl-images-amazon.com/images/I/51pc0jTUoBL.jpg, https://images-na.ssl-images-amazon.com/images/I/41GRtsp-F2L.jpg, https://images-na.ssl-images-amazon.com/images/I/51cgA0I543L.jpg, https://images-na.ssl-images-amazon.com/images/I/51qnd%2BRrl-L.jpg, https://images-na.ssl-images-amazon.com/images/I/51iAH9ngnQL.jpg', 0, 3.5, 1,'20171204 11:30:09',1),
 
-('PRO012','PTY004',null,'BRN012',N'CoolBELL Convertible Backpack Messenger Bag Shoulder bag',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+('PRO012','PTY004','admin','BRN012',N'CoolBELL Convertible Backpack Messenger Bag Shoulder bag',N'<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Dimensions: 18.8 x 5.1 x 13.7 inches; Fits up to 17.3 inches laptop.
@@ -555,7 +557,7 @@ insert into Products values
 go
 
 -- Product from PRO012
-insert into Products VALUES ('PRO013','PTY005',null,'BRN013','ZOZO Laptop Power Adapter','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO013','PTY005','admin','BRN013','ZOZO Laptop Power Adapter','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Multi Tip &amp; Voltage 90w Laptop AC charger, more convenient and high efficiency. Plug and play, easy to use with automatic voltage adjustment. You can power your different brand laptops with just one adapter.【Not compatible to all laptops, please do not use on devices over 90W】
@@ -584,7 +586,7 @@ insert into Products VALUES ('PRO013','PTY005',null,'BRN013','ZOZO Laptop Power 
             </ul>
         </div>
 ','Wide Output Voltage Range [15v-20v] - Input voltage: Worldwide 100-240V, 50 - 60Hz. Output Voltage: DC 15V, 16V, 18.5V, 19V, 19.5V, 20V, max 90W, compatible 65w 45w 40w 33w models which tips are included. Each Brand laptop has several different kinds of tips for different models. IF you are NOT SURE your laptop TIP SIZE, please send your laptop brand and model number to us before buying. We will give suggestions. Any problems, please contact us before returning it',230,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/41ahkM%2Bo2CL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/41Z4AR56Q2L._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51YQC47UauL._SS150_.jpg',0,4,0,'20171204 11:32:09',1);
-insert into Products VALUES ('PRO014','PTY005',null,'BRN014','StarTech Thunderbolt 3 Docking Station','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO014','PTY005','admin','BRN014','StarTech Thunderbolt 3 Docking Station','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         UNIVERSAL DOCKING STATION: The TB3DK2DPPD laptop dock is compatible with all Thunderbolt 3 equipped MacBook Pro (macOS 10.12 and up)and PC laptops (Windows 7 and up).
@@ -613,7 +615,7 @@ insert into Products VALUES ('PRO014','PTY005',null,'BRN014','StarTech Thunderbo
             </ul>
         </div>
 ','FASTER CONNECTIONS: Thunderbolt 3 technology offers the fastest laptop-dock connection with a throughput of 40Gbps. Work on multiple files at once without impacting system performance, making it ideal for graphic-intensive applications',325,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/31uq5XyNWdL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/41ErlrMMqNL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/419eamBeuaL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51z9j8NiC8L._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51Bz-ZORVGL._SS150_.jpg',0,4,0,'20171204 11:32:10',1);
-insert into Products VALUES ('PRO015','PTY005',null,'BRN015','Macally Aluminum Laptop Stand for Desk','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO015','PTY005','admin','BRN015','Macally Aluminum Laptop Stand for Desk','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         STYLISH ALUMINUM DESIGN: Laptop stand will fit any laptop between 10"-17" wide &amp; satin finish aluminum is designed to match and fit all Macbooks, Macbook Airs, &amp; Macbook Pros
@@ -642,7 +644,7 @@ insert into Products VALUES ('PRO015','PTY005',null,'BRN015','Macally Aluminum L
             </ul>
         </div>
 ','RECLAIM DESK SPACE: Stay organized by stashing your items such as your keyboard and mouse under the stand when not in use',135,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/410Xu5iut9L._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/41XffEM4q%2BL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51bM7dWBIKL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51gThBg40LL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/41RYd1HWmIL._SS150_.jpg',0,4,0,'20171204 11:32:11',1);
-insert into Products VALUES ('PRO016','PTY006',null,'BRN016','Laptop Fan Cooler 13 Wind Speed','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO016','PTY006','admin','BRN016','Laptop Fan Cooler 13 Wind Speed','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         New Model: Updated LED screen dynamically displays the air temperature from your laptop vent and the working modes, 13 speeds to manage the airflow and noise; Quiet operation in auto mode and max. Noise is less than 70dbm.
@@ -662,7 +664,7 @@ insert into Products VALUES ('PRO016','PTY006',null,'BRN016','Laptop Fan Cooler 
             </ul>
         </div>
 ','There are auto and manual working modes; High quality Japanese motor ensure min. 5000 working hours; One year warranty and 30 day no hassle return and refund, no question asked.',37,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/510Gn--De1L._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51KjZyBS-kL._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51fIUAR7j7L._SS150_.jpg,https://images-na.ssl-images-amazon.com/images/I/51iUtLfnB8L._SS150_.jpg',0,4,0,'20171204 11:32:12',1);
-insert into Products VALUES ('PRO017','PTY006',null,'BRN017','HAVIT Laptop Cooler Cooling Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO017','PTY006','admin','BRN017','HAVIT Laptop Cooler Cooling Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         [Ultra-Portable]: Slim, portable, and light weight allowing you to protect your investment wherever you go
@@ -691,7 +693,7 @@ insert into Products VALUES ('PRO017','PTY006',null,'BRN017','HAVIT Laptop Coole
             </ul>
         </div>
 ','[Ultra-Portable]: Slim, portable, and light weight allowing you to protect your investment wherever you go',40,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/515pNcNtYRL._SX150.jpg,https://images-na.ssl-images-amazon.com/images/I/61-9lbGadxL._SX150.jpg,https://images-na.ssl-images-amazon.com/images/I/61Gwp5mQ--L._SX150.jpg,https://images-na.ssl-images-amazon.com/images/I/41E6RtCCoxL._SX150.jpg,https://images-na.ssl-images-amazon.com/images/I/41hne6oc57L._SX150.jpg',0,4,0,'20171204 11:32:13',1);
-insert into Products VALUES ('PRO018','PTY006',null,'BRN018','Tenswall Laptop Cooling Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO018','PTY006','admin','BRN018','Tenswall Laptop Cooling Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Powerful, Ultra-quiet and High Efficiency: 4 cooling fans with 1200RPM and red LED Lights help circulate excess heat dissipation from your laptop.
@@ -720,7 +722,7 @@ insert into Products VALUES ('PRO018','PTY006',null,'BRN018','Tenswall Laptop Co
             </ul>
         </div>
 ','Impact-resistant and Ergonomic Comfort: The Tenswall Laptop cooler is crafted from high-quality ABS material to extend the service life. It also doubles as an ergonomic stand with two adjustable height settings for even more customization',50,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/61%2BFt3q4eDL.jpg,https://images-na.ssl-images-amazon.com/images/I/51wWKKxjNFL.jpg,https://images-na.ssl-images-amazon.com/images/I/516Ou5n%2BH0L.jpg,https://images-na.ssl-images-amazon.com/images/I/41Yd79mmUdL.jpg,https://images-na.ssl-images-amazon.com/images/I/41usb1Dfu3L.jpg',0,4,0,'20171204 11:32:14',1);
-insert into Products VALUES ('PRO019','PTY007',null,'BRN002','Transcend USB 3.0 Card Reader','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO019','PTY007','admin','BRN002','Transcend USB 3.0 Card Reader','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         SuperSpeed USB 3.0 interface; backwards compatible with USB 2.0
@@ -746,7 +748,7 @@ insert into Products VALUES ('PRO019','PTY007',null,'BRN002','Transcend USB 3.0 
             </ul>
         </div>
 ','SuperSpeed USB 3.0 interface; backwards compatible with USB 2.0',20,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/31mvshhOrFL.jpg,https://images-na.ssl-images-amazon.com/images/I/316NrTkXsBL.jpg,https://images-na.ssl-images-amazon.com/images/I/51Tvz3LLP1L.jpg,https://images-na.ssl-images-amazon.com/images/I/31iZ9Us28rL.jpg',0,4,0,'20171204 11:32:15',1);
-insert into Products VALUES ('PRO020','PTY007',null,'BRN009','UGREEN SD Card Reader USB 3.0','<div id=""feature-bullets"" class=""a-section a-spacing-medium a-spacing-top-small"">
+insert into Products VALUES ('PRO020','PTY007','admin','BRN009','UGREEN SD Card Reader USB 3.0','<div id=""feature-bullets"" class=""a-section a-spacing-medium a-spacing-top-small"">
             <ul class=""a-unordered-list a-vertical a-spacing-none"">
                 <li><span class=""a-list-item""> 
                         One Reader for Multi Cards: Ugreen USB Card Reader is designed with 4 card slots: SD, Micro SD, CF, MS slots and USB 3.0 connector, which allow you to read and transfer data the most popular flash media on the computer, laptop, tablet through USB 3.0 interface, including SDXC/SDHC/SD/Extreme I III SD/Ultra II SD/MMC/RS-MMC or Micro SD/TF/Micro SDXC/Micro SDHC/UHS-I or CF I 3.0/4.0 /Extreme I III CF/Ultra II CF/HS CF/XS-XS CF/CF Elite Pro/ CF Pro/CF Pro II or MS/MS PRO/MS PRO-HG/MS XC DUO.
@@ -775,7 +777,7 @@ insert into Products VALUES ('PRO020','PTY007',null,'BRN009','UGREEN SD Card Rea
             </ul>
         </div>
 ','Broad Compatibility: Compatible with Windows XP/Vista/7/8/8.1/10, Mac OS, Linux, Chrome OS and etc. It could read and write mutiple cards at the same time to keep you away from the hassle of constant unplugging and re-plugging.',22,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/41x25w5NTML.jpg,https://images-na.ssl-images-amazon.com/images/I/51adq5PAOsL.jpg,https://images-na.ssl-images-amazon.com/images/I/51U%2B%2BGlSYVL.jpg,https://images-na.ssl-images-amazon.com/images/I/51q2idhlVEL.jpg,https://images-na.ssl-images-amazon.com/images/I/41eOElc2LBL.jpg',0,4,0,'20171204 11:32:16',1);
-insert into Products VALUES ('PRO021','PTY007',null,'BRN019','Acuvar Memory Card Reader / Writer ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO021','PTY007','admin','BRN019','Acuvar Memory Card Reader / Writer ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Compatible with all versions of SD/SDHC, Micro SD, CF, XD, MS/Pro &amp; Duo Cards
@@ -804,7 +806,7 @@ insert into Products VALUES ('PRO021','PTY007',null,'BRN019','Acuvar Memory Card
             </ul>
         </div>
 ',' Compatible with all versions of SD/SDHC, Micro SD, CF, XD, MS/Pro &amp; Duo Cards',18,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/51AIW4ljV2L.jpg,https://images-na.ssl-images-amazon.com/images/I/41xoK4HRJNL.jpg',0,4,0,'20171204 11:32:17',1);
-insert into Products VALUES ('PRO022','PTY008',null,'BRN020','Multi Device Charging Station– by Wasserstein','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO022','PTY008','admin','BRN020','Multi Device Charging Station– by Wasserstein','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         ✔ ONE SOLUTION FOR ALL-DEVICES – Finally, one station to charge them ALL! Quick to charge your phones, tablets and all your other devices with our futuristic and practical charging dock.
@@ -833,7 +835,7 @@ insert into Products VALUES ('PRO022','PTY008',null,'BRN020','Multi Device Charg
             </ul>
         </div>
 ','The products are CE, FCC and ROHS certified with built-in over-voltage, over-current and short circuit protection. Wasserstein 3 months Warranty: If you are at all unhappy with the product, we will provide you with a replacement or issue a full refund, no questions, no charge, no kidding!',53,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/41FsdD3qOaL.jpg,https://images-na.ssl-images-amazon.com/images/I/51I0br0UDdL.jpg,https://images-na.ssl-images-amazon.com/images/I/51zDpIXd42L.jpg,https://images-na.ssl-images-amazon.com/images/I/41ABUxfeutL.jpg,https://images-na.ssl-images-amazon.com/images/I/51czdhoMHmL.jpg',0,4,0,'20171204 11:32:18',1);
-insert into Products VALUES ('PRO023','PTY008',null,'BRN021','Exxact New Silicone Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO023','PTY008','admin','BRN021','Exxact New Silicone Pad','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Convenient magnetic charging port with super fast micro USB 2 in 1 cable.GPS Dashboard Mount.
@@ -862,7 +864,7 @@ insert into Products VALUES ('PRO023','PTY008',null,'BRN021','Exxact New Silicon
             </ul>
         </div>
 ','The holder base provides stability to be able to touch the cell phone screen without excess movement. It is older than the middle one more notch so more firmly your cell phone, mobile phone anti-skid function more enhanced, more flexibility.',72,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/51FTHPhBtKL.jpg,https://images-na.ssl-images-amazon.com/images/I/51Jt1OHVZ-L.jpg,https://images-na.ssl-images-amazon.com/images/I/410mB%2BweICL.jpg,https://images-na.ssl-images-amazon.com/images/I/41G4aca1EpL.jpg,https://images-na.ssl-images-amazon.com/images/I/418IoOOB1rL.jpg',0,4,0,'20171204 11:32:19',1);
-insert into Products VALUES ('PRO024','PTY008',null,'BRN022','Wandlemate Cell Phone Charging Dock','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO024','PTY008','admin','BRN022','Wandlemate Cell Phone Charging Dock','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         MULTI-FUNCTION The cell phone charging station stand works as both universal phones &amp; tablets stand and also quick desktop charging dock station for iphone. Suitable height, perfect angle of view enable user read the phone handsfree.
@@ -891,7 +893,7 @@ insert into Products VALUES ('PRO024','PTY008',null,'BRN022','Wandlemate Cell Ph
             </ul>
         </div>
 ','STURDY RUBBER PROTECTION The phone pholder charging dock is with scientific design which makes the item stable on any desk or counter, and the rubber cushions of hook&amp;bottom protect your phone away from scratches and sliding.',55,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/41jpOdEC9FL.jpg,https://images-na.ssl-images-amazon.com/images/I/31M2zVblWxL.jpg,https://images-na.ssl-images-amazon.com/images/I/41%2B8O2uAY8L.jpg,https://images-na.ssl-images-amazon.com/images/I/41Dq%2BL0uqHL.jpg,https://images-na.ssl-images-amazon.com/images/I/41pYivIkWmL.jpg',0,4,0,'20171204 11:32:20',1);
-insert into Products VALUES ('PRO025','PTY009',null,'BRN023','Kobert Waterproof Cell Phone Case','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO025','PTY009','admin','BRN023','Kobert Waterproof Cell Phone Case','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Your phone stays safe and dry. Experience the delight and confidence of not having to worry about your phone when close to water. Our waterproof bag is a simple and very effective way to keep your cell phone safe and dry. You can call, text, talk and play games while your phone is in the bag without loss of sound above the water. Take your phone to the toilet without worries, listen to your favorite music while taking a shower or give your precious phone to your kids while they are in the bath
@@ -919,7 +921,7 @@ insert into Products VALUES ('PRO025','PTY009',null,'BRN023','Kobert Waterproof 
             </ul>
         </div>
 ','Durable adjustable lanyard included - carry your phone case around your neck or body for easy access. Simple to use snap and lock mechanism allows you easy access to your bags content. Please remember to use your phone volume control buttons to take pictures or a video under the water surface as the screen will be less responsive',10,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/51pGOjuV9nL.jpg,https://images-na.ssl-images-amazon.com/images/I/51OdvRD4t5L.jpg,https://images-na.ssl-images-amazon.com/images/I/519s5QKc1BL.jpg,https://images-na.ssl-images-amazon.com/images/I/41zTKK4werL.jpg,https://images-na.ssl-images-amazon.com/images/I/515kCPqWPKL.jpg',0,4,0,'20171204 11:32:21',1);
-insert into Products VALUES ('PRO026','PTY009',null,'BRN024','KISS GOLD (TM) Luxury Matte PU ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO026','PTY009','admin','BRN024','KISS GOLD (TM) Luxury Matte PU ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Imported
@@ -953,7 +955,7 @@ insert into Products VALUES ('PRO026','PTY009',null,'BRN024','KISS GOLD (TM) Lux
             </ul>
         </div>
 ','Perfect for holding your mobile phones, whose max size is less than 7.1 inch. Such as iPhone 8, iPhone 8 Plus(without case on it); iPhone 7, iPhone 7 Plus; iPhone 6, iPhone 6 Plus; Samsung Galaxy S5/S4/S3/S2',7,'item','11.3','5','7.3','20.3',17,'https://images-na.ssl-images-amazon.com/images/I/41wpninLytL.jpg,https://images-na.ssl-images-amazon.com/images/I/415ZI72C2TL.jpg,https://images-na.ssl-images-amazon.com/images/I/51aH3olPeZL.jpg,https://images-na.ssl-images-amazon.com/images/I/41jX6UC%2BC-L.jpg',0,4,0,'20171204 11:32:22',1);
-insert into Products VALUES ('PRO027','PTY009',null,'BRN024','KISS GOLD(TM) Womens Folk Style ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+insert into Products VALUES ('PRO027','PTY009','admin','BRN024','KISS GOLD(TM) Womens Folk Style ','<div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
             <ul class="a-unordered-list a-vertical a-spacing-none">
                 <li><span class="a-list-item"> 
                         Imported
