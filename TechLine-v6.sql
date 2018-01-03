@@ -35,7 +35,7 @@ go
 
 create table Users
 (
-	userId varchar(10) primary key,
+	userId varchar(30) primary key,
 	[password] varchar(20),
 	email varchar(50),
 	fullname nvarchar(100),
