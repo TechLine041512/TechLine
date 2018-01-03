@@ -47,7 +47,7 @@ go
 
 create table Customers
 (
-	userId varchar(10) foreign key references Users(userId) primary key,
+	userId varchar(30) foreign key references Users(userId) primary key,
 	dob varchar(50),
 	gender varchar(10),
 	[address] nvarchar(1000),
@@ -57,7 +57,7 @@ go
 
 create table Seller
 (
-	userId varchar(10) foreign key references Users(userId) primary key,
+	userId varchar(30) foreign key references Users(userId) primary key,
 	storeName nvarchar(1000),
 	identityCard varchar(20), -- CMND -- unseen on Customer
 	approvedDate varchar(50), -- CMND approved date -- unseen on Customer
@@ -81,7 +81,7 @@ create table Products
 (
 	productId varchar(10) primary key,
 	typeId varchar(10) foreign key references ProductTypes(typeId),
-	userId varchar(10) foreign key references Users(userId),
+	userId varchar(30) foreign key references Users(userId),
 	brandId varchar(10) foreign key references Brands(brandId),
 	productName nvarchar(500),
 	productDesc nvarchar(3500),
@@ -128,7 +128,7 @@ go
 create table ProductsComment
 (
 	commentID varchar(10) primary key,
-	userId varchar(10) foreign key references Users(userId),
+	userId varchar(30) foreign key references Users(userId),
 	productId varchar(10) foreign key references Products(productId),
 	commentContent nvarchar(3000),
 	commentStatus bit
@@ -138,7 +138,7 @@ go
 create table OrderMaster
 (
 	orderMId	varchar(10) primary key,
-	userId varchar(10) foreign key references Users(userId),
+	userId varchar(30) foreign key references Users(userId),
 	orderTotalPrice float,
 	DeliveryPrice float,
 	orderNote	nvarchar(1000),
@@ -159,7 +159,7 @@ go
 create table OrderAddress
 (
 	orderMId	varchar(10) foreign key references OrderMaster(orderMid) primary key,
-	userId varchar(10) foreign key references Users(userId),
+	userId varchar(30) foreign key references Users(userId),
 	orderAddressLat float,
 	orderAddressLng	float,
 	orderAddressDetail	nvarchar(1000),
