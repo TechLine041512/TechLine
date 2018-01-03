@@ -40,8 +40,8 @@ public class Users implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "userId", nullable = false, length = 10)
+    @Size(min = 1, max = 30)
+    @Column(name = "userId", nullable = false, length = 30)
     private String userId;
     @Size(max = 20)
     @Column(name = "password", length = 20)
