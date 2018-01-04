@@ -4,12 +4,14 @@
     Author     : Tien
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Users</title>
+        <title>Order</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -31,7 +33,7 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
             Tip 2: you can also add an image using data-image tag
@@ -40,7 +42,7 @@
 
                 <div class="logo">
                     <a href="home.jsp" class="simple-text">
-                        <img src="../resource/assets/img/tim_80x80.png"/>
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -53,7 +55,7 @@
                                 <p>Profile</p>
                             </a>
                         </li>   
-                        <li>
+                        <li >
                             <a href="viewServlet?action=sellerProduct">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
@@ -125,6 +127,9 @@
 
                 <div class="content">
                     <div class="container-fluid">
+                        <div class="row" style="text-align: center;">                       
+                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Delete</a>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">
@@ -136,47 +141,73 @@
                                         <table class="table table-hover">
                                             <thead class="text-primary">
                                             <th>Order ID</th>
-                                            <th>Buyer</th>
-                                            <th>Total Price</th>
+                                            <th>Buyer</th>   
                                             <th>Date</th>
+                                            <th>Note</th>
+                                            <th>Total Price</th>
                                             <th>Status</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>OrderMaster001</td>
-                                                    <td>Tuyết</td>
-                                                    <td>$200</td>
-                                                    <td>27/03/2017</td>
-                                                    <td>Delievery</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>OrderMaster002</td>
-                                                    <td>Diệu Nhi</td>
-                                                    <td>$50</td>
-                                                    <td>27/04/2017</td>
-                                                    <td>Delievery</td>
-                                                </tr>
-                                                <tr style="color: green;">
-                                                    <td>OrderMaster003</td>
-                                                    <td>Nhi</td>
-                                                    <td>$300</td>
-                                                    <td>27/05/2017</td>
-                                                    <td>Done</td>
-                                                </tr>
-                                                <tr style="color: green;">
-                                                    <td>OrderMaster004</td>
-                                                    <td>Thi</td>
-                                                    <td>$400</td>
-                                                    <td>27/06/2017</td>
-                                                    <td>Done</td>
-                                                </tr>
-                                                <tr style="color: red;">
-                                                    <td>OrderMaster005</td>
-                                                    <td>Uyên</td>
-                                                    <td>$600</td>
-                                                    <td>27/07/2017</td>
-                                                    <td>Cancelled</td>
-                                                </tr>
+                                                <c:forEach items="${product}" var="prd">
+                                                    <c:forEach items="${listOrder}" var="order">
+                                                        <c:forEach items="${order.orderDetailsCollection}" var="oDC">
+                                                            <c:if test="${order.orderStatus eq 'Done'} && ${oDC.products.productId == prd.productId}">
+                                                                <tr style="background-color: yellow; color: #ffffff;"> 
+                                                                <td>${order.orderMId}</td>
+                                                                <td>${order.userId.fullname}</td>
+                                                                <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                                <td>${order.orderNote}</td>
+                                                                <td>${order.orderTotalPrice}</td>
+                                                                <td>${order.orderStatus}</td>
+                                                            </tr>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:forEach>
+                                                </c:forEach>
+                                              <!--  <c:forEach items="${product}" var="prd">
+                                                    <c:forEach items="${listOrder}" var="order">
+                                                        <c:if test="${order.orderStatus eq 'Done'} && ${(order.orderDetailsCollection.products.productId)== ( prd.productId)}">
+                                                            <tr style="background-color: #33ff33; color: #ffffff;"> 
+                                                                <td>${order.orderMId}</td>
+                                                                <td>${order.userId.fullname}</td>
+                                                                <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                                <td>${order.orderNote}</td>
+                                                                <td>${order.orderTotalPrice}</td>
+                                                                <td>${order.orderStatus}</td>
+                                                            </tr>
+                                                        </c:if>     
+                                                       <c:if test="${order.orderStatus eq 'Processing'} && ${order.productId eq prd.productId} ">
+                                                            <tr style="background-color: yellow; color: #ffffff;"> 
+                                                                <td>${order.orderMId}</td>
+                                                                <td>${order.userId.fullname}</td>
+                                                                <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                                <td>${order.orderNote}</td>
+                                                                <td>${order.orderTotalPrice}</td>
+                                                                <td>${order.orderStatus}</td>
+                                                            </tr>
+                                                        </c:if>     
+                                                        <c:if test="${order.orderStatus eq 'Delivery'} && ${order.productId eq prd.productId} ">
+                                                            <tr style="background-color: blue; color: #ffffff;"> 
+                                                                <td>${order.orderMId}</td>
+                                                                <td>${order.userId.fullname}</td>
+                                                                <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                                <td>${order.orderNote}</td>
+                                                                <td>${order.orderTotalPrice}</td>
+                                                                <td>${order.orderStatus}</td>
+                                                            </tr>
+                                                        </c:if>     
+                                                        <c:if test="${order.orderStatus eq 'Cancel'} && ${order.productId eq prd.productId}">
+                                                            <tr style="background-color: red; color: #ffffff;"> 
+                                                                <td>${order.orderMId}</td>
+                                                                <td>${order.userId.fullname}</td>
+                                                                <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                                <td>${order.orderNote}</td>
+                                                                <td>${order.orderTotalPrice}</td>
+                                                                <td>${order.orderStatus}</td>
+                                                            </tr>
+                                                        </c:if> -->    
+                                                    </c:forEach>  
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
