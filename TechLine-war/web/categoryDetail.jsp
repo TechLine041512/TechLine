@@ -48,7 +48,7 @@
                         <ul class="user-menu">	
                             <li><a class="btn" href="cart.jsp">Cart</a></li>
                             <li><a class="btn" href="search.jsp">Search</a></li>
-                            <li><a class="btn" href="admin/home.jsp">Go Admin Page</a></li>
+                            <li><a class="btn" href="viewServlet?action=homeAdmin">Go Admin Page</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>

@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,5 +24,19 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
     public ProductTypesFacade() {
         super(ProductTypes.class);
     }
+
+    @Override
+    public String newId() {
+        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p ORDER BY p.typeId DESC");
+        List<ProductTypes> list = q.setMaxResults(1).getResultList();
+        if (list != null) {
+            String lastId = list.get(0).getTypeId().replace("PTY", "");
+            int lastNum = Integer.parseInt(lastId) + 1;
+            String newId = String.format("PTY", lastNum);
+            return newId;
+        }
+        return null;
+    }
+    
     
 }

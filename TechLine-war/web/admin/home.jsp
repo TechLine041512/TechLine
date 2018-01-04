@@ -47,7 +47,7 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li class="active">
-                            <a href="viewServlet?action=showUser">
+                            <a href="viewServlet?action=homeAdmin">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
