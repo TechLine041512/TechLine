@@ -25,5 +25,7 @@ public interface BrandsFacadeLocal {
     List<Brands> findRange(int[] range);
 
     int count();
+
+    String newBrandId();
     
 }

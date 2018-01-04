@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +23,19 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
 
     public OrderMasterFacade() {
         super(OrderMaster.class);
+    }
+
+    @Override
+    public String newId() {
+        javax.persistence.Query q = em.createQuery("SELECT o FROM OrderMaster o ORDER BY o.orderMId DESC");
+        List<OrderMaster> list = q.setMaxResults(1).getResultList();
+        if (list != null) {
+            String lastId = list.get(0).getOrderMId().replace("ORD", "");
+            int lastNum = Integer.parseInt(lastId) + 1;
+            String newId = String.format("ORD" + "%03d", lastNum);
+            return newId;
+        }
+        return null;
     }
     
 }

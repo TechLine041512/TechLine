@@ -19,7 +19,6 @@ import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.TechLineUtils;
 
 public class addProductsServlet extends HttpServlet {
     @EJB
@@ -60,7 +60,10 @@ public class addProductsServlet extends HttpServlet {
                     brands = brandsFacade.find(request.getParameter("txtBrand"));
                     productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
                     products = new Products();
-                    products.setProductId(request.getParameter("txtProductID"));
+                    String productID = productsFacade.newProductID();
+                    if (productID != null) {
+                        products.setProductId(productID);
+                    }
                     products.setTypeId(productTypes);
                     products.setBrandId(brands);
                     products.setProductName(request.getParameter("txtProductName"));
@@ -88,11 +91,15 @@ public class addProductsServlet extends HttpServlet {
                     
                 case "addCategory":
                     Categories categories = new Categories();
-                    categories.setCategoryId(request.getParameter("txtCategoryID"));
+                    String catId = categoriesFacade.newId();
+                    if (catId != null) {
+                        categories.setCategoryId(catId);
+                    }
                     categories.setCategoryName(request.getParameter("txtCategoryName"));
                     categories.setCategoryDesc(request.getParameter("txtDescription"));
                     categories.setCategoryStatus(true);
                     categories.setCategoryIcon(request.getParameter("txtIcon"));
+                    categoriesFacade.create(categories);
                     request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                     break;
                 case "cancelCategories":
@@ -102,7 +109,10 @@ public class addProductsServlet extends HttpServlet {
                 case "addProductType":
                     Categories categories2 = categoriesFacade.find(request.getParameter("txtCategory"));
                     ProductTypes productTypes2 = new ProductTypes();
-                    productTypes2.setTypeId(request.getParameter("txtTypeID"));
+                    String typeId = productTypesFacade.newId();
+                    if (typeId != null) {
+                        productTypes2.setTypeId(typeId);
+                    }
                     productTypes2.setCategoryId(categories2);
                     productTypes2.setTypeName(request.getParameter("txtTypeName"));
                     productTypes2.setTypeIcon(request.getParameter("txtTypeIcon"));
@@ -131,6 +141,10 @@ public class addProductsServlet extends HttpServlet {
                     brands = brandsFacade.find(request.getParameter("txtBrand"));
                     productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
                     products = new Products();
+                    String productID2 = productsFacade.newProductID();
+                    if (productID2 != null) {
+                        products.setProductId(productID2);
+                    }
                     products.setProductId(request.getParameter("txtProductID"));
                     products.setUserId(user);
                     products.setTypeId(productTypes);

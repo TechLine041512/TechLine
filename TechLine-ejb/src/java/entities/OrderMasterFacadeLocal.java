@@ -25,5 +25,7 @@ public interface OrderMasterFacadeLocal {
     List<OrderMaster> findRange(int[] range);
 
     int count();
+
+    String newId();
     
 }

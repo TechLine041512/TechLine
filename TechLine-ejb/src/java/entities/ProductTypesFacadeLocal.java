@@ -25,5 +25,7 @@ public interface ProductTypesFacadeLocal {
     List<ProductTypes> findRange(int[] range);
 
     int count();
+
+    String newId();
     
 }
