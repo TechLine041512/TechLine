@@ -61,7 +61,7 @@
                                 </c:if>
 
                             <c:if test="${user.role=='customer'}">
-                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%

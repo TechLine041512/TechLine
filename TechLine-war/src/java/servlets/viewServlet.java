@@ -8,6 +8,7 @@ package servlets;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.CustomersFacadeLocal;
 import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
@@ -36,6 +37,8 @@ import utils.PageProduct;
  * @author nth15
  */
 public class viewServlet extends HttpServlet {
+    @EJB
+    private CustomersFacadeLocal customersFacade;
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
     
@@ -148,6 +151,29 @@ public class viewServlet extends HttpServlet {
                 case "homeSeller":
                     request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
+                    break;
+                case "homeCustomer":
+                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    request.setAttribute("customer", customersFacade.find(user.getUserId()));
+                    String birthday[] = customersFacade.find(user.getUserId()).getDob().split("/");
+                    request.setAttribute("date", birthday[0]);
+                    request.setAttribute("month", birthday[1]);
+                    request.setAttribute("year", birthday[2]);
+                    ArrayList<Integer> listDate = new ArrayList<>();
+                    ArrayList<Integer> listMonth = new ArrayList<>();
+                    ArrayList<Integer> listYear = new ArrayList<>();
+                    for(int i = 1; i < 32; i++) {
+                        listDate.add(i);
+                        if(i < 13)
+                            listMonth.add(i);
+                    }
+                    for(int i = 1950; i < 2018; i++) {
+                        listYear.add(i);
+                    }
+                    request.setAttribute("listDate", listDate);
+                    request.setAttribute("listMonth", listMonth);
+                    request.setAttribute("listYear", listYear);
+                    request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "sellerProduct":
                     List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());

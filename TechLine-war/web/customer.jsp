@@ -26,7 +26,7 @@
         <script src="resource/themes/js/superfish.js"></script>	
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
-
+        <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>		
         <div id="top-bar" class="container">
@@ -51,17 +51,17 @@
                                 <%
                                     if (session.getAttribute("user") != null) {
                                 %>
-                            <c:if test="${user.role=='admin'}">
+                                <c:if test="${user.role=='admin'}">
                                 <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
-                            </c:if>
+                                </c:if>
 
                             <c:if test="${user.role=='seller'}">
                                 <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
-                            </c:if>
+                                </c:if>
 
                             <c:if test="${user.role=='customer'}">
                                 <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
-                            </c:if>
+                                </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
@@ -122,7 +122,7 @@
             </div>
         </div>
         <!--Kết thúc dialog box Login-->
-        
+
         <!--Phần dialog box Change Password-->
         <div class="modal fade login" id="PasswordModal">
             <div class="modal-dialog login animated">
@@ -187,55 +187,72 @@
                                     </ul>
                                 </div><!----- .customer-links end ----->
                                 <h4>Thông tin khách hàng</h4>
-                                <table style="border:#003 2px solid; border-radius:5px;">
-                                    <tbody>
-                                        <tr>
-                                            <td id="cus-info-1">Full Name</td>
-                                            <td id="cus-info-2"><input type="text" id="cusNameEdit" style="width:100%;"></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1">Phone</td>
-                                            <td id="cus-info-2"><input  type="text" id="cusPhoneEdit" style="width:100%;"></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1">Email</td>
-                                            <td id="cus-info-2"><input type="text" id="cusEmailEdit" style="width:100%;"></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
+                                <form action="editCustomerServlet" method="post">
+                                    <table style="border:#003 2px solid; border-radius:5px;">
+                                        <tbody>
+                                            <tr>
+                                                <td id="cus-info-1">Full Name</td>
+                                                <td id="cus-info-2" colspan="3"><input type="text" id="cusNameEdit" name="txtName" style="width:100%;" value="${user.fullname}" placeholder="Enter your full name" required=""></td>
+                                                <td id="cus-info-3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="cus-info-1">Date Of Birth</td>
+                                                <td id="cus-info-2"><label>Day
+                                                        <select name='ddlDay' id='ddlDay' class="form-control"><c:forEach items="${listDate}" var="listDate">
+                                                            <option value="${listDate}" ${date == listDate ? 'selected="selected"' : ''}>${listDate}</option></c:forEach>
+                                                        </select></label></td>
+                                                <td id="cus-info-2"><label>Month
+                                                        <select name='ddlMonth' id='ddlMonth' class="form-control" onchange='loadDay()'><c:forEach items="${listMonth}" var="listMonth">
+                                                            <option value="${listMonth}" ${month == listMonth? 'selected="selected"' : ''}>${listMonth}</option></c:forEach>
+                                                        </select></label></td>
+                                                <td id="cus-info-2"><label>Year
+                                                        <select name='ddlYear' id='ddlYear' class="form-control" onchange='loadDay()'><c:forEach items="${listYear}" var="listYear">
+                                                            <option value="${listYear}" ${year == listYear ? 'selected="selected"' : ''}>${listYear}</option></c:forEach>
+                                                        </select></label></td>
+                                                <td id="cus-info-3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="cus-info-1">Phone</td>
+                                                <td id="cus-info-2" colspan="3"><input  type="tel" id="cusPhoneEdit" name="txtPhone" style="width:100%;" pattern='\d{9,15}' value="${user.phone}"/></td>
+                                                <td id="cus-info-3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="cus-info-1">Email</td>
+                                                <td id="cus-info-2" colspan="3"><input type="email" id="cusEmailEdit" name="txtEmail" style="width:100%;" value="${user.email}" placeholder="Enter your email" maxlength="50"></td>
+                                                <td id="cus-info-3"></td>
+                                            </tr>
 
-                                        <tr>
-                                            <td id="cus-info-1">Address:</td>
-                                            <td id="cus-info-2"><input type="text" id="address${i}"  style="width:100%;"></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1">Gender:</td>
-                                            <td id="cus-info-2">
-                                                <input type="radio" name="gender" value="male" checked> Male 
-                                                <input type="radio" name="gender" value="female"> Female
-
-                                            </td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1">Point</td>
-                                            <td id="cus-info-2">12 <i class="fa fa-star" style="color: blue;"></i></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1">Discount</td>
-                                            <td id="cus-info-2">13%</td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="cus-info-1"></td>
-                                            <td id="cus-info-2" style="float: right;"><button value="Search" name="action" class="btn-success btn-large"><i class="fa-check fa"></i> Edit Profile</button></td>
-                                            <td id="cus-info-3"></td>
-                                        </tr>    
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td id="cus-info-1">Address:</td>
+                                                <td id="cus-info-2" colspan="3"><input type="text" id="address${i}" name="txtAddress" style="width:100%;" value="${customer.address}" placeholder="Enter your address" maxlength="1000"></td>
+                                                <td id="cus-info-3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="cus-info-1">Gender:</td>
+                                                <td id="cus-info-2">
+                                                    <input type="radio" name="gender" value="male" ${customer.gender == 'male' ? 'checked' : ''}> Male 
+                                                    <input type="radio" name="gender" value="female" ${customer.gender == 'female' ? 'checked' : ''}> Female
+                                                </td>
+                                                <td id="cus-info-3" colspan="3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td id="cus-info-1">Point</td>
+                                                <td id="cus-info-2">${customer.point}<i class="fa fa-star" style="color: blue;"></i></td>
+                                                <td id="cus-info-3" colspan="3"></td>
+                                            </tr>
+                                            <!--                                        <tr>
+                                                                                        <td id="cus-info-1">Discount</td>
+                                                                                        <td id="cus-info-2">13%</td>
+                                                                                        <td id="cus-info-3"></td>
+                                                                                    </tr>-->
+                                            <tr>
+                                                <td id="cus-info-1"></td>
+                                                <td id="cus-info-2" style="float: right;"><button name="action" value="editProfileCustomer" class="btn-success btn-large" type="submit" onclick="validateEmail();">Edit Profile</button></td>
+                                                <td id="cus-info-3" colspan="3"></td>
+                                            </tr>    
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div><!----- .cus-info end ---->
                             <div class="clearfix"></div>                      
                         </div><!-----.my-main end----->
@@ -306,18 +323,18 @@
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
         <script type="text/javascript">
-                                            $(function() {
-                                                $(document).ready(function() {
-                                                    $('.flexslider').flexslider({
-                                                        animation: "fade",
-                                                        slideshowSpeed: 4000,
-                                                        animationSpeed: 600,
-                                                        controlNav: false,
-                                                        directionNav: true,
-                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                    $(function() {
+                                                        $(document).ready(function() {
+                                                            $('.flexslider').flexslider({
+                                                                animation: "fade",
+                                                                slideshowSpeed: 4000,
+                                                                animationSpeed: 600,
+                                                                controlNav: false,
+                                                                directionNav: true,
+                                                                controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                            });
+                                                        });
                                                     });
-                                                });
-                                            });
         </script>
     </body>
 </html>

@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import entities.Customers;
+import entities.CustomersFacadeLocal;
+import entities.Users;
+import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editCustomerServlet extends HttpServlet {
+    @EJB
+    private CustomersFacadeLocal customersFacade;
+    @EJB
+    private UsersFacadeLocal usersFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +41,24 @@ public class editCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet editCustomerServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet editCustomerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            switch (action) {
+                case "editProfileCustomer":
+                    Users user = (Users) request.getSession().getAttribute("user");
+                    Customers customer = user.getCustomers();
+                    user.setFullname(request.getParameter("txtName"));
+                    user.setEmail(request.getParameter("txtEmail"));
+                    user.setPhone(request.getParameter("txtPhone"));
+                    usersFacade.edit(user);
+                    String birthday = request.getParameter("ddlDay") + "/" + request.getParameter("ddlMonth") + "/" + request.getParameter("ddlYear");
+                    customer.setAddress(request.getParameter("txtAddress"));
+                    customer.setGender(request.getParameter("gender"));
+                    customer.setDob(birthday);
+                    customersFacade.edit(customer);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    break;
+                
+            }
         }
     }
 
