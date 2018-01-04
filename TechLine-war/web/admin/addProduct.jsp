@@ -158,14 +158,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Product ID</label>
-                                                        <input type="text" class="form-control" name="txtProductID">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
                                                         <input type="text" class="form-control" name="txtProductName">
                                                     </div>

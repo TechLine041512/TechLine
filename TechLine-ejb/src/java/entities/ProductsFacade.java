@@ -65,18 +65,15 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
     
     @Override
     public String newProductID() {
-        String ProductID = "";
-        Query q = em.createNamedQuery("Products.findAll");
-        List<Products> list = q.getResultList();
-        int lastNumb = Integer.parseInt(list.get(list.size() - 1).getProductId().substring(0, 5));
-        if (lastNumb < 9) {
-            ProductID = "PRO00" + (lastNumb + 1);
-        } else if (lastNumb < 98) {
-            ProductID = "PRO0" + (lastNumb + 1);
-        } else {
-            ProductID = "PRO" + (lastNumb + 1);
+        Query q = em.createQuery("SELECT p FROM Products p ORDER BY p.productId DESC");
+        List<Products> p = q.setMaxResults(1).getResultList();
+        if (p != null) {
+            String lastProductID = p.get(0).getProductId().replace("PRO", "");
+            int lastNumb = Integer.parseInt(lastProductID) + 1;
+            String productID = String.format("PRO"+"%03d", lastNumb);
+            return productID;
         }
-        return ProductID;
+        return null;
     }
 
     @Override

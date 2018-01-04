@@ -154,14 +154,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Category ID</label>
-                                                        <input type="text" class="form-control" name="txtCategoryID">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
                                                         <label class="control-label">Category Name</label>
                                                         <input type="text" class="form-control" name="txtCategoryName">
                                                     </div>
@@ -183,8 +175,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary" value="addCategory">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="cancelCategories">Cancel</button>      
+                                            <button type="submit" class="btn btn-primary" name="action" value="addCategory">Save</button>
+                                            <button type="submit" class="btn btn-primary" name="action" value="cancelCategories">Cancel</button>      
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

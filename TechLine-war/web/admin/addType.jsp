@@ -158,14 +158,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Type ID</label>
-                                                        <input type="text" class="form-control" name="txtTypeID">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group label-floating">
                                                         <label>Category Name</label>
                                                         <select class="form-control" name="txtCategory">
                                                             <c:forEach items="${listlistCategory}" var="category">
@@ -200,8 +192,8 @@
                                                 </div>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary" value="addProductType">Save</button>
-                                            <button type="submit" class="btn btn-primary" value="cancelProductType">Cancel</button>
+                                            <button type="submit" class="btn btn-primary" name="action" value="addProductType">Save</button>
+                                            <button type="submit" class="btn btn-primary" name="action" value="cancelProductType">Cancel</button>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

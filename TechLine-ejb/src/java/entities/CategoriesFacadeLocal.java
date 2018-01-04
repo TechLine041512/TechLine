@@ -25,5 +25,7 @@ public interface CategoriesFacadeLocal {
     List<Categories> findRange(int[] range);
 
     int count();
+
+    String newId();
     
 }

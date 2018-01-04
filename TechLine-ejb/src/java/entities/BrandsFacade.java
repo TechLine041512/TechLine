@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +23,19 @@ public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacade
 
     public BrandsFacade() {
         super(Brands.class);
+    }
+
+    @Override
+    public String newBrandId() {
+        javax.persistence.Query q = em.createQuery("SELECT b FROM Brands b ORDER BY b.brandId DESC");
+        List<Brands> list = q.setMaxResults(1).getResultList();
+        if (list != null) {
+            String lastBrand = list.get(0).getBrandId().replace("BRN", "");
+            int lastNum = Integer.parseInt(lastBrand) + 1;
+            String newId = String.format("BRN"+"%03d", lastNum);
+            return newId;
+        }
+        return null;
     }
     
 }
