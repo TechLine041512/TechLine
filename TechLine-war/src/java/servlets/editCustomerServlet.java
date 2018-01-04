@@ -11,6 +11,7 @@ import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editCustomerServlet extends HttpServlet {
+
     @EJB
     private CustomersFacadeLocal customersFacade;
     @EJB
@@ -42,9 +44,9 @@ public class editCustomerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
+            Users user = (Users) request.getSession().getAttribute("user");
             switch (action) {
                 case "editProfileCustomer":
-                    Users user = (Users) request.getSession().getAttribute("user");
                     Customers customer = user.getCustomers();
                     user.setFullname(request.getParameter("txtName"));
                     user.setEmail(request.getParameter("txtEmail"));
@@ -57,7 +59,38 @@ public class editCustomerServlet extends HttpServlet {
                     customersFacade.edit(customer);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                     break;
-                
+                case "cusChangePassword":
+                    String inputPass = request.getParameter("txtOldPassword");
+                    if (!inputPass.equals(user.getPassword())) {
+                        request.setAttribute("loginError", "Incorrect password!");
+                        request.getRequestDispatcher("customer.jsp").forward(request, response);
+                        break;
+                    }
+                    user.setPassword(request.getParameter("txtNewPass"));
+                    usersFacade.edit(user);
+                    request.setAttribute("loginError", "Change password successfully!");
+                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    request.setAttribute("customer", customersFacade.find(user.getUserId()));
+                    String birthday2[] = customersFacade.find(user.getUserId()).getDob().split("/");
+                    request.setAttribute("date", Integer.parseInt(birthday2[0]));
+                    request.setAttribute("month", Integer.parseInt(birthday2[1]));
+                    request.setAttribute("year", Integer.parseInt(birthday2[2]));
+                    ArrayList<Integer> listDate = new ArrayList<>();
+                    ArrayList<Integer> listMonth = new ArrayList<>();
+                    ArrayList<Integer> listYear = new ArrayList<>();
+                    for(int i = 1; i < 32; i++) {
+                        listDate.add(i);
+                        if(i < 13)
+                            listMonth.add(i);
+                    }
+                    for(int i = 1950; i < 2018; i++) {
+                        listYear.add(i);
+                    }
+                    request.setAttribute("listDate", listDate);
+                    request.setAttribute("listMonth", listMonth);
+                    request.setAttribute("listYear", listYear);
+                    request.getRequestDispatcher("customer.jsp").forward(request, response);
+                    break;
             }
         }
     }

@@ -28,7 +28,14 @@
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
         <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
-    <body>		
+    <body>
+        <c:if test="${not empty loginError}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${loginError}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
@@ -136,11 +143,11 @@
                             <div class="content">
                                 <div class="error"></div>
                                 <div class="form loginBox">
-                                    <form method="post" action="viewServlet">
-                                        <input id="ChagePassword" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
-                                        <input id="ChagePassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
-                                        <input id="NewPassowrd" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
-                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Change Password">
+                                    <form method="post" action="editCustomerServlet">
+                                        <input id="oldPass" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="password" name="txtOldPassword" required="true"><br/>
+                                        <input id="newPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtNewPass" required="true"><br/>
+                                        <input id="confirmPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtConfirmPass" required="true"><br/>
+                                        <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="cusChangePassword" onclick="return validatePass()">Change Password</button>
                                     </form>
                                 </div>
                             </div>
@@ -199,21 +206,21 @@
                                                 <td id="cus-info-1">Date Of Birth</td>
                                                 <td id="cus-info-2"><label>Day
                                                         <select name='ddlDay' id='ddlDay' class="form-control"><c:forEach items="${listDate}" var="listDate">
-                                                            <option value="${listDate}" ${date == listDate ? 'selected="selected"' : ''}>${listDate}</option></c:forEach>
-                                                        </select></label></td>
-                                                <td id="cus-info-2"><label>Month
-                                                        <select name='ddlMonth' id='ddlMonth' class="form-control" onchange='loadDay()'><c:forEach items="${listMonth}" var="listMonth">
-                                                            <option value="${listMonth}" ${month == listMonth? 'selected="selected"' : ''}>${listMonth}</option></c:forEach>
-                                                        </select></label></td>
-                                                <td id="cus-info-2"><label>Year
-                                                        <select name='ddlYear' id='ddlYear' class="form-control" onchange='loadDay()'><c:forEach items="${listYear}" var="listYear">
-                                                            <option value="${listYear}" ${year == listYear ? 'selected="selected"' : ''}>${listYear}</option></c:forEach>
-                                                        </select></label></td>
-                                                <td id="cus-info-3"></td>
-                                            </tr>
-                                            <tr>
-                                                <td id="cus-info-1">Phone</td>
-                                                <td id="cus-info-2" colspan="3"><input  type="tel" id="cusPhoneEdit" name="txtPhone" style="width:100%;" pattern='\d{9,15}' value="${user.phone}"/></td>
+                                                                <option value="${listDate}" ${date == listDate ? 'selected="selected"' : ''}>${listDate}</option></c:forEach>
+                                                            </select></label></td>
+                                                    <td id="cus-info-2"><label>Month
+                                                            <select name='ddlMonth' id='ddlMonth' class="form-control" onchange='loadDay()'><c:forEach items="${listMonth}" var="listMonth">
+                                                                <option value="${listMonth}" ${month == listMonth? 'selected="selected"' : ''}>${listMonth}</option></c:forEach>
+                                                            </select></label></td>
+                                                    <td id="cus-info-2"><label>Year
+                                                            <select name='ddlYear' id='ddlYear' class="form-control" onchange='loadDay()'><c:forEach items="${listYear}" var="listYear">
+                                                                <option value="${listYear}" ${year == listYear ? 'selected="selected"' : ''}>${listYear}</option></c:forEach>
+                                                            </select></label></td>
+                                                    <td id="cus-info-3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="cus-info-1">Phone</td>
+                                                    <td id="cus-info-2" colspan="3"><input  type="tel" id="cusPhoneEdit" name="txtPhone" style="width:100%;" pattern='\d{9,15}' value="${user.phone}" title="Phone contains 9-15 digits"/></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
                                             <tr>
@@ -247,7 +254,7 @@
                                                                                     </tr>-->
                                             <tr>
                                                 <td id="cus-info-1"></td>
-                                                <td id="cus-info-2" style="float: right;"><button name="action" value="editProfileCustomer" class="btn-success btn-large" type="submit" onclick="validateEmail();">Edit Profile</button></td>
+                                                <td id="cus-info-2" style="float: right;"><button name="action" value="editProfileCustomer" class="btn-success btn-large" type="submit">Edit Profile</button></td>
                                                 <td id="cus-info-3" colspan="3"></td>
                                             </tr>    
                                         </tbody>
@@ -323,18 +330,18 @@
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
         <script type="text/javascript">
-                                                    $(function() {
-                                                        $(document).ready(function() {
-                                                            $('.flexslider').flexslider({
-                                                                animation: "fade",
-                                                                slideshowSpeed: 4000,
-                                                                animationSpeed: 600,
-                                                                controlNav: false,
-                                                                directionNav: true,
-                                                                controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                            $(function() {
+                                                                $(document).ready(function() {
+                                                                    $('.flexslider').flexslider({
+                                                                        animation: "fade",
+                                                                        slideshowSpeed: 4000,
+                                                                        animationSpeed: 600,
+                                                                        controlNav: false,
+                                                                        directionNav: true,
+                                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                                    });
+                                                                });
                                                             });
-                                                        });
-                                                    });
         </script>
     </body>
 </html>

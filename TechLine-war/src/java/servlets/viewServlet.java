@@ -156,9 +156,9 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.setAttribute("customer", customersFacade.find(user.getUserId()));
                     String birthday[] = customersFacade.find(user.getUserId()).getDob().split("/");
-                    request.setAttribute("date", birthday[0]);
-                    request.setAttribute("month", birthday[1]);
-                    request.setAttribute("year", birthday[2]);
+                    request.setAttribute("date", Integer.parseInt(birthday[0]));
+                    request.setAttribute("month", Integer.parseInt(birthday[1]));
+                    request.setAttribute("year", Integer.parseInt(birthday[2]));
                     ArrayList<Integer> listDate = new ArrayList<>();
                     ArrayList<Integer> listMonth = new ArrayList<>();
                     ArrayList<Integer> listYear = new ArrayList<>();
