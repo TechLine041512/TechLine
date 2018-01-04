@@ -181,8 +181,9 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("seller/product.jsp").forward(request, response);
                     break;
                 case "sellerOrder":
-                    request.setAttribute("user", usersFacade.find(user.getUserId()));
-                    request.getRequestDispatcher("seller/sell.jsp").forward(request, response);
+                    request.setAttribute("listOrder", orderMasterFacade.findAll());
+                    request.setAttribute("product", productsFacade.getListProductBySeller(user.getUserId()));
+                    request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
                 case "sellerProductDetail":
                     request.setAttribute("listBrand", brandsFacade.findAll());
