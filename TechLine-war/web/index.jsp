@@ -62,7 +62,7 @@
 
                             <c:if test="${user.role=='customer'}">
                                 <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
-                                </c:if>
+                            </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
@@ -130,7 +130,12 @@
                         <ul>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
-                                    <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>					
+                                    <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
+                                    <ul>
+                                        <c:forEach items="${item.productTypesCollection}" var="type">
+                                            <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
+                                        </c:forEach>
+                                    </ul>
                                 </li>
                             </c:forEach>
                         </ul>

@@ -19,6 +19,7 @@
         <!-- global styles -->
         <link href="resource/themes/css/flexslider.css" rel="stylesheet"/>
         <link href="resource/themes/css/main.css" rel="stylesheet"/>
+        <link href="resource/themes/css/my-style.css" rel="stylesheet"/>  
 
         <!-- scripts -->
         <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
@@ -26,6 +27,7 @@
         <script src="resource/themes/js/superfish.js"></script>	
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
+        <script src="resource/themes/js/google-map.js" type="text/javascript"></script>
     </head>
     <body>		
         <div id="top-bar" class="container">
@@ -81,103 +83,82 @@
             </section>
             <section class="main-content">				
                 <div class="row">
-                    <div class="span9">					
-                        <h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Remove</th>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="checkbox" value="option1"></td>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Fusce id molestie massa</td>
-                                    <td><input type="text" placeholder="1" class="input-mini"></td>
-                                    <td>$2,350.00</td>
-                                    <td>$2,350.00</td>
-                                </tr>			  
-                                <tr>
-                                    <td><input type="checkbox" value="option1"></td>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Luctus quam ultrices rutrum</td>
-                                    <td><input type="text" placeholder="2" class="input-mini"></td>
-                                    <td>$1,150.00</td>
-                                    <td>$2,450.00</td>
-                                </tr>
+                    <div class="span12">					
+                        <h4 class="title"><span class="text"><strong>Transaction </strong> Service</span></h4>
+                        <div class="delivery-panel"><!----- delivery-panel ----->
+                            <div class="deliver-address"><!------deliver-address----->
+                                <h3 style="font-weight:lighter; margin-top:0; background-color: #34495e; color: #FFF;">Provided Your Address</h3>
 
+                                <b>Address :</b>
+                                <input type="text" name="end" id="end" style="width:350px;"/>                              
+                                <div>
+                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Distance : </h4>
+                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="distanceID"></h4> <b>Km</b> 
+                                </div><br/>
+                                <div>
+                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Time Delivery : </h4>
+                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="hourID"></h4> 
+                                </div><br/>
+                                <div>
+                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Fee Delivery:</h4>
+                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="feeID">12</h4> <b>&dollar;</b> 
+                                </div><br/>
+                            </div><!------deliver-address end----->
+
+                            <div class="deliver-map"><!-----deliver-map----->
+                                <h3 style="font-weight:lighter; margin-top:0; background-color: #34495e; color: #FFF;">Map Transaction</h3>
+                                <div id="journey-map">
+                                    <div style="width: 100%;height: 100%; back" id="map"></div><!-----journey-map-----> 
+                                </div><!-----journey-map end-----> 
+                            </div><!-----deliver-map end----->
+                        </div><!----- delivery-panel end-----><br/>
+                        
+                        <div class="note-request"><!----- note-request ----->
+                            <h3 style="background-color: #34495e; color: #FFF; margin:0;">Information Delivery </h3>
+                            <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided the delivery note</h4>
+                            <div class="clearfix"></div>
+                            <div>
+                                <textarea id="delivery-notice" name="deliveryRequest"></textarea>
+                                <button style="margin-left: 5px;" class="btn-inverse btn" type="button">Send</button><br>                        
+                            </div>
+                            <div class="clearfix"></div>
+                            <table class="orderinfo-total"  >
                                 <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td><strong>$3,600.00</strong></td>
-                                </tr>		  
-                            </tbody>
-                        </table>			
-                        <hr>
-                        <p class="cart-total right">
-                            <strong>Sub-Total</strong>:	$100.00<br>
-                            <strong>Product Discount</strong>: $2.00<br>
-                            <strong>Member Discount</strong>: $17.50<br>
-                            <strong>SHIPMENT FEE</strong>: $3<br/>
-                            <strong>Total</strong>: $119.50<br>
-                        </p>
+                                    <td><p>PRODUCT SUB TOTAL($)</p></td>
+                                    <td width="17%"><p style="font-weight:bold;" id="totalPrice" >12 $</p></td>
+                                </tr>  
+                                <tr>
+                                    <td><p>PRODUCTS DISCOUNT($)</p></td>
+                                    <td><p id="totalDiscount" >3$</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>PRODUCT PRICE TOTAL($)</p></td>
+                                    <td width="17%"><p style="font-weight:bold;" id="subTotalPrice">12 $</p></td>
+                                </tr> 
+                                <tr>
+                                    <td><p>MEMBER DISCOUNT($)</p></td>
+                                    <td><p style="font-weight:bold;" id="memberDiscount" >12 $</p></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><p>SHIPMENT FEE($)</p></td>
+                                    <td><p id="deliveryFeeh4">3 $</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
+                                    <td><p style="font-weight:bold; color:#900;" id="totalPriceOrder">12 $</p></td>
+                                </tr>              
+                            </table>
+                            <div class="clearfix"></div>
+                        </div><!----- note-request end----->
                         <hr/>
                         <p class="buttons center">				
-                            <button class="btn" type="button">Back Home</button>
-                            <a class="btn btn-inverse" href="googleMap.jsp">Continue</a>
+                            <button class="btn" type="button">Back</button>
+                            <a class="btn btn-inverse" href="googleMap.jsp">Check Out</a>
                         </p>					
                     </div>
-                    <div class="span3 col">
-                        
-                        <div class="block">
-                            <h4 class="title">
-                                <span class="pull-left"><span class="text">Randomize</span></span>
-                                <span class="pull-right">
-                                    <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
-                                </span>
-                            </h4>
-                            <div id="myCarousel" class="carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="active item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">
-                                                    <span class="sale_tag"></span>												
-                                                    <a href="product_detail.html"><img alt="" src="themes/images/ladies/2.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                    <a href="#" class="category">Suspendisse aliquet</a>
-                                                    <p class="price">$261</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">												
-                                                    <a href="product_detail.html"><img alt="" src="themes/images/ladies/4.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                                    <a href="#" class="category">Urna nec lectus mollis</a>
-                                                    <p class="price">$134</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>						
-                    </div>
                 </div>
-            </section>			
+            </section>  
             <section id="footer-bar">
                 <div class="row">
                     <div class="span3">
@@ -216,6 +197,8 @@
                 <span>Copyright 2013 bootstrappage template  All right reserved.</span>
             </section>
         </div>
+        <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbmwYQw5nGav9Uu_iO0YYPW4FmD_38dwE&libraries=places&callback=initMap"
+        async defer></script>
         <script src="themes/js/common.js"></script>
         <script>
             $(document).ready(function() {

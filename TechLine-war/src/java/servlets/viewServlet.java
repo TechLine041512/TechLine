@@ -32,16 +32,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.TechLineUtils;
 import utils.PageProduct;
+
 /**
  *
  * @author nth15
  */
 public class viewServlet extends HttpServlet {
+
     @EJB
     private CustomersFacadeLocal customersFacade;
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
-    
+
     @EJB
     private OrderMasterFacadeLocal orderMasterFacade;
 
@@ -57,7 +59,7 @@ public class viewServlet extends HttpServlet {
     private SellerFacadeLocal sellerFacadeLocal;
     @EJB
     private BrandsFacadeLocal brandsFacade;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,7 +74,7 @@ public class viewServlet extends HttpServlet {
                     List<ProductTypes> listProductTypes = (List<ProductTypes>) categories.getProductTypesCollection();
                     for (ProductTypes productTypes : listProductTypes) {
                         listProduct.addAll(productTypes.getProductsCollection());
-                    }                                   
+                    }
                     PageProduct pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct));
                     String n = request.getParameter("btn");
                     if (n != null) {
@@ -84,54 +86,80 @@ public class viewServlet extends HttpServlet {
                         }
                     }
                     String pages = request.getParameter("page");
-                    if(pages != null){
+                    if (pages != null) {
                         int m = Integer.parseInt(pages);
                         pageProduct.setPageIndex(m);
                         pageProduct.updateModel();
                     }
                     request.setAttribute("pageProduct", pageProduct);
-                    request.setAttribute("listProduct",listProduct);
+                    request.setAttribute("listProduct", listProduct);
                     request.setAttribute("category", categories);
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
+                    break;
+                case "typeDetail":
+                    ProductTypes productTypes = productTypesFacade.find(request.getParameter("idType"));
+                    List<Products> listProduct2 = new ArrayList<>();
+                    listProduct2.addAll(productTypes.getProductsCollection());
+                    PageProduct pageProduct2 = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct2));
+                    String n1 = request.getParameter("btn");
+                    if (n1 != null) {
+                        if (n1.equals("next")) {
+                            pageProduct2.next();
+                        }
+                        if (n1.equals("prev")) {
+                            pageProduct2.prev();
+                        }
+                    }
+                    String pages1 = request.getParameter("page");
+                    if (pages1 != null) {
+                        int m = Integer.parseInt(pages1);
+                        pageProduct2.setPageIndex(m);
+                        pageProduct2.updateModel();
+                    }
+                    request.setAttribute("pageProduct", pageProduct2);
+                    request.setAttribute("listProduct", listProduct2);
+                    request.setAttribute("productTypesID", productTypes.getTypeId());
+                    request.setAttribute("listCategories", categoriesFacade.findAll());
+                    request.getRequestDispatcher("typeDetail.jsp").forward(request, response);
                     break;
                 case "productDetail":
                     request.setAttribute("product", TechLineUtils.buildProduct(productsFacade.find(request.getParameter("idProduct"))));
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;
-                    
+
                 case "showUser":
                     request.setAttribute("listCustomer", usersFacade.getListCustomer());
                     request.setAttribute("listSeller", usersFacade.getListSeller());
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
-                    
+
                 case "showProductAdmin":
                     request.setAttribute("listProduct", productsFacade.getListProductByDatePost());
-                    request.setAttribute("listProductSeller", productsFacade.getListProductSeller());        
+                    request.setAttribute("listProductSeller", productsFacade.getListProductSeller());
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
-                    
+
                 case "showCategories":
-                    request.setAttribute("listCategories", categoriesFacade.findAll());        
+                    request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
                     break;
-                    
+
                 case "showProductType":
-                    request.setAttribute("listProductType", productTypesFacade.findAll());  
+                    request.setAttribute("listProductType", productTypesFacade.findAll());
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
-                    
+
                 case "showOrder":
-                    request.setAttribute("listOrder", orderMasterFacade.findAll());  
+                    request.setAttribute("listOrder", orderMasterFacade.findAll());
                     request.getRequestDispatcher("admin/order.jsp").forward(request, response);
                     break;
-                    
+
                 case "homeAdmin":
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     break;
-                    
+
                 case "Login":
                     Users users = usersFacade.checkLogin(request.getParameter("username"), request.getParameter("password"));
                     if (users == null) {
@@ -141,7 +169,7 @@ public class viewServlet extends HttpServlet {
                     session.setAttribute("user", users);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
-                    
+
                 case "Logout":
                     session = request.getSession();
                     //destroy session
@@ -190,7 +218,7 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listType", productTypesFacade.findAll());
                     request.setAttribute("productDetail", productsFacade.find(request.getParameter("productId")));
                     request.getRequestDispatcher("seller/editProduct.jsp").forward(request, response);
-                    break;    
+                    break;
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
