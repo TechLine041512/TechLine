@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Users</title>
+        <title>Categories</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -30,7 +30,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty myMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMess}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
@@ -170,7 +176,7 @@
                                                         <td>${category.categoryName}</td>
                                                         <td>${category.categoryDesc}</td>
                                                         <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}">Block</a></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

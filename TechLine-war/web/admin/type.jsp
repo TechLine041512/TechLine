@@ -30,7 +30,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty myMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMess}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
@@ -171,7 +177,7 @@
                                                         <td>${type.typeName}</td>
                                                         <td>${type.typeDesc}</td>
                                                         <td><img src="${type.typeIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block">Block</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}">Block</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>

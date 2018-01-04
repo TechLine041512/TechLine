@@ -7,12 +7,16 @@ package servlets;
 
 import entities.Customers;
 import entities.CustomersFacadeLocal;
+import entities.ProductsComment;
+import entities.ProductsCommentFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editCustomerServlet extends HttpServlet {
+    @EJB
+    private ProductsCommentFacadeLocal productsCommentFacade;
 
     @EJB
     private CustomersFacadeLocal customersFacade;
@@ -90,6 +96,23 @@ public class editCustomerServlet extends HttpServlet {
                     request.setAttribute("listMonth", listMonth);
                     request.setAttribute("listYear", listYear);
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
+                    break;
+                case "blockCustomer":
+                    String[] cusIdBlock = request.getParameterValues("cbkCusID");
+                    for(String sCus: cusIdBlock) {
+                        Users uBlock = usersFacade.find(sCus);
+                        //Block customer comments
+                        Collection<ProductsComment> listCm= uBlock.getProductsCommentCollection();
+                        for(ProductsComment pc: listCm) {
+                            pc.setCommentStatus(Boolean.FALSE);
+                            productsCommentFacade.edit(pc);
+                        }
+                        //Block customer
+                        uBlock.setUserStatus(Boolean.FALSE);
+                        usersFacade.edit(uBlock);
+                    }
+                    request.setAttribute("myMessCus", "Blocked customers successfully!");
+                    request.getRequestDispatcher("viewServlet?action=showUser").forward(request, response);
                     break;
             }
         }
