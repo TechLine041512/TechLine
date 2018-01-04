@@ -62,3 +62,56 @@
 .tim-row h3{
     margin-top: 0;
 }
+
+/*=====   PRODUCT PAGE FILTER =====*/
+
+.product-page-filter{
+	width:100%;
+	height:auto;
+	float:left;
+}
+.categories-sort, .price-sort, .az-sort{
+	float:right;
+	margin-left:16px;
+}
+#pagination-center{
+	text-align:center;
+}
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+
+#title-brand{
+	padding:0;
+	display: inline-block;
+	margin-left:40px;
+	margin-top:14px;
+}
+#title-brand h3{
+	float:left;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	color:#000; 
+	background:none;
+}
+

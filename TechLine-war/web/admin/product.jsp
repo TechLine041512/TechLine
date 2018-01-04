@@ -178,7 +178,6 @@
                                                 </c:forEach>        
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +213,7 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>
