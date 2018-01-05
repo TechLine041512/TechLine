@@ -5,7 +5,6 @@
  */
 package servlets;
 
-
 import entities.Brands;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
@@ -18,6 +17,7 @@ import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsEditHistoryPK;
 import entities.ProductsFacadeLocal;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
+
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
 
@@ -39,10 +40,10 @@ public class editProductsServlet extends HttpServlet {
     private ProductTypesFacadeLocal productTypesFacade;
     @EJB
     private BrandsFacadeLocal brandsFacade;
-    
+
     @EJB
     private ProductsFacadeLocal productsFacade;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -80,7 +81,7 @@ public class editProductsServlet extends HttpServlet {
                 editHistoryE.setProductDiscount(product.getProductDiscount());
                 editHistoryE.setEditTime(getTodayE);
                 productsEditHistoryFacade.create(editHistoryE);
-                
+
                 product.setTypeId(productTypesFacade.find(request.getParameter("txtProductType")));
                 product.setBrandId(brandsFacade.find(request.getParameter("txtBrand")));
                 product.setProductName(request.getParameter("txtProductName"));
@@ -91,31 +92,31 @@ public class editProductsServlet extends HttpServlet {
                 product.setProductUnit(request.getParameter("txtUnit"));
                 product.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
                 String weightE = request.getParameter("txtWeight");
-                if(weightE.equals("")){
+                if (weightE.equals("")) {
                     weightE = "0";
                 }
                 product.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
                 String widthE = request.getParameter("txtWidth");
-                if(widthE.equals("")){
+                if (widthE.equals("")) {
                     widthE = "0";
                 }
                 product.setProductWidth(Double.parseDouble(widthE));
                 String heightE = request.getParameter("txtHeight");
-                if(heightE.equals("")){
+                if (heightE.equals("")) {
                     heightE = "0";
                 }
                 product.setProductHeigth(Double.parseDouble(heightE));
                 String lengthE = request.getParameter("txtLength");
-                if(lengthE.equals("")){
+                if (lengthE.equals("")) {
                     lengthE = "0";
                 }
                 product.setProductLength(Double.parseDouble(lengthE));
-                
+
                 product.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
                 product.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
                 product.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
                 String discountE = request.getParameter("txtDiscount");
-                if(discountE.equals("")){
+                if (discountE.equals("")) {
                     discountE = "0";
                 }
                 product.setProductDiscount(Integer.parseInt(discountE));
@@ -155,33 +156,42 @@ public class editProductsServlet extends HttpServlet {
                 products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
                 products.setProductUnit(request.getParameter("txtUnit"));
                 String weight = request.getParameter("txtWeight");
-                if(weight.equals("")){
+                if (weight.equals("")) {
                     weight = "0";
                 }
                 products.setProductWeight(Double.parseDouble(weight));
                 String width = request.getParameter("txtWidth");
-                if(width.equals("")){
+                if (width.equals("")) {
                     width = "0";
                 }
                 products.setProductWidth(Double.parseDouble(width));
                 String height = request.getParameter("txtHeight");
-                if(height.equals("")){
+                if (height.equals("")) {
                     height = "0";
                 }
                 products.setProductHeigth(Double.parseDouble(height));
                 String length = request.getParameter("txtLength");
-                if(length.equals("")){
+                if (length.equals("")) {
                     length = "0";
                 }
                 products.setProductLength(Double.parseDouble(length));
                 products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
                 products.setProductImage(request.getParameter("txtImage"));
                 String discount = request.getParameter("txtDiscount");
-                if(discount.equals("")){
+                if (discount.equals("")) {
                     discount = "0";
                 }
                 products.setProductDiscount(Integer.parseInt(discount));
                 productsFacade.edit(products);
+                request.setAttribute("myMess", "Edit successful!");
+                request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                break;
+            case "blockProduct":
+                productId = request.getParameter("pid");
+                product = productsFacade.find(productId);
+                product.setProductStatus(Boolean.FALSE);
+                productsFacade.edit(product);
+                request.setAttribute("myMess", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                 break;
             case "cancelProduct":
@@ -197,6 +207,20 @@ public class editProductsServlet extends HttpServlet {
                 type.setTypeDesc(request.getParameter("txtTypeDesc"));
                 type.setTypeIcon(request.getParameter("txtTypeIcon"));
                 productTypesFacade.edit(type);
+                request.setAttribute("myMess", "Edit successful!");
+                request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                break;
+            case "blockType":
+                String typeIdBlock = request.getParameter("typeId");
+                ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
+                typeBlock.setTypeStatus(Boolean.FALSE);
+                productTypesFacade.edit(typeBlock);
+                Collection<Products> listProType = typeBlock.getProductsCollection();
+                for (Products pro : listProType) {
+                    pro.setProductStatus(Boolean.FALSE);
+                    productsFacade.edit(pro);
+                }
+                request.setAttribute("myMess", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             //admin cancel product type
@@ -211,6 +235,25 @@ public class editProductsServlet extends HttpServlet {
                 catEdit.setCategoryDesc(request.getParameter("txtDescription"));
                 catEdit.setCategoryIcon(request.getParameter("txtIcon"));
                 categoriesFacade.edit(catEdit);
+                request.setAttribute("myMess", "Edit successful!");
+                request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                break;
+            case "blockCategory":
+                String catIdBlock = request.getParameter("catId");
+                Categories catBlock = categoriesFacade.find(catIdBlock);
+                Collection<ProductTypes> listTypeCat = catBlock.getProductTypesCollection();
+                for (ProductTypes pt : listTypeCat) {
+                    Collection<Products> listProTypeCat = pt.getProductsCollection();
+                    for (Products pro : listProTypeCat) {
+                        pro.setProductStatus(Boolean.FALSE);
+                        productsFacade.edit(pro);
+                    }
+                    pt.setTypeStatus(Boolean.FALSE);
+                    productTypesFacade.edit(pt);
+                }
+                catBlock.setCategoryStatus(Boolean.FALSE);
+                categoriesFacade.edit(catBlock);
+                request.setAttribute("myMess", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category

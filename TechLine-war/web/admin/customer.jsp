@@ -30,7 +30,20 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty myMessCus}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMessCus}");
+                })
+            </script>
+        </c:if>
+        <c:if test="${not empty myMessSel}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMessSel}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
@@ -144,79 +157,86 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <button class="btn-instagram btn" value="Block" name="action" type="submit">Block</button>    
-                            <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
-                        </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Customers</h4>
-                                        <p class="category">Line Tech</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table">
-                                            <thead class="text-primary">
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>dob</th>
-                                            <th>Gender</th>
-                                            <th>Address</th>
-                                            <th>Point</th>
-                                            </thead>
-                                            <tbody>
-                                            <c:forEach items="${listCustomer}" var="customer">
-                                                <tr>
-                                                    <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                    <td>${customer.userId}</td>
-                                                    <td>${customer.fullname}</td>
-                                                    <td>${customer.customers.dob}</td>
-                                                    <td>${customer.customers.gender}</td>
-                                                    <td>${customer.customers.address}</td>
-                                                    <td>${customer.customers.point}</td>
-                                                </tr>
-                                            </c:forEach>    
-                                            </tbody>
-                                        </table>
+                            <form action="editCustomerServlet" method="post">
+                                <div class="row" style="text-align: center;">
+                                    <button class="btn-instagram btn" value="blockCustomer" name="action" type="submit">Block</button>    
+                                    <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Customers</h4>
+                                            <p class="category">Line Tech</p>
+                                        </div>
+                                        <div class="card-content table-responsive">
 
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>dob</th>
+                                                <th>Gender</th>
+                                                <th>Address</th>
+                                                <th>Point</th>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${listCustomer}" var="customer">
+                                                        <tr>
+                                                            <td><input type="checkbox" value="${customer.userId}" name="cbkCusID"/></td>
+                                                            <td>${customer.userId}</td>
+                                                            <td>${customer.fullname}</td>
+                                                            <td>${customer.customers.dob}</td>
+                                                            <td>${customer.customers.gender}</td>
+                                                            <td>${customer.customers.address}</td>
+                                                            <td>${customer.customers.point}</td>
+                                                        </tr>
+                                                    </c:forEach>    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="card card-plain">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Sellers</h4>
-                                        <p class="category">Line Tech</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Store Name</th>
-                                            <th>Store Address</th>
-                                            <th>Phone</th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listSeller}" var="seller">
-                                                    <tr>
-                                                        <td><input type="checkbox" value="" name="cbkCusID"/></td>
-                                                        <td>${seller.userId}</td>
-                                                        <td>${seller.fullname}</td>
-                                                        <td>${seller.seller.storeName}</td>
-                                                        <td>${seller.seller.storeAddress}</td>
-                                                        <td>${seller.phone}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                            </form>
+                            <form action="editSellerServlet" method="post">
+                                <div class="row" style="text-align: center;">
+                                    <button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button>    
+                                    <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card card-plain">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Sellers</h4>
+                                            <p class="category">Line Tech</p>
+                                        </div>
+                                        <div class="card-content table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Store Name</th>
+                                                <th>Store Address</th>
+                                                <th>Phone</th>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${listSeller}" var="seller">
+                                                        <tr>
+                                                            <td><input type="checkbox" value="${seller.userId}" name="cbkSellerID"/></td>
+                                                            <td>${seller.userId}</td>
+                                                            <td>${seller.fullname}</td>
+                                                            <td>${seller.seller.storeName}</td>
+                                                            <td>${seller.seller.storeAddress}</td>
+                                                            <td>${seller.phone}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

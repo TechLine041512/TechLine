@@ -5,12 +5,15 @@
  */
 package servlets;
 
+import entities.Products;
+import entities.ProductsFacadeLocal;
 import entities.Seller;
 import entities.SellerFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editSellerServlet extends HttpServlet {
+    @EJB
+    private ProductsFacadeLocal productsFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,13 +37,12 @@ public class editSellerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @EJB
     private SellerFacadeLocal sellerFacadeLocal;
-    
+
     @EJB
     private UsersFacadeLocal usersFacadeLocal;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -54,14 +58,32 @@ public class editSellerServlet extends HttpServlet {
                 seller.setStoreAddress(request.getParameter("txtStoreAddress"));
                 seller.setStoreSummary(request.getParameter("txtStoreSummary"));
                 sellerFacadeLocal.edit(seller);
-                
+
                 Users users = usersFacadeLocal.find(user.getUserId());
                 users.setEmail(request.getParameter("txtEmail"));
                 users.setFullname(request.getParameter("txtName"));
                 users.setPhone(request.getParameter("txtPhone"));
                 usersFacadeLocal.edit(users);
                 request.getRequestDispatcher("viewServlet?action=homeSeller").forward(request, response);
-                
+
+                break;
+            case "blockSeller":
+                String[] sellerIdBlock = request.getParameterValues("cbkSellerID");
+                for (String sSeller : sellerIdBlock) {
+                    Seller sBlock = sellerFacadeLocal.find(sSeller);
+                    Users uS = usersFacadeLocal.find(sBlock.getUsers().getUserId());
+                    //Block seller's products
+                    Collection<Products> listPB = uS.getProductsCollection();
+                    for (Products proB : listPB) {
+                        proB.setProductStatus(Boolean.FALSE);
+                        productsFacade.edit(proB);
+                    }
+                    //Block seller
+                    uS.setUserStatus(Boolean.FALSE);
+                    usersFacadeLocal.edit(uS);
+                }
+                request.setAttribute("myMessSel", "Blocked sellers successfully!");
+                request.getRequestDispatcher("viewServlet?action=showUser").forward(request, response);
                 break;
             default:
                 request.setAttribute("error", "Page not found");

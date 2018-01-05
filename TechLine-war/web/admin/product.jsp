@@ -30,7 +30,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty myMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMess}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
@@ -173,7 +179,7 @@
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.productQuantity}</td>
                                                         <td><a class="btn-instagram btn" href="#">Edit History</a></td>
-                                                        <td><a class="btn-instagram btn" href="#">Block</a></td>
+                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.productId}">Block</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>
