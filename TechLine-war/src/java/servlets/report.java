@@ -40,7 +40,7 @@ public class report extends HttpServlet {
         response.setContentType("application/pdf");
         response.setHeader("Content-Type", "application/pdf");
         //report-- Change this path.
-        String reportpath = "F:\\Workspace\\pet\\GenerateReport\\web\\report\\testreport2.pdf";
+        String reportpath = "E:\\Projects\\TechLine-war\\web\\report\\adminReportUser2.pdf";
         File filePDF = new File(reportpath);
         FileInputStream fis = new FileInputStream(filePDF);     
         OutputStream os = response.getOutputStream();
@@ -70,7 +70,7 @@ public class report extends HttpServlet {
         ReportConnection myConnection = new ReportConnection();
         Connection connection = null;
         try {
-        String reportPath = "F:\\Workspace\\TechLine\\TechLine_Official_vr1\\TechLine-1\\TechLine-war\\web\\report\\adminReportUser2.jrxml";
+        String reportPath = "E:\\Projects\\TechLine-war\\web\\adminReportUser2.jrxml";
         JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
         
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -81,12 +81,12 @@ public class report extends HttpServlet {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
         
         //outPut
-        String outputPath = "F:/Workspace/pet/GenerateReport/web/report";
+        String outputPath = "E:/Projects/TechLine-war/web/report";
         File outDir = new File(outputPath);
         outDir.mkdirs();
         
         //export to PDF
-        JasperExportManager.exportReportToPdfFile(jasperPrint, outputPath+"/testreport2.pdf");
+        JasperExportManager.exportReportToPdfFile(jasperPrint, outputPath+"/adminReportUser2.pdf");
         
         System.out.println("Done!");
         } catch (Exception e) {

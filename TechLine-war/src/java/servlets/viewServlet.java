@@ -8,6 +8,7 @@ package servlets;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.Customers;
 import entities.CustomersFacadeLocal;
 import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
@@ -181,12 +182,30 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     break;
                 case "homeCustomer":
-                    request.setAttribute("user", usersFacade.find(user.getUserId()));
-                    request.setAttribute("customer", customersFacade.find(user.getUserId()));
-                    String birthday[] = customersFacade.find(user.getUserId()).getDob().split("/");
-                    request.setAttribute("date", Integer.parseInt(birthday[0]));
-                    request.setAttribute("month", Integer.parseInt(birthday[1]));
-                    request.setAttribute("year", Integer.parseInt(birthday[2]));
+                    String userID = user.getUserId();
+                    if (userID != null) {
+                        Users u = usersFacade.find(userID);
+                        request.setAttribute("user",u);
+                        Customers c = customersFacade.find(userID);
+                        if ( c != null ) {
+                            String birthday[] = c.getDob().split("/");
+                            request.setAttribute("date", Integer.parseInt(birthday[0]));
+                            request.setAttribute("month", Integer.parseInt(birthday[1]));
+                            request.setAttribute("year", Integer.parseInt(birthday[2]));
+                        }
+                        else {
+                            c = new Customers();
+                            c.setPoint(0);
+                            c.setAddress("");
+                            request.setAttribute("date", 0);
+                            request.setAttribute("month", 0);
+                            request.setAttribute("year", 0);
+                            c.setGender("male");
+                        }
+                        request.setAttribute("customer", c);
+                    }
+                    
+                    
                     ArrayList<Integer> listDate = new ArrayList<>();
                     ArrayList<Integer> listMonth = new ArrayList<>();
                     ArrayList<Integer> listYear = new ArrayList<>();

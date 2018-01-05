@@ -9,6 +9,8 @@ import entities.BrandsFacadeLocal;
 import entities.CategoriesFacadeLocal;
 import entities.ProductTypesFacadeLocal;
 import entities.ProductsFacadeLocal;
+import entities.Users;
+import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -16,9 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class RedirectServlet extends HttpServlet {
-
+    @EJB
+    private UsersFacadeLocal usersFacade;
     @EJB
     private ProductsFacadeLocal productsFacade;
     @EJB
@@ -34,6 +38,11 @@ public class RedirectServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             switch (action) {
+                case "backToHome":
+                    HttpSession session = request.getSession();
+                    Users u = (Users) session.getAttribute("user");
+                    session.setAttribute("user", u);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 case "addProduct":
                     request.setAttribute("listBrand", brandsFacade.findAll());
                     request.setAttribute("listType", productTypesFacade.findAll());

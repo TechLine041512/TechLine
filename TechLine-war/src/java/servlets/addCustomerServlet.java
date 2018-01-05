@@ -6,6 +6,10 @@
 
 package servlets;
 
+import entities.Customers;
+import entities.CustomersFacadeLocal;
+import entities.Seller;
+import entities.SellerFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
@@ -23,6 +27,10 @@ import javax.servlet.http.HttpSession;
  * @author nth15
  */
 public class addCustomerServlet extends HttpServlet {
+    @EJB
+    private SellerFacadeLocal sellerFacade;
+    @EJB
+    private CustomersFacadeLocal customersFacade;
     @EJB
     private UsersFacadeLocal usersFacade;
 
@@ -45,15 +53,13 @@ public class addCustomerServlet extends HttpServlet {
             switch (action) {
                 case "register":
                     String idRegist = request.getParameter("txtUsername");
-                    List<Users> listUserRegist = usersFacade.findAll();
-                    for(Users usn: listUserRegist) {
-                        if(usn.getUserId().equals(idRegist)) {
-                            request.setAttribute("registMess", "Username already exists!");
-                            request.getRequestDispatcher("index.jsp").forward(request, response);
-                            break;
-                        }
+                    Users userRegist = usersFacade.find(idRegist);
+                    if (userRegist != null) {
+                        request.setAttribute("registMess", "Username already exists!");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        break;
                     }
-                    Users userRegist = new Users();
+                    userRegist = new Users();
                     userRegist.setUserId(idRegist);
                     userRegist.setPassword(request.getParameter("txtPassword"));
                     userRegist.setEmail(request.getParameter("txtEmail"));
@@ -63,11 +69,16 @@ public class addCustomerServlet extends HttpServlet {
                     userRegist.setRole(roleRegist);
                     userRegist.setUserStatus(true);
                     usersFacade.create(userRegist);
+                    
                     request.setAttribute("user", userRegist);
                     request.setAttribute("registMess", "Registration successful!");
                     if (roleRegist.equals("customer")) {
+                        Customers c = new Customers(idRegist);
+                        customersFacade.create(c);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (roleRegist.equals("seller")) {
+                        Seller s = new Seller(idRegist);
+                        sellerFacade.create(s);
                         request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     }
                     break;
