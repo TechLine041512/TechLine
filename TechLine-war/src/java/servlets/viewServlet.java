@@ -176,34 +176,6 @@ public class viewServlet extends HttpServlet {
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
-                case "register":
-                    String idRegist = request.getParameter("txtUsername");
-                    List<Users> listUserRegist = usersFacade.findAll();
-                    for(Users usn: listUserRegist) {
-                        if(usn.getUserId().equals(idRegist)) {
-                            request.setAttribute("registMess", "Username already exists!");
-                            request.getRequestDispatcher("index.jsp").forward(request, response);
-                            break;
-                        }
-                    }
-                    Users userRegist = new Users();
-                    userRegist.setUserId(idRegist);
-                    userRegist.setPassword(request.getParameter("txtPassword"));
-                    userRegist.setEmail(request.getParameter("txtEmail"));
-                    userRegist.setFullname(request.getParameter("txtFullname"));
-                    userRegist.setPhone(request.getParameter("txtPhone"));
-                    String roleRegist = request.getParameter("role");
-                    userRegist.setRole(roleRegist);
-                    userRegist.setUserStatus(true);
-                    usersFacade.create(userRegist);
-                    request.setAttribute("user", userRegist);
-                    request.setAttribute("registMess", "Registration successful!");
-                    if (roleRegist.equals("customer")) {
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    } else if (roleRegist.equals("seller")) {
-                        request.getRequestDispatcher("seller/home.jsp").forward(request, response);
-                    }
-                    break;
                 case "homeSeller":
                     request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);

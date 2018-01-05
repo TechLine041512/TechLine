@@ -6,18 +6,25 @@
 
 package servlets;
 
+import entities.Users;
+import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nth15
  */
 public class addCustomerServlet extends HttpServlet {
+    @EJB
+    private UsersFacadeLocal usersFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +39,39 @@ public class addCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet addCustomerServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet addCustomerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            Users user = (Users) request.getSession().getAttribute("user");
+            switch (action) {
+                case "register":
+                    String idRegist = request.getParameter("txtUsername");
+                    List<Users> listUserRegist = usersFacade.findAll();
+                    for(Users usn: listUserRegist) {
+                        if(usn.getUserId().equals(idRegist)) {
+                            request.setAttribute("registMess", "Username already exists!");
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            break;
+                        }
+                    }
+                    Users userRegist = new Users();
+                    userRegist.setUserId(idRegist);
+                    userRegist.setPassword(request.getParameter("txtPassword"));
+                    userRegist.setEmail(request.getParameter("txtEmail"));
+                    userRegist.setFullname(request.getParameter("txtFullname"));
+                    userRegist.setPhone(request.getParameter("txtPhone"));
+                    String roleRegist = request.getParameter("role");
+                    userRegist.setRole(roleRegist);
+                    userRegist.setUserStatus(true);
+                    usersFacade.create(userRegist);
+                    request.setAttribute("user", userRegist);
+                    request.setAttribute("registMess", "Registration successful!");
+                    if (roleRegist.equals("customer")) {
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    } else if (roleRegist.equals("seller")) {
+                        request.getRequestDispatcher("seller/home.jsp").forward(request, response);
+                    }
+                    break;
+            }
         }
     }
 

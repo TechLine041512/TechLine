@@ -103,7 +103,7 @@
                         <div class="box">
                             <div class="content registerBox" style="display:none;">
                                 <div class="form">
-                                    <form method="post" action="viewServlet">
+                                    <form method="post" action="addCustomerServlet">
                                         <b style="color: red;" id="note1"></b>
                                         <input id="email" class="input-xlarge" type="text" placeholder="Username" name="txtUsername" pattern=".{5,30}" required title="Username contains 5 to 30 characters"><br/>
                                         <b style="color: red;" id="note2"></b>
