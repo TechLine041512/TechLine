@@ -84,4 +84,11 @@ function shakeModal(){
     }, 1000 ); 
 }
 
-   
+function checkPass() {
+    var newPass = document.getElementById('Regispassword');
+    var confirmPass = document.getElementById('Regispassword_confirmation');
+    if (newPass.value != confirmPass.value) {
+        alert('Repeat Password doesn\'t match Password');
+        newPass.focus();
+    }
+}
