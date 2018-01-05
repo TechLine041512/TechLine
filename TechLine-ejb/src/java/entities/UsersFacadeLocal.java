@@ -32,7 +32,7 @@ public interface UsersFacadeLocal {
     
     List<Users> getListCustomer();
 
-    int countActiveSeller();
+    long countActiveSeller();
 
-    int countActiveCustomer();
+    long countActiveCustomer();
 }

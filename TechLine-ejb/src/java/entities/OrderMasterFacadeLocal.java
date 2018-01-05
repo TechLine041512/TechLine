@@ -28,6 +28,6 @@ public interface OrderMasterFacadeLocal {
 
     String newId();
 
-    int countDoneOrder();
+    long countDoneOrder();
     
 }

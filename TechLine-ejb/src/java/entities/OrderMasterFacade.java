@@ -40,13 +40,13 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
     }
 
     @Override
-    public int countDoneOrder() {
-        Query q = em.createNamedQuery("OrderMaster.findByOrderStatus");
+    public long countDoneOrder() {
+        Query q = em.createQuery("SELECT COUNT(o) FROM OrderMaster o WHERE o.orderStatus = :orderStatus");
         try {
             q.setParameter("orderStatus", "Done");
         } catch (Exception e) {
         }
-        return q.getResultList().size();
+        return (long) q.getSingleResult();
     }
     
 }

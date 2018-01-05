@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="card-content">
                                         <p class="category">Sold Products</p>
-                                        <h3 class="title">49</h3>
+                                        <h3 class="title">${productsSold}</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
