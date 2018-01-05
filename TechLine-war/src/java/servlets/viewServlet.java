@@ -176,6 +176,34 @@ public class viewServlet extends HttpServlet {
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
+                case "register":
+                    String idRegist = request.getParameter("txtUsername");
+                    List<Users> listUserRegist = usersFacade.findAll();
+                    for(Users usn: listUserRegist) {
+                        if(usn.getUserId().equals(idRegist)) {
+                            request.setAttribute("registMess", "Username already exists!");
+                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            break;
+                        }
+                    }
+                    Users userRegist = new Users();
+                    userRegist.setUserId(idRegist);
+                    userRegist.setPassword(request.getParameter("txtPassword"));
+                    userRegist.setEmail(request.getParameter("txtEmail"));
+                    userRegist.setFullname(request.getParameter("txtFullname"));
+                    userRegist.setPhone(request.getParameter("txtPhone"));
+                    String roleRegist = request.getParameter("role");
+                    userRegist.setRole(roleRegist);
+                    userRegist.setUserStatus(true);
+                    usersFacade.create(userRegist);
+                    request.setAttribute("user", userRegist);
+                    request.setAttribute("registMess", "Registration successful!");
+                    if (roleRegist.equals("customer")) {
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    } else if (roleRegist.equals("seller")) {
+                        request.getRequestDispatcher("seller/home.jsp").forward(request, response);
+                    }
+                    break;
                 case "homeSeller":
                     request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
@@ -190,12 +218,13 @@ public class viewServlet extends HttpServlet {
                     ArrayList<Integer> listDate = new ArrayList<>();
                     ArrayList<Integer> listMonth = new ArrayList<>();
                     ArrayList<Integer> listYear = new ArrayList<>();
-                    for(int i = 1; i < 32; i++) {
+                    for (int i = 1; i < 32; i++) {
                         listDate.add(i);
-                        if(i < 13)
+                        if (i < 13) {
                             listMonth.add(i);
+                        }
                     }
-                    for(int i = 1950; i < 2018; i++) {
+                    for (int i = 1950; i < 2018; i++) {
                         listYear.add(i);
                     }
                     request.setAttribute("listDate", listDate);

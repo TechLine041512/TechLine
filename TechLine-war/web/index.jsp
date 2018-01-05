@@ -26,9 +26,16 @@
         <script src="resource/themes/js/superfish.js"></script>	
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
-
+        <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
-    <body>		
+    <body>
+        <c:if test="${not empty registMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${registMess}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
@@ -62,7 +69,7 @@
 
                             <c:if test="${user.role=='customer'}">
                                 <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
-                            </c:if>
+                                </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
                                     }
@@ -96,13 +103,18 @@
                         <div class="box">
                             <div class="content registerBox" style="display:none;">
                                 <div class="form">
-                                    <form method="post" action="register.html">
+                                    <form method="post" action="viewServlet">
                                         <b style="color: red;" id="note1"></b>
-                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="username" onBlur="checkEmail()" required="true"><br/>
+                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="txtUsername" pattern=".{5,30}" required title="Username contains 5 to 30 characters"><br/>
                                         <b style="color: red;" id="note2"></b>
-                                        <input id="Regispassword" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Password" name="password" required="true"><br/>
-                                        <input id="Regispassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{6,20}" type="password" placeholder="Repeat Password" name="password_confirmation" required="true" onBlur="checkPass()"><br/>
-                                        <input class="btn btn-inverse" id="btnRegister" value="Create account" name="action" type="submit">
+                                        <input id="Regispassword" class="input-xlarge" type="password" placeholder="Password" name="txtPassword" pattern=".{5,20}" required title="Password contains 5 to 20 characters"><br/>
+                                        <input id="Regispassword_confirmation" class="input-xlarge" type="password" placeholder="Repeat Password" name="password_confirmation" pattern=".{5,20}" required title="Repeat password contains 5 to 20 characters" onBlur="checkPass()"><br/>
+                                        <input id="Regispassword" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required="true"><br/>
+                                        <input id="Regispassword" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" required="true"><br/>
+                                        <input id="Regispassword" class="input-xlarge"  pattern='\d{9,15}' type="tel" placeholder="Phone" name="txtPhone" required title="Phone contains 9 to 15 characters"><br/>
+                                        <input type="radio" name="role" value="customer" checked> Customer 
+                                        <input type="radio" name="role" value="seller" > Seller <br/>
+                                        <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="register">Create An Account</button>
                                     </form>
                                 </div>
                             </div>
@@ -134,7 +146,7 @@
                                     <ul>
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>

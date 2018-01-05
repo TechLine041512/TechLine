@@ -33,7 +33,13 @@
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     </head>
     <body>
-
+        <c:if test="${not empty registMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${registMess}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
                 <!--
