@@ -158,6 +158,12 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeAdmin":
+                    int activeSellers = usersFacade.countActiveSeller();
+                    int activeCustomers = usersFacade.countActiveCustomer();
+                    int doneOrders = orderMasterFacade.countDoneOrder();
+                    request.setAttribute("activeSellers", activeSellers);
+                    request.setAttribute("activeCustomers", activeCustomers);
+                    request.setAttribute("doneOrders", doneOrders);
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     break;
 
