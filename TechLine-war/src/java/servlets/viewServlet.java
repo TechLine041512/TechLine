@@ -190,12 +190,13 @@ public class viewServlet extends HttpServlet {
                     ArrayList<Integer> listDate = new ArrayList<>();
                     ArrayList<Integer> listMonth = new ArrayList<>();
                     ArrayList<Integer> listYear = new ArrayList<>();
-                    for(int i = 1; i < 32; i++) {
+                    for (int i = 1; i < 32; i++) {
                         listDate.add(i);
-                        if(i < 13)
+                        if (i < 13) {
                             listMonth.add(i);
+                        }
                     }
-                    for(int i = 1950; i < 2018; i++) {
+                    for (int i = 1950; i < 2018; i++) {
                         listYear.add(i);
                     }
                     request.setAttribute("listDate", listDate);
