@@ -46,7 +46,7 @@
                 -->
 
                 <div class="logo">
-                    <a href="home.jsp" class="simple-text">
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
                         <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
@@ -194,7 +194,7 @@
                         <nav class="pull-left">
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="RedirectServlet?action=backToHome">
                                         Home
                                     </a>
                                 </li> 
