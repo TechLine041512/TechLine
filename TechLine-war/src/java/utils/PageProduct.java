@@ -15,7 +15,6 @@ import models.ProductIndexModel;
  * @author tatyuki1209
  */
 public class PageProduct {
-    private static final int DEFAULT_RECORDS_NUMBER = 12;
     private static final int DEFAULT_PAGE_INDEX = 1;
 
     private int records;
