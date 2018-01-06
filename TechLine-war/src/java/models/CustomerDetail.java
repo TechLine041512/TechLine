@@ -6,6 +6,8 @@
 
 package models;
 
+import entities.Users;
+
 /**
  *
  * @author nth15
@@ -17,7 +19,16 @@ public class CustomerDetail {
     private String gender;
     private String address;
     private int point;
+    private Users users;
 
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+    
     public String getUserId() {
         return userId;
     }

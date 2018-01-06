@@ -3,14 +3,15 @@
     Created on : Dec 17, 2017, 3:07:56 AM
     Author     : Tien
 --%>
-
+<%@page import="utils.PageProduct"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Categories</title>
+        <title>Users</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -30,10 +31,17 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <c:if test="${not empty myMess}">
+        <c:if test="${not empty myMessCus}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${myMess}");
+                    alert("${myMessCus}");
+                })
+            </script>
+        </c:if>
+        <c:if test="${not empty myMessSel}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMessSel}");
                 })
             </script>
         </c:if>
@@ -66,7 +74,7 @@
                                 <p>Customer List</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=showSeller">
                                 <i class="material-icons">person</i>
                                 <p>Seller List</p>
@@ -78,7 +86,7 @@
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
@@ -156,40 +164,62 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" href="RedirectServlet?action=addCategory">Add</a>
-                        </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-plain">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Categories</h4>
-                                        <p class="category">Line Tech</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Icon</th>
-                                            <th>Action</th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listCategories}" var="category">
-                                                    <tr>
-                                                        <td><a href="RedirectServlet?action=editCategory&catId=${category.categoryId}">${category.categoryId}</a></td>
-                                                        <td>${category.categoryName}</td>
-                                                        <td>${category.categoryDesc}</td>
-                                                        <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}">Block</a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                            <form action="editSellerServlet" method="post">
+                                <div class="col-md-12">
+                                    <div class="card card-plain">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Sellers</h4>
+                                            <p class="category">Line Tech</p>
+                                        </div>
+                                        <div class="card-content table-responsive">
+                                            <%
+                                                PageProduct pageSeller = (PageProduct) request.getAttribute("pageSeller");
+                                            %>
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Store Name</th>
+                                                <th>Store Address</th>
+                                                <th>Phone</th>
+                                                <th>Action</th>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="<%= pageSeller.getModel()%>" var="seller">
+                                                        <tr>                                                          
+                                                            <td>${seller.userId}</td>
+                                                            <td>${seller.users.fullname}</td>
+                                                            <td>${seller.storeName}</td>
+                                                            <td>${seller.storeAddress}</td>
+                                                            <td>${seller.users.phone}</td>
+                                                            <td><button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button></td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="pagination pagination-small pagination-centered" style="margin-left:650px;">
+                                            <ul>
+                                                <li><a href="viewServlet?action=showSeller&btn=prev">Prev</a></li>
+                                                    <%
+
+                                                        int pages = pageSeller.getPages();
+                                                        for (int i = 1; i <= pages; i++) {
+                                                    %>
+
+                                                <li><a href="viewServlet?action=showSeller&page=<%=i%>"><%=i%></a></li>
+
+                                                <%
+                                                    }
+                                                %>
+                                                <li><a href="viewServlet?action=showSeller&btn=next">Next</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>

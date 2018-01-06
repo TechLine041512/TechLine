@@ -3,6 +3,7 @@
     Created on : Dec 17, 2017, 3:07:56 AM
     Author     : Tien
 --%>
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -68,9 +69,15 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="viewServlet?action=showUser">
+                            <a href="viewServlet?action=showCustomer">
                                 <i class="material-icons">person</i>
-                                <p>User List</p>
+                                <p>Customer List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showSeller">
+                                <i class="material-icons">person</i>
+                                <p>Seller List</p>
                             </a>
                         </li>
                         <li>
@@ -160,15 +167,17 @@
                         <div class="row">
                             <form action="editCustomerServlet" method="post">
                                 <div class="col-md-12">
-                                    <div class="card">
+                                    <div class="card card-plain">
                                         <div class="card-header" data-background-color="purple">
                                             <h4 class="title">Customers</h4>
                                             <p class="category">Line Tech</p>
                                         </div>
                                         <div class="card-content table-responsive">
-
-                                            <table class="table">
-                                                <thead class="text-primary">
+                                            <%
+                                                PageProduct pageCus = (PageProduct) request.getAttribute("pageCus");
+                                            %>
+                                            <table class="table table-hover">
+                                                <thead>
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>dob</th>
@@ -178,59 +187,40 @@
                                                 <th>Action</th>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${listCustomer}" var="customer">
+                                                    <c:forEach items="<%=pageCus.getModel()%>" var="customer">
                                                         <tr>
                                                             <td>${customer.userId}</td>
-                                                            <td>${customer.fullname}</td>
-                                                            <td>${customer.customers.dob}</td>
-                                                            <td>${customer.customers.gender}</td>
-                                                            <td>${customer.customers.address}</td>
-                                                            <td>${customer.customers.point}</td>
+                                                            <td>${customer.users.fullname}</td>
+                                                            <td>${customer.dob}</td>
+                                                            <td>${customer.gender}</td>
+                                                            <td>${customer.address}</td>
+                                                            <td>${customer.point}</td>
                                                             <td><button class="btn-instagram btn" value="blockCustomer" name="action" type="submit">Block</button></td>
                                                         </tr>
                                                     </c:forEach>    
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="editSellerServlet" method="post">
-                                <div class="col-md-12">
-                                    <div class="card card-plain">
-                                        <div class="card-header" data-background-color="purple">
-                                            <h4 class="title">Sellers</h4>
-                                            <p class="category">Line Tech</p>
-                                        </div>
-                                        <div class="card-content table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <th></th>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Store Name</th>
-                                                <th>Store Address</th>
-                                                <th>Phone</th>
-                                                <th>Action</th>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${listSeller}" var="seller">
-                                                        <tr>
-                                                            <td><input type="checkbox" value="${seller.userId}" name="cbkSellerID"/></td>
-                                                            <td>${seller.userId}</td>
-                                                            <td>${seller.fullname}</td>
-                                                            <td>${seller.seller.storeName}</td>
-                                                            <td>${seller.seller.storeAddress}</td>
-                                                            <td>${seller.phone}</td>
-                                                            <td><button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button></td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                        <div class="pagination pagination-small pagination-centered" style="margin-left:650px;">
+                                            <ul>
+                                                <li><a href="viewServlet?action=showCustomer&btn=prev">Prev</a></li>
+                                                    <%
+
+                                                        int pages = pageCus.getPages();
+                                                        for (int i = 1; i <= pages; i++) {
+                                                    %>
+
+                                                <li><a href="viewServlet?action=showCustomer&page=<%=i%>"><%=i%></a></li>
+
+                                                <%
+                                                    }
+                                                %>
+                                                <li><a href="viewServlet?action=showCustomer&btn=next">Next</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form>             
                         </div>
                     </div>
                 </div>

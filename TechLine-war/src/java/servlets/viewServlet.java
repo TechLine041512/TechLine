@@ -138,12 +138,50 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;
 
-                case "showUser":
-                    request.setAttribute("listCustomer", usersFacade.getListCustomer());
-                    request.setAttribute("listSeller", usersFacade.getListSeller());
+                case "showCustomer":
+                    List<Customers> listCus = new ArrayList<>();
+                    listCus = customersFacade.findAll();
+                    PageProduct pageCustomer = new PageProduct(listCus, 5);
+                    String nCus = request.getParameter("btn");
+                    if (nCus != null) {
+                        if (nCus.equals("next")) {
+                            pageCustomer.next();
+                        }
+                        if (nCus.equals("prev")) {
+                            pageCustomer.prev();
+                        }
+                    }
+                    String pagesCus = request.getParameter("page");
+                    if (pagesCus != null) {
+                        int m = Integer.parseInt(pagesCus);
+                        pageCustomer.setPageIndex(m);
+                        pageCustomer.updateModel();
+                    }
+                    request.setAttribute("pageCus", pageCustomer);           
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
-
+                case "showSeller":
+                    List<Seller> sellers = new ArrayList<>();
+                    sellers = sellerFacadeLocal.findAll();
+                    PageProduct pageSeller = new PageProduct(sellers, 5);
+                    String nSeller = request.getParameter("btn");
+                    if (nSeller != null) {
+                        if (nSeller.equals("next")) {
+                            pageSeller.next();
+                        }
+                        if (nSeller.equals("prev")) {
+                            pageSeller.prev();
+                        }
+                    }
+                    String pageSell = request.getParameter("page");
+                    if (pageSell != null) {
+                        int m = Integer.parseInt(pageSell);
+                        pageSeller.setPageIndex(m);
+                        pageSeller.updateModel();
+                    }
+                    request.setAttribute("pageSeller", pageSeller);           
+                    request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
+                    break;
                 case "showProductAdmin":
                     List<Products> listDateposted = productsFacade.getListProductByDatePost();
                     PageProduct pageProduct3 = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
