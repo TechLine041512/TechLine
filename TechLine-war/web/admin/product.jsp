@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +18,7 @@
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
-
+        <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />	
         <!--  Material Dashboard CSS    -->
         <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
@@ -160,6 +160,9 @@
                                         <h4 class="title">Product List</h4>
                                         <p class="category">Products in store</p>
                                     </div>
+                                    <%
+                                        PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
+                                    %>
                                     <div class="card-content table-responsive">
                                         <table class="table">
                                             <thead class="text-primary">                     
@@ -171,7 +174,7 @@
                                             <th>Action</th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${listProduct}" var="product">
+                                                <c:forEach items="<%=pageProduct.getModel()%>" var="product">
                                                     <tr>
                                                         <td><a href="RedirectServlet?action=editProduct&pid=${product.id}">${product.id}</a></td>
                                                         <td>${product.name}</td>
@@ -186,6 +189,23 @@
                                                 </c:forEach>        
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="pagination pagination-small pagination-centered" style="margin-left:250px;">
+                                        <ul>
+                                            <li><a href="viewServlet?action=showProductAdmin&btn=prev">Prev</a></li>
+                                                <%
+
+                                                    int pages = pageProduct.getPages();
+                                                    for (int i = 1; i <= pages; i++) {
+                                                %>
+
+                                            <li><a href="viewServlet?action=showProductAdmin&page=<%=i%>"><%=i%></a></li>
+
+                                            <%
+                                                }
+                                            %>
+                                            <li><a href="viewServlet?action=showProductAdmin&btn=next">Next</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>                          

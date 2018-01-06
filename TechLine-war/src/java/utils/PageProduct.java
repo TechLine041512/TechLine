@@ -15,7 +15,6 @@ import models.ProductIndexModel;
  * @author tatyuki1209
  */
 public class PageProduct {
-    private static final int DEFAULT_RECORDS_NUMBER = 12;
     private static final int DEFAULT_PAGE_INDEX = 1;
 
     private int records;
@@ -25,9 +24,9 @@ public class PageProduct {
     private final List<?> origModel;
     private List<?> model;
    
-    public PageProduct(List<?> model) {
+    public PageProduct(List<?> model, int addRecoredPage) {
         this.origModel = model;
-        this.records = DEFAULT_RECORDS_NUMBER;
+        this.records = addRecoredPage;
         this.pageIndex = DEFAULT_PAGE_INDEX;        
         this.recordsTotal = model.size();
 
@@ -62,7 +61,7 @@ public class PageProduct {
             toIndex = this.recordsTotal;
         }
 
-        this.model = (List<ProductIndexModel>) origModel.subList(fromIndex, toIndex);
+        this.model = (List<?>) origModel.subList(fromIndex, toIndex);
     }
 
     public void next() {
@@ -83,6 +82,10 @@ public class PageProduct {
 
     public int getRecords() {
         return records;
+    }
+
+    public void setRecords(int records) {
+        this.records = records;
     }
 
     public int getRecordsTotal() {

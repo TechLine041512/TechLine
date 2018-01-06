@@ -83,7 +83,7 @@ public class viewServlet extends HttpServlet {
                     for (ProductTypes productTypes : listProductTypes) {
                         listProduct.addAll(productTypes.getProductsCollection());
                     }
-                    PageProduct pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct));
+                    PageProduct pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
                     String n = request.getParameter("btn");
                     if (n != null) {
                         if (n.equals("next")) {
@@ -109,7 +109,7 @@ public class viewServlet extends HttpServlet {
                     ProductTypes productTypes = productTypesFacade.find(request.getParameter("idType"));
                     List<Products> listProduct2 = new ArrayList<>();
                     listProduct2.addAll(productTypes.getProductsCollection());
-                    PageProduct pageProduct2 = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct2));
+                    PageProduct pageProduct2 = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct2), 12);
                     String n1 = request.getParameter("btn");
                     if (n1 != null) {
                         if (n1.equals("next")) {
@@ -145,8 +145,23 @@ public class viewServlet extends HttpServlet {
 
                 case "showProductAdmin":
                     List<Products> listDateposted = productsFacade.getListProductByDatePost();
-                    List<ProductListAdminModel> listProductForAdmin = TechLineUtils.buildProductAdmin(listDateposted);
-                    request.setAttribute("listProduct", listProductForAdmin);
+                    PageProduct pageProduct3 = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
+                    String n3 = request.getParameter("btn");
+                    if (n3 != null) {
+                        if (n3.equals("next")) {
+                            pageProduct3.next();
+                        }
+                        if (n3.equals("prev")) {
+                            pageProduct3.prev();
+                        }
+                    }
+                    String pages3 = request.getParameter("page");
+                    if (pages3 != null) {
+                        int m = Integer.parseInt(pages3);
+                        pageProduct3.setPageIndex(m);
+                        pageProduct3.updateModel();
+                    }
+                    request.setAttribute("pageProduct", pageProduct3);
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
