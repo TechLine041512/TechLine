@@ -32,23 +32,22 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../resource/assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-            Tip 2: you can also add an image using data-image tag
+                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
+                Tip 2: you can also add an image using data-image tag
                 -->
 
                 <div class="logo">
-                    <a href="home.jsp" class="simple-text">
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
                         <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
-
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                        <li >
+                        <li>
                             <a href="viewServlet?action=homeSeller">
                                 <i class="material-icons">dashboard</i>
                                 <p>Profile</p>
@@ -57,13 +56,13 @@
                         <li class="active">
                             <a href="viewServlet?action=sellerProduct">
                                 <i class="material-icons">content_paste</i>
-                                <p>Product List</p>
+                                <p>List Product of Seller </p>
                             </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="viewServlet?action=sellerOrder">
                                 <i class="material-icons">location_on</i>
-                                <p>Order List</p>
+                                <p>List Order </p>
                             </a>
                         </li>
                     </ul>
