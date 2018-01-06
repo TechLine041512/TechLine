@@ -15,18 +15,18 @@ function loadDay() {
             var gtYear = parseInt(Year.options[Year.selectedIndex].value);
             // Thuat toan tinh nam nhuan
             if ((gtYear % 4 == 0) && ((gtYear % 100 != 0) || (gtYear % 400 == 0))) {
-                if (day < 29 && Day.length == 28) {
+                if (day < 29 && Day.length == 29) {
                     return;
                 }
                 // La nam nhuan
-                SoDay = 28;
+                SoDay = 29;
             }
             else {
-                if (day < 30 && Day.length == 29) {
+                if (day < 30 && Day.length == 28) {
                     return;
                 }
                 // Khong la nam nhuan
-                SoDay = 29;
+                SoDay = 28;
             }
             break;
             // Truong hop cac thang 1, 3, 5, 7, 8, 10, 12
