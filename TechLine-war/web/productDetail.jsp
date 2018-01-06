@@ -62,7 +62,7 @@
                                 </c:if>
 
                             <c:if test="${user.role=='customer'}">
-                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -129,13 +129,16 @@
                 <div class="navbar-inner main-menu">				
                     <nav id="menu" class="pull-right">
                         <ul>
+                            <li>
+                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                            </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
                                     <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
                                     <ul>
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -154,18 +157,26 @@
                             <div class="span4">
                                 <a href="${product.productImage[0]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img alt="" src="${product.productImage[0]}" ></a>												
                                 <ul class="thumbnails small">								
-                                    <li class="span1">
-                                        <a href="${product.productImage[1]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
-                                    </li>								
-                                    <li class="span1">
-                                        <a href="${product.productImage[2]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
-                                    </li>													
-                                    <li class="span1">
-                                        <a href="${product.productImage[3]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
-                                    </li>
-                                    <li class="span1">
-                                        <a href="${product.productImage[4]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
-                                    </li>
+                                    <c:if test="${product.productImage[1] != null}">
+                                        <li class="span1">
+                                            <a href="${product.productImage[1]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[1]}" alt="" style="width: 50px; height: 50px"></a>
+                                        </li>								
+                                    </c:if>
+                                    <c:if test="${product.productImage[2] != null}">
+                                        <li class="span1">
+                                            <a href="${product.productImage[2]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[2]}" alt="" style="width: 50px; height: 50px"></a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${product.productImage[3] != null}">
+                                        <li class="span1">
+                                            <a href="${product.productImage[3]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[3]}" alt="" style="width: 50px; height: 50px"></a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${product.productImage[4] != null}">
+                                        <li class="span1">
+                                            <a href="${product.productImage[4]}" class="thumbnail" data-fancybox-group="group1" title="${product.productName}"><img src="${product.productImage[4]}" alt="" style="width: 50px; height: 50px"></a>
+                                        </li>
+                                    </c:if>
                                 </ul>
                             </div>
                             <div class="span5">
@@ -224,94 +235,8 @@
                                         </form>
                                     </div><br>  <!---End #write-review-rating--->
                                 </div><!---.accordion-panel end--->       
-                            </div>  
-                            <div class="span12">	
-                                <br>
-                                <h4 class="title">
-                                    <span class="pull-left"><span class="text"><strong>Related</strong> Products</span></span>
-                                    <span class="pull-right">
-                                        <a class="left button" href="#myCarousel-1" data-slide="prev"></a><a class="right button" href="#myCarousel-1" data-slide="next"></a>
-                                    </span>
-                                </h4>
-                                <div id="myCarousel-1" class="carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="active item">
-                                            <ul class="thumbnails listing-products">
-                                                <li class="span3">
-                                                    <div class="product-box">
-                                                        <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
-                                                        <p class="price">$341</p>
-                                                    </div>
-                                                </li>
-                                                <li class="span3">
-                                                    <div class="product-box">
-                                                        <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/61eKsimQtVL._SL1000_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">Western Digital Caviar SE (WD3200AAJS)</a><br/>
-                                                        <p class="price">$341</p>
-                                                    </div>
-                                                </li>       
-                                                <li class="span3">
-                                                    <div class="product-box">												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
-                                                        <p class="price">$28</p>
-                                                    </div>
-                                                </li>
-                                                <li class="span3">
-                                                    <div class="product-box">												
-                                                        <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41JjEu7FCkL._AC_US218_.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">WD Blue 1TB SATA Desktop Hard Drive</a><br/>
-                                                        <p class="price">$28</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="item">
-                                            <ul class="thumbnails listing-products">
-                                                <li class="span3">
-                                                    <div class="product-box">
-                                                        <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                        <a href="#" class="category">Phasellus consequat</a>
-                                                        <p class="price">$341</p>
-                                                    </div>
-                                                </li>
-                                                <li class="span3">
-                                                    <div class="product-box">
-                                                        <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                        <a href="#" class="category">Phasellus consequat</a>
-                                                        <p class="price">$341</p>
-                                                    </div>
-                                                </li>
-                                                <li class="span3">
-                                                    <div class="product-box">												
-                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/2.jpg"></a><br/>
-                                                        <a href="product_detail.html">Praesent tempor sem</a><br/>
-                                                        <a href="#" class="category">Erat gravida</a>
-                                                        <p class="price">$28</p>
-                                                    </div>
-                                                </li>
-                                                <li class="span3">
-                                                    <div class="product-box">
-                                                        <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/3.jpg"></a><br/>
-                                                        <a href="product_detail.html" class="title">Wuam ultrices rutrum</a><br/>
-                                                        <a href="#" class="category">Suspendisse aliquet</a>
-                                                        <p class="price">$341</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </div>                  
+                        </div>                    
                     </div>
                     <div class="span3 col">
                         <div class="block">
@@ -328,7 +253,7 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL._SS150_.jpg" ><br/>
+                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL._SS150_.jpg" style="width: 150px; height: 150px;"><br/>
                                                     <a href="product_detail.html" class="title" style="height: 60px;">ZOZO Laptop Power Adapter</a><br/>
                                                     <p class="price">$261</p>
                                                 </div>
@@ -339,7 +264,7 @@
                                         <ul class="thumbnails listing-products">
                                             <li class="span3">
                                                 <div class="product-box">												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
+                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 150px; height: 150px;"><br/>
                                                     <a href="product_detail.html" class="title" style="height: 60px;">Ring Video Doorbell Pro</a><br/>
                                                     <p class="price">$134</p>
                                                 </div>
@@ -352,29 +277,125 @@
                         <div class="block">								
                             <h4 class="title"><strong>Best</strong> Seller</h4>								
                             <ul class="small-product">
-                                <li>
-                                    <a href="#" title="Praesent tempor sem sodales">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" alt="Praesent tempor sem sodales" style="width: 150px; height: 150px">
-                                    </a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Praesent tempor sem sodales">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
                                     <a href="#">Veriya Lightweight Casual Travel School</a>
                                 </li>
-                                <li>
-                                    <a href="#" title="Luctus quam ultrices rutrum">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" alt="Luctus quam ultrices rutrum" style="width: 150px; height: 150px">
-                                    </a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Luctus quam ultrices rutrum">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
                                     <a href="#">Edifier H650 Hi-Fi On-Ear Headphones</a>
                                 </li>
-                                <li>
-                                    <a href="#" title="Fusce id molestie massa">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" alt="Fusce id molestie massa" style="width: 150px; height: 150px">
-                                    </a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Fusce id molestie massa">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
                                     <a href="#">Gorsun Lightweight Sport Workout Headphones</a>
                                 </li>   
                             </ul>
                         </div>
                     </div>
                 </div>
-            </section>			
+            </section>
+            <section>
+                <div class="row">
+                    <div class="span12">	
+                        <br>
+                        <h4 class="title">
+                            <span class="pull-left"><span class="text"><strong>Related</strong> Products</span></span>
+                            <span class="pull-right">
+                                <a class="left button" href="#myCarousel-1" data-slide="prev"></a><a class="right button" href="#myCarousel-1" data-slide="next"></a>
+                            </span>
+                        </h4>
+                        <div id="myCarousel-1" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="active item">
+                                    <ul class="thumbnails listing-products">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>												
+                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width: 200px; height: 200px"></a><br/>
+                                                <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
+                                                <p class="price">$341</p>
+                                            </div>
+                                        </li>
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>												
+                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/61eKsimQtVL._SL1000_.jpg" style="width: 200px; height: 200px"></a><br/>
+                                                <a href="product_detail.html" class="title" style="height: 60px;">Western Digital Caviar SE (WD3200AAJS)</a><br/>
+                                                <p class="price">$341</p>
+                                            </div>
+                                        </li>       
+                                        <li class="span3">
+                                            <div class="product-box">												
+                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width: 200px; height: 200px"></a><br/>
+                                                <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
+                                                <p class="price">$28</p>
+                                            </div>
+                                        </li>
+                                        <li class="span3">
+                                            <div class="product-box">												
+                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41JjEu7FCkL._AC_US218_.jpg" style="width: 200px; height: 200px"></a><br/>
+                                                <a href="product_detail.html" class="title" style="height: 60px;">WD Blue 1TB SATA Desktop Hard Drive</a><br/>
+                                                <p class="price">$28</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="item">
+                                    <ul class="thumbnails listing-products">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>												
+                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
+                                                <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
+                                                <a href="#" class="category">Phasellus consequat</a>
+                                                <p class="price">$341</p>
+                                            </div>
+                                        </li>
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>												
+                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
+                                                <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
+                                                <a href="#" class="category">Phasellus consequat</a>
+                                                <p class="price">$341</p>
+                                            </div>
+                                        </li>
+                                        <li class="span3">
+                                            <div class="product-box">												
+                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/2.jpg"></a><br/>
+                                                <a href="product_detail.html">Praesent tempor sem</a><br/>
+                                                <a href="#" class="category">Erat gravida</a>
+                                                <p class="price">$28</p>
+                                            </div>
+                                        </li>
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>												
+                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/3.jpg"></a><br/>
+                                                <a href="product_detail.html" class="title">Wuam ultrices rutrum</a><br/>
+                                                <a href="#" class="category">Suspendisse aliquet</a>
+                                                <p class="price">$341</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+            </section>                                                                
             <section id="footer-bar">
                 <div class="row">
                     <div class="span3">
