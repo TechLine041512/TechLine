@@ -114,7 +114,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Type Name</label>
-                                                    <input type="text" class="form-control" name="txtTypeName" value="${type.typeName}" pattern=".{1,50}" required title="Name contains 1 to 50 characters">
+                                                    <input type="text" class="form-control" name="txtTypeName" value="${type.typeName}" pattern="[A-Za-z0-9 /-]{1,50}" required title="Name contains 1 to 50 characters">
                                                 </div>
                                             </div>
                                         </div>

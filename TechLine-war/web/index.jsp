@@ -92,8 +92,8 @@
                                 <div class="error"></div>
                                 <div class="form loginBox">
                                     <form method="post" action="viewServlet">
-                                        <input id="username" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
-                                        <input id="password" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
+                                        <input id="username" class="input-xlarge" type="text" name="username" pattern="[A-Za-z0-9]{4,30}" required title="Username contains 4 to 30 characters, no special characters"><br/>
+                                        <input id="password" class="input-xlarge" type="password"  name="password" pattern=".{5,20}" required title="Password contains 5 to 20 characters"><br/>
                                         <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Login">
                                     </form>
                                 </div>
@@ -104,11 +104,11 @@
                                 <div class="form">
                                     <form method="post" action="addCustomerServlet">
                                         <b style="color: red;" id="note1"></b>
-                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="txtUsername" pattern=".{5,30}" required title="Username contains 5 to 30 characters"><br/>
+                                        <input id="email" class="input-xlarge" type="text" placeholder="Username" name="txtUsername" pattern="[A-Za-z0-9]{4,30}" required title="Username contains 4 to 30 characters, no special characters"><br/>
                                         <b style="color: red;" id="note2"></b>
                                         <input id="Regispassword" class="input-xlarge" type="password" placeholder="Password" name="txtPassword" pattern=".{5,20}" required title="Password contains 5 to 20 characters"><br/>
                                         <input id="Regispassword_confirmation" class="input-xlarge" type="password" placeholder="Repeat Password" name="password_confirmation" pattern=".{5,20}" required title="Repeat password contains 5 to 20 characters" onBlur="checkPass()"><br/>
-                                        <input id="Regispassword" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required="true"><br/>
+                                        <input id="Regispassword" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required title="Email must be in the correct format" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><br/>
                                         <input id="Regispassword" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" required="true"><br/>
                                         <input id="Regispassword" class="input-xlarge"  pattern='\d{9,15}' type="tel" placeholder="Phone" name="txtPhone" required title="Phone contains 9 to 15 digits"><br/>
                                         <input type="radio" name="role" value="customer" checked> Customer 
