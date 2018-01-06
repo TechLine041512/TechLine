@@ -233,43 +233,29 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="card">
+                                    <jsp:useBean id="now" class="java.util.Date" />
+                                    <fmt:formatDate var="year" value="${now}" pattern="dd MMM yyyy" />
                                     <div class="card-header" data-background-color="orange">
                                         <h4 class="title">Top Products</h4>
-                                        <p class="category">Top Products on 15th December, 2017</p>
+                                        <p class="category">Top Products on ${year}</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-warning">
                                             <th>ID</th>
                                             <th>Title</th>
-                                            <th>Brand</th>
-                                            <th>Price</th>
+                                            <th>Seller</th>
+                                            <th>Sold</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>PRO001</td>
-                                                    <td>IOGEAR 3.0/4 Port Peripheral Sharing Switch</td>
-                                                    <td>IOGEAR</td>
-                                                    <td>$45</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO002</td>
-                                                    <td>Transcend 1TB StoreJet 25H3 USB 3.0 HDD External</td>
-                                                    <td>KINGSTON</td>
-                                                    <td>$32</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO003</td>
-                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                    <td>Western Digital</td>
-                                                    <td>$50</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PRO004</td>
-                                                    <td>UGREEN USB Switch Selector</td>
-                                                    <td>SGILE</td>
-                                                    <td>$100</td>
-                                                </tr>
+                                                <c:forEach items="${listTop}" var="item">
+                                                    <tr>
+                                                        <td>${item.id}</td>
+                                                        <td>${item.name}</td>
+                                                        <td>${item.seller}</td>
+                                                        <td>${item.quantity}</td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -279,7 +265,7 @@
                             <div class="col-lg-6 col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Employees Stats</h4>
+                                        <h4 class="title">Seller</h4>
                                         <p class="category">New employees on 15th September, 2016</p>
                                     </div>
                                     <div class="card-content table-responsive">
@@ -291,30 +277,14 @@
                                             <th>Store Address</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>ringu</td>
-                                                    <td>Reajas Company</td>
-                                                    <td>121245939</td>
-                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>taidy</td>
-                                                    <td>ABC Technology</td>
-                                                    <td>121245939</td>
-                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ringu</td>
-                                                    <td>Reajas Company</td>
-                                                    <td>121245939</td>
-                                                    <td>171 Phạm Văn Đồng q.Gò Vấp</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>taidy</td>
-                                                    <td>ABC Technology</td>
-                                                    <td>121245939</td>
-                                                    <td>175 Phạm Văn Đồng q.Gò Vấp</td>
-                                                </tr>
+                                                <c:forEach items="${listSeller}" var="item">
+                                                    <tr>
+                                                        <td>${item.userId}</td>
+                                                        <td>${item.storeName}</td>
+                                                        <td>${item.users.phone}</td>
+                                                        <td>${item.storeAddress}</td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

@@ -39,4 +39,6 @@ public interface ProductsFacadeLocal {
     List<Products> getListProductBySeller(String seller);//get product is posted by seller
 
     long countSoldProduct();
+
+    List<Products> getTopProduct();
 }
