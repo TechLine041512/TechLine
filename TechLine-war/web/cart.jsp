@@ -86,7 +86,6 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Remove</th>
                                     <th>Image</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
@@ -95,31 +94,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" value="option1"></td>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Fusce id molestie massa</td>
-                                    <td><input type="text" placeholder="1" class="input-mini"></td>
-                                    <td>$2,350.00</td>
-                                    <td>$2,350.00</td>
-                                </tr>			  
-                                <tr>
-                                    <td><input type="checkbox" value="option1"></td>
-                                    <td><a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width:200px; height:200px;"></a></td>
-                                    <td>Luctus quam ultrices rutrum</td>
-                                    <td><input type="text" placeholder="2" class="input-mini"></td>
-                                    <td>$1,150.00</td>
-                                    <td>$2,450.00</td>
-                                </tr>
-
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td><strong>$3,600.00</strong></td>
-                                </tr>		  
+                                <c:forEach items="${cart}" var="item">
+                                    <tr>
+                                        <td><a href="product_detail.html"><img alt="" src="${item.image}" style="width:200px; height:200px;"></a></td>
+                                        <td>${item.name}</td>
+                                        <td><input type="text" placeholder="1" class="input-mini" value="${item.quantity}"></td>
+                                        <td>$${item.price}</td>
+                                        <td>$${item.total}</td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>			
                         <hr>
