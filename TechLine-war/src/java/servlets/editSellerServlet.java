@@ -12,8 +12,7 @@ import entities.SellerFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -73,7 +72,7 @@ public class editSellerServlet extends HttpServlet {
                     Seller sBlock = sellerFacadeLocal.find(sSeller);
                     Users uS = usersFacadeLocal.find(sBlock.getUsers().getUserId());
                     //Block seller's products
-                    Collection<Products> listPB = uS.getProductsCollection();
+                    List<Products> listPB = (List<Products>) uS.getProductsCollection();
                     for (Products proB : listPB) {
                         proB.setProductStatus(Boolean.FALSE);
                         productsFacade.edit(proB);

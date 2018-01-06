@@ -17,6 +17,7 @@ import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsCommentFacadeLocal;
 import entities.ProductsFacadeLocal;
+import entities.Seller;
 import entities.SellerFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
@@ -32,6 +33,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ProductListAdminModel;
+import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
 
@@ -140,8 +143,9 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "showProductAdmin":
-                    request.setAttribute("listProduct", productsFacade.getListProductByDatePost());
-                    request.setAttribute("listProductSeller", productsFacade.getListProductSeller());
+                    List<Products> listDateposted = productsFacade.getListProductByDatePost();
+                    List<ProductListAdminModel> listProductForAdmin = TechLineUtils.buildProductAdmin(listDateposted);
+                    request.setAttribute("listProduct", listProductForAdmin);
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
@@ -165,10 +169,15 @@ public class viewServlet extends HttpServlet {
                     long activeCustomers = usersFacade.countActiveCustomer();
                     long doneOrders = orderMasterFacade.countDoneOrder();
                     long productsSold = productsFacade.countSoldProduct();
+                    List<Products> listProducts = productsFacade.getTopProduct();
+                    List<TopProductModel> listTop = TechLineUtils.buildProductTop(listProducts);
+                    List<Seller> listSeller = sellerFacadeLocal.findAll();
                     request.setAttribute("activeSellers", activeSellers);
                     request.setAttribute("activeCustomers", activeCustomers);
                     request.setAttribute("doneOrders", doneOrders);
                     request.setAttribute("productsSold", productsSold);
+                    request.setAttribute("listTop", listTop.subList(0, 5));
+                    request.setAttribute("listSeller", listSeller.subList(0, 4));
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     break;
 
@@ -194,6 +203,7 @@ public class viewServlet extends HttpServlet {
                     break;
                 case "homeCustomer":
                     String userID = user.getUserId();
+                    request.setAttribute("listCategories", categoriesFacade.findAll());
                     if (userID != null) {
                         Users u = usersFacade.find(userID);
                         request.setAttribute("user",u);
@@ -217,9 +227,9 @@ public class viewServlet extends HttpServlet {
                     }
                     
                     
-                    ArrayList<Integer> listDate = new ArrayList<>();
-                    ArrayList<Integer> listMonth = new ArrayList<>();
-                    ArrayList<Integer> listYear = new ArrayList<>();
+                    List<Integer> listDate = new ArrayList<>();
+                    List<Integer> listMonth = new ArrayList<>();
+                    List<Integer> listYear = new ArrayList<>();
                     for (int i = 1; i < 32; i++) {
                         listDate.add(i);
                         if (i < 13) {

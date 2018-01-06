@@ -89,6 +89,16 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         long count = (long) q.getSingleResult();
         return count;
     }
+
+    @Override
+    public List<Products> getTopProduct() {
+        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p WHERE p.orderDetailsCollection IS NOT EMPTY");
+        List<Products> list = q.getResultList();
+        if (list != null){
+            return list;
+        }
+        return null;
+    }
     
     
 }

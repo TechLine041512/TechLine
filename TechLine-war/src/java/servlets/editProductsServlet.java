@@ -17,8 +17,8 @@ import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsEditHistoryPK;
 import entities.ProductsFacadeLocal;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -215,7 +215,7 @@ public class editProductsServlet extends HttpServlet {
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
                 typeBlock.setTypeStatus(Boolean.FALSE);
                 productTypesFacade.edit(typeBlock);
-                Collection<Products> listProType = typeBlock.getProductsCollection();
+                List<Products> listProType = (List<Products>) typeBlock.getProductsCollection();
                 for (Products pro : listProType) {
                     pro.setProductStatus(Boolean.FALSE);
                     productsFacade.edit(pro);
@@ -241,9 +241,9 @@ public class editProductsServlet extends HttpServlet {
             case "blockCategory":
                 String catIdBlock = request.getParameter("catId");
                 Categories catBlock = categoriesFacade.find(catIdBlock);
-                Collection<ProductTypes> listTypeCat = catBlock.getProductTypesCollection();
+                List<ProductTypes> listTypeCat = (List<ProductTypes>) catBlock.getProductTypesCollection();
                 for (ProductTypes pt : listTypeCat) {
-                    Collection<Products> listProTypeCat = pt.getProductsCollection();
+                    List<Products> listProTypeCat = (List<Products>) pt.getProductsCollection();
                     for (Products pro : listProTypeCat) {
                         pro.setProductStatus(Boolean.FALSE);
                         productsFacade.edit(pro);
