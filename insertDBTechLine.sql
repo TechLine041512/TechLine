@@ -1092,13 +1092,13 @@ insert into Products(productId,typeId,userId,brandId,productName,productDesc,pro
 Multi-Compartment: 14"x 5.7" x 19.5" (L*W*H). Generous main compartments with padded sleeve for 15.6-inch laptops and several functional pockets allow you to keep all of your gear secure and organized in its place.
 External USB Interface: You can easily and conveniently charge your phone, tablet and other devices without opening up the backpack.Power bank not included,we suggest you to choose Ankers Power Bank:http://a.co/iP6SBVu.
 Anti-Theft: The hidden zipper and invisible pockets located on the back keep your laptop and other valuables safe and handy.
-Comfort: The innovative weight balance design makes you feel 20%-25% less weight. The body side and shoulder straps have excellent thick breathable mesh padding, offering your back plenty of cushioned comfort.','Laptop Backpack, Sosoon Business Bags with USB Charging Port Anti-Theft Water Resistant Polyester School Bookbag for College Travel Backpack for 15.6-Inch Laptop and Notebook, Black',29,'item',3.5,3.5,2.3,2.3,33,',https://images-na.ssl-images-amazon.com/images/I/712OSZcgHiL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71BZhbjizgL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81tpFirN8YL._SL1500_.jpg',5,4,1,1);
+Comfort: The innovative weight balance design makes you feel 20%-25% less weight. The body side and shoulder straps have excellent thick breathable mesh padding, offering your back plenty of cushioned comfort.','Laptop Backpack, Sosoon Business Bags with USB Charging Port Anti-Theft Water Resistant Polyester School Bookbag for College Travel Backpack for 15.6-Inch Laptop and Notebook, Black',29,'item',3.5,3.5,2.3,2.3,33,'https://images-na.ssl-images-amazon.com/images/I/712OSZcgHiL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71BZhbjizgL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81tpFirN8YL._SL1500_.jpg',5,4,1,1);
 insert into Products(productId,typeId,userId,brandId,productName,productDesc,productSummary,productPrice,productUnit,productWeight,productWidth,productHeigth,productLength,productQuantity,productImage,productDiscount,productRating,isApproved,productStatus)VALUES ('PRO044','PTY004', 'tienminh','BRN006','Veking 13 - 13.3 Inch Laptop Bag Fashion Tablet Bag ','The Laptop Bag designed for Apple MacBook 13 Inch,alse fits most laptops with up to 12-13.3 Inch
 2 Large,Zippered Exterior Pockets: let you securely transport digital devices,pens,keys,earphone and other small things
 Durable Neoprene Material and Soft Foam cushioned interior help protect your macbook from bumps and scrapes
 Slimline Design: enables you to slide your sleeve into backpacks,briefcases and other bags with ease
 Soft Handbag：helps ensure comfortable carrying','Veking 13 - 13.3 Inch Laptop Bag Fashion Tablet Bag Carrying Sleeve Case for Macbook Air Pro (Retina) 12 13 Inch and Slim 12 13 Inch Laptop
-',21,'item',3.5,3.5,2.3,2.3,34,',https://images-na.ssl-images-amazon.com/images/I/61VoOa5FCNL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/71B-GQxDJNL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/714tSKBHkRL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/61YRRUywtxL._SL1000_.jpg',5,4,1,1);
+',21,'item',3.5,3.5,2.3,2.3,34,'https://images-na.ssl-images-amazon.com/images/I/61VoOa5FCNL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/71B-GQxDJNL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/714tSKBHkRL._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/61YRRUywtxL._SL1000_.jpg',5,4,1,1);
 insert into Products(productId,typeId,userId,brandId,productName,productDesc,productSummary,productPrice,productUnit,productWeight,productWidth,productHeigth,productLength,productQuantity,productImage,productDiscount,productRating,isApproved,productStatus)VALUES ('PRO045','PTY004', 'tienminh','BRN006','Laptop USB Backpack, TanTaiNick Anti Thief Tear, Waterproof','USB Cord Charge: There is a USB cord can connect your power bank inside and your phone or pad outside, just need to plug in the usb cable from the cord outside,then charging.
 High-Quality Material,The backpack has high-quality Oxford fabric that can anti-rain,anti-dust,and so on
 High-Capacity: 40L Capacity,you can put your computer, pencil cases, cell phones, documents and so on;and the computer compartment part can protect your computer well
@@ -1723,16 +1723,16 @@ insert into OrderMaster VALUES('ORD019','linhnhi',432,25,'','Done','11/21/2017  
 insert into OrderMaster VALUES('ORD008','tuanka',149,25,'Deliever at weekend','Done','11/11/2017  21:44:50');
 insert into OrderMaster VALUES('ORD031','tuanka',119,25,'Deliever at weekend','Done','12/22/2017  21:44:12');
 insert into OrderMaster VALUES('ORD033','tuanka',187,25,'','Done','12/25/2017  21:44:12');
-insert into OrderMaster VALUES('ORD009','HungDung',187,25,'Deliever at weekend','Done','11/13/2017  21:44:10');
+insert into OrderMaster VALUES('ORD009','HungDung',187,25,'Deliever at weekend','Delivery','11/13/2017  21:44:10');
 insert into OrderMaster VALUES('ORD020','HungDung',153,25,'','Done','11/22/2017  21:44:10');
-insert into OrderMaster VALUES('ORD010','Thanh',432,25,'Deliever at weekend','Done','11/14/2017  21:44:10');
+insert into OrderMaster VALUES('ORD010','Thanh',432,25,'Deliever at weekend','Cancel','11/14/2017  21:44:10');
 insert into OrderMaster VALUES('ORD023','Thanh',149,25,'Deliever at weekend','Done','12/07/2017  21:44:12');
 insert into OrderMaster VALUES('ORD012','Giangnhi',119,25,'Deliever at weekend','Done','11/14/2017  21:44:50');
 insert into OrderMaster VALUES('ORD013','dave',120,25,'Deliever immediately','Done','11/15/2017  21:44:10');
 insert into OrderMaster VALUES('ORD025','dave',432,25,'','Done','12/13/2017  21:44:12');
 insert into OrderMaster VALUES('ORD029','dave',119,25,'Deliever at weekend','Done','12/20/2017  21:44:12');
 insert into OrderMaster VALUES('ORD032','dave',432,25,'','Done','12/24/2017  21:44:12');
-insert into OrderMaster VALUES('ORD014','josh',360,30,'Deliever at weekend','Done','11/16/2017  21:44:10');
+insert into OrderMaster VALUES('ORD014','josh',360,30,'Deliever at weekend','Processing','11/16/2017  21:44:10');
 insert into OrderMaster VALUES('ORD024','josh',360,25,'Deliever at weekend','Done','12/10/2017  21:44:12');
 
 -- OrderDetails
