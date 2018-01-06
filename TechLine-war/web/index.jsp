@@ -47,7 +47,7 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                            <li><a class="btn" href="addOrderServlet?action=viewShoppingCart">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>
@@ -201,7 +201,7 @@
                                                             <p class="price">&#36;${item.productPrice}</p>
                                                             <div>
                                                                 <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
-                                                                <button class="btn btn-inverse" type="submit">Add to cart</button>
+                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item.productId}">Add to cart</a>
                                                             </div>
                                                         </div>
                                                     </li>
