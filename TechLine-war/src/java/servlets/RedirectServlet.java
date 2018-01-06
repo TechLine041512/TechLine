@@ -42,7 +42,7 @@ public class RedirectServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     Users u = (Users) session.getAttribute("user");
                     session.setAttribute("user", u);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("HomeServlet").forward(request, response);
                 case "addProduct":
                     request.setAttribute("listBrand", brandsFacade.findAll());
                     request.setAttribute("listType", productTypesFacade.findAll());

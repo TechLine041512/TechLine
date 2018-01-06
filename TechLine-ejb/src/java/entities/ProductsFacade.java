@@ -82,4 +82,13 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         q.setParameter("userId", seller);
         return q.getResultList();
     }
+
+    @Override
+    public long countSoldProduct() {
+        javax.persistence.Query q = em.createQuery("SELECT COUNT(p) FROM Products p WHERE p.orderDetailsCollection IS NOT EMPTY");
+        long count = (long) q.getSingleResult();
+        return count;
+    }
+    
+    
 }

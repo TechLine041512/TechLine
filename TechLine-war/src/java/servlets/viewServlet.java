@@ -164,7 +164,7 @@ public class viewServlet extends HttpServlet {
                     long activeSellers = usersFacade.countActiveSeller();
                     long activeCustomers = usersFacade.countActiveCustomer();
                     long doneOrders = orderMasterFacade.countDoneOrder();
-                    long productsSold = orderDetailsFacade.sumProductsSold();
+                    long productsSold = productsFacade.countSoldProduct();
                     request.setAttribute("activeSellers", activeSellers);
                     request.setAttribute("activeCustomers", activeCustomers);
                     request.setAttribute("doneOrders", doneOrders);

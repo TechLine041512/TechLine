@@ -37,4 +37,6 @@ public interface ProductsFacadeLocal {
     String newProductID();
     
     List<Products> getListProductBySeller(String seller);//get product is posted by seller
+
+    long countSoldProduct();
 }
