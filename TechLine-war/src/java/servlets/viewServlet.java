@@ -37,6 +37,7 @@ import models.ProductListAdminModel;
 import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
+import utils.SellerOrder;
 
 /**
  *
@@ -251,8 +252,9 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("seller/product.jsp").forward(request, response);
                     break;
                 case "sellerOrder":
-                    request.setAttribute("listOrder", orderMasterFacade.findAll());
-                    request.setAttribute("product", productsFacade.getListProductBySeller(user.getUserId()));
+                    TechLineUtils util = new TechLineUtils();
+                    List<SellerOrder> order = util.getSellerOrdered(user.getUserId());
+                    request.setAttribute("order", order);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
                 case "sellerProductDetail":
