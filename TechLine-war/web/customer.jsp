@@ -233,13 +233,13 @@
                                             </tr>
                                             <tr>
                                                 <td id="cus-info-1">Email</td>
-                                                <td id="cus-info-2" colspan="3"><input type="email" id="cusEmailEdit" name="txtEmail" style="width:100%;" value="${user.email}" placeholder="Enter your email" required maxlength="50"></td>
+                                                <td id="cus-info-2" colspan="3"><input type="email" id="cusEmailEdit" name="txtEmail" style="width:100%;" value="${user.email}" placeholder="Enter your email" required title="Email must be in the correct format" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="50"></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
 
                                             <tr>
                                                 <td id="cus-info-1">Address:</td>
-                                                <td id="cus-info-2" colspan="3"><input type="text" id="address${i}" name="txtAddress" style="width:100%;" value="${customer.address}" placeholder="Enter your address" maxlength="1000" required=""></td>
+                                                <td id="cus-info-2" colspan="3"><input type="text" id="address" name="txtAddress" style="width:100%;" value="${customer.address}" placeholder="Enter your address" required maxlength="1000"></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
                                             <tr>

@@ -163,7 +163,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Name</label>
-                                                        <input type="text" class="form-control" name="txtCategoryName" value="${category.categoryName}" pattern=".{1,100}" required title="Category name contains 1 to 100 characters">
+                                                        <input type="text" class="form-control" name="txtCategoryName" value="${category.categoryName}" pattern="[A-Za-z0-9]{1,100}" required title="Category name contains 1 to 100 characters, no special characters">
                                                     </div>
                                                 </div>
                                             </div>

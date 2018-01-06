@@ -51,15 +51,19 @@ public class editCustomerServlet extends HttpServlet {
             Users user = (Users) request.getSession().getAttribute("user");
             switch (action) {
                 case "editProfileCustomer":
-                    Customers customer = user.getCustomers();
                     user.setFullname(request.getParameter("txtName"));
                     user.setEmail(request.getParameter("txtEmail"));
                     user.setPhone(request.getParameter("txtPhone"));
                     usersFacade.edit(user);
+                    //start with customer
+                    Customers customer = customersFacade.find(user.getUserId());
                     String birthday = request.getParameter("ddlDay") + "/" + request.getParameter("ddlMonth") + "/" + request.getParameter("ddlYear");
                     String edAddress = request.getParameter("txtAddress");
-                    if (edAddress != null)
+                    if(edAddress == null) {
+                        customer.setAddress("");
+                    } else {
                         customer.setAddress(edAddress);
+                    }
                     customer.setGender(request.getParameter("gender"));
                     customer.setDob(birthday);
                     customersFacade.edit(customer);//completed edit customer

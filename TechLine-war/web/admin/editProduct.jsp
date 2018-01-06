@@ -169,7 +169,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern=".{1,500}" required title="Name contains 1 to 500 characters">
+                                                        <input type="text" class="form-control" name="txtProductName" value="${product.productName}" pattern="[A-Za-z0-9]{1,500}" required title="Name contains 1 to 500 characters, no special characters">
                                                     </div>
                                                 </div>
                                             </div>
