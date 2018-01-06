@@ -37,7 +37,7 @@ import models.ProductListAdminModel;
 import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
-import utils.SellerOrder;
+import models.SellerOrder;
 
 /**
  *

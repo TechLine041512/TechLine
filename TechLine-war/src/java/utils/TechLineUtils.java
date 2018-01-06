@@ -5,6 +5,7 @@
  */
 package utils;
 
+import models.SellerOrder;
 import entities.OrderDetails;
 import entities.Products;
 import java.io.File;
