@@ -60,4 +60,26 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
         }
         return q.getResultList();
     }
+
+    @Override
+    public long countActiveSeller() {
+        Query q = em.createQuery("SELECT COUNT(u.userId) FROM Users u WHERE u.role = :role and u.userStatus = :userStatus");
+        try {
+            q.setParameter("role", "seller");
+            q.setParameter("userStatus", true);
+        } catch (Exception e) {
+        }
+        return (long) q.getSingleResult();
+    }
+
+    @Override
+    public long countActiveCustomer() {
+        Query q = em.createQuery("SELECT COUNT(u.userId) FROM Users u WHERE u.role = :role and u.userStatus = :userStatus");
+        try {
+            q.setParameter("role", "customer");
+            q.setParameter("userStatus", true);
+        } catch (Exception e) {
+        }
+        return (long) q.getSingleResult();
+    }
 }

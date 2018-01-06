@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements OrderMasterFacadeLocal {
@@ -36,6 +37,16 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
             return newId;
         }
         return null;
+    }
+
+    @Override
+    public long countDoneOrder() {
+        Query q = em.createQuery("SELECT COUNT(o) FROM OrderMaster o WHERE o.orderStatus = :orderStatus");
+        try {
+            q.setParameter("orderStatus", "Done");
+        } catch (Exception e) {
+        }
+        return (long) q.getSingleResult();
     }
     
 }

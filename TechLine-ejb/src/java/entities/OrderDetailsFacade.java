@@ -9,6 +9,7 @@ package entities;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class OrderDetailsFacade extends AbstractFacade<OrderDetails> implements OrderDetailsFacadeLocal {
@@ -22,6 +23,16 @@ public class OrderDetailsFacade extends AbstractFacade<OrderDetails> implements 
 
     public OrderDetailsFacade() {
         super(OrderDetails.class);
+    }
+
+    @Override
+    public long sumProductsSold() {
+        Query q = em.createQuery("SELECT SUM(o.quantity) FROM OrderDetails o WHERE o.orderMaster.orderStatus = :orderStatus");
+        try {
+            q.setParameter("orderStatus", "Done");
+        } catch (Exception e) {
+        }
+        return (long) q.getSingleResult();
     }
     
 }

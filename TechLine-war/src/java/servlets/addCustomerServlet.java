@@ -73,12 +73,8 @@ public class addCustomerServlet extends HttpServlet {
                     request.setAttribute("user", userRegist);
                     request.setAttribute("registMess", "Registration successful!");
                     if (roleRegist.equals("customer")) {
-                        Customers c = new Customers(idRegist);
-                        customersFacade.create(c);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (roleRegist.equals("seller")) {
-                        Seller s = new Seller(idRegist);
-                        sellerFacade.create(s);
                         request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     }
                     break;

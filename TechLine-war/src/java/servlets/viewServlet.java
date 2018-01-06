@@ -10,6 +10,7 @@ import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.Customers;
 import entities.CustomersFacadeLocal;
+import entities.OrderDetailsFacadeLocal;
 import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
@@ -39,6 +40,8 @@ import utils.PageProduct;
  * @author nth15
  */
 public class viewServlet extends HttpServlet {
+    @EJB
+    private OrderDetailsFacadeLocal orderDetailsFacade;
 
     @EJB
     private CustomersFacadeLocal customersFacade;
@@ -158,6 +161,14 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeAdmin":
+                    long activeSellers = usersFacade.countActiveSeller();
+                    long activeCustomers = usersFacade.countActiveCustomer();
+                    long doneOrders = orderMasterFacade.countDoneOrder();
+                    long productsSold = productsFacade.countSoldProduct();
+                    request.setAttribute("activeSellers", activeSellers);
+                    request.setAttribute("activeCustomers", activeCustomers);
+                    request.setAttribute("doneOrders", doneOrders);
+                    request.setAttribute("productsSold", productsSold);
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     break;
 

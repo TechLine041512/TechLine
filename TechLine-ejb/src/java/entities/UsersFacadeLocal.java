@@ -31,4 +31,8 @@ public interface UsersFacadeLocal {
     List<Users> getListSeller();
     
     List<Users> getListCustomer();
+
+    long countActiveSeller();
+
+    long countActiveCustomer();
 }

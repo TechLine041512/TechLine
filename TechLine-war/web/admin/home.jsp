@@ -3,7 +3,7 @@
     Created on : Dec 17, 2017, 3:01:25 AM
     Author     : Tien
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="card-content">
                                         <p class="category">Sold Products</p>
-                                        <h3 class="title">49</h3>
+                                        <h3 class="title">${productsSold}</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="card-content">
                                         <p class="category">Sellers</p>
-                                        <h3 class="title">$34,245</h3>
+                                        <h3 class="title">${activeSellers}</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="card-content">
                                         <p class="category">Customers</p>
-                                        <h3 class="title">75</h3>
+                                        <h3 class="title">${activeCustomers}</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
@@ -199,8 +199,8 @@
                                         <i class="fa fa-twitter"></i>
                                     </div>
                                     <div class="card-content">
-                                        <p class="category">orders</p>
-                                        <h3 class="title">245</h3>
+                                        <p class="category">Orders</p>
+                                        <h3 class="title">${doneOrders}</h3>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">
