@@ -103,13 +103,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" class="form-control" value="${user.fullname}" name="txtName" pattern="[A-Za-z0-9]{2,30}">
+                                                        <input type="text" class="form-control" value="${user.fullname}" name="txtName" pattern=".{5,30}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Phone</label>
-                                                        <input type="text" class="form-control" value="${user.phone}" name="txtPhone" pattern="[0-9]{10,11}">
+                                                        <input type="text" class="form-control" value="${user.phone}" name="txtPhone" pattern='\d{9,15}'>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,13 +117,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Name</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName" pattern="[A-Za-z0-9]{2,50}">
+                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName" name="txtName" pattern=".{5,50}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Identity Card</label>
-                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard" pattern="[0-9]{9,20}">
+                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard" pattern='\d{9,20}'>
                                                     </div>
                                                 </div>    
                                             </div>
@@ -138,7 +138,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Place</label>
-                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace" pattern="[A-Za-z0-9 ,]{2,50}">
+                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace" pattern=".{5,50}">
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -147,7 +147,7 @@
                                                 <div class="col-md-8">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern="[A-Za-z0-9 ,]{2,50}">
+                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{5,100}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
