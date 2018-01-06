@@ -168,7 +168,7 @@
                                             <tbody>
                                                 <c:forEach items="${listOrder}" var="order">
                                                     <c:if test="${order.orderStatus eq 'Done'}">
-                                                        <tr style="background-color: #33ff33; color: #ffffff;"> 
+                                                        <tr style="background-color: #4edc14; color: #ffffff;"> 
                                                             <td>${order.orderMId}</td>
                                                             <td>${order.userId.fullname}</td>
                                                             <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
@@ -178,7 +178,7 @@
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Processing'}">
-                                                        <tr style="background-color: yellow; color: #ffffff;"> 
+                                                        <tr style="background-color: #ffb100; color: #ffffff;"> 
                                                             <td>${order.orderMId}</td>
                                                             <td>${order.userId.fullname}</td>
                                                             <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>

@@ -168,7 +168,7 @@
                                             <th>Brand</th>
                                             <th>Image</th>
                                             <th>Quantity</th>
-                                            <th></th>
+                                            <th>Action</th>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listProduct}" var="product">
@@ -178,50 +178,17 @@
                                                         <td>${product.brandId.brandName}</td>
                                                         <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.productQuantity}</td>
-                                                        <td><a class="btn-instagram btn" href="#">Edit History</a></td>
-                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.productId}">Block</a></td>
+                                                        <td>
+                                                            <a class="btn-instagram btn" href="#">Edit History</a>
+                                                            <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.productId}" style="width:136.45px;">Block</a>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="card card-plain">
-                                    <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product List</h4>
-                                        <p class="category">Product's seller</p>
-                                    </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Seller</th>
-                                            <th>Product Name</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listProductSeller}" var="productSeller">
-                                                    <tr>                                           
-                                                       <td>${productSeller.productId}</td>
-                                                       <td>${productSeller.userId.fullname}</td>
-                                                       <td>${productSeller.productName}</td>
-                                                       <td>${productSeller.brandId.brandName}</td>
-                                                       <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                       <td>${productSeller.productQuantity}</td>
-                                                       <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>                                   
-                                </div>
-                            </div>
+                            </div>                          
                         </div>
                     </div>
                 </div>

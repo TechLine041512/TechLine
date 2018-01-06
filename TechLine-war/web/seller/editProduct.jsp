@@ -37,42 +37,42 @@
 <body>
 
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
-            <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+        <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
+                <!--
+                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-            Tip 2: you can also add an image using data-image tag
-            -->
+                Tip 2: you can also add an image using data-image tag
+                -->
 
-            <div class="logo">
-                <a href="home.jsp" class="simple-text">
-                    <img src="resource/assets/img/tim_80x80.png"/>
-                </a>
+                <div class="logo">
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
+                    </a>
+                </div>
+
+                <div class="sidebar-wrapper">
+                    <ul class="nav">
+                        <li>
+                            <a href="viewServlet?action=homeSeller">
+                                <i class="material-icons">dashboard</i>
+                                <p>Profile</p>
+                            </a>
+                        </li>   
+                        <li class="active">
+                            <a href="viewServlet?action=sellerProduct">
+                                <i class="material-icons">content_paste</i>
+                                <p>List Product of Seller </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=sellerOrder">
+                                <i class="material-icons">location_on</i>
+                                <p>List Order </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-                    <li >
-                        <a href="viewServlet?action=homeSeller">
-                            <i class="material-icons">dashboard</i>
-                            <p>Profile</p>
-                        </a>
-                    </li>   
-                    <li class="active">
-                        <a href="viewServlet?action=sellerProduct">
-                            <i class="material-icons">content_paste</i>
-                            <p>Product List</p>
-                        </a>
-                    </li>
-                    <li >
-                        <a href="viewServlet?action=sellerOrder">
-                            <i class="material-icons">location_on</i>
-                            <p>Order List</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <div class="main-panel">
             <nav class="navbar navbar-transparent navbar-absolute">

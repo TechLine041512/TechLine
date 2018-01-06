@@ -47,7 +47,6 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="customer.jsp">Customer</a></li>
                             <li><a class="btn" href="cart.jsp">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
@@ -60,15 +59,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='seller'}">
-                                <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='seller'}">
+                                    <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='customer'}">
-                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='customer'}">
+                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -140,6 +139,9 @@
                 <div class="navbar-inner main-menu">				
                     <nav id="menu" class="pull-right">
                         <ul>
+                            <li>
+                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                            </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
                                     <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
@@ -215,7 +217,7 @@
                                                             <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
                                                             <p class="price">&#36;${item2.productPrice}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item2.productId}">Detail</a>
                                                                 <button class="btn btn-inverse" type="submit">Add to cart</button>
                                                             </div>
                                                         </div>
@@ -249,7 +251,7 @@
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount.productPrice}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
                                                                 <button class="btn btn-inverse" type="submit">Add to cart</button>
                                                             </div>
                                                         </div>
@@ -266,7 +268,7 @@
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount2.productPrice}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
                                                                 <button class="btn btn-inverse" type="submit">Add to cart</button>
                                                             </div>
                                                         </div>
@@ -298,7 +300,7 @@
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount.productPrice}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
                                                                 <button class="btn btn-inverse" type="submit">Add to cart</button>
                                                             </div>
                                                         </div>
@@ -315,7 +317,7 @@
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
                                                             <p class="price">&#36;${itemDiscount2.productPrice}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
                                                                 <button class="btn btn-inverse" type="submit">Add to cart</button>
                                                             </div>
                                                         </div>
@@ -363,22 +365,22 @@
                 <h4 class="title"><span class="text">Manufactures</span></h4>
                 <div class="row">					
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/14.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/14.png" style="width: 120px; height: 45px;"></a>
                     </div>
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/35.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/35.png" style="width: 120px; height: 45px;"></a>
                     </div>
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/1.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/1.png" style="width: 120px; height: 45px;"></a>
                     </div>
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/2.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/2.png" style="width: 120px; height: 45px;"></a>
                     </div>
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/3.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/3.png" style="width: 120px; height: 45px;"></a>
                     </div>
                     <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/4.png"></a>
+                        <a href="#"><img alt="" src="resource/themes/images/clients/4.png" style="width: 120px; height: 45px;"></a>
                     </div>
                 </div>
             </section>

@@ -7,13 +7,25 @@ package utils;
 
 import entities.OrderDetails;
 import entities.Products;
+import java.io.File;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import models.ProductIndexModel;
 import models.ProductListAdminModel;
 import models.TopProductModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  *
@@ -130,5 +142,45 @@ public class TechLineUtils {
         }
         top.setPrice(item.getProductPrice());
         return top;
+    }
+    
+    public void generatePdfReport(String inputTemplatePath, String inputTemplateName, String outputPdfPath, String outputPdfName) {
+        ReportConnection myConnection = new ReportConnection();
+        Connection connection = null;
+        try {
+            //String reportPath = "E:\\Projects\\TechLine-war\\web\\adminReportUser2.jrxml";
+            String reportTemplatePath = inputTemplatePath + inputTemplateName + ".jrxml";
+            JasperReport jasperReport = JasperCompileManager.compileReport(reportTemplatePath);
+
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            //Data Source
+            connection = myConnection.connect();
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+            //outPut
+            String outputPath = outputPdfPath;
+            File outDir = new File(outputPath);
+            outDir.mkdirs();
+
+            //export to PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, outputPath + outputPdfName + ".pdf");
+
+            System.out.println("Done!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getPathByProject(HttpServletRequest request, HttpServletResponse response) {
+        String reportSrcFile = request.getSession().getServletContext().getRealPath("/");
+        String[] listPath = reportSrcFile.split("\\\\");
+
+        List<String> lsData = Arrays.asList(listPath);
+        StringBuilder returnString = new StringBuilder();
+        for (int i = 0; i < lsData.size() - 4; i++) {
+            returnString.append(lsData.get(i)).append("\\");
+        }
+        return returnString.toString();
     }
 }

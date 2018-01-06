@@ -59,15 +59,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='seller'}">
-                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='seller'}">
+                                    <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='customer'}">
-                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='customer'}">
+                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -168,6 +168,9 @@
                 <div class="navbar-inner main-menu">				
                     <nav id="menu" class="pull-right">
                         <ul>
+                            <li>
+                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                            </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
                                     <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
