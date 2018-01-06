@@ -40,6 +40,7 @@ import utils.PageProduct;
  * @author nth15
  */
 public class viewServlet extends HttpServlet {
+
     @EJB
     private OrderDetailsFacadeLocal orderDetailsFacade;
 
@@ -194,32 +195,16 @@ public class viewServlet extends HttpServlet {
                     break;
                 case "homeCustomer":
                     String userID = user.getUserId();
-                    if (userID != null) {
-                        Users u = usersFacade.find(userID);
-                        request.setAttribute("user",u);
-                        Customers c = customersFacade.find(userID);
-                        if ( c != null ) {
-                            String birthday[] = c.getDob().split("/");
-                            request.setAttribute("date", Integer.parseInt(birthday[0]));
-                            request.setAttribute("month", Integer.parseInt(birthday[1]));
-                            request.setAttribute("year", Integer.parseInt(birthday[2]));
-                        }
-                        else {
-                            c = new Customers();
-                            c.setPoint(0);
-                            c.setAddress("");
-                            request.setAttribute("date", 0);
-                            request.setAttribute("month", 0);
-                            request.setAttribute("year", 0);
-                            c.setGender("male");
-                        }
-                        request.setAttribute("customer", c);
-                    }
-                    
-                    
-                    ArrayList<Integer> listDate = new ArrayList<>();
-                    ArrayList<Integer> listMonth = new ArrayList<>();
-                    ArrayList<Integer> listYear = new ArrayList<>();
+                    Users u = usersFacade.find(userID);
+                    request.setAttribute("user", u);
+                    Customers c = customersFacade.find(userID);
+                    String birthday[] = c.getDob().split("/");
+                    request.setAttribute("date", Integer.parseInt(birthday[0]));
+                    request.setAttribute("month", Integer.parseInt(birthday[1]));
+                    request.setAttribute("year", Integer.parseInt(birthday[2]));
+                    List<Integer> listDate = new ArrayList<>();
+                    List< Integer> listMonth = new ArrayList<>();
+                    List< Integer> listYear = new ArrayList<>();
                     for (int i = 1; i < 32; i++) {
                         listDate.add(i);
                         if (i < 13) {
@@ -232,6 +217,7 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listDate", listDate);
                     request.setAttribute("listMonth", listMonth);
                     request.setAttribute("listYear", listYear);
+                    request.setAttribute("customer", c);
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "sellerProduct":

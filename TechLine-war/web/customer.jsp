@@ -225,18 +225,18 @@
                                                 </tr>
                                                 <tr>
                                                     <td id="cus-info-1">Phone</td>
-                                                    <td id="cus-info-2" colspan="3"><input  type="tel" id="cusPhoneEdit" name="txtPhone" style="width:100%;" pattern='\d{9,15}' value="${user.phone}" title="Phone contains 9-15 digits"/></td>
+                                                    <td id="cus-info-2" colspan="3"><input  type="tel" id="cusPhoneEdit" name="txtPhone" style="width:100%;" pattern='\d{9,15}' value="${user.phone}" required title="Phone contains 9-15 digits"/></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
                                             <tr>
                                                 <td id="cus-info-1">Email</td>
-                                                <td id="cus-info-2" colspan="3"><input type="email" id="cusEmailEdit" name="txtEmail" style="width:100%;" value="${user.email}" placeholder="Enter your email" maxlength="50"></td>
+                                                <td id="cus-info-2" colspan="3"><input type="email" id="cusEmailEdit" name="txtEmail" style="width:100%;" value="${user.email}" placeholder="Enter your email" required maxlength="50"></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
 
                                             <tr>
                                                 <td id="cus-info-1">Address:</td>
-                                                <td id="cus-info-2" colspan="3"><input type="text" id="address${i}" name="txtAddress" style="width:100%;" value="${customer.address}" placeholder="Enter your address" maxlength="1000"></td>
+                                                <td id="cus-info-2" colspan="3"><input type="text" id="address${i}" name="txtAddress" style="width:100%;" value="${customer.address}" placeholder="Enter your address" maxlength="1000" required=""></td>
                                                 <td id="cus-info-3"></td>
                                             </tr>
                                             <tr>

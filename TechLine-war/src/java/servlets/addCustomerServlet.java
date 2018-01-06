@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
 import entities.Customers;
@@ -14,7 +13,6 @@ import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author nth15
  */
 public class addCustomerServlet extends HttpServlet {
+
     @EJB
     private SellerFacadeLocal sellerFacade;
     @EJB
@@ -69,12 +68,20 @@ public class addCustomerServlet extends HttpServlet {
                     userRegist.setRole(roleRegist);
                     userRegist.setUserStatus(true);
                     usersFacade.create(userRegist);
-                    
+
                     request.setAttribute("user", userRegist);
                     request.setAttribute("registMess", "Registration successful!");
                     if (roleRegist.equals("customer")) {
+                        Customers cusRegist = new Customers(idRegist);
+                        cusRegist.setPoint(0);
+                        cusRegist.setAddress("");
+                        cusRegist.setDob("1/1/1950");
+                        cusRegist.setGender("male");
+                        customersFacade.create(cusRegist);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else if (roleRegist.equals("seller")) {
+                        Seller sellRegist = new Seller(idRegist);
+                        sellerFacade.create(sellRegist);
                         request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     }
                     break;
