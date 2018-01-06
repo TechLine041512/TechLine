@@ -204,7 +204,6 @@ public class viewServlet extends HttpServlet {
                     break;
                 case "homeCustomer":
                     String userID = user.getUserId();
-<<<<<<< HEAD
                     Users u = usersFacade.find(userID);
                     request.setAttribute("user", u);
                     Customers c = customersFacade.find(userID);
