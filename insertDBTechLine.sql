@@ -17,14 +17,14 @@ insert into Users VALUES('tuanka','123456','tuanka@mailinator.com',N'Tuấn','09
 insert into Users VALUES('HungDung','123456','hung@mailinator.com',N'Hùng','0909882239','customer',1);
 insert into Users VALUES('Thanh','123456','thanh@mailinator.com',N'Thành','0909882240','customer',1);
 insert into Users VALUES('Giangnhi','123456','giang@mailinator.com',N'Giang','0909882241','customer',1);
-insert into Users VALUES('dave','123456','david@mailinator.com',N'David','0909882242','customer',1);
-insert into Users VALUES('josh','123456','joshua@mailinator.com',N'Joshua','0909882243','customer',1);
+insert into Users VALUES('david','123456','david@mailinator.com',N'David','0909882242','customer',1);
+insert into Users VALUES('joshua','123456','joshua@mailinator.com',N'Joshua','0909882243','customer',1);
 insert into Users VALUES('quocanh','123abca','quocanh@mailinator.com',N'Quốc Anh','0909882244','seller',1);
 insert into Users VALUES('tienminh','123abca','tienminh@mailinator.com',N'Minh Tiến','0909882245','seller',1);
 insert into Users VALUES('thanhlong','123abca','thanhlong@mailinator.com',N'Long Thành','0909882246','seller',1);
 insert into Users VALUES('lylienkiet','123abca','lylienkiet@mailinator.com',N'Thành Kiệt','0909882247','seller',1);
 insert into Users VALUES('uyenle','123abca','uyenle@mailinator.com',N'Lê Uyên','0909882248','seller',1);
-insert into Users VALUES('andy','123abca','andy@mailinator.com',N'Andy','0909882249','seller',1);
+insert into Users VALUES('andytruong','123abca','andytruong@mailinator.com',N'Andy','0909882249','seller',1);
 insert into Users VALUES('kenny','123abca','kenny@mailinator.com',N'Kenny','0909882250','seller',1);
 insert into Users VALUES('sonmai','123abca','sonmai@mailinator.com',N'Mai Sơn','0909882251','seller',1);
 insert into Users VALUES('ringu','123abca','ringu@mailinator.com',N'Ring','0909882252','seller',1);
