@@ -60,8 +60,30 @@ public class editCustomerServlet extends HttpServlet {
                     customer.setAddress(request.getParameter("txtAddress"));
                     customer.setGender(request.getParameter("gender"));
                     customer.setDob(birthday);
-                    customersFacade.edit(customer);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    customersFacade.edit(customer);//completed edit customer
+                    //re-display birthday
+                    String disBirthday[] = customer.getDob().split("/");
+                    request.setAttribute("date", Integer.parseInt(disBirthday[0]));
+                    request.setAttribute("month", Integer.parseInt(disBirthday[1]));
+                    request.setAttribute("year", Integer.parseInt(disBirthday[2]));
+                    List<Integer> listDate = new ArrayList<>();
+                    List< Integer> listMonth = new ArrayList<>();
+                    List< Integer> listYear = new ArrayList<>();
+                    for (int i = 1; i < 32; i++) {
+                        listDate.add(i);
+                        if (i < 13) {
+                            listMonth.add(i);
+                        }
+                    }
+                    for (int i = 1950; i < 2018; i++) {
+                        listYear.add(i);
+                    }
+                    request.setAttribute("listDate", listDate);
+                    request.setAttribute("listMonth", listMonth);
+                    request.setAttribute("listYear", listYear);
+                    request.setAttribute("customer", customer);
+                    request.setAttribute("myMess", "Edit successful!");
+                    request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "cusChangePassword":
                     String inputPass = request.getParameter("txtOldPassword");
@@ -79,20 +101,20 @@ public class editCustomerServlet extends HttpServlet {
                     request.setAttribute("date", Integer.parseInt(birthday2[0]));
                     request.setAttribute("month", Integer.parseInt(birthday2[1]));
                     request.setAttribute("year", Integer.parseInt(birthday2[2]));
-                    List<Integer> listDate = new ArrayList<>();
-                    List<Integer> listMonth = new ArrayList<>();
-                    List<Integer> listYear = new ArrayList<>();
+                    List<Integer> listDate1 = new ArrayList<>();
+                    List<Integer> listMonth1 = new ArrayList<>();
+                    List<Integer> listYear1 = new ArrayList<>();
                     for(int i = 1; i < 32; i++) {
-                        listDate.add(i);
+                        listDate1.add(i);
                         if(i < 13)
-                            listMonth.add(i);
+                            listMonth1.add(i);
                     }
                     for(int i = 1950; i < 2018; i++) {
-                        listYear.add(i);
+                        listYear1.add(i);
                     }
-                    request.setAttribute("listDate", listDate);
-                    request.setAttribute("listMonth", listMonth);
-                    request.setAttribute("listYear", listYear);
+                    request.setAttribute("listDate", listDate1);
+                    request.setAttribute("listMonth", listMonth1);
+                    request.setAttribute("listYear", listYear1);
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "blockCustomer":

@@ -29,10 +29,10 @@
         <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>
-        <c:if test="${not empty loginError}">
+        <c:if test="${not empty myMess}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${loginError}");
+                    alert("${myMess}");
                 })
             </script>
         </c:if>
