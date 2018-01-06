@@ -199,7 +199,7 @@
                                         <i class="fa fa-twitter"></i>
                                     </div>
                                     <div class="card-content">
-                                        <p class="category">orders</p>
+                                        <p class="category">Orders</p>
                                         <h3 class="title">${doneOrders}</h3>
                                     </div>
                                     <div class="card-footer">
