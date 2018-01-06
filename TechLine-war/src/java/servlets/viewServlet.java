@@ -227,6 +227,7 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listMonth", listMonth);
                     request.setAttribute("listYear", listYear);
                     request.setAttribute("customer", c);
+                    request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "sellerProduct":
