@@ -14,8 +14,6 @@ import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -81,9 +79,9 @@ public class editCustomerServlet extends HttpServlet {
                     request.setAttribute("date", Integer.parseInt(birthday2[0]));
                     request.setAttribute("month", Integer.parseInt(birthday2[1]));
                     request.setAttribute("year", Integer.parseInt(birthday2[2]));
-                    ArrayList<Integer> listDate = new ArrayList<>();
-                    ArrayList<Integer> listMonth = new ArrayList<>();
-                    ArrayList<Integer> listYear = new ArrayList<>();
+                    List<Integer> listDate = new ArrayList<>();
+                    List<Integer> listMonth = new ArrayList<>();
+                    List<Integer> listYear = new ArrayList<>();
                     for(int i = 1; i < 32; i++) {
                         listDate.add(i);
                         if(i < 13)
@@ -102,7 +100,7 @@ public class editCustomerServlet extends HttpServlet {
                     for(String sCus: cusIdBlock) {
                         Users uBlock = usersFacade.find(sCus);
                         //Block customer comments
-                        Collection<ProductsComment> listCm= uBlock.getProductsCommentCollection();
+                        List<ProductsComment> listCm= (List<ProductsComment>) uBlock.getProductsCommentCollection();
                         for(ProductsComment pc: listCm) {
                             pc.setCommentStatus(Boolean.FALSE);
                             productsCommentFacade.edit(pc);
