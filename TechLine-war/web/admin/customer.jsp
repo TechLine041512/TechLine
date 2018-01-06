@@ -159,10 +159,6 @@
                     <div class="container-fluid">
                         <div class="row">
                             <form action="editCustomerServlet" method="post">
-                                <div class="row" style="text-align: center;">
-                                    <button class="btn-instagram btn" value="blockCustomer" name="action" type="submit">Block</button>    
-                                    <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header" data-background-color="purple">
@@ -173,24 +169,24 @@
 
                                             <table class="table">
                                                 <thead class="text-primary">
-                                                <th></th>
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>dob</th>
                                                 <th>Gender</th>
                                                 <th>Address</th>
                                                 <th>Point</th>
+                                                <th>Action</th>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listCustomer}" var="customer">
                                                         <tr>
-                                                            <td><input type="checkbox" value="${customer.userId}" name="cbkCusID"/></td>
                                                             <td>${customer.userId}</td>
                                                             <td>${customer.fullname}</td>
                                                             <td>${customer.customers.dob}</td>
                                                             <td>${customer.customers.gender}</td>
                                                             <td>${customer.customers.address}</td>
                                                             <td>${customer.customers.point}</td>
+                                                            <td><button class="btn-instagram btn" value="blockCustomer" name="action" type="submit">Block</button></td>
                                                         </tr>
                                                     </c:forEach>    
                                                 </tbody>
@@ -200,10 +196,6 @@
                                 </div>
                             </form>
                             <form action="editSellerServlet" method="post">
-                                <div class="row" style="text-align: center;">
-                                    <button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button>    
-                                    <button class="btn-instagram btn" value="permissions" name="action" type="submit">Authorize</button>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="card card-plain">
                                         <div class="card-header" data-background-color="purple">
@@ -219,6 +211,7 @@
                                                 <th>Store Name</th>
                                                 <th>Store Address</th>
                                                 <th>Phone</th>
+                                                <th>Action</th>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${listSeller}" var="seller">
@@ -229,6 +222,7 @@
                                                             <td>${seller.seller.storeName}</td>
                                                             <td>${seller.seller.storeAddress}</td>
                                                             <td>${seller.phone}</td>
+                                                            <td><button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button></td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

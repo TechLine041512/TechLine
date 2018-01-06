@@ -46,9 +46,6 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="cart.jsp">Cart</a></li>
-                            <li><a class="btn" href="search.jsp">Search</a></li>
-                            <li><a class="btn" href="admin/home.jsp">Go Admin Page</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>
@@ -60,15 +57,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='seller'}">
-                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='seller'}">
+                                    <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                            <c:if test="${user.role=='customer'}">
-                                <li><a href="customer/home.jsp">Hi, ${user.fullname}</a></li>  
+                                <c:if test="${user.role=='customer'}">
+                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -135,6 +132,9 @@
                 <div class="navbar-inner main-menu">				
                     <nav id="menu" class="pull-right">
                         <ul>
+                            <li>
+                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                            </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
                                     <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
@@ -230,23 +230,29 @@
                         <div class="block">								
                             <h4 class="title"><strong>Best</strong> Seller</h4>								
                             <ul class="small-product">
-                                <li>
-                                    <a href="#" title="Praesent tempor sem sodales">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Praesent tempor sem sodales">
-                                    </a>
-                                    <a href="#">Praesent tempor sem</a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Praesent tempor sem sodales">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
+                                    <a href="#">Veriya Lightweight Casual Travel School</a>
                                 </li>
-                                <li>
-                                    <a href="#" title="Luctus quam ultrices rutrum">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Luctus quam ultrices rutrum">
-                                    </a>
-                                    <a href="#">Luctus quam ultrices rutrum</a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Luctus quam ultrices rutrum">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
+                                    <a href="#">Edifier H650 Hi-Fi On-Ear Headphones</a>
                                 </li>
-                                <li>
-                                    <a href="#" title="Fusce id molestie massa">
-                                        <img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="Fusce id molestie massa">
-                                    </a>
-                                    <a href="#">Fusce id molestie massa</a>
+                                <li style="text-align:center;">
+                                    <div>
+                                        <a href="#" title="Fusce id molestie massa">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" style="width: 150px; height: 150px">
+                                        </a>
+                                    </div>
+                                    <a href="#">Gorsun Lightweight Sport Workout Headphones</a>
                                 </li>   
                             </ul>
                         </div>
