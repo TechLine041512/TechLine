@@ -57,7 +57,9 @@ public class editCustomerServlet extends HttpServlet {
                     user.setPhone(request.getParameter("txtPhone"));
                     usersFacade.edit(user);
                     String birthday = request.getParameter("ddlDay") + "/" + request.getParameter("ddlMonth") + "/" + request.getParameter("ddlYear");
-                    customer.setAddress(request.getParameter("txtAddress"));
+                    String edAddress = request.getParameter("txtAddress");
+                    if (edAddress != null)
+                        customer.setAddress(edAddress);
                     customer.setGender(request.getParameter("gender"));
                     customer.setDob(birthday);
                     customersFacade.edit(customer);//completed edit customer
