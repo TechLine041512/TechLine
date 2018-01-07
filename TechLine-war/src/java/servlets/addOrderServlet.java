@@ -74,7 +74,6 @@ public class addOrderServlet extends HttpServlet {
                                 break;
                             }
                         }
-                        
                     }
                     else {
                         cart = new ArrayList<>();
@@ -91,19 +90,9 @@ public class addOrderServlet extends HttpServlet {
                         cart.add(pInCart);
                     }
                     
-                    
                     session.setAttribute("user", user);
                     session.setAttribute("cart", cart);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
-                    break;
-                case "viewShoppingCart":
-                    if (cart != null) {
-                        request.setAttribute("cart", cart);
-                    }
-                    else {
-                        request.setAttribute("mess", "Please select some products");
-                    }
-                    request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
                 default:
                     request.setAttribute("error", "Page not found");
