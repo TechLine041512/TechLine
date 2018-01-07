@@ -6,18 +6,29 @@
 
 package servlets;
 
+import entities.Products;
+import entities.ProductsFacadeLocal;
+import entities.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.ProductInCart;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author nth15
  */
 public class deleteOrderServlet extends HttpServlet {
+    @EJB
+    private ProductsFacadeLocal productsFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +43,42 @@ public class deleteOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet deleteOrderServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet deleteOrderServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("user");
+            String userId = user.getUserId();
+            List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
+            switch (action) {
+                case "removeFromCart":
+                    String id = request.getParameter("idProduct");
+                    Products currentP = productsFacade.find(id);
+                    boolean isExisted = false;
+                    ProductInCart pInCart = new ProductInCart();
+                    if (cart != null) {
+                        for (ProductInCart p : cart ) {
+                            if (p != null && StringUtils.equals(p.getProductId(), id)) {
+                                cart.remove(p);
+                                isExisted = true;
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        cart = new ArrayList<>();
+                    }
+                    if (!isExisted) {
+                        request.setAttribute("mess", "Cart Empty");
+                    }
+                    
+                    session.setAttribute("user", user);
+                    session.setAttribute("cart", cart);
+                    request.getRequestDispatcher("viewServlet?action=viewShoppingCart").forward(request, response);
+                    break;
+                default:
+                    request.setAttribute("error", "Page not found");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    break;
+            }
         }
     }
 

@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ProductInCart;
 import models.ProductListAdminModel;
 import models.TopProductModel;
 import utils.TechLineUtils;
@@ -356,6 +357,28 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listType", productTypesFacade.findAll());
                     request.setAttribute("productDetail", productsFacade.find(request.getParameter("productId")));
                     request.getRequestDispatcher("seller/editProduct.jsp").forward(request, response);
+                    break;
+                case "viewShoppingCart":
+                    List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
+                    double subTotal = 0;
+                    if (cart != null && user != null) {
+                        for (ProductInCart p : cart) {
+                            subTotal += p.getTotal();
+                        }
+                        int point = user.getCustomers().getPoint();
+                        int discount = point / 10;
+                        request.setAttribute("memberDiscount", discount);
+                        request.setAttribute("subtotal", subTotal);
+                        request.setAttribute("cart", cart);
+                    }
+                    else {
+                        request.setAttribute("mess", "Please select some products");
+                    }
+                    List<Categories> listCategorieses = categoriesFacade.findAll();
+                    if (listCategorieses != null) {
+                        request.setAttribute("listCategories", categoriesFacade.findAll());
+                    }
+                    request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
                 default:
                     request.setAttribute("error", "Page not found");
