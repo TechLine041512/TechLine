@@ -37,6 +37,16 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
         }
         return null;
     }
+
+    @Override
+    public List<ProductTypes> showAll() {
+        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p WHERE p.typeStatus = TRUE");
+        List<ProductTypes> list = q.getResultList();
+        if (list != null ) {
+            return list;
+        }
+        return null;
+    }
     
     
 }

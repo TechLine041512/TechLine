@@ -27,21 +27,51 @@
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
     </head>
-    <body>		
+    <body>	
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${message}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST" class="search_form">
-                        <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
+                    <form method="POST" action="searchProductsServlet">
+                        <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
+                        <button value="Search" name="action" class="btn-success btn">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
-                        <ul class="user-menu">				
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="cart.html">Your Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>					
-                            <li><a href="register.html">Login</a></li>			
+                        <ul class="user-menu">	
+                            <li><a class="btn" href="viewServlet?action=viewShoppingCart">Cart</a></li>
+                                <%
+                                    if (session.getAttribute("user") == null) {
+                                %>
+                            <li><a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a></li>
+                                <%
+                                    }
+                                %>
+                                <%
+                                    if (session.getAttribute("user") != null) {
+                                %>
+                                <c:if test="${user.role=='admin'}">
+                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                                <c:if test="${user.role=='seller'}">
+                                    <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                                <c:if test="${user.role=='customer'}">
+                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+                            <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
+                                <%
+                                    }
+                                %>
                         </ul>
                     </div>
                 </div>
@@ -53,7 +83,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                              <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>

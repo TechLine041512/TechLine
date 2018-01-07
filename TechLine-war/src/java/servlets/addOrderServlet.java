@@ -7,7 +7,6 @@
 package servlets;
 
 import entities.OrderDetailsFacadeLocal;
-import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
 import entities.Products;
 import entities.ProductsFacadeLocal;
@@ -51,20 +50,28 @@ public class addOrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
+            String message = "";
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
-            String userId = user.getUserId();
+            if (user == null) {
+                message = "Please log in";
+            }
             List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
+            ProductInCart pInCart = new ProductInCart();
+            
             switch (action) {
                 case "addToCart":
                     String id = request.getParameter("idProduct");
                     Products currentP = productsFacade.find(id);
+                    String quantityDemand = request.getParameter("quantity");
+                    if (StringUtils.isBlank(quantityDemand)) {
+                        quantityDemand = "1";
+                    }
                     boolean isExisted = false;
-                    ProductInCart pInCart = new ProductInCart();
                     if (cart != null) {
                         for (ProductInCart p : cart ) {
                             if (p != null && StringUtils.equals(p.getProductId(), id)) {
-                                int quantity = p.getQuantity() + 1;
+                                int quantity = p.getQuantity() + Integer.parseInt(quantityDemand);
                                 double total = p.getPrice() * quantity;
                                 cart.remove(p);
                                 p.setQuantity(quantity);
@@ -92,6 +99,9 @@ public class addOrderServlet extends HttpServlet {
                     
                     session.setAttribute("user", user);
                     session.setAttribute("cart", cart);
+                    if (StringUtils.isNotBlank(message)) {
+                        request.setAttribute("message", message);
+                    }
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                 default:

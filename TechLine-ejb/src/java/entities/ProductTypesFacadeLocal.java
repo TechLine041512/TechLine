@@ -27,5 +27,7 @@ public interface ProductTypesFacadeLocal {
     int count();
 
     String newId();
+
+    List<ProductTypes> showAll();
     
 }

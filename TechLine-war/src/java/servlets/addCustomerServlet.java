@@ -54,7 +54,7 @@ public class addCustomerServlet extends HttpServlet {
                     String idRegist = request.getParameter("txtUsername");
                     Users userRegist = usersFacade.find(idRegist);
                     if (userRegist != null) {
-                        request.setAttribute("registMess", "Username already exists!");
+                        request.setAttribute("message", "Username already exists!");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                         break;
                     }

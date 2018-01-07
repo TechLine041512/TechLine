@@ -29,5 +29,5 @@ public interface OrderMasterFacadeLocal {
     String newId();
 
     long countDoneOrder();
-    
+
 }

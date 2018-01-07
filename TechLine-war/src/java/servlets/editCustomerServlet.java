@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,7 +49,9 @@ public class editCustomerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-            Users user = (Users) request.getSession().getAttribute("user");
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("user");
+            session.setAttribute("user", user);
             switch (action) {
                 case "editProfileCustomer":
                     user.setFullname(request.getParameter("txtName"));
@@ -69,59 +72,26 @@ public class editCustomerServlet extends HttpServlet {
                     customersFacade.edit(customer);//completed edit customer
                     //re-display birthday
                     String disBirthday[] = customer.getDob().split("/");
+                    
                     request.setAttribute("date", Integer.parseInt(disBirthday[0]));
                     request.setAttribute("month", Integer.parseInt(disBirthday[1]));
                     request.setAttribute("year", Integer.parseInt(disBirthday[2]));
-                    List<Integer> listDate = new ArrayList<>();
-                    List< Integer> listMonth = new ArrayList<>();
-                    List< Integer> listYear = new ArrayList<>();
-                    for (int i = 1; i < 32; i++) {
-                        listDate.add(i);
-                        if (i < 13) {
-                            listMonth.add(i);
-                        }
-                    }
-                    for (int i = 1950; i < 2018; i++) {
-                        listYear.add(i);
-                    }
-                    request.setAttribute("listDate", listDate);
-                    request.setAttribute("listMonth", listMonth);
-                    request.setAttribute("listYear", listYear);
+                    buildDatePicker(request);
                     request.setAttribute("customer", customer);
-                    request.setAttribute("myMess", "Edit successful!");
-                    request.getRequestDispatcher("customer.jsp").forward(request, response);
+                    request.setAttribute("message", "Edit successful!");
+                    session.setAttribute("user", user);
+                    request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
                 case "cusChangePassword":
                     String inputPass = request.getParameter("txtOldPassword");
                     if (!inputPass.equals(user.getPassword())) {
-                        request.setAttribute("loginError", "Incorrect password!");
-                        request.getRequestDispatcher("customer.jsp").forward(request, response);
+                        request.setAttribute("message", "Incorrect password!");
+                        request.getRequestDispatcher("viewServlet?action=homeCustomer").forward(request, response);
                         break;
                     }
                     user.setPassword(request.getParameter("txtNewPass"));
                     usersFacade.edit(user);
-                    request.setAttribute("loginError", "Change password successfully!");
-                    request.setAttribute("user", usersFacade.find(user.getUserId()));
-                    request.setAttribute("customer", customersFacade.find(user.getUserId()));
-                    String birthday2[] = customersFacade.find(user.getUserId()).getDob().split("/");
-                    request.setAttribute("date", Integer.parseInt(birthday2[0]));
-                    request.setAttribute("month", Integer.parseInt(birthday2[1]));
-                    request.setAttribute("year", Integer.parseInt(birthday2[2]));
-                    List<Integer> listDate1 = new ArrayList<>();
-                    List<Integer> listMonth1 = new ArrayList<>();
-                    List<Integer> listYear1 = new ArrayList<>();
-                    for(int i = 1; i < 32; i++) {
-                        listDate1.add(i);
-                        if(i < 13)
-                            listMonth1.add(i);
-                    }
-                    for(int i = 1950; i < 2018; i++) {
-                        listYear1.add(i);
-                    }
-                    request.setAttribute("listDate", listDate1);
-                    request.setAttribute("listMonth", listMonth1);
-                    request.setAttribute("listYear", listYear1);
-                    request.getRequestDispatcher("customer.jsp").forward(request, response);
+                    request.getRequestDispatcher("viewServlet?action=homeCustomer").forward(request, response);
                     break;
                 case "blockCustomer":
                     String[] cusIdBlock = request.getParameterValues("cbkCusID");
@@ -137,7 +107,8 @@ public class editCustomerServlet extends HttpServlet {
                         uBlock.setUserStatus(Boolean.FALSE);
                         usersFacade.edit(uBlock);
                     }
-                    request.setAttribute("myMessCus", "Blocked customers successfully!");
+                    request.setAttribute("message", "Blocked customers successfully!");
+                    
                     request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
             }
@@ -182,5 +153,23 @@ public class editCustomerServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void buildDatePicker(HttpServletRequest request) {
+        List<Integer> listDate = new ArrayList<>();
+        List< Integer> listMonth = new ArrayList<>();
+        List< Integer> listYear = new ArrayList<>();
+        for (int i = 1; i < 32; i++) {
+            listDate.add(i);
+            if (i < 13) {
+                listMonth.add(i);
+            }
+        }
+        for (int i = 1950; i < 2018; i++) {
+            listYear.add(i);
+        }
+        request.setAttribute("listDate", listDate);
+        request.setAttribute("listMonth", listMonth);
+        request.setAttribute("listYear", listYear);
+    }
 
 }

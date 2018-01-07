@@ -27,5 +27,7 @@ public interface BrandsFacadeLocal {
     int count();
 
     String newBrandId();
+
+    List<Brands> showAll();
     
 }

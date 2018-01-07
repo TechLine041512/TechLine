@@ -27,5 +27,7 @@ public interface CategoriesFacadeLocal {
     int count();
 
     String newId();
+
+    List<Categories> showAll();
     
 }

@@ -5,14 +5,18 @@
  */
 package servlets;
 
+import entities.Brands;
 import entities.BrandsFacadeLocal;
+import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.ProductsFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +41,9 @@ public class RedirectServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
+            List<Categories> listCategories = categoriesFacade.showAll();
+            List<Brands> listBrands = brandsFacade.showAll();
+            List<ProductTypes> listProductTypes = productTypesFacade.showAll();
             switch (action) {
                 case "backToHome":
                     HttpSession session = request.getSession();
@@ -44,26 +51,26 @@ public class RedirectServlet extends HttpServlet {
                     session.setAttribute("user", u);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                 case "addProduct":
-                    request.setAttribute("listBrand", brandsFacade.findAll());
-                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.setAttribute("listBrand", listBrands);
+                    request.setAttribute("listType", listProductTypes);
                     request.getRequestDispatcher("admin/addProduct.jsp").forward(request, response);
                     break;
                 case "addCategory":
                     request.getRequestDispatcher("admin/addCategory.jsp").forward(request, response);
                     break;
                 case "addProductType":
-                    request.setAttribute("listCategory", categoriesFacade.findAll());
+                    request.setAttribute("listCategory", listCategories);
                     request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
                     break;
                 case "editProduct":
-                    request.setAttribute("listBrand", brandsFacade.findAll());
-                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.setAttribute("listBrand", listBrands);
+                    request.setAttribute("listType", listProductTypes);
                     String productId = request.getParameter("pid");
                     request.setAttribute("product", productsFacade.find(productId));
                     request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
                 case "editProductType":
-                    request.setAttribute("listCategory", categoriesFacade.findAll());
+                    request.setAttribute("listCategory", listCategories);
                     String typeId = request.getParameter("typeId");
                     request.setAttribute("type", productTypesFacade.find(typeId));
                     request.getRequestDispatcher("admin/editType.jsp").forward(request, response);
@@ -74,8 +81,8 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/editCategory.jsp").forward(request, response);
                     break;
                 case "sellerAddProduct":
-                    request.setAttribute("listBrand", brandsFacade.findAll());
-                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.setAttribute("listBrand", listBrands);
+                    request.setAttribute("listType", listProductTypes);
                     request.getRequestDispatcher("seller/addProduct.jsp").forward(request, response);
                     break;
                 default:

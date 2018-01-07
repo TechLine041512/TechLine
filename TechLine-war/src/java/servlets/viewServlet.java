@@ -36,11 +36,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.ProductInCart;
-import models.ProductListAdminModel;
 import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
 import models.SellerOrder;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -50,15 +50,12 @@ public class viewServlet extends HttpServlet {
 
     @EJB
     private OrderDetailsFacadeLocal orderDetailsFacade;
-
     @EJB
     private CustomersFacadeLocal customersFacade;
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
-
     @EJB
     private OrderMasterFacadeLocal orderMasterFacade;
-
     @EJB
     private UsersFacadeLocal usersFacade;
     @EJB
@@ -79,15 +76,32 @@ public class viewServlet extends HttpServlet {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
             Users user = (Users) request.getSession().getAttribute("user");
+            session.setAttribute("user", user);
+
+            List<Products> listProduct = new ArrayList<>();
+            List<Products> listProductRelated = new ArrayList<>();
+            List<Categories> listCategories = categoriesFacade.showAll();
+            List<Brands> listBrands = brandsFacade.showAll();
+            List<OrderMaster> listOrderMaster = orderMasterFacade.findAll();
+            List<Customers> listCustomer;
+            List<Seller> listSellers;
+            List<ProductTypes> listProductTypes;
+            List<TopProductModel> listTopProducts = TechLineUtils.buildProductTop(productsFacade.getTopProduct());
+
+            ProductTypes productTypes;
+            PageProduct pageProduct;
+            Products product;
+            String idProduct;
+            String typeId;
             switch (action) {
+
                 case "cateDetail":
                     Categories categories = categoriesFacade.find(request.getParameter("idCate"));
-                    List<Products> listProduct = new ArrayList<>();
-                    List<ProductTypes> listProductTypes = (List<ProductTypes>) categories.getProductTypesCollection();
-                    for (ProductTypes productTypes : listProductTypes) {
-                        listProduct.addAll(productTypes.getProductsCollection());
+                    listProductTypes = (List<ProductTypes>) categories.getProductTypesCollection();
+                    for (ProductTypes p : listProductTypes) {
+                        listProduct.addAll(p.getProductsCollection());
                     }
-                    PageProduct pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
+                    pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
                     String n = request.getParameter("btn");
                     if (n != null) {
                         if (n.equals("next")) {
@@ -105,46 +119,72 @@ public class viewServlet extends HttpServlet {
                     }
                     request.setAttribute("pageProduct", pageProduct);
                     request.setAttribute("listProduct", listProduct);
+                    request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("category", categories);
-                    request.setAttribute("listCategories", categoriesFacade.findAll());
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
                     break;
+
                 case "typeDetail":
-                    ProductTypes productTypes = productTypesFacade.find(request.getParameter("idType"));
-                    List<Products> listProduct2 = new ArrayList<>();
-                    listProduct2.addAll(productTypes.getProductsCollection());
-                    PageProduct pageProduct2 = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct2), 12);
+                    typeId = request.getParameter("idType");
+                    productTypes = new ProductTypes();
+                    if (StringUtils.isNotBlank(typeId)) {
+                        productTypes = productTypesFacade.find(typeId);
+                    }
+                    listProduct = (List<Products>) productTypes.getProductsCollection();
+
+                    pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
                     String n1 = request.getParameter("btn");
+
                     if (n1 != null) {
                         if (n1.equals("next")) {
-                            pageProduct2.next();
+                            pageProduct.next();
                         }
                         if (n1.equals("prev")) {
-                            pageProduct2.prev();
+                            pageProduct.prev();
                         }
                     }
                     String pages1 = request.getParameter("page");
+
                     if (pages1 != null) {
                         int m = Integer.parseInt(pages1);
-                        pageProduct2.setPageIndex(m);
-                        pageProduct2.updateModel();
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
                     }
-                    request.setAttribute("pageProduct", pageProduct2);
-                    request.setAttribute("listProduct", listProduct2);
-                    request.setAttribute("productTypesID", productTypes.getTypeId());
-                    request.setAttribute("listCategories", categoriesFacade.findAll());
+
+                    request.setAttribute("pageProduct", pageProduct);
+                    request.setAttribute("listProduct", listProduct);
+                    request.setAttribute("listTopProduct", listTopProducts.subList(0,3));
+                    request.setAttribute("productTypesID", productTypes.getTypeId()); //Noted
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("typeDetail.jsp").forward(request, response);
                     break;
+
                 case "productDetail":
-                    request.setAttribute("product", TechLineUtils.buildProduct(productsFacade.find(request.getParameter("idProduct"))));
-                    request.setAttribute("listCategories", categoriesFacade.findAll());
+                    idProduct = request.getParameter("idProduct");
+                    product = new Products();
+                    if (StringUtils.isNotBlank(idProduct)) {
+                        product = productsFacade.find(idProduct);
+                    }
+                    if (product != null) {
+                        request.setAttribute("product", TechLineUtils.buildProduct(product));
+                        productTypes = product.getTypeId();
+                        listProductRelated.addAll(productTypes.getProductsCollection());
+                        if (listProductRelated.size() > 4) {
+                            request.setAttribute("listProductRelated1", TechLineUtils.buidProductIndexModel(listProductRelated).subList(0, 4));
+                            request.setAttribute("listProductRelated2", TechLineUtils.buidProductIndexModel(listProductRelated).subList(4, listProductRelated.size()));
+                        } else {
+                            request.setAttribute("listProductRelated1", TechLineUtils.buidProductIndexModel(listProductRelated).subList(0, listProductRelated.size()));
+                        }
+                    }
+                    request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;
 
                 case "showCustomer":
-                    List<Customers> listCus = new ArrayList<>();
-                    listCus = customersFacade.findAll();
-                    PageProduct pageCustomer = new PageProduct(listCus, 5);
+                    listCustomer = customersFacade.showAll();
+                    PageProduct pageCustomer = new PageProduct(listCustomer, 5);
                     String nCus = request.getParameter("btn");
                     if (nCus != null) {
                         if (nCus.equals("next")) {
@@ -160,13 +200,13 @@ public class viewServlet extends HttpServlet {
                         pageCustomer.setPageIndex(m);
                         pageCustomer.updateModel();
                     }
-                    request.setAttribute("pageCus", pageCustomer);           
+                    request.setAttribute("pageCus", pageCustomer);
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
+
                 case "showSeller":
-                    List<Seller> sellers = new ArrayList<>();
-                    sellers = sellerFacadeLocal.findAll();
-                    PageProduct pageSeller = new PageProduct(sellers, 5);
+                    listSellers = sellerFacadeLocal.showAll();
+                    PageProduct pageSeller = new PageProduct(listSellers, 5);
                     String nSeller = request.getParameter("btn");
                     if (nSeller != null) {
                         if (nSeller.equals("next")) {
@@ -182,97 +222,101 @@ public class viewServlet extends HttpServlet {
                         pageSeller.setPageIndex(m);
                         pageSeller.updateModel();
                     }
-                    request.setAttribute("pageSeller", pageSeller);           
+                    request.setAttribute("pageSeller", pageSeller);
                     request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
                     break;
+
                 case "showProductAdmin":
                     List<Products> listDateposted = productsFacade.getListProductByDatePost();
-                    PageProduct pageProduct3 = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
+                    pageProduct = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
                     String n3 = request.getParameter("btn");
                     if (n3 != null) {
                         if (n3.equals("next")) {
-                            pageProduct3.next();
+                            pageProduct.next();
                         }
                         if (n3.equals("prev")) {
-                            pageProduct3.prev();
+                            pageProduct.prev();
                         }
                     }
                     String pages3 = request.getParameter("page");
                     if (pages3 != null) {
                         int m = Integer.parseInt(pages3);
-                        pageProduct3.setPageIndex(m);
-                        pageProduct3.updateModel();
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
                     }
-                    request.setAttribute("pageProduct", pageProduct3);
+                    request.setAttribute("pageProduct", pageProduct);
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
+
                 case "showBrand":
-                    List<Brands> listBrand = brandsFacade.findAll();
-                    PageProduct pageBrands = new PageProduct(listBrand, 10);
+                    pageProduct = new PageProduct(listBrands, 10);
                     String nBrand = request.getParameter("btn");
                     if (nBrand != null) {
                         if (nBrand.equals("next")) {
-                            pageBrands.next();
+                            pageProduct.next();
                         }
                         if (nBrand.equals("prev")) {
-                            pageBrands.prev();
+                            pageProduct.prev();
                         }
                     }
                     String pagesBrand = request.getParameter("page");
                     if (pagesBrand != null) {
                         int m = Integer.parseInt(pagesBrand);
-                        pageBrands.setPageIndex(m);
-                        pageBrands.updateModel();
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
                     }
-                    request.setAttribute("pageBrands", pageBrands);
+                    request.setAttribute("pageBrands", pageProduct);
                     request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
                     break;
+
                 case "showCategories":
-                    request.setAttribute("listCategories", categoriesFacade.findAll());
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
                     break;
 
                 case "showProductType":
-                    List<ProductTypes> listProductType = productTypesFacade.findAll();
-                    PageProduct pageProductType = new PageProduct(listProductType, 10);
+                    listProductTypes = productTypesFacade.showAll();
+                    pageProduct = new PageProduct(listProductTypes, 10);
                     String nProductType = request.getParameter("btn");
                     if (nProductType != null) {
                         if (nProductType.equals("next")) {
-                            pageProductType.next();
+                            pageProduct.next();
                         }
                         if (nProductType.equals("prev")) {
-                            pageProductType.prev();
+                            pageProduct.prev();
                         }
                     }
                     String pagesProductType = request.getParameter("page");
                     if (pagesProductType != null) {
                         int m = Integer.parseInt(pagesProductType);
-                        pageProductType.setPageIndex(m);
-                        pageProductType.updateModel();
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
                     }
-                    request.setAttribute("pageProductType", pageProductType);
+                    request.setAttribute("pageProductType", pageProduct);
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
 
                 case "showOrder":
-                    List<OrderMaster> listOrderMaster = orderMasterFacade.findAll();
-                    PageProduct pageOrderMaster = new PageProduct(listOrderMaster, 15);
+
+                    pageProduct = new PageProduct(listOrderMaster, 15);
                     String nOrderMaster = request.getParameter("btn");
                     if (nOrderMaster != null) {
                         if (nOrderMaster.equals("next")) {
-                            pageOrderMaster.next();
+                            pageProduct.next();
                         }
                         if (nOrderMaster.equals("prev")) {
-                            pageOrderMaster.prev();
+                            pageProduct.prev();
                         }
                     }
                     String pagesOrderMaster = request.getParameter("page");
+
                     if (pagesOrderMaster != null) {
                         int m = Integer.parseInt(pagesOrderMaster);
-                        pageOrderMaster.setPageIndex(m);
-                        pageOrderMaster.updateModel();
+                        pageProduct.setPageIndex(m);
+                        pageProduct.updateModel();
                     }
-                    request.setAttribute("pageOrderMaster", pageOrderMaster);
+
+                    request.setAttribute("pageOrderMaster", pageProduct);
                     request.getRequestDispatcher("admin/order.jsp").forward(request, response);
                     break;
 
@@ -281,25 +325,35 @@ public class viewServlet extends HttpServlet {
                     long activeCustomers = usersFacade.countActiveCustomer();
                     long doneOrders = orderMasterFacade.countDoneOrder();
                     long productsSold = productsFacade.countSoldProduct();
-                    List<Products> listProducts = productsFacade.getTopProduct();
-                    List<TopProductModel> listTop = TechLineUtils.buildProductTop(listProducts);
-                    List<Seller> listSeller = sellerFacadeLocal.findAll();
+                    listSellers = sellerFacadeLocal.findAll();
+
                     request.setAttribute("activeSellers", activeSellers);
                     request.setAttribute("activeCustomers", activeCustomers);
                     request.setAttribute("doneOrders", doneOrders);
                     request.setAttribute("productsSold", productsSold);
-                    request.setAttribute("listTop", listTop.subList(0, 5));
-                    request.setAttribute("listSeller", listSeller.subList(0, 4));
+
+                    if (listTopProducts.size() > 5) {
+                        listTopProducts = listTopProducts.subList(0, 5);
+                    }
+
+                    if (listSellers.size() > 4) {
+                        listSellers = listSellers.subList(0, 4);
+                    }
+
+                    request.setAttribute("listTop", listTopProducts);
+                    request.setAttribute("listSeller", listSellers);
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     break;
 
                 case "Login":
-                    Users users = usersFacade.checkLogin(request.getParameter("username"), request.getParameter("password"));
+                    String userName = request.getParameter("username");
+                    String password = request.getParameter("password");
+                    Users users = usersFacade.checkLogin(userName, password);
                     if (users == null) {
-                        request.setAttribute("error", "Page not found");
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                        request.setAttribute("message", "Invalid Users or Password");
+                    } else {
+                        session.setAttribute("user", users);
                     }
-                    session.setAttribute("user", users);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
 
@@ -309,15 +363,16 @@ public class viewServlet extends HttpServlet {
                     session.invalidate();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
+
                 case "homeSeller":
-                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    request.setAttribute("user", user);
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     break;
+
                 case "homeCustomer":
-                    String userID = user.getUserId();
-                    Users u = usersFacade.find(userID);
-                    request.setAttribute("user", u);
-                    Customers c = customersFacade.find(userID);
+                    request.setAttribute("user", user);
+                    String userId = user.getUserId();
+                    Customers c = customersFacade.find(userId);
                     String birthday[] = c.getDob().split("/");
                     request.setAttribute("date", Integer.parseInt(birthday[0]));
                     request.setAttribute("month", Integer.parseInt(birthday[1]));
@@ -338,48 +393,60 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listMonth", listMonth);
                     request.setAttribute("listYear", listYear);
                     request.setAttribute("customer", c);
-                    request.setAttribute("listCategories", categoriesFacade.findAll());
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
+
                 case "sellerProduct":
                     List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());
                     request.setAttribute("lsProduct", sellerProduct);
                     request.getRequestDispatcher("seller/product.jsp").forward(request, response);
                     break;
+
                 case "sellerOrder":
                     TechLineUtils util = new TechLineUtils();
                     List<SellerOrder> order = util.getSellerOrdered(user.getUserId());
                     request.setAttribute("order", order);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
+
                 case "sellerProductDetail":
-                    request.setAttribute("listBrand", brandsFacade.findAll());
-                    request.setAttribute("listType", productTypesFacade.findAll());
+                    request.setAttribute("listBrand", listBrands);
+                    request.setAttribute("listType", productTypesFacade.showAll());
                     request.setAttribute("productDetail", productsFacade.find(request.getParameter("productId")));
                     request.getRequestDispatcher("seller/editProduct.jsp").forward(request, response);
                     break;
+
                 case "viewShoppingCart":
+                    if (user == null) {
+                        request.setAttribute("message", "Please Log in first");
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    }
+                    Customers customer = user.getCustomers();
+                    if (customer == null) {
+                        request.setAttribute("message", "Please register customer account");
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    }
                     List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
                     double subTotal = 0;
-                    if (cart != null && user != null) {
+                    if (cart != null) {
                         for (ProductInCart p : cart) {
                             subTotal += p.getTotal();
                         }
+
                         int point = user.getCustomers().getPoint();
                         int discount = point / 10;
                         request.setAttribute("memberDiscount", discount);
                         request.setAttribute("subtotal", subTotal);
                         request.setAttribute("cart", cart);
+                    } else {
+                        request.setAttribute("message", "Please select some products");
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
                     }
-                    else {
-                        request.setAttribute("mess", "Please select some products");
-                    }
-                    List<Categories> listCategorieses = categoriesFacade.findAll();
-                    if (listCategorieses != null) {
-                        request.setAttribute("listCategories", categoriesFacade.findAll());
-                    }
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
+
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);

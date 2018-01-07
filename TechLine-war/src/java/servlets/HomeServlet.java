@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
-
+import entities.Brands;
+import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.Products;
@@ -23,36 +23,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utils.TechLineUtils;
 
-
 public class HomeServlet extends HttpServlet {
+
+    @EJB
+    private BrandsFacadeLocal brandsFacade;
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
     @EJB
     private ProductsFacadeLocal productsFacade;
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-            List<Products> listProduct;
-            listProduct = productsFacade.getListProductByDatePost();
-            if (listProduct != null) {
-                request.setAttribute("ListProductByDatePost1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
-                request.setAttribute("ListProductByDatePost2", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
-            }
-            listProduct = productsFacade.getListProductByDiscount();
-            if (listProduct != null) {
-                request.setAttribute("ListProductByDiscount1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
-                request.setAttribute("ListProductByDiscount1", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
-            }
-            List<Categories> listCategorieses = categoriesFacade.findAll();
-            if (listCategorieses != null) {
-                request.setAttribute("listCategories", categoriesFacade.findAll());
-            }
-            
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        buildProductRequest("ListProductByDatePost", request, productsFacade.getListProductByDatePost());
+        buildProductRequest("ListProductByDiscount", request, productsFacade.getListProductByDiscount());
+        buildProductRequest("ListProductBySeller", request, productsFacade.getListProductSeller());
+        List<Categories> listCategories = categoriesFacade.showAll();
+        if (listCategories != null) {
+            request.setAttribute("listCategories", listCategories);
         }
+        List<Brands> listBrands = brandsFacade.showAll();
+        if (listBrands != null) {
+            request.setAttribute("listBrands", listBrands.subList(0, 6));
+        }
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -93,5 +89,11 @@ public class HomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    private void buildProductRequest(String listName, HttpServletRequest request, List<Products> listProduct) {
+        if (listProduct != null) {
+            request.setAttribute(listName + "1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
+            request.setAttribute(listName + "2", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
+        }
+    }
+
 }
