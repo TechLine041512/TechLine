@@ -138,7 +138,7 @@ public class editCustomerServlet extends HttpServlet {
                         usersFacade.edit(uBlock);
                     }
                     request.setAttribute("myMessCus", "Blocked customers successfully!");
-                    request.getRequestDispatcher("viewServlet?action=showUser").forward(request, response);
+                    request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
             }
         }

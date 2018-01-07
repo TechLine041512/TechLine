@@ -82,7 +82,7 @@ public class editSellerServlet extends HttpServlet {
                     usersFacadeLocal.edit(uS);
                 }
                 request.setAttribute("myMessSel", "Blocked sellers successfully!");
-                request.getRequestDispatcher("viewServlet?action=showUser").forward(request, response);
+                request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
             default:
                 request.setAttribute("error", "Page not found");

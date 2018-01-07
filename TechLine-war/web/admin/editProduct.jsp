@@ -52,15 +52,21 @@
                 <div class="sidebar-wrapper">
                     <ul class="nav">
                         <li>
-                            <a href="viewServlet?action=showUser">
+                            <a href="viewServlet?action=homeAdmin">
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showUser">
+                            <a href="viewServlet?action=showCustomer">
                                 <i class="material-icons">person</i>
-                                <p>User List</p>
+                                <p>Customer List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showSeller">
+                                <i class="material-icons">person</i>
+                                <p>Seller List</p>
                             </a>
                         </li>
                         <li class="active">

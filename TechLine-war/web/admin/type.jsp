@@ -61,9 +61,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showUser">
+                            <a href="viewServlet?action=showCustomer">
                                 <i class="material-icons">person</i>
-                                <p>User List</p>
+                                <p>Customer List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showSeller">
+                                <i class="material-icons">person</i>
+                                <p>Seller List</p>
                             </a>
                         </li>
                         <li>
