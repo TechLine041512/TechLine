@@ -29,7 +29,7 @@ public class searchProductsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             request.setAttribute("listProductSearch", productsFacade.getListProductsByName(request.getParameter("txtProductName")));
-            request.setAttribute("listCategories", categoriesFacade.findAll());
+            request.setAttribute("listCategories", categoriesFacade.showAll());
             request.getRequestDispatcher("search.jsp").forward(request, response);
         }
     }

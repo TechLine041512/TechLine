@@ -25,5 +25,7 @@ public interface CustomersFacadeLocal {
     List<Customers> findRange(int[] range);
 
     int count();
+
+    List<Customers> showAll();
     
 }

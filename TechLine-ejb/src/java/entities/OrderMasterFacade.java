@@ -49,4 +49,5 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
         return (long) q.getSingleResult();
     }
     
+    
 }

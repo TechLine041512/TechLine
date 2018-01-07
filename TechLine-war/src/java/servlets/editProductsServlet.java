@@ -183,7 +183,7 @@ public class editProductsServlet extends HttpServlet {
                 }
                 products.setProductDiscount(Integer.parseInt(discount));
                 productsFacade.edit(products);
-                request.setAttribute("myMess", "Edit successful!");
+                request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                 break;
             case "blockProduct":
@@ -191,7 +191,7 @@ public class editProductsServlet extends HttpServlet {
                 product = productsFacade.find(productId);
                 product.setProductStatus(Boolean.FALSE);
                 productsFacade.edit(product);
-                request.setAttribute("myMess", "Block successful!");
+                request.setAttribute("message", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                 break;
             case "cancelProduct":
@@ -207,7 +207,7 @@ public class editProductsServlet extends HttpServlet {
                 type.setTypeDesc(request.getParameter("txtTypeDesc"));
                 type.setTypeIcon(request.getParameter("txtTypeIcon"));
                 productTypesFacade.edit(type);
-                request.setAttribute("myMess", "Edit successful!");
+                request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             case "blockType":
@@ -220,7 +220,7 @@ public class editProductsServlet extends HttpServlet {
                     pro.setProductStatus(Boolean.FALSE);
                     productsFacade.edit(pro);
                 }
-                request.setAttribute("myMess", "Block successful!");
+                request.setAttribute("message", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             //admin cancel product type
@@ -235,7 +235,7 @@ public class editProductsServlet extends HttpServlet {
                 catEdit.setCategoryDesc(request.getParameter("txtDescription"));
                 catEdit.setCategoryIcon(request.getParameter("txtIcon"));
                 categoriesFacade.edit(catEdit);
-                request.setAttribute("myMess", "Edit successful!");
+                request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             case "blockCategory":
@@ -253,7 +253,7 @@ public class editProductsServlet extends HttpServlet {
                 }
                 catBlock.setCategoryStatus(Boolean.FALSE);
                 categoriesFacade.edit(catBlock);
-                request.setAttribute("myMess", "Block successful!");
+                request.setAttribute("message", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category

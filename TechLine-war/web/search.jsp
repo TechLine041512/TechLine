@@ -28,7 +28,14 @@
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
 
     </head>
-    <body>		
+    <body>	
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${message}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
@@ -128,7 +135,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                              <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -136,7 +143,7 @@
                                     <ul>
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>

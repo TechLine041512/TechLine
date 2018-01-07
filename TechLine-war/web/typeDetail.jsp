@@ -35,6 +35,13 @@
         <![endif]-->
     </head>
     <body>		
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${message}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
@@ -46,6 +53,7 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
+                            <li><a class="btn" href="viewServlet?action=viewShoppingCart">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>
@@ -133,7 +141,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                              <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -141,7 +149,7 @@
                                     <ul>
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -230,30 +238,16 @@
                         <div class="block">								
                             <h4 class="title"><strong>Best</strong> Seller</h4>								
                             <ul class="small-product">
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Praesent tempor sem sodales">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Veriya Lightweight Casual Travel School</a>
-                                </li>
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Luctus quam ultrices rutrum">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Edifier H650 Hi-Fi On-Ear Headphones</a>
-                                </li>
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Fusce id molestie massa">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Gorsun Lightweight Sport Workout Headphones</a>
-                                </li>   
+                                <c:forEach items="${listTopProduct}" var="top">
+                                    <li style="text-align:center;">
+                                        <div>
+                                            <a href="viewServlet?action=productDetail&idProduct=${top.id}" title="${top.name}">
+                                                <img src="${top.image}" style="width: 150px; height: 150px">
+                                            </a>
+                                        </div>
+                                        <a href="viewServlet?action=productDetail&idProduct=${top.id}">${top.name}</a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

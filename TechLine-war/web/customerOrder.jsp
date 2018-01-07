@@ -28,7 +28,14 @@
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
 
     </head>
-    <body>		
+    <body>	
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${message}");
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">

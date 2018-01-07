@@ -29,10 +29,10 @@
         <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>
-        <c:if test="${not empty registMess}">
+        <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${registMess}");
+                    alert("${message}");
                 })
             </script>
         </c:if>
@@ -198,7 +198,7 @@
                                                             <span class="sale_tag"></span>
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="${item.productImage[0]}" alt="${item.productName}" style="width: 200px; height: 200px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
-                                                            <p class="price">&#36;${item.productPrice}</p>
+                                                            <p class="price">&#36;${item.productPrice - (item.productPrice * item.productDiscount / 100)}</p>
                                                             <div>
                                                                 <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
                                                                 <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item.productId}">Add to cart</a>
@@ -215,7 +215,7 @@
                                                         <div class="product-box">
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage[0]}" alt="${item2.productName}" style="width: 200px; height: 200px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
-                                                            <p class="price">&#36;${item2.productPrice}</p>
+                                                            <p class="price">&#36;${item2.productPrice - (item2.productPrice * item2.productDiscount / 100)}</p>
                                                             <div>
                                                                 <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item2.productId}">Detail</a>
                                                                 <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item2.productId}">Add to cart</a>
@@ -249,7 +249,7 @@
                                                             <span class="sale_tag"></span>
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage[0]}" alt="${itemDiscount.productName}" style="width: 200px; height: 200px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount.productPrice}</p>
+                                                            <p class="price">&#36;${itemDiscount.productPrice - (itemDiscount.productPrice * itemDiscount.productDiscount / 100)}</p>
                                                             <div>
                                                                 <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
                                                                 <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount.productId}">Add to cart</a>
@@ -266,7 +266,7 @@
                                                         <div class="product-box" >
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage[0]}" alt="${itemDiscount2.productName}" style="width: 200px; height: 200px"/></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount2.productPrice}</p>
+                                                            <p class="price">&#36;${itemDiscount2.productPrice - (itemDiscount2.productPrice * itemDiscount2.productDiscount / 100)}</p>
                                                             <div>
                                                                 <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
                                                                 <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount2.productId}">Add to cart</a>
@@ -292,16 +292,16 @@
                                     <div class="carousel-inner">
                                         <div class="active item">
                                             <ul class="thumbnails">
-                                                <c:forEach items="${ListProductByDiscount1}" var="itemDiscount">
+                                                <c:forEach items="${ListProductBySeller1}" var="itemSeller">
                                                     <li class="span3" style="line-height: none">
                                                         <div class="product-box" >
                                                             <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount.productPrice}</p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}"><img src="${itemSeller.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}" class="title" style="height: 60px;">${itemSeller.productName}</a><br/>
+                                                            <p class="price">&#36;${itemSeller.productPrice - (itemSeller.productPrice * itemSeller.productDiscount / 100)}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
-                                                                <button class="btn btn-inverse" type="submit">Add to cart</button>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller.productId}">Add to cart</a>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -310,15 +310,15 @@
                                         </div>
                                         <div class="item">
                                             <ul class="thumbnails">
-                                                <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
+                                                <c:forEach items="${ListProductBySeller2}" var="itemSeller2">
                                                     <li class="span3">
                                                         <div class="product-box" style="line-height: none">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" alt="" /></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount2.productPrice}</p>
+                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}"><img src="${itemSeller2.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}" class="title" style="height: 60px;">${itemSeller2.productName}</a><br/>
+                                                            <p class="price">&#36;${itemSeller2.productPrice - (itemSeller2.productPrice * itemSeller2.productDiscount / 100)}</p>
                                                             <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
-                                                                <button class="btn btn-inverse" type="submit">Add to cart</button>
+                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}">Detail</a>
+                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller2.productId}">Add to cart</a>
                                                             </div>
                                                         </div>
                                                     </li>     
@@ -363,25 +363,12 @@
             </section>
             <section class="our_client">
                 <h4 class="title"><span class="text">Manufactures</span></h4>
-                <div class="row">					
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/14.png" style="width: 120px; height: 45px;"></a>
-                    </div>
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/35.png" style="width: 120px; height: 45px;"></a>
-                    </div>
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/1.png" style="width: 120px; height: 45px;"></a>
-                    </div>
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/2.png" style="width: 120px; height: 45px;"></a>
-                    </div>
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/3.png" style="width: 120px; height: 45px;"></a>
-                    </div>
-                    <div class="span2">
-                        <a href="#"><img alt="" src="resource/themes/images/clients/4.png" style="width: 120px; height: 45px;"></a>
-                    </div>
+                <div class="row">
+                    <c:forEach items="${listBrands}" var="brand">
+                        <div class="span2">
+                            <img alt="${brand.brandName}" src="${brand.brandIcon}" style="width: 120px; height: 45px;">
+                        </div>
+                    </c:forEach>
                 </div>
             </section>
             <section id="footer-bar">

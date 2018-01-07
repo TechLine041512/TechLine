@@ -33,10 +33,14 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
             q.setParameter("userId", userID);
             q.setParameter("password", pwd);
             q.setParameter("userStatus", true);
+            Users user = (Users) q.getSingleResult();
+            if (user != null) {
+                return user;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (Users) q.getSingleResult();
+        return null;
     }
 
     @Override

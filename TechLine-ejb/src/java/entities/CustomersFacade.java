@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,5 +24,16 @@ public class CustomersFacade extends AbstractFacade<Customers> implements Custom
     public CustomersFacade() {
         super(Customers.class);
     }
+
+    @Override
+    public List<Customers> showAll() {
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Customers c WHERE c.users.userStatus = TRUE");
+        List<Customers> list = q.getResultList();
+        if (list != null) {
+            return list;
+        }
+        return null;
+    }
+    
     
 }

@@ -28,7 +28,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${message}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
                 <!--

@@ -28,7 +28,6 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
                 <!--

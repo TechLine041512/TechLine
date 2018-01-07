@@ -25,5 +25,7 @@ public interface SellerFacadeLocal {
     List<Seller> findRange(int[] range);
 
     int count();
+
+    List<Seller> showAll();
     
 }

@@ -29,10 +29,10 @@
         <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>
-        <c:if test="${not empty myMess}">
+        <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${myMess}");
+                    alert("${message}");
                 })
             </script>
         </c:if>
@@ -144,9 +144,9 @@
                                 <div class="error"></div>
                                 <div class="form loginBox">
                                     <form method="post" action="editCustomerServlet">
-                                        <input id="oldPass" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="password" name="txtOldPassword" required="true"><br/>
-                                        <input id="newPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtNewPass" required="true"><br/>
-                                        <input id="confirmPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtConfirmPass" required="true"><br/>
+                                        <input id="oldPass" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="password" name="txtOldPassword" required="true" required title="This is your current password"><br/>
+                                        <input id="newPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtNewPass" required="true" required title="This is your new password"><br/>
+                                        <input id="confirmPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password"><br/>
                                         <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="cusChangePassword" onclick="return validatePass()">Change Password</button>
                                     </form>
                                 </div>
@@ -190,18 +190,18 @@
                     <div class="span12">
                         <div class="my-main"><!-----!!!!!!!!!!!!!!!!!!!!!!!!.my-main Phan than noi dung trang!!!!!!!!!!!!!!!!!!!!!!!!!!!!----->
                             <button onclick="topFunction()" id="myBtn" title="Go to top">Go to top</button>
-                            <h3>Tài Khoản Của Tôi</h3>
+                            <h3>My Account Information</h3>
 
                             <div class="cus-info"><!----- .cus-info ---->
-                                <h4>Chức năng khách hàng</h4>
+                                <h4>Customer Features</h4>
                                 <div class="customer-links"><!----- .customer-links ----->
                                     <ul>
-                                        <li><i class="fa fa-shopping-cart"></i><a href="OrderDetail" id="customer-cart" onclick="return isNull(<%= session.getAttribute("cart") != null%>);">Giỏ hàng của tôi</a></li>
-                                        <li><i class="fa fa-cubes"></i><a href="customerOrder.jsp" id="customer-history">Lịch sử đặt hàng</a></li>
-                                        <li><i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();">Đổi mật khẩu</a></li>
+                                        <li><i class="fa fa-shopping-cart"></i><a href="viewServlet?action=viewShoppingCart" id="customer-cart" onclick="return isNull(<%= session.getAttribute("cart") != null%>);">My Cart</a></li>
+                                        <li><i class="fa fa-cubes"></i><a href="customerOrder.jsp" id="customer-history">Order History</a></li>
+                                        <li><i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();">Change Password</a></li>
                                     </ul>
                                 </div><!----- .customer-links end ----->
-                                <h4>Thông tin khách hàng</h4>
+                                <h4>Personal Information</h4>
                                 <form action="editCustomerServlet" method="post">
                                     <table style="border:#003 2px solid; border-radius:5px;">
                                         <tbody>

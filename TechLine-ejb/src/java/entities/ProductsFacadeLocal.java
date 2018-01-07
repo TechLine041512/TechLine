@@ -41,4 +41,6 @@ public interface ProductsFacadeLocal {
     long countSoldProduct();
 
     List<Products> getTopProduct();
+
+    List<Products> showAll();
 }

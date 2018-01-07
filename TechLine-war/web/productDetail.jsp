@@ -130,7 +130,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirecServlet?action=backToHome">Home</a>	          
+                              <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -190,7 +190,7 @@
                                     <strong>Rating Points:</strong> <span style="color: yellow"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span><br>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
                                 </address>									
-                                <h4>Price: <strong style="color: red;">&#36;${product.productPrice}</strong> <strong><strike> ${product.productDiscount}</strike></strong></h4>
+                                <h4>Price: <strong style="color: red;">&#36;${product.productPrice - (product.productPrice * product.productDiscount / 100)}</strong> <strong><strike> ${product.productPrice}</strike></strong></h4>
                             </div>
                             <div class="span5">
                                 <form class="form-inline">                                    
@@ -277,30 +277,16 @@
                         <div class="block">								
                             <h4 class="title"><strong>Best</strong> Seller</h4>								
                             <ul class="small-product">
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Praesent tempor sem sodales">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/713tfuNKQTL._SX522_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Veriya Lightweight Casual Travel School</a>
-                                </li>
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Luctus quam ultrices rutrum">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71C%2Bv7lhWSL._SL1500_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Edifier H650 Hi-Fi On-Ear Headphones</a>
-                                </li>
-                                <li style="text-align:center;">
-                                    <div>
-                                        <a href="#" title="Fusce id molestie massa">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/71XA-bxbIkL._SL1500_.jpg" style="width: 150px; height: 150px">
-                                        </a>
-                                    </div>
-                                    <a href="#">Gorsun Lightweight Sport Workout Headphones</a>
-                                </li>   
+                                <c:forEach items="${listTopProduct}" var="top">
+                                    <li style="text-align:center;">
+                                        <div>
+                                            <a href="viewServlet?action=productDetail&idProduct=${top.id}" title="${top.name}">
+                                                <img src="${top.image}" style="width: 150px; height: 150px">
+                                            </a>
+                                        </div>
+                                        <a href="viewServlet?action=productDetail&idProduct=${top.id}">${top.name}</a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -320,77 +306,34 @@
                             <div class="carousel-inner">
                                 <div class="active item">
                                     <ul class="thumbnails listing-products">
-                                        <li class="span3">
-                                            <div class="product-box">
-                                                <span class="sale_tag"></span>												
-                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width: 200px; height: 200px"></a><br/>
-                                                <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
-                                                <p class="price">$341</p>
-                                            </div>
-                                        </li>
-                                        <li class="span3">
-                                            <div class="product-box">
-                                                <span class="sale_tag"></span>												
-                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/61eKsimQtVL._SL1000_.jpg" style="width: 200px; height: 200px"></a><br/>
-                                                <a href="product_detail.html" class="title" style="height: 60px;">Western Digital Caviar SE (WD3200AAJS)</a><br/>
-                                                <p class="price">$341</p>
-                                            </div>
-                                        </li>       
-                                        <li class="span3">
-                                            <div class="product-box">												
-                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/314XCz9A30L._SX425_.jpg" style="width: 200px; height: 200px"></a><br/>
-                                                <a href="product_detail.html" class="title" style="height: 60px;">WD 2TB Elements Portable External Hard Drive</a><br/>
-                                                <p class="price">$28</p>
-                                            </div>
-                                        </li>
-                                        <li class="span3">
-                                            <div class="product-box">												
-                                                <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41JjEu7FCkL._AC_US218_.jpg" style="width: 200px; height: 200px"></a><br/>
-                                                <a href="product_detail.html" class="title" style="height: 60px;">WD Blue 1TB SATA Desktop Hard Drive</a><br/>
-                                                <p class="price">$28</p>
-                                            </div>
-                                        </li>
+                                        <c:forEach items="${listProductRelated1}" var="items">
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <span class="sale_tag"></span>												
+                                                    <a href="product_detail.html"><img alt="${items.productName}" src="${items.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
+                                                    <a href="product_detail.html" class="title" style="height: 60px;">${items.productName}</a><br/>
+                                                    <p class="price">${items.productPrice - (items.productPrice * items.productDiscount / 100)}</p>
+                                                </div>
+                                            </li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
-                                <div class="item">
-                                    <ul class="thumbnails listing-products">
-                                        <li class="span3">
-                                            <div class="product-box">
-                                                <span class="sale_tag"></span>												
-                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
-                                                <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                <a href="#" class="category">Phasellus consequat</a>
-                                                <p class="price">$341</p>
-                                            </div>
-                                        </li>
-                                        <li class="span3">
-                                            <div class="product-box">
-                                                <span class="sale_tag"></span>												
-                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/1.jpg"></a><br/>
-                                                <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                <a href="#" class="category">Phasellus consequat</a>
-                                                <p class="price">$341</p>
-                                            </div>
-                                        </li>
-                                        <li class="span3">
-                                            <div class="product-box">												
-                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/2.jpg"></a><br/>
-                                                <a href="product_detail.html">Praesent tempor sem</a><br/>
-                                                <a href="#" class="category">Erat gravida</a>
-                                                <p class="price">$28</p>
-                                            </div>
-                                        </li>
-                                        <li class="span3">
-                                            <div class="product-box">
-                                                <span class="sale_tag"></span>												
-                                                <a href="product_detail.html"><img alt="" src="resource/themes/images/ladies/3.jpg"></a><br/>
-                                                <a href="product_detail.html" class="title">Wuam ultrices rutrum</a><br/>
-                                                <a href="#" class="category">Suspendisse aliquet</a>
-                                                <p class="price">$341</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <c:if test="${listProductRelated2 != null}">
+                                    <div class="item">
+                                        <ul class="thumbnails listing-products">
+                                            <c:forEach items="${listProductRelated2}" var="items2">
+                                                <li class="span3">
+                                                    <div class="product-box">
+                                                        <span class="sale_tag"></span>												
+                                                        <a href="product_detail.html"><img alt="${items2.productName}" src="${items2.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
+                                                        <a href="product_detail.html" class="title" style="height: 60px;">${items2.productName}</a><br/>
+                                                        <p class="price">${items2.productPrice - (items2.productPrice * items2.productDiscount / 100)}</p>
+                                                    </div>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
