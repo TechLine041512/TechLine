@@ -210,7 +210,24 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "showProductType":
-                    request.setAttribute("listProductType", productTypesFacade.findAll());
+                    List<ProductTypes> listProductType = productTypesFacade.findAll();
+                    PageProduct pageProductType = new PageProduct(listProductType, 10);
+                    String nProductType = request.getParameter("btn");
+                    if (nProductType != null) {
+                        if (nProductType.equals("next")) {
+                            pageProductType.next();
+                        }
+                        if (nProductType.equals("prev")) {
+                            pageProductType.prev();
+                        }
+                    }
+                    String pagesProductType = request.getParameter("page");
+                    if (pagesProductType != null) {
+                        int m = Integer.parseInt(pagesProductType);
+                        pageProductType.setPageIndex(m);
+                        pageProductType.updateModel();
+                    }
+                    request.setAttribute("pageProductType", pageProductType);
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
 
