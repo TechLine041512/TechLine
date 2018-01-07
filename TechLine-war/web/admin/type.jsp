@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -166,6 +167,9 @@
                                         <h4 class="title">Type Product</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
+                                    <%
+                                        PageProduct pageProductType = (PageProduct) request.getAttribute("pageProductType");
+                                    %>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
                                             <thead class="text-primary">
@@ -176,7 +180,7 @@
                                             <th>Action</th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${listProductType}" var="type">
+                                                <c:forEach items="<%=pageProductType.getModel()%>" var="type">
                                                     <tr>
                                                         <td><a href="RedirectServlet?action=editProductType&typeId=${type.typeId}">${type.typeId}</a></td>
                                                         <td>${type.typeName}</td>
@@ -187,6 +191,23 @@
                                                 </c:forEach>        
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="pagination pagination-small pagination-centered" style="margin-left:400px;">
+                                        <ul>
+                                            <li><a href="viewServlet?action=showProductType&btn=prev">Prev</a></li>
+                                                <%
+
+                                                    int pages = pageProductType.getPages();
+                                                    for (int i = 1; i <= pages; i++) {
+                                                %>
+
+                                            <li><a href="viewServlet?action=showProductType&page=<%=i%>"><%=i%></a></li>
+
+                                            <%
+                                                }
+                                            %>
+                                            <li><a href="viewServlet?action=showProductType&btn=next">Next</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
