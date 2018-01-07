@@ -11,6 +11,7 @@ import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.Customers;
 import entities.CustomersFacadeLocal;
+import entities.OrderDetails;
 import entities.OrderDetailsFacadeLocal;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
@@ -40,6 +41,7 @@ import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
 import models.SellerOrder;
+import models.TopProductStaticModel;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -71,8 +73,7 @@ public class viewServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
             Users user = (Users) request.getSession().getAttribute("user");
@@ -89,7 +90,7 @@ public class viewServlet extends HttpServlet {
             List<TopProductModel> listTopProducts = TechLineUtils.buildProductTop(productsFacade.getTopProduct());
 
             ProductTypes productTypes;
-            PageProduct pageProduct;
+            PageProduct paging;
             Products product;
             String idProduct;
             String typeId;
@@ -101,23 +102,23 @@ public class viewServlet extends HttpServlet {
                     for (ProductTypes p : listProductTypes) {
                         listProduct.addAll(p.getProductsCollection());
                     }
-                    pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
+                    paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
                     String n = request.getParameter("btn");
                     if (n != null) {
                         if (n.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (n.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pages = request.getParameter("page");
                     if (pages != null) {
                         int m = Integer.parseInt(pages);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
-                    request.setAttribute("pageProduct", pageProduct);
+                    request.setAttribute("pageProduct", paging);
                     request.setAttribute("listProduct", listProduct);
                     request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("category", categories);
@@ -133,26 +134,26 @@ public class viewServlet extends HttpServlet {
                     }
                     listProduct = (List<Products>) productTypes.getProductsCollection();
 
-                    pageProduct = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
+                    paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
                     String n1 = request.getParameter("btn");
 
                     if (n1 != null) {
                         if (n1.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (n1.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pages1 = request.getParameter("page");
 
                     if (pages1 != null) {
                         int m = Integer.parseInt(pages1);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
 
-                    request.setAttribute("pageProduct", pageProduct);
+                    request.setAttribute("pageProduct", paging);
                     request.setAttribute("listProduct", listProduct);
                     request.setAttribute("listTopProduct", listTopProducts.subList(0,3));
                     request.setAttribute("productTypesID", productTypes.getTypeId()); //Noted
@@ -228,44 +229,44 @@ public class viewServlet extends HttpServlet {
 
                 case "showProductAdmin":
                     List<Products> listDateposted = productsFacade.getListProductByDatePost();
-                    pageProduct = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
+                    paging = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
                     String n3 = request.getParameter("btn");
                     if (n3 != null) {
                         if (n3.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (n3.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pages3 = request.getParameter("page");
                     if (pages3 != null) {
                         int m = Integer.parseInt(pages3);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
-                    request.setAttribute("pageProduct", pageProduct);
+                    request.setAttribute("pageProduct", paging);
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
                 case "showBrand":
-                    pageProduct = new PageProduct(listBrands, 10);
+                    paging = new PageProduct(listBrands, 10);
                     String nBrand = request.getParameter("btn");
                     if (nBrand != null) {
                         if (nBrand.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (nBrand.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pagesBrand = request.getParameter("page");
                     if (pagesBrand != null) {
                         int m = Integer.parseInt(pagesBrand);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
-                    request.setAttribute("pageBrands", pageProduct);
+                    request.setAttribute("pageBrands", paging);
                     request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
                     break;
 
@@ -276,47 +277,47 @@ public class viewServlet extends HttpServlet {
 
                 case "showProductType":
                     listProductTypes = productTypesFacade.showAll();
-                    pageProduct = new PageProduct(listProductTypes, 10);
+                    paging = new PageProduct(listProductTypes, 10);
                     String nProductType = request.getParameter("btn");
                     if (nProductType != null) {
                         if (nProductType.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (nProductType.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pagesProductType = request.getParameter("page");
                     if (pagesProductType != null) {
                         int m = Integer.parseInt(pagesProductType);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
-                    request.setAttribute("pageProductType", pageProduct);
+                    request.setAttribute("pageProductType", paging);
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
 
                 case "showOrder":
 
-                    pageProduct = new PageProduct(listOrderMaster, 15);
+                    paging = new PageProduct(listOrderMaster, 15);
                     String nOrderMaster = request.getParameter("btn");
                     if (nOrderMaster != null) {
                         if (nOrderMaster.equals("next")) {
-                            pageProduct.next();
+                            paging.next();
                         }
                         if (nOrderMaster.equals("prev")) {
-                            pageProduct.prev();
+                            paging.prev();
                         }
                     }
                     String pagesOrderMaster = request.getParameter("page");
 
                     if (pagesOrderMaster != null) {
                         int m = Integer.parseInt(pagesOrderMaster);
-                        pageProduct.setPageIndex(m);
-                        pageProduct.updateModel();
+                        paging.setPageIndex(m);
+                        paging.updateModel();
                     }
 
-                    request.setAttribute("pageOrderMaster", pageProduct);
+                    request.setAttribute("pageOrderMaster", paging);
                     request.getRequestDispatcher("admin/order.jsp").forward(request, response);
                     break;
 
@@ -446,12 +447,36 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
-
+                case "viewTopProductPDF":
+                    listProduct = productsFacade.getTopProduct();
+                    List<TopProductStaticModel> listStatic = new ArrayList<>();
+                    for (Products p : listProduct) {
+                        TopProductStaticModel model = new TopProductStaticModel();
+                        model.setId(p.getProductId());
+                        model.setName(p.getProductName());
+                        StringBuilder sb = new StringBuilder();
+                        int sold = 0;
+                        for (OrderDetails o : p.getOrderDetailsCollection()) {
+                            sb.append(o.getOrderMaster().getOrderMId());
+                            sb.append(",");
+                            sold += o.getQuantity();
+                        }
+                        model.setSold(sold);
+                        model.setOrderId(sb.toString());
+                        model.setSeller(p.getUserId().getFullname());
+                        listStatic.add(model);
+                    }
+                    request.setAttribute("products", listStatic);
+                    request.getRequestDispatcher("report?action=report 2&reportName=topProduct").forward(request, response);
+                    break;
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
             }
+        }
+        catch (Exception e ){
+            e.printStackTrace();
         }
     }
 

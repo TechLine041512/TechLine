@@ -210,6 +210,15 @@ public class editProductsServlet extends HttpServlet {
                 request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
+            case "editBrand":
+                String brandId = request.getParameter("txtBrandId");
+                Brands brand = brandsFacade.find(brandId);
+                brand.setBrandName(request.getParameter("txtBrandName"));
+                brand.setBrandIcon(request.getParameter("txtBrandIcon"));
+                brandsFacade.edit(brand);
+                request.setAttribute("message", "Edit successful!");
+                request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
+                break;
             case "blockType":
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
@@ -226,6 +235,10 @@ public class editProductsServlet extends HttpServlet {
             //admin cancel product type
             case "cancelProductType":
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                break;
+                
+            case "cancelBrand":
+                request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
             //admin edit category
             case "editCategory":

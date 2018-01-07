@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utils.TechLineUtils;
 
 public class addProductsServlet extends HttpServlet {
     @EJB
@@ -120,6 +119,19 @@ public class addProductsServlet extends HttpServlet {
                     productTypes2.setTypeStatus(true);
                     productTypesFacade.create(productTypes2);
                     request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                    break;
+                    
+                case "addBrand":
+                    Brands brand = new Brands();
+                    String brandId = brandsFacade.newBrandId();
+                    if (brandId != null) {
+                        brand.setBrandId(brandId);
+                    }
+                    brand.setBrandIcon(request.getParameter("txtBrandIcon"));
+                    brand.setBrandName(request.getParameter("txtTypeName"));
+                    brand.setBrandStatus(Boolean.TRUE);
+                    brandsFacade.create(brand);
+                    request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                     break;
                 case "cancelProductType":
                     request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);

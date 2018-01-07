@@ -9,11 +9,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import utils.Constants;
 import utils.TechLineUtils;
 
@@ -51,23 +62,22 @@ public class report extends HttpServlet {
         response.setContentType("application/pdf");
         response.setHeader("Content-Type", "application/pdf");
 
+        
         //report-- Change this path.
-        String reportpath = pdfPath + ".pdf";
+        String reportpath = request.getServletContext().getRealPath("reportTemplate/topProduct.jrxml");
         File filePDF = new File(reportpath);
         FileInputStream fis = new FileInputStream(filePDF);
-        OutputStream os = response.getOutputStream();
         try {
-            response.setContentLength((int) filePDF.length());
-            int byteRead = 0;
-            while ((byteRead = fis.read()) != -1) {
-                os.write(byteRead);
-            }
-            os.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
+            JasperReport jasperReport = JasperCompileManager.compileReport(fis);
+            List<Map<String,Object>> rows = (List<Map<String,Object>>) request.getAttribute("products");
+            JRDataSource jRDataSource = new JRBeanCollectionDataSource(rows);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
+            JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+        } catch (JRException ex) {
+            Logger.getLogger(report.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            os.close();
-            fis.close();
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
         }
 
     }

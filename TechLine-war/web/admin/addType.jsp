@@ -178,7 +178,7 @@
                                                     <div class="form-group label-floating">
                                                         <label>Category Name</label>
                                                         <select class="form-control" name="txtCategory">
-                                                            <c:forEach items="${listlistCategory}" var="category">
+                                                            <c:forEach items="${listCategory}" var="category">
                                                                 <option value="${category.categoryId}">${category.categoryName}</option>
                                                             </c:forEach>
                                                         </select>

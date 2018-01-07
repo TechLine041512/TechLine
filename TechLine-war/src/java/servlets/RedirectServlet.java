@@ -85,6 +85,15 @@ public class RedirectServlet extends HttpServlet {
                     request.setAttribute("listType", listProductTypes);
                     request.getRequestDispatcher("seller/addProduct.jsp").forward(request, response);
                     break;
+                case "editBrand":
+                    String brandId = request.getParameter("brandId");
+                    Brands brand = brandsFacade.find(brandId);
+                    request.setAttribute("brand", brand);
+                    request.getRequestDispatcher("admin/editBrand.jsp").forward(request, response);
+                    break;
+                case "addBrand":
+                    request.getRequestDispatcher("admin/addBrand.jsp").forward(request, response);
+                    break;
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
