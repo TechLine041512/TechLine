@@ -99,6 +99,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="viewServlet?action=showBrand">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
@@ -176,14 +182,14 @@
                                             <%
                                                 PageProduct pageSeller = (PageProduct) request.getAttribute("pageSeller");
                                             %>
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" id="myTable">
                                                 <thead>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Store Name</th>
-                                                <th>Store Address</th>
-                                                <th>Phone</th>
-                                                <th>Action</th>
+                                                <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                                <th onclick="sortTable(1)"><a href="#">Name</a></th>
+                                                <th onclick="sortTable(2)"><a href="#">Store Name</a></th>
+                                                <th onclick="sortTable(3)"><a href="#">Store Address</a></th>
+                                                <th onclick="sortTable(4)"><a href="#">Phone</a></th>
+                                                <th><a href="#">Action</a></th>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="<%= pageSeller.getModel()%>" var="seller">
@@ -249,7 +255,7 @@
     <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
-
+    <script src="resource/assets/js/sort.js" type="text/javascript"></script>
     <!--  Charts Plugin -->
     <script src="resource/assets/js/chartist.min.js"></script>
 

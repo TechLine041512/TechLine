@@ -5,14 +5,13 @@
 --%>
 
 <%@page import="utils.PageProduct"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Orders</title>
+        <title>Product Type</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -32,7 +31,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
-
+        <c:if test="${not empty myMess}">
+            <script>
+                window.addEventListener("load", function() {
+                    alert("${myMess}");
+                })
+            </script>
+        </c:if>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
@@ -86,13 +91,13 @@
                                 <p>Type Product</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=showBrand">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Brand</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
@@ -158,90 +163,54 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">                       
-                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Delete</a>
+                        <div class="row" style="text-align: center;">
+                            <a class="btn-instagram btn" href="RedirectServlet?action=addProductType">Add</a>                        
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Order List</h4>
+                                        <h4 class="title">Type Product</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <%
-                                        PageProduct pageOrder = (PageProduct) request.getAttribute("pageOrderMaster");
+                                        PageProduct pageBrand = (PageProduct) request.getAttribute("pageBrands");
                                     %>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover" id="myTable">
                                             <thead class="text-primary">
-                                            <th onclick="sortTable(0)"><a href="#">Order ID</a></th>
-                                            <th onclick="sortTable(1)"><a href="#">Buyer</a></th>   
-                                            <th onclick="sortTable(2)"><a href="#">Date</a></th>
-                                            <th onclick="sortTable(3)"><a href="#">Note</a></th>
-                                            <th onclick="sortTable(4)"><a href="#">Total Price</a></th>
-                                            <th onclick="sortTable(5)"><a href="#">Status</a></th>
+                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Name</a></th>
+                                            <th><a href="#">Icon</a></th>
+                                            <th><a href="#">Action</a></th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="<%=pageOrder.getModel()%>" var="order">
-                                                    <c:if test="${order.orderStatus eq 'Done'}">
-                                                        <tr style="background-color: #4edc14; color: #ffffff;"> 
-                                                            <td>${order.orderMId}</td>
-                                                            <td>${order.userId.fullname}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
-                                                            <td>${order.orderNote}</td>
-                                                            <td>${order.orderTotalPrice}</td>
-                                                            <td>${order.orderStatus}</td>
-                                                        </tr>
-                                                    </c:if>     
-                                                    <c:if test="${order.orderStatus eq 'Processing'}">
-                                                        <tr style="background-color: #ffb100; color: #ffffff;"> 
-                                                            <td>${order.orderMId}</td>
-                                                            <td>${order.userId.fullname}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
-                                                            <td>${order.orderNote}</td>
-                                                            <td>${order.orderTotalPrice}</td>
-                                                            <td>${order.orderStatus}</td>
-                                                        </tr>
-                                                    </c:if>     
-                                                    <c:if test="${order.orderStatus eq 'Delivery'}">
-                                                        <tr style="background-color: blue; color: #ffffff;"> 
-                                                            <td>${order.orderMId}</td>
-                                                            <td>${order.userId.fullname}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
-                                                            <td>${order.orderNote}</td>
-                                                            <td>${order.orderTotalPrice}</td>
-                                                            <td>${order.orderStatus}</td>
-                                                        </tr>
-                                                    </c:if>     
-                                                    <c:if test="${order.orderStatus eq 'Cancel'}">
-                                                        <tr style="background-color: red; color: #ffffff;"> 
-                                                            <td>${order.orderMId}</td>
-                                                            <td>${order.userId.fullname}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
-                                                            <td>${order.orderNote}</td>
-                                                            <td>${order.orderTotalPrice}</td>
-                                                            <td>${order.orderStatus}</td>
-                                                        </tr>
-                                                    </c:if>     
+                                                <c:forEach items="<%=pageBrand.getModel()%>" var="brand">
+                                                    <tr>
+                                                        <td><a href="RedirectServlet?action=editProductType&typeId=${type.typeId}">${brand.brandId}</a></td>
+                                                        <td>${brand.brandName}</td>
+                                                        <td><img src="${brand.brandIcon}" style="width: 80px; height: 80px;"/></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}">Block</a></td>
+                                                    </tr>
                                                 </c:forEach>        
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="pagination pagination-small pagination-centered" style="margin-left:400px;">
                                         <ul>
-                                            <li><a href="viewServlet?action=showOrder&btn=prev">Prev</a></li>
+                                            <li><a href="viewServlet?action=showBrand&btn=prev">Prev</a></li>
                                                 <%
 
-                                                    int pages = pageOrder.getPages();
+                                                    int pages = pageBrand.getPages();
                                                     for (int i = 1; i <= pages; i++) {
                                                 %>
 
-                                            <li><a href="viewServlet?action=showOrder&page=<%=i%>"><%=i%></a></li>
+                                            <li><a href="viewServlet?action=showBrand&page=<%=i%>"><%=i%></a></li>
 
                                             <%
                                                 }
                                             %>
-                                            <li><a href="viewServlet?action=showOrder&btn=next">Next</a></li>
+                                            <li><a href="viewServlet?action=showBrand&btn=next">Next</a></li>
                                         </ul>
                                     </div>
                                 </div>

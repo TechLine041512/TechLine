@@ -91,6 +91,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="viewServlet?action=showBrand">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
@@ -167,13 +173,13 @@
                                         <p class="category">Line Tech</p>
                                     </div>
                                     <div class="card-content table-responsive">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover" id="myTable">
                                             <thead class="text-primary">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Icon</th>
-                                            <th>Action</th>
+                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Name</a></th>
+                                            <th><a href="#">Description</a></th>
+                                            <th><a href="#">Icon</a></th>
+                                            <th><a href="#">Action</a></th>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listCategories}" var="category">
@@ -219,7 +225,7 @@
     <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
-
+    <script src="resource/assets/js/sort.js" type="text/javascript"></script>
     <!--  Charts Plugin -->
     <script src="resource/assets/js/chartist.min.js"></script>
 

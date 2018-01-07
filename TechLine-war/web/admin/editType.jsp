@@ -38,49 +38,55 @@
 
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
-                        <a href="viewServlet?action=homeAdmin">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="viewServlet?action=showCustomer">
-                            <i class="material-icons">person</i>
-                            <p>Customer List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="viewServlet?action=showSeller">
-                            <i class="material-icons">person</i>
-                            <p>Seller List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="viewServlet?action=showProductAdmin">
-                            <i class="material-icons">content_paste</i>
-                            <p>Product List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="viewServlet?action=showCategories">
-                            <i class="material-icons">library_books</i>
-                            <p>Categories</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="viewServlet?action=showProductType">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Type Product</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="viewServlet?action=showOrder">
-                            <i class="material-icons">location_on</i>
-                            <p>Orders</p>
-                        </a>
-                    </li>
-                </ul>
+                        <li>
+                            <a href="viewServlet?action=homeAdmin">
+                                <i class="material-icons">dashboard</i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showCustomer">
+                                <i class="material-icons">person</i>
+                                <p>Customer List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showSeller">
+                                <i class="material-icons">person</i>
+                                <p>Seller List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showProductAdmin">
+                                <i class="material-icons">content_paste</i>
+                                <p>Product List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showCategories">
+                                <i class="material-icons">library_books</i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="viewServlet?action=showProductType">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Type Product</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showBrand">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=showOrder">
+                                <i class="material-icons">location_on</i>
+                                <p>Orders</p>
+                            </a>
+                        </li>
+                    </ul>
             </div>
         </div>
 

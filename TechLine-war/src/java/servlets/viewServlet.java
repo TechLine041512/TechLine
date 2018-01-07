@@ -5,12 +5,14 @@
  */
 package servlets;
 
+import entities.Brands;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.Customers;
 import entities.CustomersFacadeLocal;
 import entities.OrderDetailsFacadeLocal;
+import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
@@ -203,7 +205,27 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("pageProduct", pageProduct3);
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
-
+                case "showBrand":
+                    List<Brands> listBrand = brandsFacade.findAll();
+                    PageProduct pageBrands = new PageProduct(listBrand, 10);
+                    String nBrand = request.getParameter("btn");
+                    if (nBrand != null) {
+                        if (nBrand.equals("next")) {
+                            pageBrands.next();
+                        }
+                        if (nBrand.equals("prev")) {
+                            pageBrands.prev();
+                        }
+                    }
+                    String pagesBrand = request.getParameter("page");
+                    if (pagesBrand != null) {
+                        int m = Integer.parseInt(pagesBrand);
+                        pageBrands.setPageIndex(m);
+                        pageBrands.updateModel();
+                    }
+                    request.setAttribute("pageBrands", pageBrands);
+                    request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
+                    break;
                 case "showCategories":
                     request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
@@ -232,7 +254,24 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "showOrder":
-                    request.setAttribute("listOrder", orderMasterFacade.findAll());
+                    List<OrderMaster> listOrderMaster = orderMasterFacade.findAll();
+                    PageProduct pageOrderMaster = new PageProduct(listOrderMaster, 15);
+                    String nOrderMaster = request.getParameter("btn");
+                    if (nOrderMaster != null) {
+                        if (nOrderMaster.equals("next")) {
+                            pageOrderMaster.next();
+                        }
+                        if (nOrderMaster.equals("prev")) {
+                            pageOrderMaster.prev();
+                        }
+                    }
+                    String pagesOrderMaster = request.getParameter("page");
+                    if (pagesOrderMaster != null) {
+                        int m = Integer.parseInt(pagesOrderMaster);
+                        pageOrderMaster.setPageIndex(m);
+                        pageOrderMaster.updateModel();
+                    }
+                    request.setAttribute("pageOrderMaster", pageOrderMaster);
                     request.getRequestDispatcher("admin/order.jsp").forward(request, response);
                     break;
 

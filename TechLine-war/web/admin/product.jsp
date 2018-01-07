@@ -91,6 +91,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="viewServlet?action=showBrand">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
@@ -170,14 +176,14 @@
                                         PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
                                     %>
                                     <div class="card-content table-responsive">
-                                        <table class="table">
+                                        <table class="table table-hover" id="myTable">
                                             <thead class="text-primary">                     
-                                            <th>ID</th>
-                                            <th>Product Name</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
-                                            <th>Action</th>
+                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Product Name</a></th>
+                                            <th onclick="sortTable(2)"><a href="#">Brand</a></th>
+                                            <th><a href="#">Image</a></th>
+                                            <th onclick="sortTable(4)"><a href="#">Quantity</a></th>
+                                            <th><a href="#">Action</a></th>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="<%=pageProduct.getModel()%>" var="product">
@@ -244,7 +250,7 @@
     <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
-
+    <script src="resource/assets/js/sort.js" type="text/javascript"></script>
     <!--  Charts Plugin -->
     <script src="resource/assets/js/chartist.min.js"></script>
 

@@ -88,6 +88,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="viewServlet?action=showBrand">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="viewServlet?action=showOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
