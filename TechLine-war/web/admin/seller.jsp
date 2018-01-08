@@ -191,7 +191,7 @@
                                                         <td>${seller.storeName}</td>
                                                         <td>${seller.storeAddress}</td>
                                                         <td>${seller.users.phone}</td>
-                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}">Block</a></td>
+                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}">${btnBlock}</a></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

@@ -255,6 +255,7 @@ public class editProductsServlet extends HttpServlet {
                     else
                         request.setAttribute("message", "All products of this brand are deactivated. Block successfully!");
                 }
+                request.setAttribute("btnBlock", "Unblock");
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
             case "blockType":
@@ -280,6 +281,7 @@ public class editProductsServlet extends HttpServlet {
                     else
                         request.setAttribute("message", "All products of this type are deactivated. Block successfully!");
                 }
+                request.setAttribute("btnBlock", "Unblock");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             //admin cancel product type
@@ -330,6 +332,7 @@ public class editProductsServlet extends HttpServlet {
                     } else
                         request.setAttribute("message", "All products of this category are deactivated. Block category successfully!");
                 }
+                request.setAttribute("btnBlock", "Unblock");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category

@@ -108,6 +108,7 @@ public class editCustomerServlet extends HttpServlet {
                     uBlock.setUserStatus(Boolean.FALSE);
                     usersFacade.edit(uBlock);
                     request.setAttribute("message", "Blocked customer successfully!");
+                    request.setAttribute("btnBlock", "Unblock");
                     request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
             }

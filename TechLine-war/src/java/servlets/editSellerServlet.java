@@ -91,6 +91,7 @@ public class editSellerServlet extends HttpServlet {
                 uS.setUserStatus(Boolean.FALSE);
                 usersFacadeLocal.edit(uS);
                 request.setAttribute("message", "Blocked seller successfully!");
+                request.setAttribute("btnBlock", "Unblock");
                 request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
             default:
