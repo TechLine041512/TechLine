@@ -12,11 +12,14 @@ import entities.CategoriesFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
+import entities.ProductsComment;
+import entities.ProductsCommentFacadeLocal;
 import entities.ProductsEditHistory;
 import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsEditHistoryPK;
 import entities.ProductsFacadeLocal;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -30,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
+    @EJB
+    private ProductsCommentFacadeLocal productsCommentFacade;
 
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
@@ -189,6 +194,14 @@ public class editProductsServlet extends HttpServlet {
             case "blockProduct":
                 productId = request.getParameter("pid");
                 product = productsFacade.find(productId);
+                //block product comment
+                List<ProductsComment> listProCmt = new ArrayList<>();
+                listProCmt.addAll(product.getProductsCommentCollection());
+                for (ProductsComment prm: listProCmt) {
+                    prm.setCommentStatus(Boolean.FALSE);
+                    productsCommentFacade.edit(prm);
+                }
+                //block product
                 product.setProductStatus(Boolean.FALSE);
                 productsFacade.edit(product);
                 request.setAttribute("message", "Block successful!");
