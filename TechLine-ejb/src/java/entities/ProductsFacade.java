@@ -5,7 +5,6 @@
  */
 package entities;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -68,7 +67,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         sb.append("'venky' AND ");
         sb.append(condition);
         sb.append("'uypoko'");
-        Query q = em.createQuery("SELECT p FROM Products p WHERE ("+sb.toString()+") AND p.productStatus = TRUE ORDER BY p.datePosted ASC");
+        Query q = em.createQuery("SELECT p FROM Products p WHERE ("+sb.toString()+") AND p.productStatus = TRUE ORDER BY p.productId ASC");
         List<Products> listReturn = q.getResultList();
         if (listReturn != null) {
             return listReturn;
@@ -115,7 +114,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
 
     @Override
     public List<Products> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p WHERE p.productStatus = TRUE ORDER BY p.datePosted");
+        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p WHERE p.productStatus = TRUE ORDER BY p.productId DESC");
         List<Products> listReturn = q.getResultList();
         if (listReturn != null) {
             return listReturn;

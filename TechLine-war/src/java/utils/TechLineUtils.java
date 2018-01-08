@@ -5,14 +5,10 @@
  */
 package utils;
 
-import models.SellerOrder;
 import entities.OrderDetails;
 import entities.Products;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -188,55 +184,4 @@ public class TechLineUtils {
         return returnString.toString();
     }
     
-    public List<SellerOrder> getSellerOrdered(String seller){
-        Connection con = null;
-        ReportConnection reportConnection = new ReportConnection();
-        con = reportConnection.connect();
-        List<SellerOrder> lsSellerOrder = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM");
-        sql.append("(");
-        sql.append("SELECT A.ORDERMID, A.PRODUCTID, A.QUANTITY FROM ORDERDETAILS A JOIN PRODUCTS B ON A.PRODUCTID = B.PRODUCTID WHERE B.USERID = 'KENNY'");
-        sql.append(")");
-        sql.append("C JOIN ORDERMASTER D ON C.ORDERMID = D.ORDERMID");
-        sql.append("ORDER BY DATEORDERED DESC");
-        
-        try {
-            pstm = con.prepareCall(sql.toString());
-            rs = pstm.executeQuery();
-            lsSellerOrder = new ArrayList<>();
-            while(rs.next()){
-                SellerOrder order = new SellerOrder();
-                order.setUserId(rs.getString("userId"));
-                order.setProductId(rs.getString("productId"));
-                order.setQuantity(rs.getString("quantity"));
-                order.setOrderId(rs.getString("orderMId"));
-                order.setOrderTotalPrice(rs.getString("orderTotalPrice"));
-                order.setDeliveryPrice(rs.getString("deliveryPrice"));
-                order.setOrderNote(rs.getString("orderNote"));
-                order.setOrderStatus(rs.getString("orderStatus"));
-                order.setDateOrdered(rs.getDate("dateOrdered"));
-                lsSellerOrder.add(order);
-            }
-            return lsSellerOrder;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(rs!=null){
-                rs.close();
-            }
-            if(pstm!=null){
-                pstm.close();
-            }
-            if(con!=null){
-                con.close();
-            }
-            } catch (Exception e) {
-            }
-        }
-        return null;
-    }
 }
