@@ -219,6 +219,19 @@ public class editProductsServlet extends HttpServlet {
                 request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
+            case "blockBrand":
+                String blockBrandId = request.getParameter("bId");
+                Brands blockBr = brandsFacade.find(blockBrandId);
+                List<Products> listProBrand = (List<Products>) blockBr.getProductsCollection();
+                if (listProBrand.isEmpty()) {
+                    blockBr.setBrandStatus(Boolean.FALSE);
+                    brandsFacade.edit(blockBr);
+                    request.setAttribute("message", "Block successfully!");
+                } else {
+                    request.setAttribute("message", "This brand has products, cannot block this brand!");
+                }
+                request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
+                break;
             case "blockType":
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
