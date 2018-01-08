@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
+
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
 
@@ -197,7 +198,7 @@ public class editProductsServlet extends HttpServlet {
                 //block product comment
                 List<ProductsComment> listProCmt = new ArrayList<>();
                 listProCmt.addAll(product.getProductsCommentCollection());
-                for (ProductsComment prm: listProCmt) {
+                for (ProductsComment prm : listProCmt) {
                     prm.setCommentStatus(Boolean.FALSE);
                     productsCommentFacade.edit(prm);
                 }
@@ -236,12 +237,23 @@ public class editProductsServlet extends HttpServlet {
                 String blockBrandId = request.getParameter("bId");
                 Brands blockBr = brandsFacade.find(blockBrandId);
                 List<Products> listProBrand = (List<Products>) blockBr.getProductsCollection();
-                if (listProBrand.isEmpty()) {
+                boolean isBrandCanDisable = true; //Check List Product has all products are blocked or not
+                if (!listProBrand.isEmpty()) {
+                    for (Products pro : listProBrand) {
+                        if (pro.getProductStatus()) {
+                            isBrandCanDisable = false;
+                            request.setAttribute("message", "This brand has products which is active, cannot block this brand!");
+                            break;
+                        }
+                    }
+                }
+                if (isBrandCanDisable) { //If List Product has all products which are blocked
                     blockBr.setBrandStatus(Boolean.FALSE);
                     brandsFacade.edit(blockBr);
-                    request.setAttribute("message", "Block successfully!");
-                } else {
-                    request.setAttribute("message", "This brand has products, cannot block this brand!");
+                    if (listProBrand.isEmpty())
+                        request.setAttribute("message", "This brand has no product. Block successfully!");
+                    else
+                        request.setAttribute("message", "All products of this brand are deactivated. Block successfully!");
                 }
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
@@ -249,13 +261,24 @@ public class editProductsServlet extends HttpServlet {
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
                 List<Products> listProType = (List<Products>) typeBlock.getProductsCollection();
+                boolean isTypeCanDisable = true; //Check List Product has all products are blocked or not
                 //If type has products, do not block type. If not, block type
-                if (listProType.isEmpty()) {
+                if (!listProType.isEmpty()) {
+                    for (Products pro : listProType) {
+                        if (pro.getProductStatus()) {
+                            isTypeCanDisable = false;
+                            request.setAttribute("message", "This type has products which is active, cannot block this type!");
+                            break;
+                        }
+                    }
+                }
+                if (isTypeCanDisable) { //If List Product has all products which are blocked
                     typeBlock.setTypeStatus(Boolean.FALSE);
                     productTypesFacade.edit(typeBlock);
-                    request.setAttribute("message", "Block successful!");
-                } else {
-                    request.setAttribute("message", "This Product Type has products, can not block this type!");
+                    if(listProType.isEmpty())
+                        request.setAttribute("message", "This type has no product. Block successfully!");
+                    else
+                        request.setAttribute("message", "All products of this type are deactivated. Block successfully!");
                 }
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
@@ -282,20 +305,31 @@ public class editProductsServlet extends HttpServlet {
                 String catIdBlock = request.getParameter("catId");
                 Categories catBlock = categoriesFacade.find(catIdBlock);
                 List<ProductTypes> listTypeCat = (List<ProductTypes>) catBlock.getProductTypesCollection();
-                for (ProductTypes pt : listTypeCat) {
-                    List<Products> listProTypeCat = (List<Products>) pt.getProductsCollection();
-                    if (listProTypeCat.isEmpty()) {
-                        pt.setTypeStatus(Boolean.FALSE);
-                        productTypesFacade.edit(pt);
-                    } else {
-                        request.setAttribute("message", "This Category has products, can not block this category!");
-                        request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
-                        break;
+                boolean isCategoryCanDisable = true; //Check List Product has all products are blocked or not
+                boolean isAllTypeEmpty = true;
+                if (!listTypeCat.isEmpty()) {
+                    for (ProductTypes pt : listTypeCat) {
+                        List<Products> listProTypeCat = (List<Products>) pt.getProductsCollection();
+                        if (!listProTypeCat.isEmpty()) {
+                            for (Products pro : listProTypeCat) {
+                                if (pro.getProductStatus()) {
+                                    isCategoryCanDisable = false;
+                                    request.setAttribute("message", "This category has products which is active, cannot block this category!");
+                                    break;
+                                }
+                            }
+                            isAllTypeEmpty = false;
+                        }
                     }
                 }
-                catBlock.setCategoryStatus(Boolean.FALSE);
-                categoriesFacade.edit(catBlock);
-                request.setAttribute("message", "Block category successfully!");
+                if (isCategoryCanDisable) {
+                    catBlock.setCategoryStatus(Boolean.FALSE);
+                    categoriesFacade.edit(catBlock);
+                    if (listTypeCat.isEmpty() || isAllTypeEmpty) {
+                        request.setAttribute("message", "This category has no product. Block successfully");
+                    } else
+                        request.setAttribute("message", "All products of this category are deactivated. Block category successfully!");
+                }
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category
