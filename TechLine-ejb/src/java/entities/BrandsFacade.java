@@ -40,7 +40,7 @@ public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacade
 
     @Override
     public List<Brands> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT b FROM Brands b WHERE b.brandStatus = TRUE");
+        javax.persistence.Query q = em.createQuery("SELECT b FROM Brands b");
         List<Brands> list = q.getResultList();
         if (list != null) {
             return list;

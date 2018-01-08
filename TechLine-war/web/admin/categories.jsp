@@ -188,7 +188,7 @@
                                                         <td>${category.categoryName}</td>
                                                         <td>${category.categoryDesc}</td>
                                                         <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}">${btnBlock}</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}&bl=${category.categoryStatus ? 'Block' : 'Unblock'}">${category.categoryStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

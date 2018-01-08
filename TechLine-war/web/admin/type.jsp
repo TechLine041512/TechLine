@@ -192,7 +192,7 @@
                                                         <td>${type.typeName}</td>
                                                         <td>${type.typeDesc}</td>
                                                         <td><img src="${type.typeIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}">${btnBlock}</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}&bl=${type.typeStatus ? 'Block' : 'Unblock'}">${type.typeStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>

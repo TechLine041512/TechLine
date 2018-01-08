@@ -202,7 +202,6 @@ public class viewServlet extends HttpServlet {
                         pageCustomer.updateModel();
                     }
                     request.setAttribute("pageCus", pageCustomer);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
 
@@ -225,7 +224,6 @@ public class viewServlet extends HttpServlet {
                         pageSeller.updateModel();
                     }
                     request.setAttribute("pageSeller", pageSeller);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
                     break;
 
@@ -248,7 +246,6 @@ public class viewServlet extends HttpServlet {
                         paging.updateModel();
                     }
                     request.setAttribute("pageProduct", paging);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
@@ -270,13 +267,11 @@ public class viewServlet extends HttpServlet {
                         paging.updateModel();
                     }
                     request.setAttribute("pageBrands", paging);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
                     break;
 
                 case "showCategories":
                     request.setAttribute("listCategories", listCategories);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
                     break;
 
@@ -299,7 +294,6 @@ public class viewServlet extends HttpServlet {
                         paging.updateModel();
                     }
                     request.setAttribute("pageProductType", paging);
-                    request.setAttribute("btnBlock", "Block");
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
 

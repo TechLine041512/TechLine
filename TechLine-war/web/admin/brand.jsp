@@ -190,7 +190,7 @@
                                                         <td><a href="RedirectServlet?action=editBrand&brandId=${brand.brandId}">${brand.brandId}</a></td>
                                                         <td>${brand.brandName}</td>
                                                         <td><img src="${brand.brandIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockBrand&bId=${brand.brandId}">${btnBlock}</a></td>
+                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockBrand&bId=${brand.brandId}&bl=${brand.brandStatus ? 'Block' : 'Unblock'}">${brand.brandStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>

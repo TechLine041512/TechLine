@@ -97,18 +97,20 @@ public class editCustomerServlet extends HttpServlet {
                 case "blockCustomer":
                     String cusIdBlock = request.getParameter("cusId");
                     Users uBlock = usersFacade.find(cusIdBlock);
-                    //Block customer comments
                     List<ProductsComment> listCm = (List<ProductsComment>) uBlock.getProductsCommentCollection();
+                    boolean unblock = false;
+                    if (request.getParameter("bl").equals("Unblock")) {
+                        unblock = true;
+                    }
+                    //Block customer comments
                     for (ProductsComment pc : listCm) {
-                        pc.setCommentStatus(Boolean.FALSE);
+                        pc.setCommentStatus(unblock);
                         productsCommentFacade.edit(pc);
                     }
                     //Block customer
-                    uBlock = usersFacade.find(cusIdBlock);
-                    uBlock.setUserStatus(Boolean.FALSE);
+                    uBlock.setUserStatus(unblock);
                     usersFacade.edit(uBlock);
-                    request.setAttribute("message", "Blocked customer successfully!");
-                    request.setAttribute("btnBlock", "Unblock");
+                    request.setAttribute("message", unblock ? "Unblock customer successfully!" : "Block customer successfully!");
                     request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
             }

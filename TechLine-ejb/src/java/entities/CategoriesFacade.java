@@ -40,7 +40,7 @@ public class CategoriesFacade extends AbstractFacade<Categories> implements Cate
 
     @Override
     public List<Categories> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Categories c WHERE c.categoryStatus = TRUE");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Categories c");
         List<Categories> list = q.getResultList();
         if (list != null) {
             return list;
