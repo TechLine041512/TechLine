@@ -193,7 +193,7 @@
                                                             <td>${customer.gender}</td>
                                                             <td>${customer.address}</td>
                                                             <td>${customer.point}</td>
-                                                            <td><a href="editCustomerServlet?action=blockCustomer&cusId=${customer.userId}" class="btn-instagram btn" name="action">Block</a></td>
+                                                            <td><a href="editCustomerServlet?action=blockCustomer&cusId=${customer.userId}&bl=${customer.users.userStatus ? 'Block' : 'Unblock'}" class="btn-instagram btn" name="action">${customer.users.userStatus ? 'Block' : 'Unblock'}</a></td>
                                                         </tr>
                                                     </c:forEach>    
                                                 </tbody>

@@ -195,7 +195,7 @@
                                                         <td>${product.quantity}</td>
                                                         <td>
                                                             <a class="btn-instagram btn" href="#">View History</a>
-                                                            <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.id}" style="width:136.45px;">Block</a>
+                                                            <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.id}&bl=${product.status ? 'Block' : 'Unblock'}" style="width:136.45px;">${product.status ? 'Block' : 'Unblock'}</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>        

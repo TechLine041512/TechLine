@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editSellerServlet extends HttpServlet {
+
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
 
@@ -73,24 +74,27 @@ public class editSellerServlet extends HttpServlet {
                 break;
             case "blockSeller":
                 String sellerIdBlock = request.getParameter("sellerId");
-                Seller sBlock = sellerFacadeLocal.find(sellerIdBlock);
                 Users uS = usersFacadeLocal.find(sellerIdBlock);
                 //Block seller's products
                 List<Products> listPB = (List<Products>) uS.getProductsCollection();
+                boolean unblock = false;
+                if (request.getParameter("bl").equals("Unblock")) {
+                    unblock = true;
+                }
                 for (Products proB : listPB) {
                     //Block comments on Product
                     List<ProductsComment> listCm = (List<ProductsComment>) proB.getProductsCommentCollection();
                     for (ProductsComment pc : listCm) {
-                        pc.setCommentStatus(Boolean.FALSE);
+                        pc.setCommentStatus(unblock);
                         productsCommentFacade.edit(pc);
                     }
-                    proB.setProductStatus(Boolean.FALSE);
+                    proB.setProductStatus(unblock);
                     productsFacade.edit(proB);
                 }
                 //Block seller
-                uS.setUserStatus(Boolean.FALSE);
+                uS.setUserStatus(unblock);
                 usersFacadeLocal.edit(uS);
-                request.setAttribute("message", "Blocked seller successfully!");
+                request.setAttribute("message", unblock ? "Unblock seller successfully!" : "Block seller successfully!");
                 request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
             case "sellerChangePassword":

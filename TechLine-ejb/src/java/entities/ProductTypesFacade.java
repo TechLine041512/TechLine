@@ -40,7 +40,7 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
 
     @Override
     public List<ProductTypes> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p WHERE p.typeStatus = TRUE");
+        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p");
         List<ProductTypes> list = q.getResultList();
         if (list != null ) {
             return list;
