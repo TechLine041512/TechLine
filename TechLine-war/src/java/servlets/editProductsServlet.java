@@ -235,21 +235,22 @@ public class editProductsServlet extends HttpServlet {
             case "blockType":
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
-                typeBlock.setTypeStatus(Boolean.FALSE);
-                productTypesFacade.edit(typeBlock);
                 List<Products> listProType = (List<Products>) typeBlock.getProductsCollection();
-                for (Products pro : listProType) {
-                    pro.setProductStatus(Boolean.FALSE);
-                    productsFacade.edit(pro);
+                //If type has products, do not block type. If not, block type
+                if (listProType.isEmpty()) {
+                    typeBlock.setTypeStatus(Boolean.FALSE);
+                    productTypesFacade.edit(typeBlock);
+                    request.setAttribute("message", "Block successful!");
+                } else {
+                    request.setAttribute("message", "This Product Type has products, can not block this type!");
                 }
-                request.setAttribute("message", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             //admin cancel product type
             case "cancelProductType":
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
-                
+
             case "cancelBrand":
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
