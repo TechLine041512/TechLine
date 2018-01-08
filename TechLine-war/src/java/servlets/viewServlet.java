@@ -228,7 +228,7 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "showProductAdmin":
-                    List<Products> listDateposted = productsFacade.getListProductByDatePost();
+                    List<Products> listDateposted = productsFacade.showAll();
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
                     String n3 = request.getParameter("btn");
                     if (n3 != null) {
@@ -406,7 +406,9 @@ public class viewServlet extends HttpServlet {
 
                 case "sellerOrder":
                     TechLineUtils util = new TechLineUtils();
-                    List<SellerOrder> order = util.getSellerOrdered(user.getUserId());
+                    List<SellerOrder> order = new ArrayList<>();
+//                     = util.getSellerOrdered(user.getUserId());
+                    //Adapt to new model with JPQL and for loop
                     request.setAttribute("order", order);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;

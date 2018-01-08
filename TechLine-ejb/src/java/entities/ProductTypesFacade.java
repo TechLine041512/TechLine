@@ -32,7 +32,7 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
         if (list != null) {
             String lastId = list.get(0).getTypeId().replace("PTY", "");
             int lastNum = Integer.parseInt(lastId) + 1;
-            String newId = String.format("PTY", lastNum);
+            String newId = String.format("PTY"+"%03d", lastNum);
             return newId;
         }
         return null;

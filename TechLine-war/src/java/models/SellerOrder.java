@@ -1,18 +1,27 @@
 package models;
 
+import entities.Products;
 import java.util.Date;
+import java.util.List;
 
 
 public class SellerOrder {
     private String orderId;
-    private String productId;
-    private String quantity;
-    private String userId;
-    private String orderTotalPrice;
-    private String deliveryPrice;
-    private String orderNote;
-    private String orderStatus;
+    private String buyer;
     private Date dateOrdered;
+    private String orderNote;
+    private String orderTotalPrice;
+    private String orderStatus;
+    
+    private String quantity;
+
+    public String getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -21,15 +30,7 @@ public class SellerOrder {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
+    
     public String getQuantity() {
         return quantity;
     }
@@ -38,28 +39,12 @@ public class SellerOrder {
         this.quantity = quantity;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getOrderTotalPrice() {
         return orderTotalPrice;
     }
 
     public void setOrderTotalPrice(String orderTotalPrice) {
         this.orderTotalPrice = orderTotalPrice;
-    }
-
-    public String getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(String deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
     }
 
     public String getOrderNote() {
@@ -85,8 +70,4 @@ public class SellerOrder {
     public void setDateOrdered(Date dateOrdered) {
         this.dateOrdered = dateOrdered;
     }
-
-    
-    
-
 }
