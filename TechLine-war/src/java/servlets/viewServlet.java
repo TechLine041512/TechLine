@@ -28,6 +28,7 @@ import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -400,16 +401,64 @@ public class viewServlet extends HttpServlet {
 
                 case "sellerProduct":
                     List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());
-                    request.setAttribute("lsProduct", sellerProduct);
+                    paging = new PageProduct(TechLineUtils.buildProductAdmin(sellerProduct), 10);
+                    String n3S = request.getParameter("btn");
+                    if (n3S != null) {
+                        if (n3S.equals("next")) {
+                            paging.next();
+                        }
+                        if (n3S.equals("prev")) {
+                            paging.prev();
+                        }
+                    }
+                    String pages3S = request.getParameter("page");
+                    if (pages3S != null) {
+                        int m = Integer.parseInt(pages3S);
+                        paging.setPageIndex(m);
+                        paging.updateModel();
+                    }
+                    request.setAttribute("pageProduct", paging);
                     request.getRequestDispatcher("seller/product.jsp").forward(request, response);
                     break;
 
                 case "sellerOrder":
                     TechLineUtils util = new TechLineUtils();
-                    List<SellerOrder> order = new ArrayList<>();
+                    List<Products> lsProducts = (List<Products>) user.getProductsCollection();
+                    List<SellerOrder> sellerOrder = new ArrayList<>();
+                    for (Products prd : lsProducts) {
+                        for (OrderDetails detail : prd.getOrderDetailsCollection()) {
+                            SellerOrder slOrder = new SellerOrder();
+                            slOrder.setOrderId(detail.getOrderMaster().getOrderMId());
+                            slOrder.setBuyer(detail.getOrderMaster().getUserId().getFullname());
+                            slOrder.setDateOrdered(detail.getOrderMaster().getDateOrdered());
+                            slOrder.setOrderNote(detail.getOrderMaster().getOrderNote());
+                            slOrder.setOrderTotalPrice(detail.getOrderMaster().getOrderTotalPrice().toString());
+                            slOrder.setOrderStatus(detail.getOrderMaster().getOrderStatus());
+                            sellerOrder.add(slOrder);
+                        }
+                    }
+
+                    paging = new PageProduct(sellerOrder, 15);
+                    String nOrderMasterS = request.getParameter("btn");
+                    if (nOrderMasterS != null) {
+                        if (nOrderMasterS.equals("next")) {
+                            paging.next();
+                        }
+                        if (nOrderMasterS.equals("prev")) {
+                            paging.prev();
+                        }
+                    }
+                    String pagesOrderMasterS = request.getParameter("page");
+
+                    if (pagesOrderMasterS != null) {
+                        int m = Integer.parseInt(pagesOrderMasterS);
+                        paging.setPageIndex(m);
+                        paging.updateModel();
+                    }
+
 //                     = util.getSellerOrdered(user.getUserId());
                     //Adapt to new model with JPQL and for loop
-                    request.setAttribute("order", order);
+                    request.setAttribute("order", paging);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
 
@@ -476,8 +525,7 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
             }
-        }
-        catch (Exception e ){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

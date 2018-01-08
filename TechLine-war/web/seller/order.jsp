@@ -4,6 +4,9 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
+<%@page import="java.util.List"%>
+<%@page import="models.SellerOrder"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -81,54 +84,14 @@
                                 <span class="icon-bar"></span>
                             </button>                         
                         </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">dashboard</i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">notifications</i>
-                                        <span class="notification">5</span>
-                                        <p class="hidden-lg hidden-md">Notifications</p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Mike John responded to your email</a></li>
-                                        <li><a href="#">You have 5 new tasks</a></li>
-                                        <li><a href="#">You're now friend with Andrew</a></li>
-                                        <li><a href="#">Another Notification</a></li>
-                                        <li><a href="#">Another One</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">person</i>
-                                        <p class="hidden-lg hidden-md">Profile</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group  is-empty">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <span class="material-input"></span>
-                                </div>
-                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i><div class="ripple-container"></div>
-                                </button>
-                            </form>
-                        </div>
                     </div>
                 </nav>
+                <%
+                    PageProduct pageOrder = (PageProduct) request.getAttribute("order");
+                %>
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">                       
-                            <a class="btn-instagram btn" value="permissions" href="editType.jsp">Delete</a>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">
@@ -137,63 +100,79 @@
                                         <p class="category">Line Tech</p>
                                     </div>
 
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover">
+                                   <div class="card-content">
+                                        <table class="table table-hover" id="myTable">
                                             <thead class="text-primary">
-                                            <th>Product ID</th>
-                                            <th>Buyer</th>   
-                                            <th>Date</th>
-                                            <th>Note</th>
-                                            <th>Total Price</th>
-                                            <th>Status</th>
+                                            <th onclick="sortTable(0)"><a href="#">Order ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Buyer</a></th>   
+                                            <th onclick="sortTable(2)"><a href="#">Date</a></th>
+                                            <th onclick="sortTable(3)"><a href="#">Note</a></th>
+                                            <th onclick="sortTable(4)"><a href="#">Total Price</a></th>
+                                            <th onclick="sortTable(5)"><a href="#">Status</a></th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${order}" var="item">
-                                                    <c:if test="${item.orderStatus eq 'Done'}">
+                                                <c:forEach items="<%=pageOrder.getModel()%>" var="order">
+                                                    <c:if test="${order.orderStatus eq 'Done'}">
                                                         <tr style="background-color: #4edc14; color: #ffffff;"> 
-                                                            <td>${item.productId}</td>
-                                                            <td>${item.userId}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${item.dateOrdered}"/></td>
-                                                            <td>${item.orderNote}</td>
-                                                            <td>${item.orderTotalPrice}</td>
-                                                            <td>${item.orderStatus}</td>
+                                                            <td>${order.orderId}</td>
+                                                            <td>${order.buyer}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
                                                         </tr>
-                                                    </c:if>
-                                                    <c:if test="${item.orderStatus eq 'Processing'}">
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Processing'}">
                                                         <tr style="background-color: #ffb100; color: #ffffff;"> 
-                                                            <td>${item.productId}</td>
-                                                            <td>${item.userId}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${item.dateOrdered}"/></td>
-                                                            <td>${item.orderNote}</td>
-                                                            <td>${item.orderTotalPrice}</td>
-                                                            <td>${item.orderStatus}</td>
+                                                            <td>${order.orderId}</td>
+                                                            <td>${order.buyer}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
                                                         </tr>
-                                                    </c:if>
-                                                    <c:if test="${item.orderStatus eq 'Delivery'}">
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Delivery'}">
                                                         <tr style="background-color: blue; color: #ffffff;"> 
-                                                            <td>${item.productId}</td>
-                                                            <td>${item.userId}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${item.dateOrdered}"/></td>
-                                                            <td>${item.orderNote}</td>
-                                                            <td>${item.orderTotalPrice}</td>
-                                                            <td>${item.orderStatus}</td>
+                                                            <td>${order.orderId}</td>
+                                                            <td>${order.buyer}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
                                                         </tr>
-                                                    </c:if>
-                                                    <c:if test="${item.orderStatus eq 'Cancel'}">
+                                                    </c:if>     
+                                                    <c:if test="${order.orderStatus eq 'Cancel'}">
                                                         <tr style="background-color: red; color: #ffffff;"> 
-                                                            <td>${item.productId}</td>
-                                                            <td>${item.userId}</td>
-                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${item.dateOrdered}"/></td>
-                                                            <td>${item.orderNote}</td>
-                                                            <td>${item.orderTotalPrice}</td>
-                                                            <td>${item.orderStatus}</td>
+                                                            <td>${order.orderId}</td>
+                                                            <td>${order.buyer}</td>
+                                                            <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
+                                                            <td>${order.orderNote}</td>
+                                                            <td>${order.orderTotalPrice}</td>
+                                                            <td>${order.orderStatus}</td>
                                                         </tr>
-                                                    </c:if>
-                                                </c:forEach>
-
-
+                                                    </c:if>     
+                                                </c:forEach>        
                                             </tbody>
                                         </table>
+                                    </div>
+                                    
+                                    <div class="pagination pagination-small pagination-centered" style="margin-left:400px;">
+                                        <ul>
+                                            <li><a href="viewServlet?action=sellerOrder&btn=prev">Prev</a></li>
+                                                <%
+
+                                                    int pages = pageOrder.getPages();
+                                                    for (int i = 1; i <= pages; i++) {
+                                                %>
+
+                                            <li><a href="viewServlet?action=sellerOrder&page=<%=i%>"><%=i%></a></li>
+
+                                            <%
+                                                }
+                                            %>
+                                            <li><a href="viewServlet?action=sellerOrder&btn=next">Next</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -241,5 +220,6 @@
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/sort.js" type="text/javascript"></script>
 
 </html>

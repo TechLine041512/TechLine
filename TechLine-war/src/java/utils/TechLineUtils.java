@@ -94,6 +94,7 @@ public class TechLineUtils {
         }
         p.setName(item.getProductName());
         p.setQuantity(item.getProductQuantity());
+        p.setProductStatus(item.getProductStatus().toString());
         String userId = item.getUserId().getUserId();
         if ("admin".equals(userId) || "raejas".equals(userId) || "venky".equals(userId) || "uypoko".equals(userId)) {
             p.setRole("admin");

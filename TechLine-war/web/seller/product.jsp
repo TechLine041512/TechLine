@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -24,6 +25,7 @@
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
         <link href="resource/assets/css/demo.css" rel="stylesheet" />
+        <script src="resource/assets/js/sort.js" type="text/javascript"></script>
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -70,58 +72,6 @@
             </div>
 
             <div class="main-panel">
-                <nav class="navbar navbar-transparent navbar-absolute">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>                      
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">dashboard</i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">notifications</i>
-                                        <span class="notification">5</span>
-                                        <p class="hidden-lg hidden-md">Notifications</p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Mike John responded to your email</a></li>
-                                        <li><a href="#">You have 5 new tasks</a></li>
-                                        <li><a href="#">You're now friend with Andrew</a></li>
-                                        <li><a href="#">Another Notification</a></li>
-                                        <li><a href="#">Another One</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="material-icons">person</i>
-                                        <p class="hidden-lg hidden-md">Profile</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group  is-empty">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                    <span class="material-input"></span>
-                                </div>
-                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i><div class="ripple-container"></div>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
 
                 <div class="content">
                     <div class="container-fluid">
@@ -135,42 +85,60 @@
                                         <h4 class="title">Product List</h4>
                                         <p class="category">Tech Line</p>
                                     </div>
+                                    <%
+                                        PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
+                                    %>
                                     <div class="card-content table-responsive">
-                                        <table class="table">
-                                            <thead class="text-primary">                                       
-                                            <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Brand</th>
-                                            <th>Image</th>
-                                            <th>Quantity</th>
-                                            <th>Status</th>
-                                            <th>Edit</th>
-                                            <th></th>
+                                        <table class="table table-hover" id="myTable">
+                                            <thead class="text-primary">                     
+                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Product Name</a></th>
+                                            <th onclick="sortTable(2)"><a href="#">Brand</a></th>
+                                            <th><a href="#">Image</a></th>
+                                            <th onclick="sortTable(4)"><a href="#">Quantity</a></th>
+                                            <th><a href="#">Action</a></th>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${lsProduct}" var="item">
-                                                    <tr>
-                                                        <td>${item.productId}</td>
-                                                        <td>${item.productName}</td>
-                                                        <td>${item.brandId.brandName}</td>
-                                                        <td><img src="${item.productImage}" style="width: 80px; height: 80px;"/></td>
-                                                        <td>${item.productQuantity}</td>
-                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=sellerEditProductStatus&productId=${item.productId}">${item.productStatus=='true'?'Block':'Enable'}</a></td>
-                                                        <td><a class="btn-instagram btn" href="viewServlet?action=sellerProductDetail&productId=${item.productId}">Edit</a></td>
+                                                <c:forEach items="<%=pageProduct.getModel()%>" var="product">
+                                                    <tr ${product.productStatus =='true'?'style="background-color: #4edc14; color: #ffffff;"':'style="background-color: red; color: #ffffff;"'}>
+                                                        <td><a href="viewServlet?action=sellerProductDetail&productId=${product.id}">${product.id}</a></td>
+                                                        <td>${product.name}</td>
+                                                        <td>${product.brand}</td>
+                                                        <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
+                                                        <td>${product.quantity}</td>
+                                                        <td>
+                                                            <a class="btn-instagram btn" href="#">View History</a>
+                                                            <a class="btn-instagram btn" href="editProductsServlet?action=sellerEditProductStatus&productId=${product.id}">${product.productStatus=='true'?'Block':'Enable'}</a>
+                                                        </td>
+                                                        
+                                                        
+                                                        
                                                     </tr>
                                                 </c:forEach>
-                                                <!--                                                <tr>                                                   
-                                                                                                    <td>PRO001</td>
-                                                                                                    <td>WD My Passport Ultra 3TB Portable External</td>
-                                                                                                    <td>Western Digital</td>
-                                                                                                    <td><img src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 80px; height: 80px;"/></td>
-                                                                                                    <td>10</td>
-                                                                                                    <td><a class="btn-instagram btn" href="#">Block</a></td>
-                                                                                                </tr>-->
                                             </tbody>
                                         </table>
 
                                     </div>
+                                    
+                                    <div class="pagination pagination-small pagination-centered" style="margin-left:250px;">
+                                        <ul>
+                                            <li><a href="viewServlet?action=sellerProduct&btn=prev">Prev</a></li>
+                                                <%
+
+                                                    int pages = pageProduct.getPages();
+                                                    for (int i = 1; i <= pages; i++) {
+                                                %>
+
+                                            <li><a href="viewServlet?action=sellerProduct&page=<%=i%>"><%=i%></a></li>
+
+                                            <%
+                                                }
+                                            %>
+                                            <li><a href="viewServlet?action=sellerProduct&btn=next">Next</a></li>
+                                        </ul>
+                                    </div>
+                                            
+                                            
                                 </div>
                             </div>                     
                         </div>
