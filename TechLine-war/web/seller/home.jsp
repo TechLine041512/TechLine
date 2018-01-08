@@ -17,7 +17,14 @@
 
         <!-- Bootstrap core CSS     -->
         <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
-
+<!--        <script src="resource/bootstrap/js/bootstrap.min.js"></script>	
+        <script src="resource/themes/css/bootstrappage.css"></script>
+        <script src="resource/bootstrap/css/bootstrap-responsive.min.css"></script>
+        <script src="resource/bootstrap/css/bootstrap.css"></script>
+        <script src="resource/bootstrap/css/bootstrap-responsive.css"></script>
+        <script src="resource/theme/css/my-style.css"></script>-->
+        
+        
         <!--  Material Dashboard CSS    -->
         <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
@@ -27,10 +34,47 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
 
         <!--Richtext-->
         <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
+        <script>
+            function showPasswordForm() {
+                $('#PasswordModal .registerBox').fadeOut('fast', function() {
+                    $('.loginBox').fadeIn('fast');
+
+                    $('.modal-title').html('Login with');
+                });
+                $('.error').removeClass('alert alert-danger').html('');
+            }
+
+            function openPasswordModal() {
+                showPasswordForm();
+                setTimeout(function() {
+                    $('#PasswordModal').modal('show');
+                }, 230);
+
+            }
+            function validatePass() {
+                var newPass = document.getElementById('newPass').value;
+                var confirmPass = document.getElementById('confirmPass').value;
+                
+                if(${user.password} != $('#oldPass').val()){
+                    alert('Password is invalid');
+                    return false;
+                } else if(${user.password} == newPass) {
+                    alert('Old Password must be difference new password');
+                    return false;
+                }
+                else if (newPass != confirmPass) {
+                    alert('Confirm Password does not match New Password');
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <c:if test="${not empty registMess}">
@@ -78,6 +122,40 @@
                 </div>
             </div>
 
+            <!--Phần dialog box Change Password-->
+            <div class="modal fade login" id="PasswordModal">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Change Password ${user.password}</h4>
+                        </div>
+                        <div class="modal-body">  
+                            <div class="box">
+                                <div class="content">
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <form method="post" action="editSellerServlet">
+                                            <input id="oldPass" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="password" name="txtOldPassword" required="true" required title="This is your current password"><br/>
+                                            <input id="newPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtNewPass" required="true" required title="This is your new password"><br/>
+                                            <input id="confirmPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password"><br/>
+                                            <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="sellerChangePassword" onclick="return validatePass()">Change Password</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span>Note: Change the password remember</span>
+                            </div>
+
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc dialog box Change Password-->
+
             <div class="main-panel">
                 <div class="content"> 
                     <div class="container-fluid">
@@ -95,7 +173,8 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Email</label>
-                                                            <input type="email" class="form-control" value="${user.email}" name="txtEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                                        <input type="email" class="form-control" value="${user.email}" name="txtEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                                        <i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();">   Change Password</a>
                                                     </div>
                                                 </div>
                                             </div>

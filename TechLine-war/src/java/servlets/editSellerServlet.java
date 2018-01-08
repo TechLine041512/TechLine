@@ -93,6 +93,12 @@ public class editSellerServlet extends HttpServlet {
                 request.setAttribute("message", "Blocked seller successfully!");
                 request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
+            case "sellerChangePassword":
+                String newPassword = request.getParameter("txtNewPass");
+                user.setPassword(newPassword);
+                usersFacadeLocal.edit(user);
+                request.getRequestDispatcher("viewServlet?action=homeSeller").forward(request, response);
+                break;
             default:
                 request.setAttribute("error", "Page not found");
                 request.getRequestDispatcher("error.jsp").forward(request, response);

@@ -17,6 +17,7 @@ public class ProductListAdminModel {
     private String image;
     private int quantity;
     private String role;
+    private String productStatus;
 
     public String getRole() {
         return role;
@@ -64,6 +65,14 @@ public class ProductListAdminModel {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(String productStatus) {
+        this.productStatus = productStatus;
     }
     
 }
