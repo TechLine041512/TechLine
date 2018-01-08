@@ -164,7 +164,6 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <form action="editCustomerServlet" method="post">
                                 <div class="col-md-12">
                                     <div class="card card-plain">
                                         <div class="card-header" data-background-color="purple">
@@ -194,7 +193,7 @@
                                                             <td>${customer.gender}</td>
                                                             <td>${customer.address}</td>
                                                             <td>${customer.point}</td>
-                                                            <td><button class="btn-instagram btn" value="blockCustomer" name="action" type="submit">Block</button></td>
+                                                            <td><a href="editCustomerServlet?action=blockCustomer&cusId=${customer.userId}" class="btn-instagram btn" name="action">Block</a></td>
                                                         </tr>
                                                     </c:forEach>    
                                                 </tbody>
@@ -218,8 +217,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                            </form>             
+                                </div>          
                         </div>
                     </div>
                 </div>
