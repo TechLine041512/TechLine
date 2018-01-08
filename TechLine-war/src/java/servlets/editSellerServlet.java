@@ -6,6 +6,8 @@
 package servlets;
 
 import entities.Products;
+import entities.ProductsComment;
+import entities.ProductsCommentFacadeLocal;
 import entities.ProductsFacadeLocal;
 import entities.Seller;
 import entities.SellerFacadeLocal;
@@ -24,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editSellerServlet extends HttpServlet {
+    @EJB
+    private ProductsCommentFacadeLocal productsCommentFacade;
+
     @EJB
     private ProductsFacadeLocal productsFacade;
 
@@ -67,21 +72,25 @@ public class editSellerServlet extends HttpServlet {
 
                 break;
             case "blockSeller":
-                String[] sellerIdBlock = request.getParameterValues("cbkSellerID");
-                for (String sSeller : sellerIdBlock) {
-                    Seller sBlock = sellerFacadeLocal.find(sSeller);
-                    Users uS = usersFacadeLocal.find(sBlock.getUsers().getUserId());
-                    //Block seller's products
-                    List<Products> listPB = (List<Products>) uS.getProductsCollection();
-                    for (Products proB : listPB) {
-                        proB.setProductStatus(Boolean.FALSE);
-                        productsFacade.edit(proB);
+                String sellerIdBlock = request.getParameter("sellerId");
+                Seller sBlock = sellerFacadeLocal.find(sellerIdBlock);
+                Users uS = usersFacadeLocal.find(sellerIdBlock);
+                //Block seller's products
+                List<Products> listPB = (List<Products>) uS.getProductsCollection();
+                for (Products proB : listPB) {
+                    //Block comments on Product
+                    List<ProductsComment> listCm = (List<ProductsComment>) proB.getProductsCommentCollection();
+                    for (ProductsComment pc : listCm) {
+                        pc.setCommentStatus(Boolean.FALSE);
+                        productsCommentFacade.edit(pc);
                     }
-                    //Block seller
-                    uS.setUserStatus(Boolean.FALSE);
-                    usersFacadeLocal.edit(uS);
+                    proB.setProductStatus(Boolean.FALSE);
+                    productsFacade.edit(proB);
                 }
-                request.setAttribute("message", "Blocked sellers successfully!");
+                //Block seller
+                uS.setUserStatus(Boolean.FALSE);
+                usersFacadeLocal.edit(uS);
+                request.setAttribute("message", "Blocked seller successfully!");
                 request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
             default:
