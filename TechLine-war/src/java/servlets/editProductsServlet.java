@@ -271,16 +271,18 @@ public class editProductsServlet extends HttpServlet {
                 List<ProductTypes> listTypeCat = (List<ProductTypes>) catBlock.getProductTypesCollection();
                 for (ProductTypes pt : listTypeCat) {
                     List<Products> listProTypeCat = (List<Products>) pt.getProductsCollection();
-                    for (Products pro : listProTypeCat) {
-                        pro.setProductStatus(Boolean.FALSE);
-                        productsFacade.edit(pro);
+                    if (listProTypeCat.isEmpty()) {
+                        pt.setTypeStatus(Boolean.FALSE);
+                        productTypesFacade.edit(pt);
+                    } else {
+                        request.setAttribute("message", "This Category has products, can not block this category!");
+                        request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                        break;
                     }
-                    pt.setTypeStatus(Boolean.FALSE);
-                    productTypesFacade.edit(pt);
                 }
                 catBlock.setCategoryStatus(Boolean.FALSE);
                 categoriesFacade.edit(catBlock);
-                request.setAttribute("message", "Block successful!");
+                request.setAttribute("message", "Block category successfully!");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category
