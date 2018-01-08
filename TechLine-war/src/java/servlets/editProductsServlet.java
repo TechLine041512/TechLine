@@ -219,24 +219,38 @@ public class editProductsServlet extends HttpServlet {
                 request.setAttribute("message", "Edit successful!");
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
+            case "blockBrand":
+                String blockBrandId = request.getParameter("bId");
+                Brands blockBr = brandsFacade.find(blockBrandId);
+                List<Products> listProBrand = (List<Products>) blockBr.getProductsCollection();
+                if (listProBrand.isEmpty()) {
+                    blockBr.setBrandStatus(Boolean.FALSE);
+                    brandsFacade.edit(blockBr);
+                    request.setAttribute("message", "Block successfully!");
+                } else {
+                    request.setAttribute("message", "This brand has products, cannot block this brand!");
+                }
+                request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
+                break;
             case "blockType":
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
-                typeBlock.setTypeStatus(Boolean.FALSE);
-                productTypesFacade.edit(typeBlock);
                 List<Products> listProType = (List<Products>) typeBlock.getProductsCollection();
-                for (Products pro : listProType) {
-                    pro.setProductStatus(Boolean.FALSE);
-                    productsFacade.edit(pro);
+                //If type has products, do not block type. If not, block type
+                if (listProType.isEmpty()) {
+                    typeBlock.setTypeStatus(Boolean.FALSE);
+                    productTypesFacade.edit(typeBlock);
+                    request.setAttribute("message", "Block successful!");
+                } else {
+                    request.setAttribute("message", "This Product Type has products, can not block this type!");
                 }
-                request.setAttribute("message", "Block successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             //admin cancel product type
             case "cancelProductType":
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
-                
+
             case "cancelBrand":
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
@@ -257,16 +271,18 @@ public class editProductsServlet extends HttpServlet {
                 List<ProductTypes> listTypeCat = (List<ProductTypes>) catBlock.getProductTypesCollection();
                 for (ProductTypes pt : listTypeCat) {
                     List<Products> listProTypeCat = (List<Products>) pt.getProductsCollection();
-                    for (Products pro : listProTypeCat) {
-                        pro.setProductStatus(Boolean.FALSE);
-                        productsFacade.edit(pro);
+                    if (listProTypeCat.isEmpty()) {
+                        pt.setTypeStatus(Boolean.FALSE);
+                        productTypesFacade.edit(pt);
+                    } else {
+                        request.setAttribute("message", "This Category has products, can not block this category!");
+                        request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
+                        break;
                     }
-                    pt.setTypeStatus(Boolean.FALSE);
-                    productTypesFacade.edit(pt);
                 }
                 catBlock.setCategoryStatus(Boolean.FALSE);
                 categoriesFacade.edit(catBlock);
-                request.setAttribute("message", "Block successful!");
+                request.setAttribute("message", "Block category successfully!");
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             //admin cancel category

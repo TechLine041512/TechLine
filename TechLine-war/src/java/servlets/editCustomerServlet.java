@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author nth15
  */
 public class editCustomerServlet extends HttpServlet {
+
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
 
@@ -62,7 +63,7 @@ public class editCustomerServlet extends HttpServlet {
                     Customers customer = customersFacade.find(user.getUserId());
                     String birthday = request.getParameter("ddlDay") + "/" + request.getParameter("ddlMonth") + "/" + request.getParameter("ddlYear");
                     String edAddress = request.getParameter("txtAddress");
-                    if(edAddress == null) {
+                    if (edAddress == null) {
                         customer.setAddress("");
                     } else {
                         customer.setAddress(edAddress);
@@ -72,7 +73,7 @@ public class editCustomerServlet extends HttpServlet {
                     customersFacade.edit(customer);//completed edit customer
                     //re-display birthday
                     String disBirthday[] = customer.getDob().split("/");
-                    
+
                     request.setAttribute("date", Integer.parseInt(disBirthday[0]));
                     request.setAttribute("month", Integer.parseInt(disBirthday[1]));
                     request.setAttribute("year", Integer.parseInt(disBirthday[2]));
@@ -94,21 +95,19 @@ public class editCustomerServlet extends HttpServlet {
                     request.getRequestDispatcher("viewServlet?action=homeCustomer").forward(request, response);
                     break;
                 case "blockCustomer":
-                    String[] cusIdBlock = request.getParameterValues("cbkCusID");
-                    for(String sCus: cusIdBlock) {
-                        Users uBlock = usersFacade.find(sCus);
-                        //Block customer comments
-                        List<ProductsComment> listCm= (List<ProductsComment>) uBlock.getProductsCommentCollection();
-                        for(ProductsComment pc: listCm) {
-                            pc.setCommentStatus(Boolean.FALSE);
-                            productsCommentFacade.edit(pc);
-                        }
-                        //Block customer
-                        uBlock.setUserStatus(Boolean.FALSE);
-                        usersFacade.edit(uBlock);
+                    String cusIdBlock = request.getParameter("cusId");
+                    Users uBlock = usersFacade.find(cusIdBlock);
+                    //Block customer comments
+                    List<ProductsComment> listCm = (List<ProductsComment>) uBlock.getProductsCommentCollection();
+                    for (ProductsComment pc : listCm) {
+                        pc.setCommentStatus(Boolean.FALSE);
+                        productsCommentFacade.edit(pc);
                     }
-                    request.setAttribute("message", "Blocked customers successfully!");
-                    
+                    //Block customer
+                    uBlock = usersFacade.find(cusIdBlock);
+                    uBlock.setUserStatus(Boolean.FALSE);
+                    usersFacade.edit(uBlock);
+                    request.setAttribute("message", "Blocked customer successfully!");
                     request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
             }

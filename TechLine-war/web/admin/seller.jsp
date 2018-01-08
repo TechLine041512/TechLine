@@ -164,61 +164,58 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <form action="editSellerServlet" method="post">
-                                <div class="col-md-12">
-                                    <div class="card card-plain">
-                                        <div class="card-header" data-background-color="purple">
-                                            <h4 class="title">Sellers</h4>
-                                            <p class="category">Line Tech</p>
-                                        </div>
-                                        <div class="card-content table-responsive">
-                                            <%
-                                                PageProduct pageSeller = (PageProduct) request.getAttribute("pageSeller");
-                                            %>
-                                            <table class="table table-hover" id="myTable">
-                                                <thead>
-                                                <th onclick="sortTable(0)"><a href="#">ID</a></th>
-                                                <th onclick="sortTable(1)"><a href="#">Name</a></th>
-                                                <th onclick="sortTable(2)"><a href="#">Store Name</a></th>
-                                                <th onclick="sortTable(3)"><a href="#">Store Address</a></th>
-                                                <th onclick="sortTable(4)"><a href="#">Phone</a></th>
-                                                <th><a href="#">Action</a></th>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="<%= pageSeller.getModel()%>" var="seller">
-                                                        <tr>                                                          
-                                                            <td>${seller.userId}</td>
-                                                            <td>${seller.users.fullname}</td>
-                                                            <td>${seller.storeName}</td>
-                                                            <td>${seller.storeAddress}</td>
-                                                            <td>${seller.users.phone}</td>
-                                                            <td><button class="btn-instagram btn" value="blockSeller" name="action" type="submit">Block</button></td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="pagination pagination-small pagination-centered" style="margin-left:650px;">
-                                            <ul>
-                                                <li><a href="viewServlet?action=showSeller&btn=prev">Prev</a></li>
-                                                    <%
-
-                                                        int pages = pageSeller.getPages();
-                                                        for (int i = 1; i <= pages; i++) {
-                                                    %>
-
-                                                <li><a href="viewServlet?action=showSeller&page=<%=i%>"><%=i%></a></li>
-
+                            <div class="col-md-12">
+                                <div class="card card-plain">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">Sellers</h4>
+                                        <p class="category">Line Tech</p>
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                        <%
+                                            PageProduct pageSeller = (PageProduct) request.getAttribute("pageSeller");
+                                        %>
+                                        <table class="table table-hover" id="myTable">
+                                            <thead>
+                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
+                                            <th onclick="sortTable(1)"><a href="#">Name</a></th>
+                                            <th onclick="sortTable(2)"><a href="#">Store Name</a></th>
+                                            <th onclick="sortTable(3)"><a href="#">Store Address</a></th>
+                                            <th onclick="sortTable(4)"><a href="#">Phone</a></th>
+                                            <th><a href="#">Action</a></th>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="<%= pageSeller.getModel()%>" var="seller">
+                                                    <tr>                                                          
+                                                        <td>${seller.userId}</td>
+                                                        <td>${seller.users.fullname}</td>
+                                                        <td>${seller.storeName}</td>
+                                                        <td>${seller.storeAddress}</td>
+                                                        <td>${seller.users.phone}</td>
+                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}">Block</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="pagination pagination-small pagination-centered" style="margin-left:650px;">
+                                        <ul>
+                                            <li><a href="viewServlet?action=showSeller&btn=prev">Prev</a></li>
                                                 <%
-                                                    }
+
+                                                    int pages = pageSeller.getPages();
+                                                    for (int i = 1; i <= pages; i++) {
                                                 %>
-                                                <li><a href="viewServlet?action=showSeller&btn=next">Next</a></li>
-                                            </ul>
-                                        </div>
+
+                                            <li><a href="viewServlet?action=showSeller&page=<%=i%>"><%=i%></a></li>
+
+                                            <%
+                                                }
+                                            %>
+                                            <li><a href="viewServlet?action=showSeller&btn=next">Next</a></li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </form>
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
