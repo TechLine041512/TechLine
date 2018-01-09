@@ -157,7 +157,6 @@ public class addProductsServlet extends HttpServlet {
                     if (productID2 != null) {
                         products.setProductId(productID2);
                     }
-                    products.setProductId(request.getParameter("txtProductID"));
                     products.setUserId(user);
                     products.setTypeId(productTypes);
                     products.setBrandId(brands);

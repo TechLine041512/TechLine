@@ -174,7 +174,7 @@
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Email</label>
                                                         <input type="email" class="form-control" value="${user.email}" name="txtEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                                                        <i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();">   Change Password</a>
+                                                        <i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();" >   Change Password</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,13 +182,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Full Name</label>
-                                                        <input type="text" class="form-control" value="${user.fullname}" name="txtName" pattern=".{5,30}">
+                                                        <input type="text" class="form-control" value="${user.fullname}" name="txtName" pattern=".{5,30}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Phone</label>
-                                                        <input type="text" class="form-control" value="${user.phone}" name="txtPhone" pattern='\d{9,15}'>
+                                                        <input type="text" class="form-control" value="${user.phone}" name="txtPhone" pattern='\d{9,15}' required="required">
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,13 +196,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Name</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName" name="txtName" pattern=".{5,50}">
+                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName" name="txtName" pattern=".{5,50}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Identity Card</label>
-                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard" pattern='\d{9,20}'>
+                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard" pattern='\d{9,20}' required="required">
                                                     </div>
                                                 </div>    
                                             </div>
@@ -210,14 +210,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Date</label>
-                                                        <input type="datetime-local" class="form-control" value="${user.seller.approvedDate}"  name="txtApprovedDate">
+                                                        <input type="date" class="form-control" value="${user.seller.approvedDate}" min="1900-01-01" max="2100-01-01"  name="txtApprovedDate" required="required">
                                                         </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Place</label>
-                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace" pattern=".{5,50}">
+                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace" pattern=".{5,50}" required="required">
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -226,13 +226,13 @@
                                                 <div class="col-md-8">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{5,100}">
+                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{5,100}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Icon</label>
-                                                        <img src="${user.seller.storeIcon}" alt="store Icon" style="width: 80px; height: 80px;"/>
+                                                        <img src="${user.seller.storeIcon}" alt="store Icon" style="width: 80px; height: 80px;" required="required"/>
                                                     </div>
                                                 </div>
                                             </div>
