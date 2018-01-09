@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.ProductTypes;
 import entities.Products;
@@ -31,6 +32,7 @@ public class searchProductsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         List<Products> listProductSearch = new ArrayList<>();
+        List<Categories> listCategories = categoriesFacade.showAll();
         try (PrintWriter out = response.getWriter()) {
             switch (action) {
                 case "Search":
@@ -44,7 +46,7 @@ public class searchProductsServlet extends HttpServlet {
                     getServletContext().setAttribute("keyword", keyword);
                     getServletContext().setAttribute("listTypeSearch", listTypeSearch);
                     request.setAttribute("listProductSearch", listProductSearch);
-                    request.setAttribute("listCategories", categoriesFacade.showAll());
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
                 case "byPrice":
