@@ -26,7 +26,7 @@
         <script src="resource/themes/js/superfish.js"></script>	
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
-
+        <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>	
         <c:if test="${not empty message}">
@@ -59,15 +59,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='seller'}">
-                                    <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='customer'}">
-                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -135,7 +135,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirectServlet?action=backToHome">Home</a>	          
+                                <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -153,7 +153,7 @@
             </section>				
             <section class="header_text sub">
                 <img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
-                <h4><span>Search</span></h4>
+                <h4><span>Result for keywords "${keyword}"</span></h4>
             </section>
             <section class="main-content">				
                 <div class="row">
@@ -221,7 +221,25 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>						
+                        </div>
+                        <div class="item">
+                            <ul class="thumbnails listing-products"><li class="span3">
+                                        <select class="form-control" name="txtTypeName" onchange="if (this.value !== 'Select') window.location.href='searchProductsServlet?action=byType&type=' + this.value">
+                                            <c:forEach items="${listTypeSearch}" var="type">
+                                                <option value=${type.typeId} ${type.typeId == typeIdSelected ? 'selected' : ''}>${type.typeName}</option>
+                                            </c:forEach>
+                                        </select></li>
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <ul class="thumbnails listing-products">
+                                <form method="POST" action="searchProductsServlet">
+                                    <li class="span3"><input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin"></li>
+                                    <li class="span3"><input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax"></li>
+                                    <li class="span3"><button name="action" class="btn-success btn" value="byPrice" onclick="return checkMinMax();">Search</button></li>
+                                </form>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>			
@@ -265,11 +283,11 @@
         </div>
         <script src="themes/js/common.js"></script>
         <script>
-                                            $(document).ready(function() {
-                                                $('#checkout').click(function(e) {
-                                                    document.location.href = "checkout.html";
-                                                })
-                                            });
+                                        $(document).ready(function() {
+                                            $('#checkout').click(function(e) {
+                                                document.location.href = "checkout.html";
+                                            })
+                                        });
         </script>		
     </body>
 </html>

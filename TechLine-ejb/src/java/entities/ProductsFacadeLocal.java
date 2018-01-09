@@ -43,4 +43,6 @@ public interface ProductsFacadeLocal {
     List<Products> getTopProduct();
 
     List<Products> showAll();
+
+    List<ProductTypes> getListTypeByName(String productName);
 }
