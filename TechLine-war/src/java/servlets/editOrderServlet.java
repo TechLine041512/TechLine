@@ -6,6 +6,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
 
@@ -16,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /**
  *
@@ -42,48 +42,40 @@ public class editOrderServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             String orderId = request.getParameter("oid");
+            String json = "";
             OrderMaster order = orderMasterFacade.find(orderId);
-            switch (action) {
-                case "changeOrder":
-                    String status = request.getParameter("status");
-                    String newStatus = "";
-                    switch (status) {
-                        case "Processing":
-                            newStatus = "Delivery";
-                            break;
-                        case "Delivery":
-                            newStatus = "Done";
-                            break;
-                        default:
-                            break;
+            if (action.equals("countDeliveryFee")) {
+                int fee = 0;
+                int distance = (int) Double.parseDouble(request.getParameter("distance"));
+                for (int i = 1; i <= distance; i++) {
+                    if (i < 12) {
+                        fee += 2;
+                    } else {
+                        fee += 3;
                     }
-                    order.setOrderStatus(newStatus);
-                    orderMasterFacade.edit(order);
-                    request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
-                    break;
-                case "countDeliveryFee":
-                    int fee = 0;
-                    int distance = (int) Double.parseDouble(request.getParameter("distance"));
-                    for (int i = 1; i <= distance; i++) {
-                        if (i < 12) {
-                            fee += 2;
-                        } else {
-                            fee += 3;
-                        }
-                    }
-                    String json = new Gson().toJson(fee);
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write(json);
-                    break;
-                case "cancelOrder":
-                    order.setOrderStatus("Cancel");
-                    orderMasterFacade.edit(order);
-                    request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
-                    break;
-                default:
-                    break;
+                }
+                json = "{\"fee\":\"" + fee + "\"}";
+            } else if (action.equals("changeOrder")) {
+                String status = request.getParameter("status");
+                String newStatus = "";
+                switch (status) {
+                    case "Processing":
+                        newStatus = "Delivery";
+                        break;
+                    case "Delivery":
+                        newStatus = "Done";
+                        break;
+                    default:
+                        break;
+                }
+                order.setOrderStatus(newStatus);
+                orderMasterFacade.edit(order);
+                request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
             }
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
     }
 
@@ -114,6 +106,20 @@ public class editOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        int fee = 0;
+        int distance = (int) Double.parseDouble(request.getParameter("distance"));
+        for (int i = 1; i <= distance; i++) {
+            if (i < 12) {
+                fee += 2;
+            } else {
+                fee += 3;
+            }
+        }
+        String json = new Gson().toJson(fee);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+        request.getRequestDispatcher("googleMap.jsp").forward(request, response);
     }
 
     /**

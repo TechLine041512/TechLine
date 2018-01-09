@@ -50,11 +50,10 @@ function computeTotalDistance(result) {
         action: "countDeliveryFee",
         distance: total
     }, function(jsonResponse) {
-        //window.alert(jsonResponse);
-        var tongFEE = jsonResponse;
+        window.alert(jsonResponse);
+        var tongFEE = jsonResponse.fee;
         document.getElementById("deliveryFee").innerHTML = tongFEE;
     });
     document.getElementById("hourID").innerHTML = hour;
     document.getElementById("distanceID").innerHTML = total;
 }
-
