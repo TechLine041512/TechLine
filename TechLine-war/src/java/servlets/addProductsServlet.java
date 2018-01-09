@@ -81,9 +81,12 @@ public class addProductsServlet extends HttpServlet {
                     products.setIsApproved(true);
                     products.setDatePosted(today);
                     products.setProductStatus(true);
+                    products.setUserId(user);
                     productsFacade.create(products);
+                    session.setAttribute("user", user);
                     request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                     break;
+
                 case "cancelProduct":
                     request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                     break;
@@ -138,16 +141,27 @@ public class addProductsServlet extends HttpServlet {
                     break;
                 case "comment":
                     String id = request.getParameter("productID");
+                    String content = request.getParameter("commentContent");
                     products = productsFacade.find(id);
-                    Users users = usersFacade.find(session.getAttribute("user"));
+                    Users users = (Users) session.getAttribute("user");
+                    if (users == null) {
+                        request.setAttribute("message", "Please login first");
+                    }
                     ProductsComment productsComment = new ProductsComment();
-                    productsComment.setCommentID("Comment1");
+                    String commentId = productsCommentFacade.newId();
+                    productsComment.setCommentID(commentId);
                     productsComment.setProductId(products);
                     productsComment.setUserId(users);
-                    productsComment.setCommentContent("txtContent");
+                    productsComment.setCommentContent(content);
                     productsComment.setCommentStatus(true);
-                    request.getRequestDispatcher("viewServlet?action=showProductType&idProduct="+id).forward(request, response);
+                    productsCommentFacade.create(productsComment);
+                    users.getProductsCommentCollection().add(productsComment);
+                    usersFacade.edit(users);
+                    products.getProductsCommentCollection().add(productsComment);
+                    productsFacade.edit(products);
+                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct="+id).forward(request, response);
                     break;
+
                 case "sellerAddProduct":
                     today = new Date();
                     brands = brandsFacade.find(request.getParameter("txtBrand"));

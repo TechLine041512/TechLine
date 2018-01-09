@@ -32,6 +32,20 @@ public class ProductsCommentFacade extends AbstractFacade<ProductsComment> imple
         q.setParameter("productID", productID);
         return q.getResultList();
     }
+
+    @Override
+    public String newId() {
+        Query q = em.createQuery("SELECT p FROM ProductsComment p ORDER BY p.commentID DESC");
+        List<ProductsComment> p = q.setMaxResults(1).getResultList();
+        if (p != null) {
+            String lastProductID = p.get(0).getCommentID().replace("CMT", "");
+            int lastNumb = Integer.parseInt(lastProductID) + 1;
+            String commentId = String.format("CMT" + "%03d", lastNumb);
+            return commentId;
+        }
+        return null;
+    }
+    
     
             
 }

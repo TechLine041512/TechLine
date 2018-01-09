@@ -27,5 +27,7 @@ public interface ProductsCommentFacadeLocal {
     int count();
 
     List<ProductsComment> getListComment(String productID);
-    
+
+    String newId();
+
 }

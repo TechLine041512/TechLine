@@ -154,13 +154,29 @@
                 </div>
             </section>				
             <section class="header_text sub">
-                <img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
+                <img class="pageBanner" src="https://cdn.pbrd.co/images/H29wWUf.png" alt="New products" >
                 <h4><span>Result for keywords "${keyword}"</span></h4>
             </section>
             <section class="main-content">				
                 <div class="row">
-                    <div class="span9">					
+                    <div class="span12">					
                         <h4 class="title"><span class="text"><strong>Search</strong> Product</span></h4>
+                        <div class="item">
+                            <ul class="thumbnails listing-products">
+                                <li class="span3">
+                                    <select class="form-control" name="txtTypeName" onchange="if (this.value !== 'Select') window.location.href='searchProductsServlet?action=byType&type=' + this.value">
+                                        <c:forEach items="${listTypeSearch}" var="type">
+                                            <option value=${type.typeId} ${type.typeId == typeIdSelected ? 'selected' : ''}>${type.typeName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </li>
+                                <form method="POST" action="searchProductsServlet">
+                                    <li class="span3"><input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin"></li>
+                                    <li class="span3"><input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax"></li>
+                                    <li class="span3"><button name="action" class="btn-success btn" value="byPrice" onclick="return checkMinMax();">Search</button></li>
+                                </form>
+                            </ul>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -185,63 +201,6 @@
                                 </c:forEach>                         	  
                             </tbody>
                         </table>			                					
-                    </div>
-                    <div class="span3 col">      
-                        <div class="block">
-                            <h4 class="title">
-                                <span class="pull-left"><span class="text">Randomize</span></span>
-                                <span class="pull-right">
-                                    <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
-                                </span>
-                            </h4>
-                            <div id="myCarousel" class="carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="active item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">
-                                                    <span class="sale_tag"></span>												
-                                                    <a href="product_detail.html"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Fusce id molestie massa</a><br/>
-                                                    <a href="#" class="category">Suspendisse aliquet</a>
-                                                    <p class="price">$261</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">												
-                                                    <a href="product_detail.html"><img alt="" src="themes/images/ladies/4.jpg"></a><br/>
-                                                    <a href="product_detail.html" class="title">Tempor sem sodales</a><br/>
-                                                    <a href="#" class="category">Urna nec lectus mollis</a>
-                                                    <p class="price">$134</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <ul class="thumbnails listing-products"><li class="span3">
-                                        <select class="form-control" name="txtTypeName" onchange="if (this.value !== 'Select') window.location.href='searchProductsServlet?action=byType&type=' + this.value">
-                                            <c:forEach items="${listTypeSearch}" var="type">
-                                                <option value=${type.typeId} ${type.typeId == typeIdSelected ? 'selected' : ''}>${type.typeName}</option>
-                                            </c:forEach>
-                                        </select></li>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <ul class="thumbnails listing-products">
-                                <form method="POST" action="searchProductsServlet">
-                                    <li class="span3"><input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin"></li>
-                                    <li class="span3"><input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax"></li>
-                                    <li class="span3"><button name="action" class="btn-success btn" value="byPrice" onclick="return checkMinMax();">Search</button></li>
-                                </form>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </section>			

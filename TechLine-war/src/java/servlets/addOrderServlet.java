@@ -87,7 +87,7 @@ public class addOrderServlet extends HttpServlet {
                     }
                     if (!isExisted) {
                         pInCart.setProductId(id);
-                        pInCart.setQuantity(1);
+                        pInCart.setQuantity(Integer.parseInt(quantityDemand));
                         pInCart.setName(currentP.getProductName());
                         pInCart.setPrice(currentP.getProductPrice());
                         String image = currentP.getProductImage().split(",")[0];

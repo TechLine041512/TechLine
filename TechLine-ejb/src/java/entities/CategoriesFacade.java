@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class CategoriesFacade extends AbstractFacade<Categories> implements CategoriesFacadeLocal {
@@ -27,7 +28,7 @@ public class CategoriesFacade extends AbstractFacade<Categories> implements Cate
 
     @Override
     public String newId() {
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Categories c ORDER BY c.categoryId DESC");
+        Query q = em.createQuery("SELECT c FROM Categories c ORDER BY c.categoryId DESC");
         List<Categories> list = q.setMaxResults(1).getResultList();
         if (list != null) {
             String lastId = list.get(0).getCategoryId().replace("CAT", "");
@@ -40,7 +41,7 @@ public class CategoriesFacade extends AbstractFacade<Categories> implements Cate
 
     @Override
     public List<Categories> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Categories c");
+        Query q = em.createQuery("SELECT c FROM Categories c WHERE c.categoryStatus = TRUE");
         List<Categories> list = q.getResultList();
         if (list != null) {
             return list;
