@@ -100,7 +100,7 @@
                 </div>
             </section>				
             <section class="header_text sub">
-                <img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
+                <img class="pageBanner" src="https://cdn.pbrd.co/images/H29wWUf.png" alt="New products" >
                 <h4><span>Shopping Cart</span></h4>
             </section>
             <section class="main-content">				

@@ -192,7 +192,7 @@
                     <div class="span12">
                         <div class="my-main"><!-----!!!!!!!!!!!!!!!!!!!!!!!!.my-main Phan than noi dung trang!!!!!!!!!!!!!!!!!!!!!!!!!!!!----->
                 <div class="table-cart"><!----- Table cart ----->
-                    <h3>Danh sách đặt hàng</h3>
+                    <h3>Orders</h3>
                     <div id="order-list-customer-info">
                         <h4>Name: Tiến</h4>
                     </div>               

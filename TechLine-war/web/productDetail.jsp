@@ -149,7 +149,7 @@
                 </div>
             </section>
             <section class="header_text sub">
-                <img class="pageBanner" src="resource/themes/images/pageBanner.png" alt="New products" >
+                <img class="pageBanner" src="https://cdn.pbrd.co/images/H29wWUf.png" alt="New products" >
                 <h4><span>${product.productName}</span></h4>
             </section>
             <section class="main-content">				
@@ -195,10 +195,11 @@
                                 <h4>Price: <strong style="color: red;">&#36;${product.productPrice - (product.productPrice * product.productDiscount / 100)}</strong> <strong><strike> ${product.productPrice}</strike></strong></h4>
                             </div>
                             <div class="span5">
-                                <form class="form-inline">                                    
+                                <form class="form-inline" action="addOrderServlet" method="POST">                                    
                                     <label>Qty:</label>
-                                    <input type="text" class="span1" placeholder="1">
-                                    <button class="btn btn-inverse" type="submit">Add to cart</button>
+                                    <input type="text" class="span1" name="quantity" placeholder="1">
+                                    <input type="hidden" name="idProduct" value="${product.productId}"/>
+                                    <button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add to cart</button>
                                 </form>
                             </div>							
                         </div>
@@ -231,9 +232,9 @@
                                             <input type="hidden" name="productID" value="${product.productId}">
                                             <h4>Comment</h4>
                                             <h5>Comment is limited to 500 words</h5>
-                                            <textarea name="comment" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;"></textarea>
+                                            <textarea name="commentContent" rows="9" cols="200" style="margin: 0px 0px 10px; width: 845px; height: 181px;"></textarea>
                                             <div class="clearfix"></div>
-                                            <button type="submit" id="submit-review" style="height:50px;" value="Comment" name="action"><i class="fa fa-check-circle"></i> Send Comment</button>
+                                            <button type="submit" id="submit-review" style="height:50px;" value="comment" name="action"><i class="fa fa-check-circle"></i> Send Comment</button>
                                         </form>
                                     </div><br>  <!---End #write-review-rating--->
                                 </div><!---.accordion-panel end--->       

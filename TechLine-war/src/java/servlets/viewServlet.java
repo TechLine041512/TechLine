@@ -151,7 +151,8 @@ public class viewServlet extends HttpServlet {
                         paging.setPageIndex(m);
                         paging.updateModel();
                     }
-
+                    
+                    request.setAttribute("productType", productTypes);
                     request.setAttribute("pageProduct", paging);
                     request.setAttribute("listProduct", listProduct);
                     request.setAttribute("listTopProduct", listTopProducts.subList(0,3));

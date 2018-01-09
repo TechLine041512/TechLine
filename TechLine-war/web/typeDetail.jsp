@@ -160,8 +160,8 @@
                 </div>
             </section>	
             <section class="header_text sub">
-                <img class="pageBanner" src="resource/themes/images/pageBanner.png" alt="New products" >
-                <h4><span>${category.categoryName}</span></h4>
+                <img class="pageBanner" src="https://cdn.pbrd.co/images/H29wWUf.png" alt="New products" >
+                <h4><span>${productType.typeName}</span></h4>
             </section>
             <section class="main-content">
 
