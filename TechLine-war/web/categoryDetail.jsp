@@ -34,7 +34,7 @@
                 <script src="js/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body
+    <body>
         <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {

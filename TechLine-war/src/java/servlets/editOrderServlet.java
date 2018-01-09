@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import com.google.gson.Gson;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
-import entities.Users;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -16,13 +16,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 /**
  *
  * @author nth15
  */
 public class editOrderServlet extends HttpServlet {
+
     @EJB
     private OrderMasterFacadeLocal orderMasterFacade;
 
@@ -59,6 +60,21 @@ public class editOrderServlet extends HttpServlet {
                     order.setOrderStatus(newStatus);
                     orderMasterFacade.edit(order);
                     request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
+                    break;
+                case "countDeliveryFee":
+                    int fee = 0;
+                    int distance = (int) Double.parseDouble(request.getParameter("distance"));
+                    for (int i = 1; i <= distance; i++) {
+                        if (i < 12) {
+                            fee += 2;
+                        } else {
+                            fee += 3;
+                        }
+                    }
+                    String json = new Gson().toJson(fee);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
                     break;
                 case "cancelOrder":
                     order.setOrderStatus("Cancel");

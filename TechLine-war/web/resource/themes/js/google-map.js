@@ -41,11 +41,20 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 // ham xu ly tinh khoang cach
 function computeTotalDistance(result) {
     var total = 0;
-    var hour="";
+    var hour = "";
     var myroute = result.routes[0];
     total = myroute.legs[0].distance.value;
     hour = myroute.legs[0].duration.text;
     total = total / 1000;
+    $.post('editOrderServlet', {
+        action: "countDeliveryFee",
+        distance: total
+    }, function(jsonResponse) {
+        //window.alert(jsonResponse);
+        var tongFEE = jsonResponse;
+        document.getElementById("deliveryFee").innerHTML = tongFEE;
+    });
     document.getElementById("hourID").innerHTML = hour;
     document.getElementById("distanceID").innerHTML = total;
 }
+

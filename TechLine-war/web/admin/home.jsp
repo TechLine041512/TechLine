@@ -13,7 +13,8 @@
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
-
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <!-- Bootstrap core CSS     -->
         <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -22,10 +23,17 @@
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
         <link href="resource/assets/css/demo.css" rel="stylesheet" />
+        <style>
+            #container {              
+                width: 1400px;
+                height: 500px;
+                margin: 0 auto
+            }
+        </style>
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>  
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -172,18 +180,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header card-chart" data-background-color="green">
-                                        <div class="ct-chart" id="dailySalesChart"></div>
+                                    <div class="card-header card-chart" data-background-color="blue">
+                                        <div id="container" style="width: 1400px; height: 500px;"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Daily Sales</h4>
+                                        <h4 class="title">Chart For Order And Product</h4>
                                         <p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="stats">
-                                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                                        </div>
-                                    </div>
+                                    </div>                              
                                 </div>
                             </div>
                         </div>
@@ -270,36 +273,71 @@
                 </footer>
             </div>
         </div>
+        <!-- Anh hay lay doan code <script></script ma e de trong project nho? e gui~ cho anh do' sua? lai
+        
+        $(document).ready(function() {
+                $.ajax({
+                    url: "chart",     ten servlet xu ly e nghI~ a nen xu ly duogn dan kieu nay thu~ vi'du. viewServlet?action="homeAdmin"
+                    dataType: "JSON",   
+                    success: function(values) {  values y' la gia tri khi servlet response tra? ve
+        
+                        series: values       a bo? values khi du~ lieu tra ve vao day la duoc
+                    }
+        
+        ==> co gi a xu ly giong nhu ben project nho e lam nha response Json
+        -->
+        <script type="text/javascript">
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: WorldClimate.com'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                        name: 'Tokyo',
+                        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                    }, {
+                        name: 'London',
+                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    }]
+            });
 
+        </script>
     </body>
 
     <!--   Core JS Files   -->
     <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/material.min.js" type="text/javascript"></script>
-
-    <!--  Charts Plugin -->
-    <script src="resource/assets/js/chartist.min.js"></script>
-
     <!--  Notifications Plugin    -->
     <script src="resource/assets/js/bootstrap-notify.js"></script>
+    <!-- Material Dashboard javascript methods -->
+    <script src="resource/assets/js/material-dashboard.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
-    <!-- Material Dashboard javascript methods -->
-    <script src="resource/assets/js/material-dashboard.js"></script>
 
-    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="resource/assets/js/demo.js"></script>
 
-    <script type="text/javascript">
-                                $(document).ready(function() {
-
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                    demo.initDashboardPageCharts();
-
-                                });
-    </script>
 
 </html>

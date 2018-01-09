@@ -100,8 +100,8 @@
                                     <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="hourID"></h4> 
                                 </div><br/>
                                 <div>
-                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Fee Delivery:</h4>
-                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="feeID">12</h4> <b>&dollar;</b> 
+                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Total Price : </h4>
+                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="deliveryFee"></h4> &dollar; 
                                 </div><br/>
                             </div><!------deliver-address end----->
 
@@ -112,7 +112,7 @@
                                 </div><!-----journey-map end-----> 
                             </div><!-----deliver-map end----->
                         </div><!----- delivery-panel end-----><br/>
-                        
+
                         <div class="note-request"><!----- note-request ----->
                             <h3 style="background-color: #34495e; color: #FFF; margin:0;">Information Delivery </h3>
                             <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided the delivery note</h4>
@@ -139,7 +139,7 @@
                                     <td><p>MEMBER DISCOUNT($)</p></td>
                                     <td><p style="font-weight:bold;" id="memberDiscount" >12 $</p></td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td><p>SHIPMENT FEE($)</p></td>
                                     <td><p id="deliveryFeeh4">3 $</p></td>
