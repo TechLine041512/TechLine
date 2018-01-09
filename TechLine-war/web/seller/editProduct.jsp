@@ -87,11 +87,12 @@
                                 </div>
                                 <div class="card-content">
                                     <form action="editProductsServlet" method="post">
+                                        <input type="hidden" class="form-control" name="txtProductID" value="${productDetail.productId}" > 
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Product Name</label>
-                                                    <input type="text" class="form-control" name="txtProductName" value="${productDetail.productName}" pattern=".{5,500}"> 
+                                                    <input type="text" class="form-control" name="txtProductName" value="${productDetail.productName}" pattern=".{5,500}" required="required"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +122,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label>Product Summary</label>
-                                                    <textarea rows="10" cols="80" class="form-control" name="txtSummary" pattern=".{5,500}">${productDetail.productSummary}</textarea>
+                                                    <textarea rows="10" cols="80" class="form-control" name="txtSummary" pattern=".{5,500}" >${productDetail.productSummary}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +130,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label>Product Description</label>
-                                                    <textarea rows="10" cols="80" class="form-control" name="txtDescription" pattern=".{5,5000}">${productDetail.productDesc}</textarea>
+                                                    <textarea rows="10" cols="80" class="form-control" name="txtDescription" pattern=".{5,5000}" >${productDetail.productDesc}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,13 +138,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Product Price</label>
-                                                    <input type="number" class="form-control" name="txtPrice" value="${productDetail.productPrice}" pattern="[0-9.,]{1,10}">
+                                                    <input type="number" class="form-control" name="txtPrice" value="${productDetail.productPrice}" pattern="[0-9.,]{1,10}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Product Image</label>
-                                                    <input type="text" class="form-control" name="txtImage" value="${productDetail.productImage}">
+                                                    <input type="text" class="form-control" name="txtImage" value="${productDetail.productImage}" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -151,19 +152,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Discount</label>
-                                                    <input type="number" class="form-control" name="txtDiscount" value="${productDetail.productDiscount}" pattern="[0-9.,]{1,5}">
+                                                    <input type="number" class="form-control" name="txtDiscount" value="${productDetail.productDiscount}" pattern="[0-9.,]{1,5}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Unit</label>
-                                                    <input type="text" class="form-control" name="txtUnit" value="${productDetail.productUnit}" pattern=".{1,300}">
+                                                    <input type="text" class="form-control" name="txtUnit" value="${productDetail.productUnit}" pattern=".{1,300}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Quantity</label>
-                                                    <input type="number" class="form-control" name="txtQuantity" value="${productDetail.productQuantity}" pattern="[0-9]">
+                                                    <input type="number" class="form-control" name="txtQuantity" value="${productDetail.productQuantity}" pattern="[0-9]" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -171,25 +172,25 @@
                                             <div class="col-md-3">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Weight</label>
-                                                    <input type="text" class="form-control" name="txtWeight" value="${productDetail.productWeight}" pattern="[0-9.,]{1,10}">
+                                                    <input type="text" class="form-control" name="txtWeight" value="${productDetail.productWeight}" pattern="[0-9.,]{1,10}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Width</label>
-                                                    <input type="text" class="form-control" name="txtWidth" value="${productDetail.productWidth}" pattern="[0-9.,]{1,10}"> 
+                                                    <input type="text" class="form-control" name="txtWidth" value="${productDetail.productWidth}" pattern="[0-9.,]{1,10}" required="required"> 
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Height</label>
-                                                    <input type="text" class="form-control" name="txtHeight" value="${productDetail.productHeigth}" pattern="[0-9.,]{1,10}">
+                                                    <input type="text" class="form-control" name="txtHeight" value="${productDetail.productHeigth}" pattern="[0-9.,]{1,10}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Length</label>
-                                                    <input type="text" class="form-control" name="txtLength" value="${productDetail.productLength}" pattern="[0-9.,]{1,10}">
+                                                    <input type="text" class="form-control" name="txtLength" value="${productDetail.productLength}" pattern="[0-9.,]{1,10}"required="required">
                                                 </div>
                                             </div>
                                         </div>

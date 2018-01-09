@@ -365,7 +365,7 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeSeller":
-                    request.setAttribute("user", user);
+                    request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     break;
 
