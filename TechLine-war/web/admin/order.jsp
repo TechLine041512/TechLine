@@ -186,6 +186,7 @@
                                             <th onclick="sortTable(3)"><a href="#">Note</a></th>
                                             <th onclick="sortTable(4)"><a href="#">Total Price</a></th>
                                             <th onclick="sortTable(5)"><a href="#">Status</a></th>
+                                            <th><a href="#">Action</a></th>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="<%=pageOrder.getModel()%>" var="order">
@@ -197,6 +198,7 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
+                                                            <td></td>
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Processing'}">
@@ -207,6 +209,11 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
+                                                            <td>
+                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px; background-color: blue;">Delivery</a>
+                                                                <a class="btn-instagram btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px; background-color: red;">Cancel</a>
+                                                            </td>
+                                                            
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Delivery'}">
@@ -217,6 +224,10 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
+                                                            <td>
+                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px; background-color: #4edc14">Done</a>
+                                                                <a class="btn-instagram btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px; background-color: red;">Cancel</a>
+                                                            </td>
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Cancel'}">
@@ -227,6 +238,7 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
+                                                            <td></td>
                                                         </tr>
                                                     </c:if>     
                                                 </c:forEach>        
