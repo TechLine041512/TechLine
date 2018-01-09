@@ -50,6 +50,7 @@ public class RedirectServlet extends HttpServlet {
                     Users u = (Users) session.getAttribute("user");
                     session.setAttribute("user", u);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    break;
                 case "addProduct":
                     request.setAttribute("listBrand", listBrands);
                     request.setAttribute("listType", listProductTypes);

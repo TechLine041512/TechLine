@@ -50,7 +50,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
 
     @Override
     public List<Products> getListProductsByName(String productName) {
-        Query q = em.createQuery("SELECT p FROM Products p WHERE p.productName  like :productName");
+        Query q = em.createQuery("SELECT DISTINCT(p) FROM Products p WHERE p.productName like :productName");
         q.setParameter("productName", "%" + productName + "%");
         return q.getResultList();
     }
@@ -122,5 +122,11 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         return null;
     }
 
-    
+    @Override
+    public List<ProductTypes> getListTypeByName(String productName) {
+        Query q = em.createQuery("SELECT DISTINCT(p.typeId) FROM Products p WHERE p.productName like :productName");
+        q.setParameter("productName", "%" + productName + "%");
+        return q.getResultList();
+    }
+
 }
