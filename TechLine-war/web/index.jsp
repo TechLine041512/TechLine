@@ -147,8 +147,10 @@
                                     <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
                                     <ul>
                                         <c:forEach items="${item.productTypesCollection}" var="type">
-                                            <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                            </c:forEach>
+                                            <c:if test="${type.typeStatus}">
+                                                <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
+                                            </c:if>
+                                        </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>

@@ -114,7 +114,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
 
     @Override
     public List<Products> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p WHERE p.productStatus = TRUE ORDER BY p.productId DESC");
+        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p ORDER BY p.productId DESC");
         List<Products> listReturn = q.getResultList();
         if (listReturn != null) {
             return listReturn;

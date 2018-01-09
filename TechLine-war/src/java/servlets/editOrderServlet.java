@@ -6,18 +6,25 @@
 
 package servlets;
 
+import entities.OrderMaster;
+import entities.OrderMasterFacadeLocal;
+import entities.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nth15
  */
 public class editOrderServlet extends HttpServlet {
+    @EJB
+    private OrderMasterFacadeLocal orderMasterFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +39,35 @@ public class editOrderServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet editOrderServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet editOrderServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            String orderId = request.getParameter("oid");
+            OrderMaster order = orderMasterFacade.find(orderId);
+            switch (action) {
+                case "changeOrder":
+                    String status = request.getParameter("status");
+                    String newStatus = "";
+                    switch (status) {
+                        case "Processing":
+                            newStatus = "Delivery";
+                            break;
+                        case "Delivery":
+                            newStatus = "Done";
+                            break;
+                        default:
+                            break;
+                    }
+                    order.setOrderStatus(newStatus);
+                    orderMasterFacade.edit(order);
+                    request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
+                    break;
+                case "cancelOrder":
+                    order.setOrderStatus("Cancel");
+                    orderMasterFacade.edit(order);
+                    request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
