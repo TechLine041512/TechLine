@@ -171,33 +171,38 @@
                             <%
                                 PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
                             %>
-                            <c:forEach items="<%=pageProduct.getModel()%>" var="item">
-                                <li class="span3">
-                                    <div class="product-box">
-                                        <span class="sale_tag"></span>												
-                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="${item.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
-                                        <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
-                                        <p class="price">&#36;${item.productPrice}</p>
-                                    </div>
-                                </li>       
-                            </c:forEach>
+                            <c:if test="${pageProduct !=null}">
+                                <c:forEach items="<%=pageProduct.getModel()%>" var="item">
+                                    <li class="span3">
+                                        <div class="product-box">
+                                            <span class="sale_tag"></span>												
+                                            <a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img alt="" src="${item.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
+                                            <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
+                                            <p class="price">&#36;${item.productPrice}</p>
+                                        </div>
+                                    </li>       
+                                </c:forEach>
+                            </c:if>
+                            
                         </ul>								
                         <hr>
                         <div class="pagination pagination-small pagination-centered">
                             <ul>
-                                <li><a href="viewServlet?action=typeDetail&btn=prev&idType=${productTypesID}">Prev</a></li>
+                                <c:if test="${pageProduct !=null}">
+                                    <li><a href="viewServlet?action=typeDetail&btn=prev&idType=${productTypesID}">Prev</a></li>
+                                        <%
+
+                                            int pages = pageProduct.getPages();
+                                            for (int i = 1; i <= pages; i++) {
+                                        %>
+
+                                    <li><a href="viewServlet?action=typeDetail&page=<%=i%>&idType=${productTypesID}"><%=i%></a></li>
+
                                     <%
-
-                                        int pages = pageProduct.getPages();
-                                        for (int i = 1; i <= pages; i++) {
+                                        }
                                     %>
-
-                                <li><a href="viewServlet?action=typeDetail&page=<%=i%>&idType=${productTypesID}"><%=i%></a></li>
-
-                                <%
-                                    }
-                                %>
-                                <li><a href="viewServlet?action=typeDetail&btn=next&idType=${productTypesID}">Next</a></li>
+                                    <li><a href="viewServlet?action=typeDetail&btn=next&idType=${productTypesID}">Next</a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>

@@ -137,29 +137,33 @@ public class viewServlet extends HttpServlet {
                         productTypes = productTypesFacade.find(typeId);
                     }
                     listProduct = (List<Products>) productTypes.getProductsCollection();
+                    if ( !listProduct.isEmpty() ) {
+                        paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
+                        String n1 = request.getParameter("btn");
 
-                    paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
-                    String n1 = request.getParameter("btn");
-
-                    if (n1 != null) {
-                        if (n1.equals("next")) {
-                            paging.next();
+                        if (n1 != null) {
+                            if (n1.equals("next")) {
+                                paging.next();
+                            }
+                            if (n1.equals("prev")) {
+                                paging.prev();
+                            }
                         }
-                        if (n1.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pages1 = request.getParameter("page");
+                        String pages1 = request.getParameter("page");
 
-                    if (pages1 != null) {
-                        int m = Integer.parseInt(pages1);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
+                        if (pages1 != null) {
+                            int m = Integer.parseInt(pages1);
+                            paging.setPageIndex(m);
+                            paging.updateModel();
+                        }
+
+                        request.setAttribute("productType", productTypes);
+                        request.setAttribute("pageProduct", paging);
+                        request.setAttribute("listProduct", listProduct);
                     }
-                    
-                    request.setAttribute("productType", productTypes);
-                    request.setAttribute("pageProduct", paging);
-                    request.setAttribute("listProduct", listProduct);
+                    else {
+                        request.setAttribute("message", "This Product Type haven't got any products yet");
+                    }
                     request.setAttribute("listTopProduct", listTopProducts.subList(0,3));
                     request.setAttribute("productTypesID", productTypes.getTypeId()); //Noted
                     request.setAttribute("listCategories", listCategories);
