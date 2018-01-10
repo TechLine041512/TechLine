@@ -121,6 +121,8 @@ public class addProductsServlet extends HttpServlet {
                     productTypes2.setTypeDesc(request.getParameter("txtTypeDesc"));
                     productTypes2.setTypeStatus(true);
                     productTypesFacade.create(productTypes2);
+                    categories2.getProductTypesCollection().add(productTypes2);
+                    categoriesFacade.edit(categories2);
                     request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                     break;
                     
