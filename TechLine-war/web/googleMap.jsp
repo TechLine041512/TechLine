@@ -33,17 +33,40 @@
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
-                    <form method="POST" class="search_form">
-                        <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
+                    <form method="POST" action="searchProductsServlet">
+                        <input type="text" name="txtProductName" class="search-query" Placeholder="eg Sony">
+                        <button value="Search" name="action" class="btn-success btn">Search</button>
                     </form>
                 </div>
                 <div class="span8">
                     <div class="account pull-right">
-                        <ul class="user-menu">				
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="cart.html">Your Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>					
-                            <li><a href="register.html">Login</a></li>			
+                        <ul class="user-menu">	
+                            <li><a class="btn" href="viewServlet?action=viewShoppingCart">Cart</a></li>
+                                <%
+                                    if (session.getAttribute("user") == null) {
+                                %>
+                            <li><a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a></li>
+                                <%
+                                    }
+                                %>
+                                <%
+                                    if (session.getAttribute("user") != null) {
+                                %>
+                                <c:if test="${user.role=='admin'}">
+                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                                <c:if test="${user.role=='seller'}">
+                                    <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+
+                                <c:if test="${user.role=='customer'}">
+                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                                </c:if>
+                            <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
+                                <%
+                                    }
+                                %>
                         </ul>
                     </div>
                 </div>
@@ -52,27 +75,21 @@
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
-                    <a href="index.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>
                     <nav id="menu" class="pull-right">
                         <ul>
-                            <li><a href="./products.html">Woman</a>					
-                                <ul>
-                                    <li><a href="./products.html">Lacinia nibh</a></li>									
-                                    <li><a href="./products.html">Eget molestie</a></li>
-                                    <li><a href="./products.html">Varius purus</a></li>									
-                                </ul>
-                            </li>															
-                            <li><a href="./products.html">Man</a></li>			
-                            <li><a href="./products.html">Sport</a>
-                                <ul>									
-                                    <li><a href="./products.html">Gifts and Tech</a></li>
-                                    <li><a href="./products.html">Ties and Hats</a></li>
-                                    <li><a href="./products.html">Cold Weather</a></li>
-                                </ul>
-                            </li>							
-                            <li><a href="./products.html">Hangbag</a></li>
-                            <li><a href="./products.html">Best Seller</a></li>
-                            <li><a href="./products.html">Top Seller</a></li>
+                            <li>
+                              <a href="RedirectServlet?action=backToHome">Home</a>	          
+                            </li>
+                            <c:forEach items="${listCategories}" var="item">
+                                <li>
+                                    <a href="viewServlet?action=cateDetail&idCate=${item.categoryId}">${item.categoryName}</a>	
+                                    <ul>
+                                        <c:forEach items="${item.productTypesCollection}" var="type">
+                                            <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
+                                            </c:forEach>
+                                    </ul>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </nav>
                 </div>
@@ -125,19 +142,11 @@
                             <table class="orderinfo-total"  >
                                 <tr>
                                     <td><p>PRODUCT SUB TOTAL($)</p></td>
-                                    <td width="17%"><p style="font-weight:bold;" id="totalPrice" >12 $</p></td>
-                                </tr>  
-                                <tr>
-                                    <td><p>PRODUCTS DISCOUNT($)</p></td>
-                                    <td><p id="totalDiscount" >3$</p></td>
-                                </tr>
-                                <tr>
-                                    <td><p>PRODUCT PRICE TOTAL($)</p></td>
-                                    <td width="17%"><p style="font-weight:bold;" id="subTotalPrice">12 $</p></td>
+                                    <td width="17%"><p style="font-weight:bold;" id="totalPrice" >${subtotal}$</p></td>
                                 </tr> 
                                 <tr>
                                     <td><p>MEMBER DISCOUNT($)</p></td>
-                                    <td><p style="font-weight:bold;" id="memberDiscount" >12 $</p></td>
+                                    <td><p style="font-weight:bold;" id="memberDiscount" >${memberDiscount}$</p></td>
                                 </tr>
 
                                 <tr>

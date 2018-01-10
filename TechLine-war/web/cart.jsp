@@ -139,10 +139,15 @@
                             <strong>Total</strong>: Counting .... <br>
                         </p>
                         <hr/>
-                        <p class="buttons center">				
-                            <button class="btn" type="button">Back Home</button>
-                            <a class="btn btn-inverse" href="googleMap.jsp">Continue</a>
-                        </p>					
+                        <form method="POST" action="RedirectServlet">
+                            <p class="buttons center">		
+                                <input type="hidden" value="${subtotal}" name="subtotal"/>
+                                <input type="hidden" value="${memberDiscount}" name="memberDiscount"/>
+                                <button class="btn" type="submit" value="backToHome" name="action">Back Home</button>
+                                <button class="btn btn-inverse" value="goToMap" name="action">Continue</button>
+                            </p>	
+                        </form>
+                        				
                     </div>
                     <div class="span3 col">
                         

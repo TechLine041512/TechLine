@@ -65,8 +65,13 @@ public class addOrderServlet extends HttpServlet {
                     boolean isExisted = false;
                     String id = request.getParameter("idProduct");
                     Products currentP = productsFacade.find(id);
-                    int quantityDemand = Integer.parseInt(request.getParameter("quantity"));
-                    int available = currentP.getProductQuantity() - quantityDemand;
+                    int quantityDemand;
+                    if (request.getParameter("quantity") == null ) {
+                        quantityDemand = 1;
+                    }
+                    else {
+                        quantityDemand = Integer.parseInt(request.getParameter("quantity"));
+                    }
                     if (quantityDemand > currentP.getProductQuantity()) {
                         sb.append("We dont have that much products in store, We just can offer you as much as ");
                         sb.append(currentP.getProductQuantity());
@@ -103,8 +108,6 @@ public class addOrderServlet extends HttpServlet {
                             pInCart.setTotal(total);
                             cart.add(pInCart);
                         }
-                        currentP.setProductQuantity(available);
-                        productsFacade.edit(currentP);
                     }
                     
                     session.setAttribute("user", user);
