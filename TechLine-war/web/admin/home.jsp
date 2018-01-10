@@ -25,7 +25,7 @@
         <link href="resource/assets/css/demo.css" rel="stylesheet" />
         <style>
             #container {              
-                width: 1400px;
+                width: 900px;
                 height: 500px;
                 margin: 0 auto
             }
@@ -181,7 +181,7 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header card-chart" data-background-color="blue">
-                                        <div id="container" style="width: 1400px; height: 500px;"></div>
+                                        <div id="container" style="width: 900px; height: 500px;"></div>
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Chart For Order And Product</h4>

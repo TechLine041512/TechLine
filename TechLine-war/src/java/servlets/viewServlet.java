@@ -520,6 +520,7 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("products", listStatic);
                     request.getRequestDispatcher("report?action=report 2&reportName=topProduct").forward(request, response);
                     break;
+                    
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);

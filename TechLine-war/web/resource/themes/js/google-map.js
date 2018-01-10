@@ -46,11 +46,11 @@ function computeTotalDistance(result) {
     total = myroute.legs[0].distance.value;
     hour = myroute.legs[0].duration.text;
     total = total / 1000;
-    $.post('editOrderServlet', {
+    $.post('MapServlet', {
         action: "countDeliveryFee",
         distance: total
     }, function(jsonResponse) {
-        window.alert(jsonResponse);
+//        window.alert(jsonResponse);
         var tongFEE = jsonResponse.fee;
         document.getElementById("deliveryFee").innerHTML = tongFEE;
     });

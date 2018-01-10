@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 
 public class RedirectServlet extends HttpServlet {
     @EJB
@@ -44,11 +45,11 @@ public class RedirectServlet extends HttpServlet {
             List<Categories> listCategories = categoriesFacade.showAll();
             List<Brands> listBrands = brandsFacade.showAll();
             List<ProductTypes> listProductTypes = productTypesFacade.showAll();
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("user");
             switch (action) {
                 case "backToHome":
-                    HttpSession session = request.getSession();
-                    Users u = (Users) session.getAttribute("user");
-                    session.setAttribute("user", u);
+                    session.setAttribute("user", user);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                 case "addProduct":
@@ -94,6 +95,16 @@ public class RedirectServlet extends HttpServlet {
                     break;
                 case "addBrand":
                     request.getRequestDispatcher("admin/addBrand.jsp").forward(request, response);
+                    break;
+                case "goToMap":
+                    session.setAttribute("user", user);
+                    String subtotal = request.getParameter("subtotal");
+                    String memDiscount = request.getParameter("memberDiscount");
+                    if (StringUtils.isNotBlank(subtotal) && StringUtils.isNotBlank(memDiscount)) {
+                        request.setAttribute("subtotal", subtotal);
+                        request.setAttribute("memberDiscount", memDiscount);
+                    }
+                    request.getRequestDispatcher("googleMap.jsp").forward(request, response);
                     break;
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);
