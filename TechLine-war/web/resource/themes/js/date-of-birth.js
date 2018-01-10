@@ -78,10 +78,7 @@ function validatePass() {
 function checkMinMax() {
     var minS = document.getElementById('minValue').value;
     var maxS = document.getElementById('maxValue').value;
-    if ((minS.length === 0) && (maxS.length === 0)) {
-        alert('Please fill in the appropriate price range');
-        return false;
-    } else if ((minS.length > 0) && (maxS.length > 0)) {
+    if ((minS.length > 0) && (maxS.length > 0)) {
         var minN = parseFloat(minS);
         var maxN = parseFloat(maxS);
         if (minN >= maxN) {
