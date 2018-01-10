@@ -100,7 +100,7 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="<%=pageProduct.getModel()%>" var="product">
-                                                    <tr ${product.productStatus =='true'?'style="background-color: #4edc14; color: #ffffff;"':'style="background-color: red; color: #ffffff;"'}>
+                                                    <tr>
                                                         <td><a href="viewServlet?action=sellerProductDetail&productId=${product.id}">${product.id}</a></td>
                                                         <td>${product.name}</td>
                                                         <td>${product.brand}</td>
