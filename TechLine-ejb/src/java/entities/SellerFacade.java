@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class SellerFacade extends AbstractFacade<Seller> implements SellerFacadeLocal {
@@ -27,7 +28,7 @@ public class SellerFacade extends AbstractFacade<Seller> implements SellerFacade
 
     @Override
     public List<Seller> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT s FROM Seller s");
+        Query q = em.createQuery("SELECT s FROM Seller s");
         List<Seller> list = q.getResultList();
         if (list != null ) {
             return list;

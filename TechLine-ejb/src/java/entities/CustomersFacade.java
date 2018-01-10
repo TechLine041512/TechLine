@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class CustomersFacade extends AbstractFacade<Customers> implements CustomersFacadeLocal {
@@ -27,7 +28,7 @@ public class CustomersFacade extends AbstractFacade<Customers> implements Custom
 
     @Override
     public List<Customers> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Customers c");
+        Query q = em.createQuery("SELECT c FROM Customers c");
         List<Customers> list = q.getResultList();
         if (list != null) {
             return list;

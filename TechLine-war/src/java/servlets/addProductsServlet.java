@@ -131,7 +131,7 @@ public class addProductsServlet extends HttpServlet {
                         brand.setBrandId(brandId);
                     }
                     brand.setBrandIcon(request.getParameter("txtBrandIcon"));
-                    brand.setBrandName(request.getParameter("txtTypeName"));
+                    brand.setBrandName(request.getParameter("txtBrandName"));
                     brand.setBrandStatus(Boolean.TRUE);
                     brandsFacade.create(brand);
                     request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);

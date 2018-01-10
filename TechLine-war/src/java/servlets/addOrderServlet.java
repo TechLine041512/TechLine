@@ -61,40 +61,50 @@ public class addOrderServlet extends HttpServlet {
             
             switch (action) {
                 case "addToCart":
+                    StringBuilder sb = new StringBuilder();
+                    boolean isExisted = false;
                     String id = request.getParameter("idProduct");
                     Products currentP = productsFacade.find(id);
-                    String quantityDemand = request.getParameter("quantity");
-                    if (StringUtils.isBlank(quantityDemand)) {
-                        quantityDemand = "1";
-                    }
-                    boolean isExisted = false;
-                    if (cart != null) {
-                        for (ProductInCart p : cart ) {
-                            if (p != null && StringUtils.equals(p.getProductId(), id)) {
-                                int quantity = p.getQuantity() + Integer.parseInt(quantityDemand);
-                                double total = p.getPrice() * quantity;
-                                cart.remove(p);
-                                p.setQuantity(quantity);
-                                p.setTotal(total);
-                                cart.add(p);
-                                isExisted = true;
-                                break;
-                            }
-                        }
+                    int quantityDemand = Integer.parseInt(request.getParameter("quantity"));
+                    int available = currentP.getProductQuantity() - quantityDemand;
+                    if (quantityDemand > currentP.getProductQuantity()) {
+                        sb.append("We dont have that much products in store, We just can offer you as much as ");
+                        sb.append(currentP.getProductQuantity());
+                        sb.append(" ");
+                        sb.append(currentP.getProductUnit());
+                        message =  sb.toString();
                     }
                     else {
-                        cart = new ArrayList<>();
-                    }
-                    if (!isExisted) {
-                        pInCart.setProductId(id);
-                        pInCart.setQuantity(Integer.parseInt(quantityDemand));
-                        pInCart.setName(currentP.getProductName());
-                        pInCart.setPrice(currentP.getProductPrice());
-                        String image = currentP.getProductImage().split(",")[0];
-                        pInCart.setImage(image);
-                        double total = pInCart.getPrice() * pInCart.getQuantity();
-                        pInCart.setTotal(total);
-                        cart.add(pInCart);
+                        if (cart != null) {
+                            for (ProductInCart p : cart ) {
+                                if (p != null && StringUtils.equals(p.getProductId(), id)) {
+                                    int quantity = p.getQuantity() + quantityDemand;
+                                    double total = p.getPrice() * quantity;
+                                    cart.remove(p);
+                                    p.setQuantity(quantity);
+                                    p.setTotal(total);
+                                    cart.add(p);
+                                    isExisted = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else {
+                            cart = new ArrayList<>();
+                        }
+                        if (!isExisted) {
+                            pInCart.setProductId(id);
+                            pInCart.setQuantity(quantityDemand);
+                            pInCart.setName(currentP.getProductName());
+                            pInCart.setPrice(currentP.getProductPrice());
+                            String image = currentP.getProductImage().split(",")[0];
+                            pInCart.setImage(image);
+                            double total = pInCart.getPrice() * pInCart.getQuantity();
+                            pInCart.setTotal(total);
+                            cart.add(pInCart);
+                        }
+                        currentP.setProductQuantity(available);
+                        productsFacade.edit(currentP);
                     }
                     
                     session.setAttribute("user", user);

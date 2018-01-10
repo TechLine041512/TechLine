@@ -29,7 +29,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
     @Override
     public List<Products> getListProductByDatePost() {
         try {
-            Query q = em.createQuery("SELECT p FROM Products p WHERE p.productStatus = TRUE ORDER BY p.datePosted DESC");
+            Query q = em.createQuery("SELECT p FROM Products p WHERE p.productStatus = TRUE ORDER BY p.productId DESC");
             return q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,14 +97,14 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
 
     @Override
     public long countSoldProduct() {
-        javax.persistence.Query q = em.createQuery("SELECT COUNT(p) FROM Products p WHERE (p.orderDetailsCollection IS NOT EMPTY AND p.productStatus = TRUE)");
+        Query q = em.createQuery("SELECT COUNT(p) FROM Products p WHERE (p.orderDetailsCollection IS NOT EMPTY AND p.productStatus = TRUE)");
         long count = (long) q.getSingleResult();
         return count;
     }
 
     @Override
     public List<Products> getTopProduct() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p WHERE (p.orderDetailsCollection IS NOT EMPTY AND p.productStatus = TRUE)");
+        Query q = em.createQuery("SELECT p FROM Products p WHERE (p.orderDetailsCollection IS NOT EMPTY AND p.productStatus = TRUE)");
         List<Products> list = q.getResultList();
         if (list != null) {
             return list;
@@ -114,7 +114,7 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
 
     @Override
     public List<Products> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM Products p ORDER BY p.productId DESC");
+        Query q = em.createQuery("SELECT p FROM Products p ORDER BY p.productId DESC");
         List<Products> listReturn = q.getResultList();
         if (listReturn != null) {
             return listReturn;

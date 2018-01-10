@@ -28,7 +28,7 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
 
     @Override
     public String newId() {
-        javax.persistence.Query q = em.createQuery("SELECT o FROM OrderMaster o ORDER BY o.orderMId DESC");
+        Query q = em.createQuery("SELECT o FROM OrderMaster o ORDER BY o.orderMId DESC");
         List<OrderMaster> list = q.setMaxResults(1).getResultList();
         if (list != null) {
             String lastId = list.get(0).getOrderMId().replace("ORD", "");

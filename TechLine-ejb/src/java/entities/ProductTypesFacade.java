@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements ProductTypesFacadeLocal {
@@ -27,7 +28,7 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
 
     @Override
     public String newId() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p ORDER BY p.typeId DESC");
+        Query q = em.createQuery("SELECT p FROM ProductTypes p ORDER BY p.typeId DESC");
         List<ProductTypes> list = q.setMaxResults(1).getResultList();
         if (list != null) {
             String lastId = list.get(0).getTypeId().replace("PTY", "");
@@ -40,7 +41,7 @@ public class ProductTypesFacade extends AbstractFacade<ProductTypes> implements 
 
     @Override
     public List<ProductTypes> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT p FROM ProductTypes p");
+        Query q = em.createQuery("SELECT p FROM ProductTypes p");
         List<ProductTypes> list = q.getResultList();
         if (list != null ) {
             return list;

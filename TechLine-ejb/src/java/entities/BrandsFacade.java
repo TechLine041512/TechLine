@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacadeLocal {
@@ -27,7 +28,7 @@ public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacade
 
     @Override
     public String newBrandId() {
-        javax.persistence.Query q = em.createQuery("SELECT b FROM Brands b ORDER BY b.brandId DESC");
+        Query q = em.createQuery("SELECT b FROM Brands b ORDER BY b.brandId DESC");
         List<Brands> list = q.setMaxResults(1).getResultList();
         if (list != null) {
             String lastBrand = list.get(0).getBrandId().replace("BRN", "");
@@ -40,7 +41,7 @@ public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacade
 
     @Override
     public List<Brands> showAll() {
-        javax.persistence.Query q = em.createQuery("SELECT b FROM Brands b");
+        Query q = em.createQuery("SELECT b FROM Brands b");
         List<Brands> list = q.getResultList();
         if (list != null) {
             return list;
