@@ -43,6 +43,10 @@ function computeTotalDistance(result) {
     var total = 0;
     var hour = "";
     var myroute = result.routes[0];
+    var productSubTotal = 0;
+    var memberDiscount = 0;
+    productSubTotal = document.getElementById("txtProductTotalPrice").value;
+    memberDiscount = document.getElementById("txtMemberDiscounts").value;
     total = myroute.legs[0].distance.value;
     hour = myroute.legs[0].duration.text;
     total = total / 1000;
@@ -55,6 +59,8 @@ function computeTotalDistance(result) {
         var tongFEE2 = jsonResponse.fee;
         document.getElementById("deliveryFee").innerHTML = tongFEE;
         document.getElementById("deliveryFee2").innerHTML = tongFEE2;
+        document.getElementById("totalPriceOrder").innerHTML = parseInt(tongFEE2) + parseInt(productSubTotal) + parseInt(memberDiscount);
+        document.getElementById("txtTotalPrice").value = parseInt(tongFEE2) + parseInt(productSubTotal) + parseInt(memberDiscount);
     });
     document.getElementById("hourID").innerHTML = hour;
     document.getElementById("distanceID").innerHTML = total;
