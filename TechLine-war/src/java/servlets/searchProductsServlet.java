@@ -31,7 +31,7 @@ public class searchProductsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        List<Products> listProductSearch = new ArrayList<>();
+        List<Products> listProductSearch;
         List<Categories> listCategories = categoriesFacade.showAll();
         try (PrintWriter out = response.getWriter()) {
             switch (action) {
@@ -40,62 +40,82 @@ public class searchProductsServlet extends HttpServlet {
                     listProductSearch = productsFacade.getListProductsByName(keyword);
                     List<ProductTypes> listTypeSearch = productsFacade.getListTypeByName(keyword);
                     ProductTypes fakeSelect = new ProductTypes("Select");
-                    fakeSelect.setTypeName("Select");
+                    fakeSelect.setTypeName("All Product Type");
                     listTypeSearch.add(0, fakeSelect);
-                    getServletContext().setAttribute("listForward", listProductSearch);
+                    getServletContext().setAttribute("listProductSearch", listProductSearch);
                     getServletContext().setAttribute("keyword", keyword);
                     getServletContext().setAttribute("listTypeSearch", listTypeSearch);
                     request.setAttribute("listProductSearch", listProductSearch);
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
-                case "byPrice":
-                    String judge = "";
+                case "filter":
+                    String typeIdSelected = request.getParameter("txtTypeName");
                     String strMin = request.getParameter("txtMin");
                     String strMax = request.getParameter("txtMax");
-                    double min = 0, max = Double.MAX_VALUE;
-                    if (!strMin.equals("") && strMax.equals("")) {
-                        min = Double.parseDouble(strMin);
-                    } else if (strMin.equals("") && !strMax.equals("")) {
-                        max = Double.parseDouble(strMax);
-                    } else {
-                        min = Double.parseDouble(strMin);
-                        max = Double.parseDouble(strMax);
+                    List<Products> listForward = (List<Products>) getServletContext().getAttribute("listForward");
+                    listProductSearch = (List<Products>) getServletContext().getAttribute("listProductSearch");
+                    if (listForward == null) {
+                        listForward = listProductSearch;
                     }
-                    listProductSearch = (List<Products>) getServletContext().getAttribute("listForward");
-                    if (!listProductSearch.isEmpty()) {
-                        List<Products> listByPrice = new ArrayList<>();
-                        for (Products pro : listProductSearch) {
-                            if (pro.getProductPrice() >= min && pro.getProductPrice() <= max) {
-                                listByPrice.add(pro);
-                            }
+                    if (!typeIdSelected.equals("Select") && strMin.equals("") && strMax.equals("")) { //filter by type
+                        listForward = filterByType(listProductSearch, typeIdSelected);
+                        //filter by price
+                    } else if (typeIdSelected.equals("Select") && (!strMin.equals("") || !strMax.equals(""))) {
+                        listForward = filterByPrice(listProductSearch, strMin, strMax);
+                    } else if (typeIdSelected.equals("Select") && strMin.equals("") && strMax.equals("")) {
+                        listForward = listProductSearch;
+                        request.setAttribute("listProductSearch", listForward);
+                        getServletContext().setAttribute("listForward", listForward);
+                        request.setAttribute("listCategories", categoriesFacade.showAll());
+                        request.getRequestDispatcher("search.jsp").forward(request, response);
+                        break;
+                    } else { //both
+                        listForward = filterByType(listProductSearch, typeIdSelected);
+                        if (listForward != null) {
+                            listForward = filterByPrice(listForward, strMin, strMax);
                         }
-                        listProductSearch = new ArrayList<>(listByPrice);
-                        request.setAttribute("listProductSearch", listProductSearch);
                     }
-                    request.setAttribute("listCategories", categoriesFacade.showAll());
-                    request.getRequestDispatcher("search.jsp").forward(request, response);
-                    break;
-                case "byType":
-                    String typeIdSelected = request.getParameter("type");
-                    listProductSearch = (List<Products>) getServletContext().getAttribute("listForward");
-                    if (!listProductSearch.isEmpty()) {
-                        List<Products> listByType = new ArrayList<>();
-                        for (Products pro : listProductSearch) {
-                            if (pro.getTypeId().getTypeId().equals(typeIdSelected)) {
-                                listByType.add(pro);
-                            }
-                        }
-                        listProductSearch = new ArrayList<>(listByType);
-                        request.setAttribute("typeIdSelected", typeIdSelected);
-                        request.setAttribute("listProductSearch", listProductSearch);
-                    }
+                    request.setAttribute("listProductSearch", listForward);
+                    getServletContext().setAttribute("listForward", listForward);
+                    request.setAttribute("strMin", strMin);
+                    request.setAttribute("strMax", strMax);
+                    request.setAttribute("typeIdSelected", typeIdSelected);
                     request.setAttribute("listCategories", categoriesFacade.showAll());
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
             }
 
         }
+    }
+
+    private List<Products> filterByType(List<Products> listToFilter, String typeIdSelected) {
+        List<Products> listByType = new ArrayList<>();
+        for (Products pro : listToFilter) {
+            if (pro.getTypeId().getTypeId().equals(typeIdSelected)) {
+                listByType.add(pro);
+            }
+        }
+        return listByType;
+    }
+
+    private List<Products> filterByPrice(List<Products> listToFilter, String strMin, String strMax) {
+        double min = 0, max = Double.MAX_VALUE;
+        if (!strMin.equals("") && strMax.equals("")) {
+            min = Double.parseDouble(strMin);
+        } else if (strMin.equals("") && !strMax.equals("")) {
+            max = Double.parseDouble(strMax);
+        } else {
+            min = Double.parseDouble(strMin);
+            max = Double.parseDouble(strMax);
+        }
+        List<Products> listByPrice = new ArrayList<>();
+        for (Products pro : listToFilter) {
+            if (pro.getProductPrice() >= min && pro.getProductPrice() <= max) {
+                listByPrice.add(pro);
+            }
+        }
+        return listByPrice;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

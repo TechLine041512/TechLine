@@ -135,7 +135,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirectServlet?action=backToHome">Home</a>	          
+                                <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -144,8 +144,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                            </c:if>
-                                        </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -160,20 +160,20 @@
             <section class="main-content">				
                 <div class="row">
                     <div class="span12">					
-                        <h4 class="title"><span class="text"><strong>Search</strong> Product</span></h4>
+                        <h4 class="title"><span class="text"><strong>Search</strong> Filter</span></h4>
                         <div class="item">
                             <ul class="thumbnails listing-products">
-                                <li class="span3">
-                                    <select class="form-control" name="txtTypeName" onchange="if (this.value !== 'Select') window.location.href='searchProductsServlet?action=byType&type=' + this.value">
-                                        <c:forEach items="${listTypeSearch}" var="type">
-                                            <option value=${type.typeId} ${type.typeId == typeIdSelected ? 'selected' : ''}>${type.typeName}</option>
-                                        </c:forEach>
-                                    </select>
-                                </li>
                                 <form method="POST" action="searchProductsServlet">
-                                    <li class="span3"><input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin"></li>
-                                    <li class="span3"><input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax"></li>
-                                    <li class="span3"><button name="action" class="btn-success btn" value="byPrice" onclick="return checkMinMax();">Search</button></li>
+                                    <li class="span3">
+                                        <select class="form-control" name="txtTypeName" onchange="">
+                                            <c:forEach items="${listTypeSearch}" var="type">
+                                                <option value=${type.typeId} ${type.typeId == typeIdSelected ? 'selected' : ''}>${type.typeName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </li>
+                                    <li class="span3"><input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin" value="${strMin}"></li>
+                                    <li class="span3"><input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax" value="${strMax}"></li>
+                                    <li class="span3"><button name="action" class="btn-success btn" value="filter" onclick=" return checkMinMax();">Search</button></li>
                                 </form>
                             </ul>
                         </div>
