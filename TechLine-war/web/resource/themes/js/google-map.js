@@ -52,7 +52,9 @@ function computeTotalDistance(result) {
     }, function(jsonResponse) {
 //        window.alert(jsonResponse);
         var tongFEE = jsonResponse.fee;
+        var tongFEE2 = jsonResponse.fee;
         document.getElementById("deliveryFee").innerHTML = tongFEE;
+        document.getElementById("deliveryFee2").innerHTML = tongFEE2;
     });
     document.getElementById("hourID").innerHTML = hour;
     document.getElementById("distanceID").innerHTML = total;

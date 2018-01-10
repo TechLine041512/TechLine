@@ -25,46 +25,30 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import utils.Constants;
-import utils.TechLineUtils;
 
 public class report extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Constants constant = new Constants();
-        TechLineUtils util = new TechLineUtils();
         
-        String action = request.getParameter("action");
-        String reportTemplateName = request.getParameter("reportName");
-        String reportPdfName = request.getParameter("reportName");
-        String prjPath = util.getPathByProject(request, response);
-
-        String reportTemplate = constant.REPORT_TEMPLATE;
-        String reportPdf = constant.REPORT_PDF;
+        String action = (String) request.getAttribute("action");
+        String model = (String) request.getAttribute("model");
         switch (action) {
             case "report 2":
-                //Generate Pdf report
-                util.generatePdfReport(prjPath + reportTemplate, reportTemplateName, prjPath + reportPdf, reportPdfName);
-                
                 //read Pdf
-                String reportPath = prjPath + reportPdf + reportPdfName;
-                readReportPdf(request, response, reportPath);
+                readReportPdf(request, response, model);
                 break;
         }
         
     }
 
-    protected void readReportPdf(HttpServletRequest request, HttpServletResponse response, String pdfPath) throws FileNotFoundException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int BUFF_SIZE = 1024;
-        byte[] buffer = new byte[BUFF_SIZE];
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Type", "application/pdf");
-
+    protected void readReportPdf(HttpServletRequest request, HttpServletResponse response, String model) throws FileNotFoundException, IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("reportTemplate/");
+        sb.append(model);
         
         //report-- Change this path.
-        String reportpath = request.getServletContext().getRealPath("reportTemplate/topProduct.jrxml");
+        String reportpath = request.getServletContext().getRealPath(sb.toString());
         File filePDF = new File(reportpath);
         FileInputStream fis = new FileInputStream(filePDF);
         try {

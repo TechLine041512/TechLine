@@ -101,24 +101,29 @@ public class viewServlet extends HttpServlet {
                     for (ProductTypes p : listProductTypes) {
                         listProduct.addAll(p.getProductsCollection());
                     }
-                    paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
-                    String n = request.getParameter("btn");
-                    if (n != null) {
-                        if (n.equals("next")) {
-                            paging.next();
+                    if ( !listProduct.isEmpty() ) {
+                        paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
+                        String n = request.getParameter("btn");
+                        if (n != null) {
+                            if (n.equals("next")) {
+                                paging.next();
+                            }
+                            if (n.equals("prev")) {
+                                paging.prev();
+                            }
                         }
-                        if (n.equals("prev")) {
-                            paging.prev();
+                        String pages = request.getParameter("page");
+                        if (pages != null) {
+                            int m = Integer.parseInt(pages);
+                            paging.setPageIndex(m);
+                            paging.updateModel();
                         }
+                        request.setAttribute("pageProduct", paging);
+                        request.setAttribute("listProduct", listProduct);
                     }
-                    String pages = request.getParameter("page");
-                    if (pages != null) {
-                        int m = Integer.parseInt(pages);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
+                    else {
+                        request.setAttribute("message", "This category haven't got any products yet");
                     }
-                    request.setAttribute("pageProduct", paging);
-                    request.setAttribute("listProduct", listProduct);
                     request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("category", categories);
                     request.setAttribute("listCategories", listCategories);
@@ -517,8 +522,10 @@ public class viewServlet extends HttpServlet {
                         model.setSeller(p.getUserId().getFullname());
                         listStatic.add(model);
                     }
+                    request.setAttribute("model", "topProduct.jrxml");
                     request.setAttribute("products", listStatic);
-                    request.getRequestDispatcher("report?action=report 2&reportName=topProduct").forward(request, response);
+                    request.setAttribute("action", "report 2");
+                    request.getRequestDispatcher("report").forward(request, response);
                     break;
                     
                 default:

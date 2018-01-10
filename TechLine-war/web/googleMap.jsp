@@ -118,7 +118,7 @@
                                 </div><br/>
                                 <div>
                                     <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Total Price : </h4>
-                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="deliveryFee"></h4> &dollar; 
+                                    <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="deliveryFee2"></h4> &dollar; 
                                 </div><br/>
                             </div><!------deliver-address end----->
 
@@ -151,7 +151,7 @@
 
                                 <tr>
                                     <td><p>SHIPMENT FEE($)</p></td>
-                                    <td><p id="deliveryFeeh4">3 $</p></td>
+                                    <td><p id="deliveryFee"></p>$</td>
                                 </tr>
                                 <tr>
                                     <td><p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
