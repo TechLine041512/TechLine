@@ -17,14 +17,14 @@
 
         <!-- Bootstrap core CSS     -->
         <link href="resource/assets/css/bootstrap.min.css" rel="stylesheet" />
-<!--        <script src="resource/bootstrap/js/bootstrap.min.js"></script>	
-        <script src="resource/themes/css/bootstrappage.css"></script>
-        <script src="resource/bootstrap/css/bootstrap-responsive.min.css"></script>
-        <script src="resource/bootstrap/css/bootstrap.css"></script>
-        <script src="resource/bootstrap/css/bootstrap-responsive.css"></script>
-        <script src="resource/theme/css/my-style.css"></script>-->
-        
-        
+        <!--        <script src="resource/bootstrap/js/bootstrap.min.js"></script>	
+                <script src="resource/themes/css/bootstrappage.css"></script>
+                <script src="resource/bootstrap/css/bootstrap-responsive.min.css"></script>
+                <script src="resource/bootstrap/css/bootstrap.css"></script>
+                <script src="resource/bootstrap/css/bootstrap-responsive.css"></script>
+                <script src="resource/theme/css/my-style.css"></script>-->
+
+
         <!--  Material Dashboard CSS    -->
         <link href="resource/assets/css/material-dashboard.css" rel="stylesheet"/>
 
@@ -51,7 +51,7 @@
             }
 
             function openPasswordModal() {
-                showPasswordForm();
+
                 setTimeout(function() {
                     $('#PasswordModal').modal('show');
                 }, 230);
@@ -60,11 +60,11 @@
             function validatePass() {
                 var newPass = document.getElementById('newPass').value;
                 var confirmPass = document.getElementById('confirmPass').value;
-                
-                if(${user.password} != $('#oldPass').val()){
+
+                if (${user.password} != $('#oldPass').val()) {
                     alert('Password is invalid');
                     return false;
-                } else if(${user.password} == newPass) {
+                } else if (${user.password} == newPass) {
                     alert('Old Password must be difference new password');
                     return false;
                 }
@@ -128,7 +128,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Change Password ${user.password}</h4>
+                            <h4 class="modal-title">Change Password</h4>
                         </div>
                         <div class="modal-body">  
                             <div class="box">
@@ -223,10 +223,16 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
                                                         <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{5,100}" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Store Icon</label>
+                                                        <input type="text" class="form-control" value="${user.seller.storeIcon}" name="txtStoreIcon" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

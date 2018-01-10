@@ -62,6 +62,7 @@ public class editSellerServlet extends HttpServlet {
                 seller.setApprovedPlace(request.getParameter("txtApprovedPlace"));
                 seller.setStoreAddress(request.getParameter("txtStoreAddress"));
                 seller.setStoreSummary(request.getParameter("txtStoreSummary"));
+                seller.setStoreIcon(request.getParameter("txtStoreIcon"));
                 sellerFacadeLocal.edit(seller);
 
                 Users users = usersFacadeLocal.find(user.getUserId());
