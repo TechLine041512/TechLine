@@ -32,7 +32,7 @@
         <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${message}");
+                    $('#MessageModal').modal('show');
                 })
             </script>
         </c:if>
@@ -78,6 +78,30 @@
                 </div>
             </div>
         </div>
+        <!--Phần dialog box Message-->
+        <div class="modal fade login" id="MessageModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #ff6666">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" style="color: #fff">ERROR</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                            <div class="content">
+                                <div class="error" style="font-size: 20px;">${message}</div>                  
+                            </div>
+                        </div>                      
+                    </div>        
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>Tech Line In The Best</span>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <!--Kết thúc dialog box Message-->                 
         <!--Phần dialog box Login-->
         <div class="modal fade login" id="loginModal">
             <div class="modal-dialog login animated">

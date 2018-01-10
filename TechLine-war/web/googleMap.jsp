@@ -29,7 +29,14 @@
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
         <script src="resource/themes/js/google-map.js" type="text/javascript"></script>
     </head>
-    <body>		
+    <body>
+        <c:if test="${not empty message}">
+            <script>
+                window.addEventListener("load", function() {
+                    $('#MessageModal').modal('show');
+                })
+            </script>
+        </c:if>
         <div id="top-bar" class="container">
             <div class="row">
                 <div class="span4">
@@ -72,6 +79,30 @@
                 </div>
             </div>
         </div>
+        <!--Phần dialog box Message-->
+        <div class="modal fade login" id="MessageModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #ff6666">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" style="color: #fff">ERROR</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                            <div class="content">
+                                <div class="error" style="font-size: 20px;">${message}</div>                  
+                            </div>
+                        </div>                      
+                    </div>        
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>Tech Line In The Best</span>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <!--Kết thúc dialog box Message-->                
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
@@ -142,20 +173,26 @@
                             <table class="orderinfo-total"  >
                                 <tr>
                                     <td><p>PRODUCT SUB TOTAL($)</p></td>
-                                    <td width="17%"><p style="font-weight:bold;" id="totalPrice" >${subtotal}$</p></td>
+                                    <td width="17%">
+                                        <input type="hidden" id="txtProductTotalPrice" value="${subtotal}"/>
+                                        <b id="totalPrice">${subtotal}</b> &dollar;</td>                              
                                 </tr> 
                                 <tr>
                                     <td><p>MEMBER DISCOUNT($)</p></td>
-                                    <td><p style="font-weight:bold;" id="memberDiscount" >${memberDiscount}$</p></td>
+                                    <td>
+                                        <input type="hidden" id="txtMemberDiscounts" value="${memberDiscount}"/>
+                                        <b id="memberDiscount" >${memberDiscount}</b> &dollar;</td>
                                 </tr>
 
                                 <tr>
                                     <td><p>SHIPMENT FEE($)</p></td>
-                                    <td><p id="deliveryFee"></p>$</td>
+                                    <td><b id="deliveryFee"></b> $</td>
                                 </tr>
                                 <tr>
-                                    <td><p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
-                                    <td><p style="font-weight:bold; color:#900;" id="totalPriceOrder">12 $</p></td>
+                                    <td> 
+                                        <input type="hidden" name="txtTotalPrice" id="txtTotalPrice"/>
+                                        <p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
+                                    <td><b style="color:#900;" name="totalPriceOrder" id="totalPriceOrder"></b> &dollar;</td>
                                 </tr>              
                             </table>
                             <div class="clearfix"></div>

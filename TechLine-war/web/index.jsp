@@ -19,7 +19,6 @@
         <!-- global styles -->
         <link href="resource/themes/css/flexslider.css" rel="stylesheet"/>
         <link href="resource/themes/css/main.css" rel="stylesheet"/>
-
         <!-- scripts -->
         <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
         <script src="resource/bootstrap/js/bootstrap.min.js"></script>				
@@ -32,7 +31,7 @@
         <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {
-                    alert("${message}");
+                    $('#MessageModal').modal('show');
                 })
             </script>
         </c:if>
@@ -59,15 +58,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='seller'}">
-                                    <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="viewServlet?action=homeSeller">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='customer'}">
-                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -78,6 +77,34 @@
                 </div>
             </div>
         </div>
+
+        <!--Phần dialog box Message-->
+        <div class="modal fade login" id="MessageModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #ff6666">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" style="color: #fff">ERROR</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                            <div class="content">
+                                <div class="error" style="font-size: 20px;">${message}</div>                  
+                            </div>
+                        </div>                      
+                    </div>        
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+                        <span>Tech Line In The Best</span>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <!--Kết thúc dialog box Message-->                
+
+
+
         <!--Phần dialog box Login-->
         <div class="modal fade login" id="loginModal">
             <div class="modal-dialog login animated">
@@ -108,9 +135,9 @@
                                         <b style="color: red;" id="note2"></b>
                                         <input id="Regispassword" class="input-xlarge" type="password" placeholder="Password" name="txtPassword" pattern=".{5,20}" required title="Password contains 5 to 20 characters"><br/>
                                         <input id="Regispassword_confirmation" class="input-xlarge" type="password" placeholder="Repeat Password" name="password_confirmation" pattern=".{5,20}" required title="Repeat password contains 5 to 20 characters" onBlur="checkPass()"><br/>
-                                        <input id="Regispassword" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required title="Email must be in the correct format" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><br/>
-                                        <input id="Regispassword" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" required="true"><br/>
-                                        <input id="Regispassword" class="input-xlarge"  pattern='\d{9,15}' type="tel" placeholder="Phone" name="txtPhone" required title="Phone contains 9 to 15 digits"><br/>
+                                        <input id="Regispassword2" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required title="Email must be in the correct format" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><br/>
+                                        <input id="Regispassword3" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" required="true"><br/>
+                                        <input id="Regispassword4" class="input-xlarge"  pattern='\d{9,15}' type="tel" placeholder="Phone" name="txtPhone" required title="Phone contains 9 to 15 digits"><br/>
                                         <input type="radio" name="role" value="customer" checked> Customer 
                                         <input type="radio" name="role" value="seller" > Seller <br/>
                                         <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="register">Create An Account</button>
@@ -140,7 +167,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirectServlet?action=backToHome">Home</a>	          
+                                <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -149,8 +176,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                            </c:if>
-                                        </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -195,232 +222,232 @@
                                                             <span class="sale_tag"></span>
                                                             <p><a href="viewServlet?action=productDetail&idProduct=${item.productId}"><img src="${item.productImage[0]}" alt="${item.productName}" style="width: 200px; height: 200px" /></a></p>
                                                             <a href="viewServlet?action=productDetail&idProduct=${item.productId}" class="title" style="height: 60px;">${item.productName}</a><br/>
-                                                            <p class="price">&#36;${item.productPrice - (item.productPrice * item.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item.productId}">Add to cart</a>
+                                                                <p class="price">&#36;${item.productPrice - (item.productPrice * item.productDiscount / 100)}</p>
+                                                                <div>
+                                                                    <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item.productId}">Detail</a>
+                                                                    <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item.productId}">Add to cart</a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
-                                        <div class="item">
-                                            <ul class="thumbnails">
-                                                <c:forEach items="${ListProductByDatePost2}" var="item2">
-                                                    <li class="span3" style="line-height: none">
-                                                        <div class="product-box">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage[0]}" alt="${item2.productName}" style="width: 200px; height: 200px" /></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
-                                                            <p class="price">&#36;${item2.productPrice - (item2.productPrice * item2.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item2.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item2.productId}">Add to cart</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </div>
+                                            <div class="item">
+                                                <ul class="thumbnails">
+                                                    <c:forEach items="${ListProductByDatePost2}" var="item2">
+                                                        <li class="span3" style="line-height: none">
+                                                            <div class="product-box">
+                                                                <p><a href="viewServlet?action=productDetail&idProduct=${item2.productId}"><img src="${item2.productImage[0]}" alt="${item2.productName}" style="width: 200px; height: 200px" /></a></p>
+                                                                    <a href="viewServlet?action=productDetail&idProduct=${item2.productId}" class="title" style="height: 60px;">${item2.productName}</a><br/>
+                                                                <p class="price">&#36;${item2.productPrice - (item2.productPrice * item2.productDiscount / 100)}</p>
+                                                                <div>
+                                                                    <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${item2.productId}">Detail</a>
+                                                                    <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${item2.productId}">Add to cart</a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                </c:forEach>
+                                                        </li>
+                                                    </c:forEach>
 
-                                            </ul>
-                                        </div>
-                                    </div>							
-                                </div>
-                            </div>						
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="span12">
-                                <h4 class="title">
-                                    <span class="pull-left"><span class="text"><span class="line">Discount <strong>Products</strong></span></span></span>
-                                    <span class="pull-right">
-                                        <a class="left button" href="#myCarousel-2" data-slide="prev"></a><a class="right button" href="#myCarousel-2" data-slide="next"></a>
-                                    </span>
-                                </h4>
-                                <div id="myCarousel-2" class="myCarousel carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="active item">
-                                            <ul class="thumbnails">
-                                                <c:forEach items="${ListProductByDiscount1}" var="itemDiscount">
-                                                    <li class="span3" style="line-height: none">
-                                                        <div class="product-box" style="line-height: none">
-                                                            <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage[0]}" alt="${itemDiscount.productName}" style="width: 200px; height: 200px" /></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount.productPrice - (itemDiscount.productPrice * itemDiscount.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount.productId}">Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </c:forEach>    
-                                            </ul>
-                                        </div>
-                                        <div class="item">
-                                            <ul class="thumbnails">
-                                                <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
-                                                    <li class="span3" style="line-height: none">
-                                                        <div class="product-box" >
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage[0]}" alt="${itemDiscount2.productName}" style="width: 200px; height: 200px"/></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
-                                                            <p class="price">&#36;${itemDiscount2.productPrice - (itemDiscount2.productPrice * itemDiscount2.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount2.productId}">Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </li>     
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
-                                    </div>							
-                                </div>
-                            </div>						
-                        </div>
-                        <div class="row">
-                            <div class="span12">
-                                <h4 class="title">
-                                    <span class="pull-left"><span class="text"><span class="line">Seller <strong>Products</strong></span></span></span>
-                                    <span class="pull-right">
-                                        <a class="left button" href="#myCarousel-3" data-slide="prev"></a><a class="right button" href="#myCarousel-3" data-slide="next"></a>
-                                    </span>
-                                </h4>
-                                <div id="myCarousel-3" class="myCarousel carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="active item">
-                                            <ul class="thumbnails">
-                                                <c:forEach items="${ListProductBySeller1}" var="itemSeller">
-                                                    <li class="span3" style="line-height: none">
-                                                        <div class="product-box" >
-                                                            <span class="sale_tag"></span>
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}"><img src="${itemSeller.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}" class="title" style="height: 60px;">${itemSeller.productName}</a><br/>
-                                                            <p class="price">&#36;${itemSeller.productPrice - (itemSeller.productPrice * itemSeller.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller.productId}">Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </c:forEach>    
-                                            </ul>
-                                        </div>
-                                        <div class="item">
-                                            <ul class="thumbnails">
-                                                <c:forEach items="${ListProductBySeller2}" var="itemSeller2">
-                                                    <li class="span3">
-                                                        <div class="product-box" style="line-height: none">
-                                                            <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}"><img src="${itemSeller2.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
-                                                            <a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}" class="title" style="height: 60px;">${itemSeller2.productName}</a><br/>
-                                                            <p class="price">&#36;${itemSeller2.productPrice - (itemSeller2.productPrice * itemSeller2.productDiscount / 100)}</p>
-                                                            <div>
-                                                                <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}">Detail</a>
-                                                                <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller2.productId}">Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </li>     
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
-                                    </div>							
-                                </div>
-                            </div>						
-                        </div>
-                        <div class="row feature_box">						
-                            <div class="span4">
-                                <div class="service">
-                                    <div class="responsive">	
-                                        <img src="resource/themes/images/feature_img_2.png" alt="" />
-                                        <h4>MODERN <strong>DESIGN</strong></h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>									
+                                                </ul>
+                                            </div>
+                                        </div>							
                                     </div>
-                                </div>
+                                </div>						
                             </div>
-                            <div class="span4">	
-                                <div class="service">
-                                    <div class="customize">			
-                                        <img src="resource/themes/images/feature_img_1.png" alt="" />
-                                        <h4>FREE <strong>SHIPPING</strong></h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
-                                    </div>
+                            <br/>
+                            <div class="row">
+                                <div class="span12">
+                                    <h4 class="title">
+                                        <span class="pull-left"><span class="text"><span class="line">Discount <strong>Products</strong></span></span></span>
+                                        <span class="pull-right">
+                                            <a class="left button" href="#myCarousel-2" data-slide="prev"></a><a class="right button" href="#myCarousel-2" data-slide="next"></a>
+                                        </span>
+                                    </h4>
+                                    <div id="myCarousel-2" class="myCarousel carousel slide">
+                                        <div class="carousel-inner">
+                                            <div class="active item">
+                                                <ul class="thumbnails">
+                                                    <c:forEach items="${ListProductByDiscount1}" var="itemDiscount">
+                                                        <li class="span3" style="line-height: none">
+                                                            <div class="product-box" style="line-height: none">
+                                                                <span class="sale_tag"></span>
+                                                                <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}"><img src="${itemDiscount.productImage[0]}" alt="${itemDiscount.productName}" style="width: 200px; height: 200px" /></a></p>
+                                                                <a href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}" class="title" style="height: 60px;">${itemDiscount.productName}</a><br/>
+                                                                    <p class="price">&#36;${itemDiscount.productPrice - (itemDiscount.productPrice * itemDiscount.productDiscount / 100)}</p>
+                                                                    <div>
+                                                                        <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount.productId}">Detail</a>
+                                                                        <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount.productId}">Add to cart</a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </c:forEach>    
+                                                    </ul>
+                                                </div>
+                                                <div class="item">
+                                                    <ul class="thumbnails">
+                                                        <c:forEach items="${ListProductByDiscount2}" var="itemDiscount2">
+                                                            <li class="span3" style="line-height: none">
+                                                                <div class="product-box" >
+                                                                    <p><a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}"><img src="${itemDiscount2.productImage[0]}" alt="${itemDiscount2.productName}" style="width: 200px; height: 200px"/></a></p>
+                                                                        <a href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}" class="title" style="height: 60px;">${itemDiscount2.productName}</a><br/>
+                                                                    <p class="price">&#36;${itemDiscount2.productPrice - (itemDiscount2.productPrice * itemDiscount2.productDiscount / 100)}</p>
+                                                                    <div>
+                                                                        <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemDiscount2.productId}">Detail</a>
+                                                                        <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemDiscount2.productId}">Add to cart</a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>     
+                                                        </c:forEach>
+                                                    </ul>
+                                                </div>
+                                            </div>							
+                                        </div>
+                                    </div>						
                                 </div>
+                                <div class="row">
+                                    <div class="span12">
+                                        <h4 class="title">
+                                            <span class="pull-left"><span class="text"><span class="line">Seller <strong>Products</strong></span></span></span>
+                                            <span class="pull-right">
+                                                <a class="left button" href="#myCarousel-3" data-slide="prev"></a><a class="right button" href="#myCarousel-3" data-slide="next"></a>
+                                            </span>
+                                        </h4>
+                                        <div id="myCarousel-3" class="myCarousel carousel slide">
+                                            <div class="carousel-inner">
+                                                <div class="active item">
+                                                    <ul class="thumbnails">
+                                                        <c:forEach items="${ListProductBySeller1}" var="itemSeller">
+                                                            <li class="span3" style="line-height: none">
+                                                                <div class="product-box" >
+                                                                    <span class="sale_tag"></span>
+                                                                    <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}"><img src="${itemSeller.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
+                                                                    <a href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}" class="title" style="height: 60px;">${itemSeller.productName}</a><br/>
+                                                                        <p class="price">&#36;${itemSeller.productPrice - (itemSeller.productPrice * itemSeller.productDiscount / 100)}</p>
+                                                                        <div>
+                                                                            <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller.productId}">Detail</a>
+                                                                            <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller.productId}">Add to cart</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </c:forEach>    
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item">
+                                                        <ul class="thumbnails">
+                                                            <c:forEach items="${ListProductBySeller2}" var="itemSeller2">
+                                                                <li class="span3">
+                                                                    <div class="product-box" style="line-height: none">
+                                                                        <p><a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}"><img src="${itemSeller2.productImage[0]}" alt="" style="width: 200px; height: 200px"/></a></p>
+                                                                            <a href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}" class="title" style="height: 60px;">${itemSeller2.productName}</a><br/>
+                                                                        <p class="price">&#36;${itemSeller2.productPrice - (itemSeller2.productPrice * itemSeller2.productDiscount / 100)}</p>
+                                                                        <div>
+                                                                            <a class="btn btn-inverse" href="viewServlet?action=productDetail&idProduct=${itemSeller2.productId}">Detail</a>
+                                                                            <a class="btn btn-inverse" href="addOrderServlet?action=addToCart&idProduct=${itemSeller2.productId}">Add to cart</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>     
+                                                            </c:forEach>
+                                                        </ul>
+                                                    </div>
+                                                </div>							
+                                            </div>
+                                        </div>						
+                                    </div>
+                                    <div class="row feature_box">						
+                                        <div class="span4">
+                                            <div class="service">
+                                                <div class="responsive">	
+                                                    <img src="resource/themes/images/feature_img_2.png" alt="" />
+                                                    <h4>MODERN <strong>DESIGN</strong></h4>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>									
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span4">	
+                                            <div class="service">
+                                                <div class="customize">			
+                                                    <img src="resource/themes/images/feature_img_1.png" alt="" />
+                                                    <h4>FREE <strong>SHIPPING</strong></h4>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span4">
+                                            <div class="service">
+                                                <div class="support">	
+                                                    <img src="resource/themes/images/feature_img_3.png" alt="" />
+                                                    <h4>24/7 LIVE <strong>SUPPORT</strong></h4>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                                                </div>
+                                            </div>
+                                        </div>	
+                                    </div>		
+                                </div>				
                             </div>
-                            <div class="span4">
-                                <div class="service">
-                                    <div class="support">	
-                                        <img src="resource/themes/images/feature_img_3.png" alt="" />
-                                        <h4>24/7 LIVE <strong>SUPPORT</strong></h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                        </section>
+                        <section class="our_client">
+                            <h4 class="title"><span class="text">Manufactures</span></h4>
+                            <div class="row">
+                                <c:forEach items="${listBrands}" var="brand">
+                                    <div class="span2">
+                                        <img alt="${brand.brandName}" src="${brand.brandIcon}" style="width: 120px; height: 45px;">
                                     </div>
+                                </c:forEach>
+                            </div>
+                        </section>
+                        <section id="footer-bar">
+                            <div class="row">
+                                <div class="span3">
+                                    <h4>Navigation</h4>
+                                    <ul class="nav">
+                                        <li><a href="./index.html">Homepage</a></li>  
+                                        <li><a href="./about.html">About Us</a></li>
+                                        <li><a href="./contact.html">Contac Us</a></li>
+                                        <li><a href="./cart.html">Your Cart</a></li>
+                                        <li><a href="./register.html">Login</a></li>							
+                                    </ul>					
                                 </div>
+                                <div class="span4">
+                                    <h4>My Account</h4>
+                                    <ul class="nav">
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Order History</a></li>
+                                        <li><a href="#">Wish List</a></li>
+                                        <li><a href="#">Newsletter</a></li>
+                                    </ul>
+                                </div>
+                                <div class="span5">
+                                    <p class="logo"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></p>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
+                                    <br/>
+                                    <span class="social_icons">
+                                        <a class="facebook" href="#">Facebook</a>
+                                        <a class="twitter" href="#">Twitter</a>
+                                        <a class="skype" href="#">Skype</a>
+                                        <a class="vimeo" href="#">Vimeo</a>
+                                    </span>
+                                </div>					
                             </div>	
-                        </div>		
-                    </div>				
-                </div>
-            </section>
-            <section class="our_client">
-                <h4 class="title"><span class="text">Manufactures</span></h4>
-                <div class="row">
-                    <c:forEach items="${listBrands}" var="brand">
-                        <div class="span2">
-                            <img alt="${brand.brandName}" src="${brand.brandIcon}" style="width: 120px; height: 45px;">
-                        </div>
-                    </c:forEach>
-                </div>
-            </section>
-            <section id="footer-bar">
-                <div class="row">
-                    <div class="span3">
-                        <h4>Navigation</h4>
-                        <ul class="nav">
-                            <li><a href="./index.html">Homepage</a></li>  
-                            <li><a href="./about.html">About Us</a></li>
-                            <li><a href="./contact.html">Contac Us</a></li>
-                            <li><a href="./cart.html">Your Cart</a></li>
-                            <li><a href="./register.html">Login</a></li>							
-                        </ul>					
+                        </section>
+                        <section id="copyright">
+                            <span>Copyright 2013 bootstrappage template  All right reserved.</span>
+                        </section>
                     </div>
-                    <div class="span4">
-                        <h4>My Account</h4>
-                        <ul class="nav">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order History</a></li>
-                            <li><a href="#">Wish List</a></li>
-                            <li><a href="#">Newsletter</a></li>
-                        </ul>
-                    </div>
-                    <div class="span5">
-                        <p class="logo"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
-                        <br/>
-                        <span class="social_icons">
-                            <a class="facebook" href="#">Facebook</a>
-                            <a class="twitter" href="#">Twitter</a>
-                            <a class="skype" href="#">Skype</a>
-                            <a class="vimeo" href="#">Vimeo</a>
-                        </span>
-                    </div>					
-                </div>	
-            </section>
-            <section id="copyright">
-                <span>Copyright 2013 bootstrappage template  All right reserved.</span>
-            </section>
-        </div>
-        <script src="resource/themes/js/common.js"></script>
-        <script src="resource/themes/js/jquery.flexslider-min.js"></script>
-        <script type="text/javascript">
-                                            $(function() {
-                                                $(document).ready(function() {
-                                                    $('.flexslider').flexslider({
-                                                        animation: "fade",
-                                                        slideshowSpeed: 4000,
-                                                        animationSpeed: 600,
-                                                        controlNav: false,
-                                                        directionNav: true,
-                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
-                                                    });
-                                                });
-                                            });
-        </script>
-    </body>
-</html>
+                    <script src="resource/themes/js/common.js"></script>
+                    <script src="resource/themes/js/jquery.flexslider-min.js"></script>
+                    <script type="text/javascript">
+                                                        $(function() {
+                                                            $(document).ready(function() {
+                                                                $('.flexslider').flexslider({
+                                                                    animation: "fade",
+                                                                    slideshowSpeed: 4000,
+                                                                    animationSpeed: 600,
+                                                                    controlNav: false,
+                                                                    directionNav: true,
+                                                                    controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                                });
+                                                            });
+                                                        });
+                    </script>
+                </body>
+            </html>
