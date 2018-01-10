@@ -14,8 +14,8 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="217" height="79" uuid="2d85c671-af2a-4300-b762-d2b337c7a7b5"/>
-				<textElement>
+				<reportElement x="0" y="0" width="555" height="79" uuid="2d85c671-af2a-4300-b762-d2b337c7a7b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="30"/>
 				</textElement>
 				<text><![CDATA[Top Product]]></text>
@@ -28,47 +28,149 @@
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="2" width="100" height="20" uuid="11c236d4-5056-4580-aae0-a24d41c610fc"/>
-				<text><![CDATA[id]]></text>
+				<reportElement x="0" y="0" width="39" height="61" uuid="11c236d4-5056-4580-aae0-a24d41c610fc">
+					<property name="net.sf.jasperreports.export.pdf.tag.h1" value="full"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="117" y="2" width="100" height="20" uuid="f92fd808-6da1-4836-bf1c-e2d717fab7ef"/>
-				<text><![CDATA[name]]></text>
+				<reportElement x="51" y="0" width="166" height="61" uuid="f92fd808-6da1-4836-bf1c-e2d717fab7ef"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="2" width="100" height="20" uuid="8d592c89-4c7b-4cab-855c-72d35a3313f7"/>
-				<text><![CDATA[sold]]></text>
+				<reportElement x="226" y="0" width="67" height="61" uuid="8d592c89-4c7b-4cab-855c-72d35a3313f7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Sold]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="2" width="100" height="20" uuid="b7086d9d-7623-4810-bb4e-403fb2142b27"/>
-				<text><![CDATA[orderId]]></text>
+				<reportElement x="309" y="0" width="132" height="61" uuid="b7086d9d-7623-4810-bb4e-403fb2142b27"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Order IDs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="441" y="0" width="100" height="20" uuid="bb05d097-cfeb-46c7-9890-f361cc151d03"/>
-				<text><![CDATA[seller]]></text>
+				<reportElement x="455" y="0" width="100" height="61" uuid="bb05d097-cfeb-46c7-9890-f361cc151d03"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Seller]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="61" width="100" height="20" uuid="9a09feeb-7e2e-4196-8068-e2b33fdff0f8"/>
+				<reportElement x="0" y="0" width="39" height="125" uuid="9a09feeb-7e2e-4196-8068-e2b33fdff0f8"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="61" width="100" height="20" uuid="2f68473a-8d9d-4030-b3fa-5818714cf89f"/>
+				<reportElement x="51" y="0" width="166" height="125" uuid="2f68473a-8d9d-4030-b3fa-5818714cf89f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="226" y="61" width="100" height="20" uuid="2c253b2e-626e-447c-a6cc-50eef94ead40"/>
+				<reportElement x="226" y="0" width="67" height="125" uuid="2c253b2e-626e-447c-a6cc-50eef94ead40"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{sold}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="326" y="61" width="100" height="20" uuid="c82710e5-ed28-44e7-a564-8c78a24506d3"/>
+				<reportElement x="309" y="0" width="132" height="125" uuid="c82710e5-ed28-44e7-a564-8c78a24506d3"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{orderId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="441" y="61" width="100" height="20" uuid="6e84e9ef-b257-430f-8c83-858f11ef4e0b"/>
+				<reportElement x="455" y="0" width="100" height="125" uuid="6e84e9ef-b257-430f-8c83-858f11ef4e0b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{seller}]]></textFieldExpression>
 			</textField>
 		</band>
