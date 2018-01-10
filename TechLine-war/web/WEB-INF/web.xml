@@ -80,6 +80,10 @@
         <servlet-name>report</servlet-name>
         <servlet-class>servlets.report</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MapServlet</servlet-name>
+        <servlet-class>servlets.MapServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>viewServlet</servlet-name>
         <url-pattern>/viewServlet</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>report</servlet-name>
         <url-pattern>/report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MapServlet</servlet-name>
+        <url-pattern>/MapServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
