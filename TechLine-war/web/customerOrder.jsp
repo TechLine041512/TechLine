@@ -3,6 +3,9 @@
     Created on : Jan 1, 2018, 1:35:08 PM
     Author     : tatyuki1209
 --%>
+<%@page import="java.util.List"%>
+<%@page import="entities.OrderMaster"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +29,7 @@
         <script src="resource/themes/js/superfish.js"></script>	
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
+        <script src="resource/themes/js/oderlist.js" type="text/javascript"></script>
 
     </head>
     <body>	
@@ -234,19 +238,28 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Date Order</th>
-                                <th>Hour Order</th>
+                                <th>Address</th>
                                 <th>Status</th>
-                                <th>Price</th>
+                                <th>Total Price</th>
                             </tr>
                             </thead>                            
                             <tbody class="oMView">
-                            <tr>
-                                <td class="order-number"><p><a href="#">asdasdasd</a></p></td>
-                                <td><p>asdasd</p></td>
-                                <td><p>asdasdasd</p></td>
-                                <td><p>asdasdasd</p></td>
-                                <td><p>asdasdasd</p></td>
-                            </tr>
+                                <% 
+                                    List<OrderMaster> oMList = (List<OrderMaster>) request.getAttribute("listOrderMasterCustomer");
+                                    for(OrderMaster oM : oMList){ 
+                                %>
+                                <tr>
+                                    <td class="order-number"><p><a href="#"><%= oM.getOrderMId()%></a></p></td>
+                                    <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="<%= oM.getDateOrdered() %>"/></td>
+                                    <td><%= oM.getOrderAddress().getOrderAddressDetail() %></td>
+                                    <td><%= oM.getOrderStatus() %></td>
+                                    <td><%= oM.getOrderTotalPrice() %></td>
+                                </tr>
+                                <%
+                                    }
+                                    oMList.clear();
+                                    request.removeAttribute("oMList");
+                                %>
                             </tbody>
                         </table>
                     </div><!-----   .my-orderlist-table end   ------>
@@ -318,8 +331,11 @@
                 <span>Copyright 2013 bootstrappage template  All right reserved.</span>
             </section>
         </div>
+        <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
+        <link href="resource/themes/css/jquery-ui.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript">
                                             $(function() {
                                                 $(document).ready(function() {
@@ -333,6 +349,11 @@
                                                     });
                                                 });
                                             });
+        </script>
+        <script><!------   Calendar Select for Order List   ------>
+            $(function() {
+                $('#datepicker').datepicker({dateFormat: 'dd-mm-yy'}).val();
+            });
         </script>
     </body>
 </html>

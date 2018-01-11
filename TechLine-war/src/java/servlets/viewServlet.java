@@ -452,7 +452,11 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listBrands", listBrands );
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
-
+                case "OrderHistory":
+                    request.setAttribute("listOrderMasterCustomer", orderMasterFacade.getOrderByUserID(user.getUserId()));
+                    request.setAttribute("listCategories", listCategories);
+                    request.getRequestDispatcher("customerOrder.jsp").forward(request, response);
+                    break;
                 case "sellerProduct":
                     List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(sellerProduct), 10);

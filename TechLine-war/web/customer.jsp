@@ -221,7 +221,7 @@
                                 <div class="customer-links"><!----- .customer-links ----->
                                     <ul>
                                         <li><i class="fa fa-shopping-cart"></i><a href="viewServlet?action=viewShoppingCart" id="customer-cart" onclick="return isNull(<%= session.getAttribute("cart") != null%>);">My Cart</a></li>
-                                        <li><i class="fa fa-cubes"></i><a href="customerOrder.jsp" id="customer-history">Order History</a></li>
+                                        <li><i class="fa fa-cubes"></i><a href="viewServlet?action=OrderHistory" id="customer-history">Order History</a></li>
                                         <li><i class="fa fa-unlock-alt"></i><a href="javascript:void(0)" data-toggle="modal" onclick="openPasswordModal();">Change Password</a></li>
                                     </ul>
                                 </div><!----- .customer-links end ----->
