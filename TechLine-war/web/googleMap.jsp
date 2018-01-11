@@ -161,47 +161,54 @@
                             </div><!-----deliver-map end----->
                         </div><!----- delivery-panel end-----><br/>
 
-                        <div class="note-request"><!----- note-request ----->
-                            <h3 style="background-color: #34495e; color: #FFF; margin:0;">Information Delivery </h3>
-                            <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided the delivery note</h4>
-                            <div class="clearfix"></div>
-                            <div>
-                                <textarea id="delivery-notice" name="deliveryRequest"></textarea>
-                                <button style="margin-left: 5px;" class="btn-inverse btn" type="button">Send</button><br>                        
-                            </div>
-                            <div class="clearfix"></div>
-                            <table class="orderinfo-total"  >
-                                <tr>
-                                    <td><p>PRODUCT SUB TOTAL($)</p></td>
-                                    <td width="17%">
-                                        <input type="hidden" id="txtProductTotalPrice" value="${subtotal}"/>
-                                        <b id="totalPrice">${subtotal}</b> &dollar;</td>                              
-                                </tr> 
-                                <tr>
-                                    <td><p>MEMBER DISCOUNT($)</p></td>
-                                    <td>
-                                        <input type="hidden" id="txtMemberDiscounts" value="${memberDiscount}"/>
-                                        <b id="memberDiscount" >${memberDiscount}</b> &dollar;</td>
-                                </tr>
+                        <form method="POST" action="addOrderServlet">
+                            <div class="note-request"><!----- note-request ----->
+                                <h3 style="background-color: #34495e; color: #FFF; margin:0;">Information Delivery </h3>
+                                <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided the delivery note</h4>
+                                <div class="clearfix"></div>
+                                <div>
+                                    <textarea id="delivery-notice" name="deliveryRequest"></textarea>
+                                </div>
+                                <div>
+                                    <input id="delivery-notice" name="txtPhone"/>
+                                </div>
+                                <div class="clearfix"></div>
+                                <table class="orderinfo-total"  >
+                                    <tr>
+                                        <td><p>PRODUCT SUB TOTAL($)</p></td>
+                                        <td width="17%">
+                                            <input type="hidden" id="txtProductTotalPrice" value="${subtotal}"/>
+                                            <b id="totalPrice">${subtotal}</b> &dollar;</td>                              
+                                    </tr> 
+                                    <tr>
+                                        <td><p>MEMBER DISCOUNT($)</p></td>
+                                        <td>
+                                            <input type="hidden" id="txtMemberDiscounts" value="${memberDiscount}"/>
+                                            <b id="memberDiscount" >${memberDiscount}</b> &dollar;</td>
+                                    </tr>
 
-                                <tr>
-                                    <td><p>SHIPMENT FEE($)</p></td>
-                                    <td><b id="deliveryFee"></b> $</td>
-                                </tr>
-                                <tr>
-                                    <td> 
-                                        <input type="hidden" name="txtTotalPrice" id="txtTotalPrice"/>
-                                        <p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
-                                    <td><b style="color:#900;" name="totalPriceOrder" id="totalPriceOrder"></b> &dollar;</td>
-                                </tr>              
-                            </table>
-                            <div class="clearfix"></div>
-                        </div><!----- note-request end----->
-                        <hr/>
-                        <p class="buttons center">				
-                            <button class="btn" type="button">Back</button>
-                            <a class="btn btn-inverse" href="googleMap.jsp">Check Out</a>
-                        </p>					
+                                    <tr>
+                                        <td><p>SHIPMENT FEE($)</p></td>
+                                        <td><b id="deliveryFee"></b> $</td>
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <input type="hidden" name="txtTotalPrice" id="txtTotalPrice"/>
+                                            <input type="hidden" name="txtDeliveryPrice" id="deliveryFee"/>
+                                            <input type="hidden" name="txtAddress" id="end"/>
+                                            <p style="font-weight:bold; color:#900;">TOTAL($)</p></td>
+                                        <td><b style="color:#900;" name="totalPriceOrder" id="totalPriceOrder"></b> &dollar;</td>
+                                    </tr>              
+                                </table>
+                                <div class="clearfix"></div>
+                            </div><!----- note-request end----->
+                            <hr/>
+                            <p class="buttons center">				
+                                <button class="btn" type="button">Back</button>
+                                <button class="btn btn-inverse" type="submit" name="action" value="checkout">Check Out</button>
+                            </p>
+                        </form>
+                        					
                     </div>
                 </div>
             </section>  

@@ -6,14 +6,21 @@
 
 package servlets;
 
+import entities.OrderAddress;
+import entities.OrderAddressFacadeLocal;
+import entities.OrderDetails;
 import entities.OrderDetailsFacadeLocal;
+import entities.OrderDetailsPK;
+import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
 import entities.Products;
 import entities.ProductsFacadeLocal;
 import entities.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -29,6 +36,8 @@ import org.apache.commons.lang3.StringUtils;
  * @author nth15
  */
 public class addOrderServlet extends HttpServlet {
+    @EJB
+    private OrderAddressFacadeLocal orderAddressFacade;
     @EJB
     private ProductsFacadeLocal productsFacade;
     @EJB
@@ -115,6 +124,62 @@ public class addOrderServlet extends HttpServlet {
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
                     }
+                    request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    break;
+                    
+                case "checkout":
+                    if (user == null || cart == null) {
+                        message = "Your session is ended. Please login and select product again.";
+                    }
+                    String totalPrice = request.getParameter("txtTotalPrice");
+                    String deliveryFee = request.getParameter("txtDeliveryPrice")+".0";
+                    String orderNote = request.getParameter("deliveryRequest");
+                    String phone = request.getParameter("txtPhone");
+                    OrderMaster orderMaster = new OrderMaster();
+                    String newOrderId = orderMasterFacade.newId();
+                    Date date = new Date();
+                    orderMaster.setOrderMId(newOrderId);
+                    orderMaster.setUserId(user);
+                    orderMaster.setOrderTotalPrice(Double.parseDouble(totalPrice));
+                    orderMaster.setDeliveryPrice(Double.parseDouble(deliveryFee));
+                    orderMaster.setOrderNote(orderNote);
+                    orderMaster.setOrderStatus("Processing");
+                    orderMaster.setDateOrdered(date);
+                    orderMasterFacade.create(orderMaster);
+                    for (ProductInCart p : cart) {
+                        Products productAvailable = productsFacade.find(p.getProductId());
+                        if (p.getQuantity() > productAvailable.getProductQuantity()) {
+                            message = "We're sorry. Your selected product "+ productAvailable.getProductName()+ " are out of stock. Please choose another";
+                            break;
+                        }
+                        OrderDetails orderDetail = new OrderDetails();
+                        OrderDetailsPK orderDetailPk = new OrderDetailsPK();
+                        orderDetailPk.setOrderMId(newOrderId);
+                        orderDetailPk.setProductId(p.getProductId());
+                        orderDetail.setOrderDetailsPK(orderDetailPk);
+                        orderDetail.setProducts(productAvailable);
+                        orderDetail.setQuantity(p.getQuantity());
+                        orderDetail.setOrderMaster(orderMaster);
+                        orderDetailsFacade.create(orderDetail);
+                        int quantityLeft = productAvailable.getProductQuantity() - p.getQuantity();
+                        productAvailable.setProductQuantity(quantityLeft);
+                        productsFacade.edit(productAvailable);
+                        orderMaster.getOrderDetailsCollection().add(orderDetail);
+                    }
+                    OrderAddress orderAddress = new OrderAddress();
+                    orderAddress.setOrderMId(newOrderId);
+                    orderAddress.setOrderMaster(orderMaster);
+                    orderAddress.setOrderPhone(phone);
+                    orderAddress.setOrderAddressLat(Double.MIN_VALUE);
+                    orderAddress.setOrderAddressLng(Double.MIN_VALUE);
+                    orderAddress.setUserId(user);
+                    orderAddressFacade.create(orderAddress);
+                    orderMaster.setOrderAddress(orderAddress);
+                    orderMasterFacade.edit(orderMaster);
+                    message = "Your order completed. Please wait for our delivery team call... Thank you";
+                    session.setAttribute("cart", null);
+                    session.removeAttribute("cart");
+                    request.setAttribute("message", message);
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                 default:
