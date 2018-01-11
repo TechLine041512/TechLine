@@ -29,5 +29,7 @@ public interface CategoriesFacadeLocal {
     String newId();
 
     List<Categories> showAll();
+
+    List<Categories> showActiveCategories();
     
 }

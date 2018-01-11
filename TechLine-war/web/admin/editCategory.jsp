@@ -44,10 +44,10 @@
                 -->
 
                 <div class="logo">
-                <a href="home.jsp" class="simple-text">
-                    <img src="resource/assets/img/tim_80x80.png"/>
-                </a>
-            </div>
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
+                    </a>
+                </div>
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">

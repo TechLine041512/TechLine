@@ -48,8 +48,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -149,7 +149,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Type Name</label>
-                                                        <input type="text" class="form-control" name="txtTypeName">
+                                                        <input type="text" class="form-control" name="txtTypeName" pattern="[A-Za-z0-9 /-]{1,50}" required title="Name contains 1 to 50 characters">
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,7 +157,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Type Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtTypeDesc" ></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtTypeDesc" maxlength="300"></textarea>
                                                     </div>
                                                 </div>
                                             </div>                
@@ -165,7 +165,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Type Icon</label>
-                                                        <input type="text" class="form-control" name="txtTypeIcon">
+                                                        <input type="text" class="form-control" name="txtTypeIcon" maxlength="200">
                                                     </div>
                                                 </div>
                                             </div>

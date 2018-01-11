@@ -88,3 +88,25 @@ function checkMinMax() {
     }
     return true;
 }
+
+//Check whether filling in img fileds in order or not
+function checkSubImage() {
+    var img1 = document.getElementById('txtImage1').value;
+    var img2 = document.getElementById('txtImage2').value;
+    var img3 = document.getElementById('txtImage3').value;
+    var img4 = document.getElementById('txtImage4').value;
+    var isNeedAlert = false;
+    if (img1.length === 0 && img2.length === 0 && img3.length === 0 && img4.length === 0) {
+        return;
+    } else if (img1.length === 0 && img2.length > 0) {
+        isNeedAlert = true;
+    } else if ((img1.length === 0 || img2.length === 0) && img3.length > 0) {
+        isNeedAlert = true;
+    }else if ((img1.length === 0 || img2.length === 0 || img3.length === 0) && img4.length > 0) {
+        isNeedAlert = true;
+    }
+    //alert
+    if (isNeedAlert) {
+        alert('Please fill in sub image fileds in order');
+    }
+}
