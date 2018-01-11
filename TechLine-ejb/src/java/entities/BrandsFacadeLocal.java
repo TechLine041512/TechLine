@@ -29,5 +29,7 @@ public interface BrandsFacadeLocal {
     String newBrandId();
 
     List<Brands> showAll();
+
+    List<Brands> showActiveBrands();
     
 }

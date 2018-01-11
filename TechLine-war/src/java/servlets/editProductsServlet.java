@@ -182,7 +182,14 @@ public class editProductsServlet extends HttpServlet {
                 }
                 products.setProductLength(Double.parseDouble(length));
                 products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
-                products.setProductImage(request.getParameter("txtImage"));
+                //Append strings to save to database
+                String imageChain = request.getParameter("txtImage");
+                for (int i = 1; i < 5; i++) {
+                    if (!request.getParameter("txtImage" + i).equals("")) {
+                        imageChain += "," + request.getParameter("txtImage" + i);
+                    }
+                }
+                products.setProductImage(imageChain);
                 String discount = request.getParameter("txtDiscount");
                 if (discount.equals("")) {
                     discount = "0";

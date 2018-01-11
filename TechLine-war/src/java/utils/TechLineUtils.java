@@ -58,7 +58,7 @@ public class TechLineUtils {
         model.setProductImage(listImages);
         model.setBrandName(item.getBrandId().getBrandName());
         model.setProductHeigth(item.getProductHeigth());
-        model.setProductLength(item.getProductHeigth());
+        model.setProductLength(item.getProductLength());
         model.setProductWidth(item.getProductWidth());
         model.setProductWeight(item.getProductWeight());
         model.setProductQuantity(item.getProductQuantity());

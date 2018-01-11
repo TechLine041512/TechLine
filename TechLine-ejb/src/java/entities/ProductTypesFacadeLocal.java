@@ -29,5 +29,7 @@ public interface ProductTypesFacadeLocal {
     String newId();
 
     List<ProductTypes> showAll();
+
+    List<ProductTypes> showActiveTypes();
     
 }

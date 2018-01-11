@@ -11,6 +11,7 @@ import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
+import entities.Products;
 import entities.ProductsFacadeLocal;
 import entities.Users;
 import entities.UsersFacadeLocal;
@@ -53,8 +54,8 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                 case "addProduct":
-                    request.setAttribute("listBrand", listBrands);
-                    request.setAttribute("listType", listProductTypes);
+                    request.setAttribute("listBrand", brandsFacade.showActiveBrands());
+                    request.setAttribute("listType", productTypesFacade.showActiveTypes());
                     request.getRequestDispatcher("admin/addProduct.jsp").forward(request, response);
                     break;
                 case "addCategory":
@@ -65,10 +66,17 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
                     break;
                 case "editProduct":
-                    request.setAttribute("listBrand", listBrands);
-                    request.setAttribute("listType", listProductTypes);
+                    request.setAttribute("listBrand", brandsFacade.showActiveBrands());
+                    request.setAttribute("listType", productTypesFacade.showActiveTypes());
                     String productId = request.getParameter("pid");
-                    request.setAttribute("product", productsFacade.find(productId));
+                    Products editPro = productsFacade.find(productId);
+                    //Split the string to display
+                    String imgChain[] = editPro.getProductImage().split(",");
+                    request.setAttribute("mainImg", imgChain[0]);
+                    for (int i = 1; i < imgChain.length; i++) {
+                        request.setAttribute("subImg" + i, imgChain[i]);
+                    }
+                    request.setAttribute("product", editPro);
                     request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
                 case "editProductType":
