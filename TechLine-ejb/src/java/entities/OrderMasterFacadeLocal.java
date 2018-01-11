@@ -33,4 +33,8 @@ public interface OrderMasterFacadeLocal {
 
     long countOrderByMonth(Date aftermonth, Date beforemonth);
 
+    List<OrderMaster> getOrderByUserID(String userID);
+    
+    List<Object> searchOrderMastersByDate(String customerID, String date);
+
 }

@@ -26,7 +26,7 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
     public OrderMasterFacade() {
         super(OrderMaster.class);
     }
-
+       
     @Override
     public String newId() {
         Query q = em.createQuery("SELECT o FROM OrderMaster o ORDER BY o.orderMId DESC");
@@ -58,6 +58,28 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
         long count = (long) q.getSingleResult();
         return count;
     }
+
+    @Override
+    public List<OrderMaster> getOrderByUserID(String userID) {
+        Query q = em.createQuery("SELECT o FROM OrderMaster o WHERE o.userId.userId = :userId ORDER BY o.dateOrdered DESC");
+        try {
+            q.setParameter("userId", userID);
+        } catch (Exception e) {
+        }
+        return q.getResultList();
+    }
     
-    
+    @Override
+    public List<Object> searchOrderMastersByDate(String customerID, String date) {
+        em.clear();
+        em.getEntityManagerFactory().getCache().evictAll();
+        if (date.equalsIgnoreCase("")) {
+        javax.persistence.Query q = em.createNativeQuery("SELECT o.orderMId,  o.dateOrdered, o.orderStatus,  o.orderTotalPrice FROM OrderMaster o WHERE o.userId = ? ORDER BY o.orderMId DESC");
+        return q.setParameter(1, customerID).getResultList();
+        }else{
+        javax.persistence.Query q = em.createNativeQuery("SELECT o.orderMId,  o.dateOrdered, o.orderStatus,  o.orderTotalPrice FROM OrderMaster o WHERE o.userId = ? AND CAST(o.dateOrdered as DATE) = CAST(? as DATE ) ORDER BY o.orderMId DESC");
+        return q.setParameter(1, customerID).setParameter(2, date).getResultList();
+        }
+    }
 }
+

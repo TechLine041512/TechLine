@@ -287,9 +287,9 @@
         ==> co gi a xu ly giong nhu ben project nho e lam nha response Json
         -->
         <script type="text/javascript">
-            $(document).ready(function() {
+            window.addEventListener("load", function() {
                 $.ajax({
-                    url: "viewServlet?action=chart",
+                    url: "chart",
                     dataType: "JSON",
                     success: function(values) {
                         Highcharts.chart('container', {
