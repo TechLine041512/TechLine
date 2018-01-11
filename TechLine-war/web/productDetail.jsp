@@ -225,7 +225,7 @@
                                     <strong>Width:</strong> <span>${product.productWidth}(cm)</span><br>
                                     <strong>Heigth:</strong> <span>${product.productHeigth}(cm)</span><br>
                                     <strong>Length:</strong> <span>${product.productLength}(cm)</span><br>
-                                    <strong>Rating Points:</strong> 12 <span style="color: yellow"><i class="fa fa-star"></i></span><br>
+                                    <strong>Rating Points:</strong> 12 <a href="#"><span style="color: yellow"><i class="fa fa-star"></i></span></a><br>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
                                 </address>									
                                 <h4>Price: <strong style="color: red;">&#36;${product.productPrice - (product.productPrice * product.productDiscount / 100)}</strong> <strong><strike> ${product.productPrice}</strike></strong></h4>
