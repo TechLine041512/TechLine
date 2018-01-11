@@ -125,6 +125,7 @@ public class addProductsServlet extends HttpServlet {
                     categories.setCategoryStatus(true);
                     categories.setCategoryIcon(request.getParameter("txtIcon"));
                     categoriesFacade.create(categories);
+                    request.setAttribute("message", "Add category successfully");
                     request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                     break;
                 case "cancelCategories":
