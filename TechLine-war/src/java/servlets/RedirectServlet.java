@@ -62,7 +62,7 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/addCategory.jsp").forward(request, response);
                     break;
                 case "addProductType":
-                    request.setAttribute("listCategory", listCategories);
+                    request.setAttribute("listCategory", categoriesFacade.showActiveCategories());
                     request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
                     break;
                 case "editProduct":
@@ -80,7 +80,7 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
                 case "editProductType":
-                    request.setAttribute("listCategory", listCategories);
+                    request.setAttribute("listCategory", categoriesFacade.showActiveCategories());
                     String typeId = request.getParameter("typeId");
                     request.setAttribute("type", productTypesFacade.find(typeId));
                     request.getRequestDispatcher("admin/editType.jsp").forward(request, response);
