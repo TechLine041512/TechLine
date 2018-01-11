@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -47,6 +48,15 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
         } catch (Exception e) {
         }
         return (long) q.getSingleResult();
+    }
+
+    @Override
+    public long countOrderByMonth(Date aftermonth, Date beforemonth) {
+        Query q = em.createQuery("SELECT COUNT(o) FROM OrderMaster o WHERE o.dateOrdered between ?1 and ?2");
+        q.setParameter(1, aftermonth);
+        q.setParameter(2, beforemonth);
+        long count = (long) q.getSingleResult();
+        return count;
     }
     
     

@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -45,4 +46,6 @@ public interface ProductsFacadeLocal {
     List<Products> showAll();
 
     List<ProductTypes> getListTypeByName(String productName);
+
+    long countProductsByMonth(Date beforeMonth, Date afterMonth);
 }

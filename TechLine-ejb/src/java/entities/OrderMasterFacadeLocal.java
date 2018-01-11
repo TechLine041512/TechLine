@@ -6,6 +6,7 @@
 
 package entities;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface OrderMasterFacadeLocal {
     String newId();
 
     long countDoneOrder();
+
+    long countOrderByMonth(Date aftermonth, Date beforemonth);
 
 }
