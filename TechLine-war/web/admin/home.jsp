@@ -185,7 +185,6 @@
                                     </div>
                                     <div class="card-content">
                                         <h4 class="title">Chart For Order And Product</h4>
-                                        <p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
                                     </div>                              
                                 </div>
                             </div>
