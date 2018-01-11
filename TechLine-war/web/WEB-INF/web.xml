@@ -84,6 +84,10 @@
         <servlet-name>MapServlet</servlet-name>
         <servlet-class>servlets.MapServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>chartServlet</servlet-name>
+        <servlet-class>servlets.chartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>viewServlet</servlet-name>
         <url-pattern>/viewServlet</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>MapServlet</servlet-name>
         <url-pattern>/MapServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>chartServlet</servlet-name>
+        <url-pattern>/chartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

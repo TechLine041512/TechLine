@@ -5,6 +5,7 @@
  */
 package entities;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -129,4 +130,14 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         return q.getResultList();
     }
 
+    @Override
+    public long countProductsByMonth(Date afterMonth, Date beforeMonth) {
+        Query q = em.createQuery("SELECT Count(p) FROM Products p WHERE p.datePosted between ?1 and ?2");
+        q.setParameter(1, afterMonth);
+        q.setParameter(2, beforeMonth);
+        long count = (long) q.getSingleResult();
+        return count;
+    }
+
+    
 }
