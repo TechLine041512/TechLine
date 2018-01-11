@@ -48,7 +48,16 @@ public class BrandsFacade extends AbstractFacade<Brands> implements BrandsFacade
         }
         return null;
     }
-    
+
+    @Override
+    public List<Brands> showActiveBrands() {
+        Query q = em.createQuery("SELECT b FROM Brands b WHERE b.brandStatus = TRUE");
+        List<Brands> list = q.getResultList();
+        if (list != null) {
+            return list;
+        }
+        return null;
+    }
     
     
 }

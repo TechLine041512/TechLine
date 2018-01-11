@@ -31,6 +31,7 @@
         <!--Richtext-->
         <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+        <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -49,8 +50,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -137,7 +138,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName">
+                                                        <input type="text" class="form-control" name="txtProductName" pattern=".{1,500}" required title="Name contains 1 to 500 characters">
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,13 +184,39 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Price</label>
-                                                        <input type="number" class="form-control" name="txtPrice">
+                                                        <input type="number" class="form-control" name="txtPrice" min="0.01" max="10000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
-                                                        <label class="control-label">Product Image</label>
-                                                        <input type="text" class="form-control" name="txtImage">
+                                                        <label class="control-label">Product Main Image</label>
+                                                        <input type="url" class="form-control" name="txtImage" maxlength="800" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 1</label>
+                                                        <input id="txtImage1" type="url" class="form-control" name="txtImage1" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 2</label>
+                                                        <input id="txtImage2" type="url" class="form-control" name="txtImage2" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 3</label>
+                                                        <input id="txtImage3" type="url" class="form-control" name="txtImage3" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 4</label>
+                                                        <input id="txtImage4" type="url" class="form-control" name="txtImage4" maxlength="800" onblur="checkSubImage()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,19 +224,22 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Discount</label>
-                                                        <input type="number" class="form-control" name="txtDiscount">
+                                                        <input type="number" class="form-control" name="txtDiscount" min="0" max="100">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Unit</label>
-                                                        <input type="text" class="form-control" name="txtUnit">
+                                                        <select class="form-control" name="txtUnit">
+                                                            <option value="item">Item</option>
+                                                            <option value="set">Set</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Quantity</label>
-                                                        <input type="number" class="form-control" name="txtQuantity">
+                                                        <input type="number" class="form-control" name="txtQuantity" min="0" max="100" required="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -217,25 +247,25 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="text" class="form-control" name="txtWeight">
+                                                        <input type="text" class="form-control" name="txtWeight" min="0.01" max="500" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Width</label>
-                                                        <input type="text" class="form-control" name="txtWidth">
+                                                        <input type="text" class="form-control" name="txtWidth" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Height</label>
-                                                        <input type="text" class="form-control" name="txtHeight">
+                                                        <input type="text" class="form-control" name="txtHeight" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Length</label>
-                                                        <input type="text" class="form-control" name="txtLength">
+                                                        <input type="text" class="form-control" name="txtLength" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                             </div>

@@ -31,6 +31,7 @@
         <!--Richtext-->
         <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+        <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -49,7 +50,7 @@
                 -->
 
                 <div class="logo">
-                    <a href="home.jsp" class="simple-text">
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
                         <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
@@ -197,7 +198,7 @@
                                                         <label>Product Type</label>
                                                         <select class="form-control" name="txtProductType">
                                                             <c:forEach items="${listType}" var="type">
-                                                                <option value="${type.typeId}" ${type.typeId == product.typeId.typeId ? 'selected="selected"' : ''} >${type.typeName}></option>                                 
+                                                                <option value="${type.typeId}" ${type.typeId == product.typeId.typeId ? 'selected="selected"' : ''}>${type.typeName}</option>                                 
                                                             </c:forEach>
                                                         </select>
                                                     </div>
@@ -233,13 +234,39 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Price</label>
-                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}" min="0.01" max="1000000" step="0.01" required="">
+                                                        <input type="number" class="form-control" name="txtPrice" value="${product.productPrice}" min="0.01" max="10000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Image</label>
-                                                        <input type="text" class="form-control" name="txtImage" value="${product.productImage}" maxlength="4000">
+                                                        <input type="url" class="form-control" name="txtImage" value="${mainImg}" maxlength="800" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 1</label>
+                                                        <input id="txtImage1" type="url" class="form-control" name="txtImage1" value="${subImg1}" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 2</label>
+                                                        <input id="txtImage2" type="url" class="form-control" name="txtImage2" value="${subImg2}" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 3</label>
+                                                        <input id="txtImage3" type="url" class="form-control" name="txtImage3" value="${subImg3}" maxlength="800" onblur="checkSubImage()">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 4</label>
+                                                        <input id="txtImage4" type="url" class="form-control" name="txtImage4" value="${subImg4}" maxlength="800" onblur="checkSubImage()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,25 +297,25 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="number" class="form-control" name="txtWeight" value="${product.productWeight}" min="0.01" max="1000" step="0.01">
+                                                        <input type="number" class="form-control" name="txtWeight" value="${product.productWeight}" min="0.01" max="500" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Width</label>
-                                                        <input type="number" class="form-control" name="txtWidth" value="${product.productWidth}" min="0.01" max="100000" step="0.01">
+                                                        <input type="number" class="form-control" name="txtWidth" value="${product.productWidth}" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Height</label>
-                                                        <input type="number" class="form-control" name="txtHeight" value="${product.productHeigth}" min="0.01" max="100000" step="0.01">
+                                                        <input type="number" class="form-control" name="txtHeight" value="${product.productHeigth}" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Length</label>
-                                                        <input type="number" class="form-control" name="txtLength" value="${product.productLength}" min="0.01" max="100000" step="0.01">
+                                                        <input type="number" class="form-control" name="txtLength" value="${product.productLength}" min="0.01" max="1000" step="0.01" required="">
                                                     </div>
                                                 </div>
                                             </div>

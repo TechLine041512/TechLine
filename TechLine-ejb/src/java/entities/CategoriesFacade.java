@@ -41,6 +41,16 @@ public class CategoriesFacade extends AbstractFacade<Categories> implements Cate
 
     @Override
     public List<Categories> showAll() {
+        Query q = em.createQuery("SELECT c FROM Categories c");
+        List<Categories> list = q.getResultList();
+        if (list != null) {
+            return list;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Categories> showActiveCategories() {
         Query q = em.createQuery("SELECT c FROM Categories c WHERE c.categoryStatus = TRUE");
         List<Categories> list = q.getResultList();
         if (list != null) {
@@ -48,7 +58,6 @@ public class CategoriesFacade extends AbstractFacade<Categories> implements Cate
         }
         return null;
     }
-    
     
     
 }

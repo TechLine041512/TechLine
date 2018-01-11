@@ -69,14 +69,36 @@ public class addProductsServlet extends HttpServlet {
                     products.setProductDesc(request.getParameter("txtDescription"));
                     products.setProductSummary(request.getParameter("txtSummary"));
                     products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
-                    products.setProductImage(request.getParameter("txtImage"));
+                    //Append strings to save to database
+                    String imageChain = request.getParameter("txtImage");
+                    for (int i = 1; i < 5; i++) {
+                        if (!request.getParameter("txtImage" + i).equals(""))
+                            imageChain += "," + request.getParameter("txtImage" + i);
+                    }
+                    products.setProductImage(imageChain);
                     products.setProductUnit(request.getParameter("txtUnit"));
                     products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
-                    products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
-                    products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
-                    products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
-                    products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
-                    products.setProductDiscount(0);
+                    if (!request.getParameter("txtWeight").equals(""))
+                        products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
+                    else
+                        products.setProductWeight(0.0);
+                    if (!request.getParameter("txtWidth").equals(""))
+                        products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
+                    else
+                        products.setProductWidth(0.0);
+                    if (!request.getParameter("txtHeight").equals(""))
+                        products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
+                    else
+                        products.setProductHeigth(0.0);
+                    if (!request.getParameter("txtLength").equals(""))
+                        products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
+                    else
+                        products.setProductLength(0.0);
+                    String discountAdd = request.getParameter("txtDiscount");
+                    if (!discountAdd.equals(""))
+                        products.setProductDiscount(Integer.parseInt(discountAdd));
+                    else
+                        products.setProductDiscount(0);
                     products.setProductRating(0.0);
                     products.setIsApproved(true);
                     products.setDatePosted(today);
@@ -84,6 +106,7 @@ public class addProductsServlet extends HttpServlet {
                     products.setUserId(user);
                     productsFacade.create(products);
                     session.setAttribute("user", user);
+                    request.setAttribute("message", "Add product successfully");
                     request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                     break;
 
@@ -102,6 +125,7 @@ public class addProductsServlet extends HttpServlet {
                     categories.setCategoryStatus(true);
                     categories.setCategoryIcon(request.getParameter("txtIcon"));
                     categoriesFacade.create(categories);
+                    request.setAttribute("message", "Add category successfully");
                     request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                     break;
                 case "cancelCategories":

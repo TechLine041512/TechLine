@@ -37,8 +37,8 @@
                 -->
 
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="RedirectServlet?action=backToHome" class="simple-text">
+                        <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
 
@@ -126,7 +126,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Name</label>
-                                                        <input type="text" class="form-control" name="txtCategoryName">
+                                                        <input type="text" class="form-control" name="txtCategoryName" pattern="[A-Za-z0-9 /-]{1,100}" required title="Category name contains 1 to 100 characters">
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,7 +134,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription"></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="500"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -142,7 +142,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Category Icon</label>
-                                                        <input type="text" class="form-control" name="txtIcon">
+                                                        <input type="text" class="form-control" name="txtIcon" maxlength="200">
                                                     </div>
                                                 </div>
                                             </div>
