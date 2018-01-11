@@ -38,7 +38,7 @@
         <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
 
             <div class="logo">
-                <a href="home.jsp" class="simple-text">
+                <a href="RedirectServlet?action=backToHome" class="simple-text">
                     <img src="resource/assets/img/tim_80x80.png"/>
                 </a>
             </div>
@@ -75,13 +75,13 @@
                                 <p>Categories</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=showBrand">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Brand</p>
@@ -121,7 +121,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Brand Name</label>
-                                                    <input type="text" class="form-control" name="txtBrandName" value="${brand.brandName}" pattern="[A-Za-z0-9 /-]{1,50}" required title="Name contains 1 to 50 characters">
+                                                    <input type="text" class="form-control" name="txtBrandName" value="${brand.brandName}" pattern="[A-Za-z0-9 /-]{1,100}" required title="Name contains 1 to 100 characters">
                                                 </div>
                                             </div>
                                         </div>
