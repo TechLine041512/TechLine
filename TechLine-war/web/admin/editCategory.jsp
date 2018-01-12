@@ -202,7 +202,7 @@
                                                 </div>
                                             </div>
                                             <button type="submit" name="action" class="btn btn-primary" value="editCategory">Save</button>
-                                            <button type="submit" name="action" class="btn btn-primary" value="cancelCategory">Cancel</button>      
+                                            <a href="viewServlet?action=showCategories" class="btn btn-primary">Cancel</a>   
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

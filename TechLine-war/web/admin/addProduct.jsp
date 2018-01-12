@@ -27,7 +27,7 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-        
+
         <!--Richtext-->
         <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
         <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
@@ -36,9 +36,9 @@
     <body>
         <c:if test="${not empty message}">
             <script>
-                window.addEventListener("load", function() {
-                    alert("${message}");
-                })
+            window.addEventListener("load", function() {
+                alert("${message}");
+            })
             </script>
         </c:if>
         <div class="wrapper">
@@ -269,8 +269,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                    <button type="submit" class="btn btn-primary" name="action" value="addProduct">Save</button>
-                                                    <button type="submit" class="btn btn-primary" name="action" value="cancelProduct">Cancel</button>
+                                            <button type="submit" class="btn btn-primary" name="action" value="addProduct">Save</button>
+                                            <a href="viewServlet?action=showProductAdmin" class="btn btn-primary">Cancel</a>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

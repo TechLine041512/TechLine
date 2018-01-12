@@ -209,6 +209,17 @@ public class editProductsServlet extends HttpServlet {
                 if (request.getParameter("bl").equals("Unblock")) {
                     unblock = true;
                 }
+                if (unblock) {
+                    if (!product.getTypeId().getTypeStatus()) {
+                        request.setAttribute("message", "The Type of this product is blocked. Unblock or change type before unblock this product!");
+                        request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                        break;
+                    } else if (!product.getBrandId().getBrandStatus()) {
+                        request.setAttribute("message", "The brand of this product is blocked. Unblock or change brand before unblock this product!");
+                        request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                        break;
+                    }
+                }
                 for (ProductsComment prm : listProCmt) {
                     prm.setCommentStatus(unblock);
                     productsCommentFacade.edit(prm);
@@ -301,6 +312,11 @@ public class editProductsServlet extends HttpServlet {
                         }
                     }
                 } else { //Unblock type
+                    if (!typeBlock.getCategoryId().getCategoryStatus()) {
+                        request.setAttribute("message", "The Category of this Type is blocked. Unblock or change Category before unblock this Type!");
+                        request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
+                        break;
+                    }
                     typeBlock.setTypeStatus(true);
                     productTypesFacade.edit(typeBlock);
                     request.setAttribute("message", "Unblock type successfully!");

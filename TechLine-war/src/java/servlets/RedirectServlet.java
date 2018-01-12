@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 public class RedirectServlet extends HttpServlet {
+
     @EJB
     private UsersFacadeLocal usersFacade;
     @EJB
@@ -66,10 +67,15 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/addType.jsp").forward(request, response);
                     break;
                 case "editProduct":
-                    request.setAttribute("listBrand", brandsFacade.showActiveBrands());
-                    request.setAttribute("listType", productTypesFacade.showActiveTypes());
                     String productId = request.getParameter("pid");
                     Products editPro = productsFacade.find(productId);
+                    if (editPro.getProductStatus()) {
+                        request.setAttribute("listBrand", brandsFacade.showActiveBrands());
+                        request.setAttribute("listType", productTypesFacade.showActiveTypes());
+                    } else {
+                        request.setAttribute("listBrand", listBrands);
+                        request.setAttribute("listType", listProductTypes);
+                    }
                     //Split the string to display
                     String imgChain[] = editPro.getProductImage().split(",");
                     request.setAttribute("mainImg", imgChain[0]);
@@ -80,8 +86,13 @@ public class RedirectServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/editProduct.jsp").forward(request, response);
                     break;
                 case "editProductType":
-                    request.setAttribute("listCategory", categoriesFacade.showActiveCategories());
                     String typeId = request.getParameter("typeId");
+                    ProductTypes editType = productTypesFacade.find(typeId);
+                    if (editType.getTypeStatus()) {
+                        request.setAttribute("listCategory", categoriesFacade.showActiveCategories());
+                    } else {
+                        request.setAttribute("listCategory", listCategories);
+                    }
                     request.setAttribute("type", productTypesFacade.find(typeId));
                     request.getRequestDispatcher("admin/editType.jsp").forward(request, response);
                     break;

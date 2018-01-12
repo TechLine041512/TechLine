@@ -129,13 +129,13 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Brand Icon</label>
-                                                    <input type="text" class="form-control" name="txtBrandIcon" value="${brand.brandIcon}" maxlength="200">
+                                                    <input type="text" class="form-control" name="txtBrandIcon" value="${brand.brandIcon}" maxlength="200" required="">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <button type="submit" name="action" class="btn btn-primary" value="editBrand">Save</button>
-                                        <button type="submit" name="action" class="btn btn-primary" value="cancelBrand">Cancel</button>
+                                        <a href="viewServlet?action=showBrand" class="btn btn-primary">Cancel</a>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
