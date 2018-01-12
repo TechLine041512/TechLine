@@ -202,9 +202,9 @@
                                     </div>
                                     <div class="span6">
                                         <input id="minValue" type="number" min="0" step="any" class="search-query" Placeholder="Min price" name="txtMin" value="${strMin}">
-                                        <input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax" value="${strMax}">
+                                        <input id="maxValue" type="number" min="0.01" step="any" class="search-query" Placeholder="Max price" name="txtMax" value="${strMax}" max="10000">
                                     </div>
-                                    <div class="span2"><button name="action" class="btn-success btn" value="filter" onclick=" return checkMinMax();">Search</button></div>
+                                    <div class="span2"><button name="action" class="btn-success btn" value="filter" onclick=" return checkMinMax();">Filter</button></div>
                                 </form>
                             </ul>
                         </div>
@@ -222,14 +222,15 @@
                             <tbody>
                                 <c:forEach items="${listProductSearch}" var="product">
                                     <tr>
-                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width:200px; height:200px;"></a></td>
+                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="Product Image" src="${product.productImage.split(",")[0]}" style="width:200px; height:200px;"></a></td>
                                         <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
-                                        <td><input type="text" placeholder="1" class="input-mini"></td>
+                                        <td><input type="number" placeholder="1" class="input-mini" min="1" max="20" name="quantity" value="1"></td>
                                         <td>$${product.productPrice}</td>
                                         <td>${product.brandId.brandName}</td>
-                                        <td><button class="btn btn-inverse" type="submit" id="checkout">Add</button></td>
-                                    </tr>			  
-                                </c:forEach>                         	  
+                                        <td><button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add</button></td>
+                                        <input type="hidden" name="idProduct" value="${product.productId}"/>
+                                    </tr>
+                                </c:forEach>                       	  
                             </tbody>
                         </table>			                					
                     </div>
