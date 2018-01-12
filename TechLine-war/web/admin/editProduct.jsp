@@ -218,7 +218,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000">${product.productSummary}</textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000" required="">${product.productSummary}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -320,7 +320,7 @@
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary" name="action" value="editProduct">Save</button>
-                                            <button type="submit" class="btn btn-primary" name="action" value="cancelProduct">Cancel</button>
+                                            <a href="viewServlet?action=showProductAdmin" class="btn btn-primary">Cancel</a>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>

@@ -155,7 +155,7 @@
                                         </div>
 
                                         <button type="submit" name="action" class="btn btn-primary" value="editProductType">Save</button>
-                                        <button type="submit" name="action" class="btn btn-primary" value="cancelProductType">Cancel</button>
+                                        <a href="viewServlet?action=showProductType" class="btn btn-primary">Cancel</a>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>

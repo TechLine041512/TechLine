@@ -105,6 +105,10 @@ public class addProductsServlet extends HttpServlet {
                     products.setProductStatus(true);
                     products.setUserId(user);
                     productsFacade.create(products);
+                    productTypes.getProductsCollection().add(products);
+                    productTypesFacade.edit(productTypes);
+                    brands.getProductsCollection().add(products);
+                    brandsFacade.edit(brands);
                     session.setAttribute("user", user);
                     request.setAttribute("message", "Add product successfully");
                     request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
@@ -147,6 +151,7 @@ public class addProductsServlet extends HttpServlet {
                     productTypesFacade.create(productTypes2);
                     categories2.getProductTypesCollection().add(productTypes2);
                     categoriesFacade.edit(categories2);
+                    request.setAttribute("message", "Add type successfully");
                     request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                     break;
                     
@@ -160,6 +165,7 @@ public class addProductsServlet extends HttpServlet {
                     brand.setBrandName(request.getParameter("txtBrandName"));
                     brand.setBrandStatus(Boolean.TRUE);
                     brandsFacade.create(brand);
+                    request.setAttribute("message", "Add brand successfully");
                     request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                     break;
                 case "cancelProductType":
