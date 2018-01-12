@@ -40,11 +40,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.ChartModel;
+import models.CustomerReportModel;
+import models.OrderReportModel;
 import models.ProductInCart;
 import models.TopProductModel;
 import utils.TechLineUtils;
 import utils.PageProduct;
 import models.SellerOrder;
+import models.SellerReportModel;
 import models.TopProductStaticModel;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -291,6 +294,10 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
                     break;
 
+                case "showReport":
+                    request.getRequestDispatcher("admin/report.jsp").forward(request, response);
+                    break;
+                    
                 case "showProductType":
                     listProductTypes = productTypesFacade.showAll();
                     paging = new PageProduct(listProductTypes, 10);
@@ -556,27 +563,110 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
-                case "viewTopProductPDF":
-                    listProduct = productsFacade.getTopProduct();
-                    List<TopProductStaticModel> listStatic = new ArrayList<>();
-                    for (Products p : listProduct) {
-                        TopProductStaticModel model = new TopProductStaticModel();
-                        model.setId(p.getProductId());
-                        model.setName(p.getProductName());
-                        StringBuilder sb = new StringBuilder();
-                        int sold = 0;
-                        for (OrderDetails o : p.getOrderDetailsCollection()) {
-                            sb.append(o.getOrderMaster().getOrderMId());
-                            sb.append(",");
-                            sold += o.getQuantity();
-                        }
-                        model.setSold(sold);
-                        model.setOrderId(sb.toString());
-                        model.setSeller(p.getUserId().getFullname());
-                        listStatic.add(model);
+                case "printReport":
+                    String reportType = request.getParameter("txtReportType");
+                    String limit = request.getParameter("txtLimit");
+                    int limitOrder = Integer.parseInt(limit);
+                    switch (reportType) {
+                        case "topProductReport.jrxml":
+                            listProduct = productsFacade.getTopProduct();
+                            List<TopProductStaticModel> listStatic = new ArrayList<>();
+                            for (Products p : listProduct) {
+                                TopProductStaticModel model = new TopProductStaticModel();
+                                model.setId(p.getProductId());
+                                model.setName(p.getProductName());
+                                StringBuilder sb = new StringBuilder();
+                                int sold = 0;
+                                for (OrderDetails o : p.getOrderDetailsCollection()) {
+                                    sb.append(o.getOrderMaster().getOrderMId());
+                                    sb.append(",");
+                                    sold += o.getQuantity();
+                                }
+                                model.setSold(sold);
+                                model.setOrderid(sb.toString());
+                                model.setSeller(p.getUserId().getFullname());
+                                listStatic.add(model);
+                            }
+                            request.setAttribute("model", "topProductReport.jrxml");
+                            if (limitOrder > listStatic.size()) {
+                                limitOrder = listStatic.size();
+                            }
+                            request.setAttribute("products", listStatic.subList(0, limitOrder));
+                            break;
+                        case "sellerReport.jrxml":
+                            List<SellerReportModel> listSellerReport = new ArrayList<>();
+                            
+                            for (Seller s : sellerFacadeLocal.showAll()) {
+                                List<OrderDetails> listDetails = new ArrayList<>();
+                                SellerReportModel sReport = new SellerReportModel();
+                                sReport.setId(s.getUserId());
+                                sReport.setName(s.getUsers().getFullname());
+                                sReport.setStorename(s.getStoreName());
+                                
+                                for ( Products p : s.getUsers().getProductsCollection() ) {
+                                    for (OrderDetails o : p.getOrderDetailsCollection()) {
+                                        if (listDetails.contains(o)) {
+                                            continue;
+                                        }
+                                        listDetails.add(o);
+                                    }
+                                }
+                                sReport.setNumberorders(listDetails.size());
+                                sReport.setNumberproducts(s.getUsers().getProductsCollection().size());
+                                listSellerReport.add(sReport);
+                            }
+                            
+                            request.setAttribute("model", "sellerReport.jrxml");
+                            if (limitOrder > listSellerReport.size()) {
+                                limitOrder = listSellerReport.size();
+                            }
+                            request.setAttribute("products", listSellerReport.subList(0, limitOrder));
+                            break;
+                        case "customerReport.jrxml":
+                            List<CustomerReportModel> listCustomerReport = new ArrayList<>();
+                            for ( Customers customerC : customersFacade.showAll() ) {
+                                CustomerReportModel cReport = new CustomerReportModel();
+                                cReport.setId(customerC.getUsers().getUserId());
+                                cReport.setName(customerC.getUsers().getFullname());
+                                cReport.setNumberorders(customerC.getUsers().getOrderMasterCollection().size());
+                                cReport.setNumbercomments(customerC.getUsers().getProductsCommentCollection().size());
+                                cReport.setPhone(customerC.getUsers().getPhone());
+                                listCustomerReport.add(cReport);
+                            }
+                            request.setAttribute("model", "customerReport.jrxml");
+                            if (limitOrder > listCustomerReport.size()) {
+                                limitOrder = listCustomerReport.size();
+                            }
+                            request.setAttribute("products", listCustomerReport.subList(0, limitOrder));
+                            break;
+                        case "orderReport.jrxml":
+                            List<OrderReportModel> listOrderReportModels = new ArrayList<>();
+                            for ( OrderMaster o : orderMasterFacade.findAll() ) {
+                                StringBuilder sb = new StringBuilder();
+                                OrderReportModel oReport = new OrderReportModel();
+                                oReport.setId(o.getOrderMId());
+                                oReport.setBuyer(o.getUserId().getFullname());
+                                for (OrderDetails oDetails : o.getOrderDetailsCollection()) {
+                                    sb.append(oDetails.getProducts().getProductId());
+                                    sb.append(" | ");
+                                }
+                                
+                                oReport.setProducts(sb.toString());
+                                oReport.setTotalprice(o.getOrderTotalPrice());
+                                oReport.setStatus(o.getOrderStatus());
+                                listOrderReportModels.add(oReport);
+                            }
+                            request.setAttribute("model", "orderReport.jrxml");
+                            if (limitOrder > listOrderReportModels.size()) {
+                                limitOrder = listOrderReportModels.size();
+                            }
+                            request.setAttribute("products", listOrderReportModels.subList(0, limitOrder));
+                            break;
+                        default:
+                            break;
                     }
-                    request.setAttribute("model", "topProduct.jrxml");
-                    request.setAttribute("products", listStatic);
+                    
+                    
                     request.setAttribute("action", "report 2");
                     request.getRequestDispatcher("report").forward(request, response);
                     break;

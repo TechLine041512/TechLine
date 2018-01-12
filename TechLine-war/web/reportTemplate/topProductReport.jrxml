@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="555" pageHeight="822" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bc0fbdff-9478-4b3a-b981-92dc7962e470">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
@@ -13,15 +13,14 @@
 	<field name="orderid" class="java.lang.String"/>
 	<field name="seller" class="java.lang.String"/>
 	<background>
-		<band height="822" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="555" height="375" uuid="284f5205-8c48-4436-8801-6d585eecc84c"/>
-				<imageExpression><![CDATA["E:\\Projects\\TechLine-war\\web\\resource\\themes\\images\\banner1.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="822" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="152" splitType="Stretch">
+			<image scaleImage="RealSize">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="152" uuid="b46308aa-3e57-4ed8-8618-e41780457be9"/>
+				<imageExpression><![CDATA["E:\\Projects\\TechLine-war\\web\\resource\\themes\\images\\banner1.png"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement style="SubTitle" mode="Opaque" x="0" y="115" width="215" height="37" forecolor="#333333" backcolor="#CCCCCC" uuid="583994e2-aa1a-4f19-966e-ce97a261444d"/>
 				<textElement>

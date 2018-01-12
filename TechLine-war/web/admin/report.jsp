@@ -4,13 +4,14 @@
     Author     : Tien
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Categories</title>
+        <title>Product Type</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -78,13 +79,13 @@
                                 <p>Product List</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=showCategories">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
-                        <li>
+                        <li >
                             <a href="viewServlet?action=showProductType">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
@@ -102,7 +103,7 @@
                                 <p>Orders</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=showReport">
                                 <i class="material-icons">library_books</i>
                                 <p>Report</p>
@@ -129,44 +130,46 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" href="RedirectServlet?action=addCategory">Add</a>
+                            <a class="btn-instagram btn" href="RedirectServlet?action=addProductType">Add</a>                        
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Categories</h4>
+                                        <h4 class="title">Report</h4>
                                         <p class="category">Line Tech</p>
                                     </div>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover" id="myTable">
-                                            <thead class="text-primary">
-                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
-                                            <th onclick="sortTable(1)"><a href="#">Name</a></th>
-                                            <th><a href="#">Description</a></th>
-                                            <th><a href="#">Icon</a></th>
-                                            <th><a href="#">Action</a></th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${listCategories}" var="category">
-                                                    <tr>
-                                                        <td><a href="RedirectServlet?action=editCategory&catId=${category.categoryId}">${category.categoryId}</a></td>
-                                                        <td>${category.categoryName}</td>
-                                                        <td>${category.categoryDesc}</td>
-                                                        <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}&bl=${category.categoryStatus ? 'Block' : 'Unblock'}">${category.categoryStatus ? 'Block' : 'Unblock'}</a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
+                                    <div class="card-content">
+                                        <form action="viewServlet" method="post">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Which Report you want to generate ?</label>
+                                                        <select class="form-control" name="txtReportType">
+                                                            <option value="topProductReport.jrxml">Top Products</option>
+                                                            <option value="sellerReport.jrxml">Sellers</option>
+                                                            <option value="customerReport.jrxml">Customers</option>
+                                                            <option value="orderReport.jrxml">Orders</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Hown many record you want to print</label>
+                                                        <input type="number" class="form-control" name="txtLimit" min="10" max="1000" required="">
+                                                    </div>
+                                                </div>
+                                            </div>          
+                                            <button type="submit" class="btn btn-primary" name="action" value="printReport">Report</button>
+                                            <button type="submit" class="btn btn-primary" name="action" value="homeAdmin">Cancel</button>
+                                            <div class="clearfix"></div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <footer class="footer">
                     <div class="container-fluid">
                         <nav class="pull-left">
                             <ul>

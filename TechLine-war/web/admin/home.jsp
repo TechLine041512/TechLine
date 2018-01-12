@@ -108,6 +108,12 @@
                                 <p>Orders</p>
                             </a>
                         </li>
+                        <li>
+                            <a href="viewServlet?action=showReport">
+                                <i class="material-icons">library_books</i>
+                                <p>Report</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

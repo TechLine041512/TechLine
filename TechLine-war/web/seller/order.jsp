@@ -69,6 +69,12 @@
                                 <p>List Order </p>
                             </a>
                         </li>
+                        <li>
+                            <a href="admin/report.jsp">
+                                <i class="material-icons">library_books</i>
+                                <p>Report</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

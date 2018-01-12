@@ -14,7 +14,15 @@ public class TopProductStaticModel {
     private String id;
     private String name;
     private int sold;
-    private String orderId;
+    private String orderid;
+
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
+    }
     private String seller;
 
     public String getSeller() {
@@ -47,13 +55,5 @@ public class TopProductStaticModel {
 
     public void setSold(int sold) {
         this.sold = sold;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
     }
 }
