@@ -36,5 +36,18 @@ public class ProductsEditHistoryFacade extends AbstractFacade<ProductsEditHistor
         newVersion = editHistorys.size() + 1;
         return newVersion;
     }
+
+    @Override
+    public List<ProductsEditHistory> findByProductId(String productId) {
+        Query q = em.createQuery("SELECT p FROM ProductsEditHistory p WHERE p.productsEditHistoryPK.productId = ?1");
+        q.setParameter(1, productId);
+        List<ProductsEditHistory> listResult = q.getResultList();
+        if (listResult != null) {
+            return listResult;
+        }
+        return null;
+    }
+    
+    
     
 }

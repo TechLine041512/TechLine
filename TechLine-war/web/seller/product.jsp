@@ -47,9 +47,9 @@
                         
                         for(i=0; i<data.length; i++){
                             htmlText += '<tr>';
+                            htmlText += '<td>'+data[i].version+'</td>';
                             htmlText += '<td>'+data[i].productId+'</td>';
                             htmlText += '<td>'+data[i].productName+'</td>';
-                            htmlText += '<td>'+data[i].version+'</td>';
                             htmlText += '<td>'+data[i].productPrice+'</td>';
                             htmlText += '<td>'+data[i].productDiscount+'</td>';
                             htmlText += '<td>'+data[i].editTime+'</td>';
@@ -132,9 +132,9 @@
                                     <div class="form loginBox">
                                         <table class="table table-hover" id="myTable">
                                             <thead class="text-primary">                     
+                                            <th>Version</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
-                                            <th>Version</th>
                                             <th>Price</th>
                                             <th>Discount</th>
                                             <th>Edit Time</th>
