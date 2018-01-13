@@ -139,5 +139,14 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         return count;
     }
 
-    
+    @Override
+    public List<Products> getTopProduct(String seller) {
+        Query q = em.createQuery("SELECT p FROM Products p WHERE (p.orderDetailsCollection IS NOT EMPTY AND p.productStatus = TRUE) AND p.userId.userId = :seller");
+        q.setParameter("seller", seller);
+        List<Products> list = q.getResultList();
+        if (list != null) {
+            return list;
+        }
+        return null;
+    }
 }

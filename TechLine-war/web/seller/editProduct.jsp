@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product Page</title>
+        <title>Seller Edit Product Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -38,41 +38,47 @@
 
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
-                <!--
-                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+            <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-                Tip 2: you can also add an image using data-image tag
-                -->
+            Tip 2: you can also add an image using data-image tag
+            -->
 
-                <div class="logo">
-                    <a href="RedirectServlet?action=backToHome" class="simple-text">
-                        <img src="resource/assets/img/tim_80x80.png"/>
-                    </a>
-                </div>
-
-                <div class="sidebar-wrapper">
-                    <ul class="nav">
-                        <li>
-                            <a href="viewServlet?action=homeSeller">
-                                <i class="material-icons">dashboard</i>
-                                <p>Profile</p>
-                            </a>
-                        </li>   
-                        <li class="active">
-                            <a href="viewServlet?action=sellerProduct">
-                                <i class="material-icons">content_paste</i>
-                                <p>List Product of Seller </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="viewServlet?action=sellerOrder">
-                                <i class="material-icons">location_on</i>
-                                <p>List Order </p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="logo">
+                <a href="RedirectServlet?action=backToHome" class="simple-text">
+                    <img src="resource/assets/img/tim_80x80.png"/>
+                </a>
             </div>
+
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="viewServlet?action=homeSeller">
+                            <i class="material-icons">dashboard</i>
+                            <p>Profile</p>
+                        </a>
+                    </li>   
+                    <li class="active">
+                        <a href="viewServlet?action=sellerProduct">
+                            <i class="material-icons">content_paste</i>
+                            <p>List Product of Seller </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="viewServlet?action=sellerOrder">
+                            <i class="material-icons">location_on</i>
+                            <p>List Order </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="viewServlet?action=sellerShowReport">
+                            <i class="material-icons">library_books</i>
+                            <p>Report</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <div class="main-panel">
 
@@ -144,10 +150,36 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Product Image</label>
-                                                    <input type="text" class="form-control" name="txtImage" value="${productDetail.productImage}" required="required">
+                                                    <input type="url" class="form-control" name="txtImage" value="${txtImage}" required="required">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Sub Image 1</label>
+                                                    <input type="url" class="form-control" name="txtSubImage1" value="${txtSubImage1}" required="required" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Sub Image 2</label>
+                                                    <input type="url" class="form-control" name="txtSubImage2" value="${txtSubImage2}" required="required" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Sub Image 3</label>
+                                                    <input type="url" class="form-control" name="txtSubImage3" value="${txtSubImage3}"  required="required" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Sub Image 4</label>
+                                                    <input type="url" class="form-control" name="txtSubImage4" value="${txtSubImage4}" required="required" />
+                                                </div>
+                                            </div>
+                                        </div>        
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
