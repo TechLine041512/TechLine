@@ -32,7 +32,7 @@ public class searchProductsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         List<Products> listProductSearch;
-        List<Categories> listCategories = categoriesFacade.showAll();
+        List<Categories> listCategories = categoriesFacade.showActiveCategories();
         try (PrintWriter out = response.getWriter()) {
             switch (action) {
                 case "Search":
@@ -67,7 +67,7 @@ public class searchProductsServlet extends HttpServlet {
                         listForward = listProductSearch;
                         request.setAttribute("listProductSearch", listForward);
                         getServletContext().setAttribute("listForward", listForward);
-                        request.setAttribute("listCategories", categoriesFacade.showAll());
+                        request.setAttribute("listCategories", listCategories);
                         request.getRequestDispatcher("search.jsp").forward(request, response);
                         break;
                     } else { //both
@@ -81,7 +81,7 @@ public class searchProductsServlet extends HttpServlet {
                     request.setAttribute("strMin", strMin);
                     request.setAttribute("strMax", strMax);
                     request.setAttribute("typeIdSelected", typeIdSelected);
-                    request.setAttribute("listCategories", categoriesFacade.showAll());
+                    request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
             }

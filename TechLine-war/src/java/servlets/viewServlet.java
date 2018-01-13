@@ -64,11 +64,7 @@ import org.apache.commons.lang3.StringUtils;
 public class viewServlet extends HttpServlet {
 
     @EJB
-    private OrderDetailsFacadeLocal orderDetailsFacade;
-    @EJB
     private CustomersFacadeLocal customersFacade;
-    @EJB
-    private ProductsCommentFacadeLocal productsCommentFacade;
     @EJB
     private OrderMasterFacadeLocal orderMasterFacade;
     @EJB
@@ -96,8 +92,8 @@ public class viewServlet extends HttpServlet {
 
             List<Products> listProduct = new ArrayList<>();
             List<Products> listProductRelated = new ArrayList<>();
-            List<Categories> listCategories = categoriesFacade.showAll();
-            List<Brands> listBrands = brandsFacade.showAll();
+            List<Categories> listCategories = categoriesFacade.showActiveCategories();
+            List<Brands> listBrands = brandsFacade.showActiveBrands();
             List<OrderMaster> listOrderMaster = orderMasterFacade.findAll();
             List<Customers> listCustomer;
             List<Seller> listSellers;
@@ -206,7 +202,28 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("productDetail.jsp").forward(request, response);
                     break;
-
+                case "viewProductSeller":
+                    String sellerID = request.getParameter("sellerID");
+                    List<Products> listProductSeller = productsFacade.getListProductByUserID(sellerID);
+                    paging = new PageProduct(TechLineUtils.buildProductAdmin(listProductSeller), 10);
+                    String nproductSeller = request.getParameter("btn");
+                    if (nproductSeller != null) {
+                        if (nproductSeller.equals("next")) {
+                            paging.next();
+                        }
+                        if (nproductSeller.equals("prev")) {
+                            paging.prev();
+                        }
+                    }
+                    String pagesSellerProduct = request.getParameter("page");
+                    if (pagesSellerProduct != null) {
+                        int m = Integer.parseInt(pagesSellerProduct);
+                        paging.setPageIndex(m);
+                        paging.updateModel();
+                    }
+                    request.setAttribute("pageProduct", paging);
+                    request.getRequestDispatcher("admin/product.jsp").forward(request, response);
+                    break;
                 case "showCustomer":
                     listCustomer = customersFacade.showAll();
                     PageProduct pageCustomer = new PageProduct(listCustomer, 5);

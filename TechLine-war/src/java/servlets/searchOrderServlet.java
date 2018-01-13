@@ -6,8 +6,14 @@
 
 package servlets;
 
+import entities.Categories;
+import entities.CategoriesFacadeLocal;
+import entities.OrderMaster;
+import entities.OrderMasterFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,30 +24,30 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class searchOrderServlet extends HttpServlet {
+    @EJB
+    private CategoriesFacadeLocal categoriesFacade;
+    @EJB
+    private OrderMasterFacadeLocal orderMasterFacade;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet searchOrderServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet searchOrderServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String action = request.getParameter("action");
+            switch(action){
+                case "orderDetailCustomer":
+                    String orderID = request.getParameter("orderID");
+                    OrderMaster ODM =  orderMasterFacade.find(orderID);
+                    List<Categories> listCategories = categoriesFacade.showActiveCategories();
+                    request.setAttribute("OrderMaster", ODM);
+                    request.setAttribute("listCategories", listCategories);
+                    request.getRequestDispatcher("customerOrderDetail.jsp").forward(request, response);
+                    break;
+                default:
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    break;
+            }
         }
     }
 

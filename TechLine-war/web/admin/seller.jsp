@@ -157,7 +157,10 @@
                                                         <td>${seller.storeName}</td>
                                                         <td>${seller.storeAddress}</td>
                                                         <td>${seller.users.phone}</td>
-                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}&bl=${seller.users.userStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${seller.users.userStatus ? 'Block' : 'Unblock'}');">${seller.users.userStatus ? 'Block' : 'Unblock'}</a></td>
+                                                        <td>
+                                                            <a class="btn-info btn" href="viewServlet?action=viewProductSeller&sellerID=${seller.userId}">View Product Seller</a>
+                                                            <a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}&bl=${seller.users.userStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${seller.users.userStatus ? 'Block' : 'Unblock'}');">${seller.users.userStatus ? 'Block' : 'Unblock'}</a>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
