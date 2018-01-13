@@ -198,8 +198,8 @@
                 </div>			
             </section>
             <section class="header_text">
-                We stand for top quality templates. Our genuine developers always optimized bootstrap commercial templates. 
-                <br/>Don't miss to use our cheap abd best bootstrap templates.
+                At this century, you can not deny the evolution of technology. It’s nearly become the air that we are breathing. 
+                <br/>Remember ! Technology is on the run, and we draw line for you to catch it up.
             </section>
             <section class="main-content">
                 <div class="row">
@@ -358,8 +358,8 @@
                                             <div class="service">
                                                 <div class="responsive">	
                                                     <img src="resource/themes/images/feature_img_2.png" alt="" />
-                                                    <h4>MODERN <strong>DESIGN</strong></h4>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>									
+                                                    <h4>EXCLUSIVE <strong>INVENTIONS</strong></h4>
+                                                    <p>Technology is not just smart phones or laptops or tablets. It also includes your tv, cars, motorbikes, vacum cleaner, and many simple things in your house that you use everyday. </p>									
                                                 </div>
                                             </div>
                                         </div>
@@ -367,8 +367,8 @@
                                             <div class="service">
                                                 <div class="customize">			
                                                     <img src="resource/themes/images/feature_img_1.png" alt="" />
-                                                    <h4>FREE <strong>SHIPPING</strong></h4>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                                                    <h4>RIGHT <strong>DELIVERY</strong></h4>
+                                                    <p>I think you will be happy to hear that there are many inventors around the world dedicated themselves to create new things serving for our lives.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -376,8 +376,8 @@
                                             <div class="service">
                                                 <div class="support">	
                                                     <img src="resource/themes/images/feature_img_3.png" alt="" />
-                                                    <h4>24/7 LIVE <strong>SUPPORT</strong></h4>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                                                    <h4>ENORMOUS <strong>MOTIVATION</strong></h4>
+                                                    <p>Technology is on the run, and we draw line for you to catch it up.</p>
                                                 </div>
                                             </div>
                                         </div>	
@@ -411,7 +411,7 @@
                                 </div>
                                 <div class="span5">
                                     <p class="logo"><img src="resource/themes/images/logo.png" class="site_logo" alt=""></p>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
+                                    <p>At this century, you can not deny the evolution of technology. It’s nearly become the air that we are breathing.</p>
                                     <br/>
                                     <span class="social_icons">
                                         <a class="facebook" href="#">Facebook</a>
@@ -423,7 +423,7 @@
                             </div>	
                         </section>
                         <section id="copyright">
-                            <span>Copyright 2013 bootstrappage template  All right reserved.</span>
+                            <span>Copyright 2013  All right reserved.</span>
                         </section>
                     </div>
                     <script src="resource/themes/js/common.js"></script>
