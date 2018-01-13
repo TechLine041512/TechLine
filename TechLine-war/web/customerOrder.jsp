@@ -324,7 +324,6 @@
                 <span>Copyright 2013 bootstrappage template  All right reserved.</span>
             </section>
         </div>
-        <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
         <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>

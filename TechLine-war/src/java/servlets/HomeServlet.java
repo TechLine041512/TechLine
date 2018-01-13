@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet {
         buildProductRequest("ListProductByDatePost", request, productsFacade.getListProductByDatePost());
         buildProductRequest("ListProductByDiscount", request, productsFacade.getListProductByDiscount());
         buildProductRequest("ListProductBySeller", request, productsFacade.getListProductSeller());
-        List<Categories> listCategories = categoriesFacade.showAll();
+        List<Categories> listCategories = categoriesFacade.showActiveCategories();
         if (listCategories != null) {
             request.setAttribute("listCategories", listCategories);
         }
