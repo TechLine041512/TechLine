@@ -75,10 +75,6 @@ public class addOrderServlet extends HttpServlet {
                     Products currentP = productsFacade.find(id);
                     int quantityDemand;
                     String redirect = "HomeServlet";
-                    if ("search".equals(request.getParameter("fromjsp"))) {
-                        request.setAttribute("backToHistory", id);
-                        redirect = "search.jsp";
-                    }
                     if (StringUtils.isBlank(request.getParameter("quantity"))) {
                         quantityDemand = 1;
                     }
@@ -125,6 +121,11 @@ public class addOrderServlet extends HttpServlet {
                     
                     session.setAttribute("user", user);
                     session.setAttribute("cart", cart);
+                    if ("search".equals(request.getParameter("fromjsp"))) {
+                        if (StringUtils.isBlank(message))
+                            request.setAttribute("addSuccess", "true");
+                        redirect = "search.jsp";
+                    }
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
                     }

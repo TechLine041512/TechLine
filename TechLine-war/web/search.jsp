@@ -27,6 +27,9 @@
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
         <script src="resource/themes/js/date-of-birth.js" type="text/javascript"></script>
+        <!--add dialog-->
+        <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+        <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
     </head>
     <body>	
         <c:if test="${not empty message}">
@@ -36,9 +39,12 @@
                 });
             </script>
         </c:if>
-        <c:if test="${not empty backToHistory}">
+        <c:if test="${not empty addSuccess}">
             <script>
-                window.history.back();
+                window.addEventListener("load", function() {
+                    swal("Add to cart successfully", "", "success");
+                });
+                setTimeout(function(){window.history.go(-1);}, 2000);
             </script>
         </c:if>
         <div id="top-bar" class="container">
@@ -88,7 +94,7 @@
             <div class="modal-dialog login animated">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #ff6666">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.history.go(-1);">&times;</button>
                         <h4 class="modal-title" style="color: #fff">ERROR</h4>
                     </div>
                     <div class="modal-body">  
