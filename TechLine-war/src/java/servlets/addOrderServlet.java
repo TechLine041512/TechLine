@@ -124,7 +124,12 @@ public class addOrderServlet extends HttpServlet {
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
                     }
-                    request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    if (request.getParameter("fromjsp").equals("search")) {
+                        request.setAttribute("backToHistory", id);
+                        request.getRequestDispatcher("search.jsp").forward(request, response);
+                    }
+                    else
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                     
                 case "checkout":

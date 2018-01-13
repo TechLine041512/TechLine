@@ -33,7 +33,12 @@
             <script>
                 window.addEventListener("load", function() {
                     $('#MessageModal').modal('show');
-                })
+                });
+            </script>
+        </c:if>
+        <c:if test="${not empty backToHistory}">
+            <script>
+                window.history.back();
             </script>
         </c:if>
         <div id="top-bar" class="container">
@@ -221,6 +226,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${listProductSearch}" var="product">
+                                <form class="form-inline" action="addOrderServlet" method="POST">
                                     <tr>
                                         <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="Product Image" src="${product.productImage.split(",")[0]}" style="width:200px; height:200px;"></a></td>
                                         <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
@@ -228,9 +234,11 @@
                                         <td>$${product.productPrice}</td>
                                         <td>${product.brandId.brandName}</td>
                                         <td><button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add</button></td>
-                                        <input type="hidden" name="idProduct" value="${product.productId}"/>
+                                    <input type="hidden" name="idProduct" value="${product.productId}">
+                                    <input type="hidden" name="fromjsp" value="search">
                                     </tr>
-                                </c:forEach>                       	  
+                                </form>
+                            </c:forEach>
                             </tbody>
                         </table>			                					
                     </div>
