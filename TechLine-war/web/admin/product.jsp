@@ -28,6 +28,128 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        <script>
+            function openHistoryModal(productId) {
+                
+                //ajax to get history.
+                $.ajax({
+                    type: 'get',
+                    data: {txtProductId : productId},
+                    url:'viewServlet?action=adminGetProductHistory',
+                    datatype:'text',
+                    success: function(response){
+                       
+                       // alert(datas);
+                        var htmlText = '';
+                        data = JSON.parse(response);
+                        
+                        for(i=0; i<data.length; i++){
+                            htmlText += '<tr>';
+                            htmlText += '<td>'+data[i].version+'</td>';
+                            htmlText += '<td>'+data[i].productId+'</td>';
+                            htmlText += '<td>'+data[i].productName+'</td>';
+                            htmlText += '<td>'+data[i].productPrice+'</td>';
+                            htmlText += '<td>'+data[i].productDiscount+'</td>';
+                            htmlText += '<td>'+data[i].editTime+'</td>';
+                            htmlText += '</tr>';
+                        }
+                        $('#historyModal').empty();
+                        $('#historyModal').append(htmlText);
+                        
+                    }
+                });
+                
+                
+                setTimeout(function() {
+                    $('#EditHistory').modal('show');
+                }, 230);
+            }
+            
+            
+            function openProductDetailModal(productId) {
+                
+                //ajax to get history.
+                $.ajax({
+                    type: 'get',
+                    data: {txtProductId : productId},
+                    url:'viewServlet?action=getProductDetail',
+                    datatype:'text',
+                    success: function(response){
+                       
+                       // alert(datas);
+                        var htmlText = '';
+                        data = JSON.parse(response);
+                        
+                        var image = data.productImage.toString().split(',');
+                        
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Product Id</td>' + '<td>' +data.productId+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Type</td>' +  '<td>' +data.productType+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Brand</td>' + '<td>' +data.productBrand+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Price</td>' + '<td>' +data.productPrice+ '$</td>' ;
+                        htmlText += '</tr>';
+                        
+                       htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Quantity</td>' + '<td>' +data.productQuantity+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Discount</td>' + '<td>' +data.productDiscount+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td style="width: 100px" >Summary </td>' + '<td>' +data.productSummary +'</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td style="width: 100px" >Orders </td>' + '<td>' +data.productOrders +'</td>' ;
+                        htmlText += '</tr>';
+                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td  style="width: 100px" >Image Main</td>' + '<td>' +'<img src="'+image[0]+'" style="width: 80px; height: 80px;"/>'+ '</td>' ;
+//                        htmlText += '</tr>';
+//                       
+//                        htmlText += '<tr>';
+//                        htmlText += '<td  style="width: 100px" > Image Sub 1</td>' + '<td>' +'<img src="'+image[1]+'" style="width: 60px; height: 60px;"/>'+ '</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 2</td>' + '<td>' +'<img src="'+image[2]+'" style="width: 60px; height: 60px;"/>'+'</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 3</td>' + '<td>' +'<img src="'+image[3]+'" style="width: 60px; height: 60px;"/>' +'</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 4</td>' + '<td>' +'<img src="'+image[4]+'" style="width: 60px; height: 60px;">'+ '</td>' ;
+//                        htmlText += '</tr>';
+                        
+                       
+                        
+                        
+                        $('#productDetailModal').empty();
+                        $('#productDetailModal').append(htmlText);
+                        
+                    }
+                });
+                
+                
+                setTimeout(function() {
+                    $('#ProductDetail').modal('show');
+                }, 230);
+            }
+        </script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -111,6 +233,77 @@
                     </ul>
                 </div>
             </div>
+            
+            <!--Phần dialog box Product History-->
+            <div class="modal fade login" id="EditHistory">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Product History</h4>
+                        </div>
+                        <div class="modal-body">  
+                            <div class="box">
+                                <div class="content">
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <table class="table table-hover" id="myTable">
+                                            <thead class="text-primary">                     
+                                            <th>Version</th>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Discount</th>
+                                            <th>Edit Time</th>
+                                            </thead>
+                                            <tbody id="historyModal">
+                                                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span></span>
+                            </div>
+
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc dialog box Product History-->
+            
+            <!--Phần dialog box Product Details-->
+            <div class="modal fade login" id="ProductDetail">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Product Detail</h4>
+                        </div>
+                        <div class="modal-body">  
+                            <div class="box">
+                                <div class="content">
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <table class="table table-hover" id="productDetailModal">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span></span>
+                            </div>
+
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc dialog box Product Details-->
 
             <div class="main-panel">
                 <nav class="navbar navbar-transparent navbar-absolute">
@@ -155,12 +348,12 @@
                                                 <c:forEach items="<%=pageProduct.getModel()%>" var="product">
                                                     <tr>
                                                         <td><a href="RedirectServlet?action=editProduct&pid=${product.id}">${product.id}</a></td>
-                                                        <td>${product.name}</td>
+                                                        <td><a onclick="openProductDetailModal('${product.id}')">${product.name}</a></td>
                                                         <td>${product.brand}</td>
                                                         <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.quantity}</td>
                                                         <td>
-                                                            <a class="btn-instagram btn" href="#">View History</a>
+                                                            <a class="btn-instagram btn" onclick="openHistoryModal('${product.id}')">View History</a>
                                                             <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.id}&bl=${product.productStatus ? 'Block' : 'Unblock'}" style="width:136.45px;" onclick="return showDialog('${product.productStatus ? 'Block' : 'Unblock'}');">${product.productStatus ? 'Block' : 'Unblock'}</a>
                                                         </td>
                                                     </tr>
