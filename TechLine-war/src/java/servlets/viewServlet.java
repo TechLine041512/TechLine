@@ -729,8 +729,9 @@ public class viewServlet extends HttpServlet {
                 case "sellerGetProductHistory":
                     String productId = request.getParameter("txtProductId");
                     gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
-                    List<ProductsEditHistory> lsProductHistory = (List<ProductsEditHistory>) productsFacade.find(productId).getProductsEditHistoryCollection();
+                    List<ProductsEditHistory> lsProductHistory = productsEditHistory.findByProductId(productId);
                     List<ProductHistory> lsConvert = new ArrayList<>();
+                    SimpleDateFormat sdfSeller = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
                     for(ProductsEditHistory data: lsProductHistory){
                         lsConvert.add(new ProductHistory(
                                 String.valueOf(data.getProductsEditHistoryPK().getProductId()),
@@ -738,7 +739,7 @@ public class viewServlet extends HttpServlet {
                                 String.valueOf(data.getProductName()), 
                                 String.valueOf(data.getProductPrice()), 
                                 String.valueOf(data.getProductDiscount()), 
-                                String.valueOf(data.getEditTime())));
+                                String.valueOf(sdfSeller.format(data.getEditTime()))));
                     }
                     
                     String json = gson.toJson(lsConvert);

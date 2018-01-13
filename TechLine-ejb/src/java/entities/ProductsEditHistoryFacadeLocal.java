@@ -27,5 +27,7 @@ public interface ProductsEditHistoryFacadeLocal {
     int count();
 
     int newVersion(String productId);
+
+    List<ProductsEditHistory> findByProductId(String productId);
     
 }

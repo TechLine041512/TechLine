@@ -75,7 +75,7 @@ public class editProductsServlet extends HttpServlet {
                 editHistoryE = new ProductsEditHistory(editHistoryPKE);
                 //Save current information of product to history
                 product = productsFacade.find(productId);
-                java.sql.Date getTodayE = new java.sql.Date(new Date().getTime());//return current time
+                Date getTodayE = new Date(new Date().getTime());//return current time
                 editHistoryE.setProductName(product.getProductName());
                 editHistoryE.setProductPrice(product.getProductPrice());
                 editHistoryE.setProductDiscount(product.getProductDiscount());
