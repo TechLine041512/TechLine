@@ -169,11 +169,12 @@
                                 <div>
                                     <textarea id="delivery-notice" name="deliveryRequest"></textarea>
                                 </div>
-                                <div>
-                                    <input id="delivery-notice" name="txtPhone"/>
-                                </div>
                                 <div class="clearfix"></div>
-                                <table class="orderinfo-total"  >
+                                <div>
+                                    <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided phone number</h4>
+                                    <input type="text" style="width: 550px; float:left; margin-left:20px;" name="txtPhone" required title="Phone contains 9 to 15 digits" pattern="\d{9,15}"/>
+                                </div>
+                                <table class="orderinfo-total" style="margin-top: 30px;">
                                     <tr>
                                         <td><p>PRODUCT SUB TOTAL($)</p></td>
                                         <td width="17%">

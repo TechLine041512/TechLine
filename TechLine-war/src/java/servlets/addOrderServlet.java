@@ -18,7 +18,6 @@ import entities.ProductsFacadeLocal;
 import entities.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +74,12 @@ public class addOrderServlet extends HttpServlet {
                     String id = request.getParameter("idProduct");
                     Products currentP = productsFacade.find(id);
                     int quantityDemand;
-                    if (request.getParameter("quantity") == null ) {
+                    String redirect = "HomeServlet";
+                    if ("search".equals(request.getParameter("fromjsp"))) {
+                        request.setAttribute("backToHistory", id);
+                        redirect = "search.jsp";
+                    }
+                    if (StringUtils.isBlank(request.getParameter("quantity"))) {
                         quantityDemand = 1;
                     }
                     else {
@@ -124,17 +128,15 @@ public class addOrderServlet extends HttpServlet {
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
                     }
-                    if (request.getParameter("fromjsp").equals("search")) {
-                        request.setAttribute("backToHistory", id);
-                        request.getRequestDispatcher("search.jsp").forward(request, response);
-                    }
-                    else
-                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    request.getRequestDispatcher(redirect).forward(request, response);
                     break;
                     
                 case "checkout":
                     if (user == null || cart == null) {
                         message = "Your session is ended. Please login and select product again.";
+                        request.setAttribute("message", message);
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                        break;
                     }
                     String totalPrice = request.getParameter("txtTotalPrice");
                     String deliveryFee = request.getParameter("txtDeliveryPrice")+".0";
@@ -154,7 +156,11 @@ public class addOrderServlet extends HttpServlet {
                     for (ProductInCart p : cart) {
                         Products productAvailable = productsFacade.find(p.getProductId());
                         if (p.getQuantity() > productAvailable.getProductQuantity()) {
-                            message = "We're sorry. Your selected product "+ productAvailable.getProductName()+ " are out of stock. Please choose another";
+                            orderMasterFacade.remove(orderMaster);
+                            cart.remove(p);
+                            message = "We're sorry. Your selected product: "+ productAvailable.getProductName()+ " is out of stock. Please choose another";
+                            request.setAttribute("message", message);
+                            request.getRequestDispatcher("HomeServlet").forward(request, response);
                             break;
                         }
                         OrderDetails orderDetail = new OrderDetails();
@@ -164,7 +170,6 @@ public class addOrderServlet extends HttpServlet {
                         orderDetail.setOrderDetailsPK(orderDetailPk);
                         orderDetail.setProducts(productAvailable);
                         orderDetail.setQuantity(p.getQuantity());
-                        orderDetail.setOrderMaster(orderMaster);
                         orderDetailsFacade.create(orderDetail);
                         int quantityLeft = productAvailable.getProductQuantity() - p.getQuantity();
                         productAvailable.setProductQuantity(quantityLeft);
