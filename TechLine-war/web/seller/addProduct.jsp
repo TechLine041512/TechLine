@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product Page</title>
+        <title>Seller Add Product Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -66,6 +66,12 @@
                             <a href="viewServlet?action=sellerOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>List Order </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="viewServlet?action=sellerShowReport">
+                                <i class="material-icons">library_books</i>
+                                <p>Report</p>
                             </a>
                         </li>
                     </ul>
@@ -141,7 +147,33 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Image</label>
-                                                        <input type="text" class="form-control" name="txtImage" required="required" />
+                                                        <input type="url" class="form-control" name="txtImageMain" required="required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 1</label>
+                                                        <input type="url" class="form-control" name="txtSubImage1" required="required" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 2</label>
+                                                        <input type="url" class="form-control" name="txtSubImage2" required="required" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 3</label>
+                                                        <input type="url" class="form-control" name="txtSubImage3"  required="required" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Sub Image 4</label>
+                                                        <input type="url" class="form-control" name="txtSubImage4" required="required" />
                                                     </div>
                                                 </div>
                                             </div>
