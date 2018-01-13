@@ -176,8 +176,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                                </c:if>
-                                            </c:forEach>
+                                            </c:if>
+                                        </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
