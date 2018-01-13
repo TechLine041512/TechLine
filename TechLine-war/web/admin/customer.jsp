@@ -159,7 +159,7 @@
                                                             <td>${customer.gender}</td>
                                                             <td>${customer.address}</td>
                                                             <td>${customer.point}</td>
-                                                            <td><a href="editCustomerServlet?action=blockCustomer&cusId=${customer.userId}&bl=${customer.users.userStatus ? 'Block' : 'Unblock'}" class="btn-instagram btn" name="action">${customer.users.userStatus ? 'Block' : 'Unblock'}</a></td>
+                                                            <td><a href="editCustomerServlet?action=blockCustomer&cusId=${customer.userId}&bl=${customer.users.userStatus ? 'Block' : 'Unblock'}" class="btn-instagram btn" name="action" onclick="return showDialog('${customer.users.userStatus ? 'Block' : 'Unblock'}');">${customer.users.userStatus ? 'Block' : 'Unblock'}</a></td>
                                                         </tr>
                                                     </c:forEach>    
                                                 </tbody>
@@ -206,7 +206,15 @@
                 </footer>
             </div>
         </div>
-
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('This action will also block customer comments\nAre you sure?');
+                } else {
+                    return confirm('Are your sure you want to unblock this customer?');
+                }
+            }
+        </script>
     </body>
 
     <!--   Core JS Files   -->

@@ -12,14 +12,11 @@ import entities.CategoriesFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
-import entities.ProductsComment;
-import entities.ProductsCommentFacadeLocal;
 import entities.ProductsEditHistory;
 import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsEditHistoryPK;
 import entities.ProductsFacadeLocal;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,9 +30,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author nth15
  */
 public class editProductsServlet extends HttpServlet {
-
-    @EJB
-    private ProductsCommentFacadeLocal productsCommentFacade;
 
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
@@ -202,9 +196,6 @@ public class editProductsServlet extends HttpServlet {
             case "blockProduct":
                 productId = request.getParameter("pid");
                 product = productsFacade.find(productId);
-                //block product comment
-                List<ProductsComment> listProCmt = new ArrayList<>();
-                listProCmt.addAll(product.getProductsCommentCollection());
                 boolean unblock = false;
                 if (request.getParameter("bl").equals("Unblock")) {
                     unblock = true;
@@ -219,10 +210,6 @@ public class editProductsServlet extends HttpServlet {
                         request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                         break;
                     }
-                }
-                for (ProductsComment prm : listProCmt) {
-                    prm.setCommentStatus(unblock);
-                    productsCommentFacade.edit(prm);
                 }
                 //block product
                 product.setProductStatus(unblock);

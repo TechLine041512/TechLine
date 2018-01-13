@@ -154,7 +154,7 @@
                                                         <td>${category.categoryName}</td>
                                                         <td>${category.categoryDesc}</td>
                                                         <td><img src="${category.categoryIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}&bl=${category.categoryStatus ? 'Block' : 'Unblock'}">${category.categoryStatus ? 'Block' : 'Unblock'}</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockCategory&catId=${category.categoryId}&bl=${category.categoryStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${category.categoryStatus ? 'Block' : 'Unblock'}');">${category.categoryStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -178,12 +178,21 @@
                             </ul>
                         </nav>
                         <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Line Tech</a>, made with love for a Group TechLine
+                            &copy; <script>document.write(new Date().getFullYear());</script> <a href="#">Line Tech</a>, made with love for a Group TechLine
                         </p>
                     </div>
                 </footer>
             </div>
         </div>
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('Can not block category which has products\nAre you sure?');
+                } else {
+                    return confirm('Are your sure you want to unblock this category?');
+                }
+            }
+        </script>
 
     </body>
 

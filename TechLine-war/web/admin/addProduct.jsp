@@ -168,7 +168,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" required=""></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

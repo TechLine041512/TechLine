@@ -161,7 +161,7 @@
                                                         <td>${product.quantity}</td>
                                                         <td>
                                                             <a class="btn-instagram btn" href="#">View History</a>
-                                                            <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.id}&bl=${product.productStatus ? 'Block' : 'Unblock'}" style="width:136.45px;">${product.productStatus ? 'Block' : 'Unblock'}</a>
+                                                            <a class="btn-instagram btn" href="editProductsServlet?action=blockProduct&pid=${product.id}&bl=${product.productStatus ? 'Block' : 'Unblock'}" style="width:136.45px;" onclick="return showDialog('${product.productStatus ? 'Block' : 'Unblock'}');">${product.productStatus ? 'Block' : 'Unblock'}</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>        
@@ -209,7 +209,15 @@
                 </footer>
             </div>
         </div>
-
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('Are you sure you want to block this product?');
+                } else {
+                    return confirm('Are your sure you want to unblock this product?');
+                }
+            }
+        </script>
     </body>
 
     <!--   Core JS Files   -->

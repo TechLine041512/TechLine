@@ -158,7 +158,7 @@
                                                         <td>${type.typeName}</td>
                                                         <td>${type.typeDesc}</td>
                                                         <td><img src="${type.typeIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}&bl=${type.typeStatus ? 'Block' : 'Unblock'}">${type.typeStatus ? 'Block' : 'Unblock'}</a></td>
+                                                        <td><a class="btn-instagram btn" value="Block" href="editProductsServlet?action=blockType&typeId=${type.typeId}&bl=${type.typeStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${type.typeStatus ? 'Block' : 'Unblock'}');">${type.typeStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>
@@ -205,7 +205,15 @@
                 </footer>
             </div>
         </div>
-
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('Can not block type which has products\nAre you sure?');
+                } else {
+                    return confirm('Are your sure you want to unblock this type?');
+                }
+            }
+        </script>
     </body>
 
     <!--   Core JS Files   -->

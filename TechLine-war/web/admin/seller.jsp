@@ -157,7 +157,7 @@
                                                         <td>${seller.storeName}</td>
                                                         <td>${seller.storeAddress}</td>
                                                         <td>${seller.users.phone}</td>
-                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}&bl=${seller.users.userStatus ? 'Block' : 'Unblock'}">${seller.users.userStatus ? 'Block' : 'Unblock'}</a></td>
+                                                        <td><a class="btn-instagram btn" href="editSellerServlet?action=blockSeller&sellerId=${seller.userId}&bl=${seller.users.userStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${seller.users.userStatus ? 'Block' : 'Unblock'}');">${seller.users.userStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -204,7 +204,15 @@
                 </footer>
             </div>
         </div>
-
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('This action will also block seller\'s products\nAre you sure?');
+                } else {
+                    return confirm('Are your sure you want to unblock this seller?');
+                }
+            }
+        </script>
     </body>
 
     <!--   Core JS Files   -->

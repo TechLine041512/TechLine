@@ -27,5 +27,7 @@ public interface SellerFacadeLocal {
     int count();
 
     List<Seller> showAll();
+
+    List<Seller> showActiveSellers();
     
 }
