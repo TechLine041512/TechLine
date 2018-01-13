@@ -28,6 +28,5 @@ public interface SellerFacadeLocal {
 
     List<Seller> showAll();
 
-    List<Seller> showActiveSellers();
     
 }

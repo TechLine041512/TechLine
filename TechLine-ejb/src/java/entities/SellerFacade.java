@@ -36,14 +36,5 @@ public class SellerFacade extends AbstractFacade<Seller> implements SellerFacade
         return null;
     }
 
-    @Override
-    public List<Seller> showActiveSellers() {
-        Query q = em.createQuery("SELECT s FROM Seller s WHERE s.users.userStatus = TRUE");
-        List<Seller> list = q.getResultList();
-        if (list != null ) {
-            return list;
-        }
-        return null;
-    }
     
 }
