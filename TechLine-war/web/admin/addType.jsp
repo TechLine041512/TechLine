@@ -27,9 +27,6 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-        <!--Richtext-->
-        <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-        <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
     </head>
     <body>
         <c:if test="${not empty message}">

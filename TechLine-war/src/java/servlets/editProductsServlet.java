@@ -196,6 +196,8 @@ public class editProductsServlet extends HttpServlet {
             case "blockProduct":
                 productId = request.getParameter("pid");
                 product = productsFacade.find(productId);
+                product.getTypeId().getProductsCollection().remove(product);
+                product.getBrandId().getProductsCollection().remove(product);
                 boolean unblock = false;
                 if (request.getParameter("bl").equals("Unblock")) {
                     unblock = true;
@@ -214,6 +216,8 @@ public class editProductsServlet extends HttpServlet {
                 //block product
                 product.setProductStatus(unblock);
                 productsFacade.edit(product);
+                product.getTypeId().getProductsCollection().add(product);
+                product.getBrandId().getProductsCollection().add(product);
                 request.setAttribute("message", unblock ? "Unblock product successful!" : "Block product successful!");
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                 break;
@@ -290,8 +294,10 @@ public class editProductsServlet extends HttpServlet {
                         }
                     }
                     if (isTypeCanDisable) { //If List Product has all products which are blocked
+                        typeBlock.getCategoryId().getProductTypesCollection().remove(typeBlock);
                         typeBlock.setTypeStatus(Boolean.FALSE);
                         productTypesFacade.edit(typeBlock);
+                        typeBlock.getCategoryId().getProductTypesCollection().add(typeBlock);
                         if (listProType.isEmpty()) {
                             request.setAttribute("message", "This type has no product. Block successfully!");
                         } else {
@@ -304,8 +310,10 @@ public class editProductsServlet extends HttpServlet {
                         request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                         break;
                     }
+                    typeBlock.getCategoryId().getProductTypesCollection().remove(typeBlock);
                     typeBlock.setTypeStatus(true);
                     productTypesFacade.edit(typeBlock);
+                    typeBlock.getCategoryId().getProductTypesCollection().add(typeBlock);
                     request.setAttribute("message", "Unblock type successfully!");
                 }
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
