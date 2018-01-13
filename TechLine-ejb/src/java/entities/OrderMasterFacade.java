@@ -74,11 +74,14 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
         em.clear();
         em.getEntityManagerFactory().getCache().evictAll();
         if (date.equalsIgnoreCase("")) {
-        javax.persistence.Query q = em.createNativeQuery("SELECT o.orderMId,  o.dateOrdered, o.orderStatus,  o.orderTotalPrice FROM OrderMaster o WHERE o.userId = ? ORDER BY o.orderMId DESC");
-        return q.setParameter(1, customerID).getResultList();
+            Query q = em.createQuery("SELECT o.orderMId, o.dateOrdered, o.orderAddress.orderAddressDetail,o.orderStatus, o.orderTotalPrice FROM OrderMaster o WHERE o.userId.userId = :customerID ORDER BY o.orderMId DESC");
+            q.setParameter("customerID", customerID);
+            return q.getResultList();
         }else{
-        javax.persistence.Query q = em.createNativeQuery("SELECT o.orderMId,  o.dateOrdered, o.orderStatus,  o.orderTotalPrice FROM OrderMaster o WHERE o.userId = ? AND CAST(o.dateOrdered as DATE) = CAST(? as DATE ) ORDER BY o.orderMId DESC");
-        return q.setParameter(1, customerID).setParameter(2, date).getResultList();
+            Query q = em.createQuery("SELECT o.orderMId, o.dateOrdered, o.orderAddress.orderAddressDetail, o.orderStatus, o.orderTotalPrice FROM OrderMaster o WHERE o.userId.userId = :customerID AND CAST(o.dateOrdered as DATE) = CAST(:date as DATE ) ORDER BY o.orderMId DESC");
+            q.setParameter("customerID", customerID);
+            q.setParameter("date", date);
+            return q.getResultList();
         }
     }
 }
