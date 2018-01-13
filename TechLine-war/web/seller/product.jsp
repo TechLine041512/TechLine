@@ -55,18 +55,105 @@
                             htmlText += '<td>'+data[i].editTime+'</td>';
                             htmlText += '</tr>';
                         }
-                       
+                        $('#historyModal').empty();
                         $('#historyModal').append(htmlText);
                     }
                 });
-                
                 
                 setTimeout(function() {
                     $('#EditHistory').modal('show');
                 }, 230);
             }
-            function closeModal(){
-                $('#historyModal').empty();
+//            function closeModal(){
+//                $('#historyModal').empty();
+//            }
+            
+            function openProductDetailModal(productId) {
+                
+                //ajax to get history.
+                $.ajax({
+                    type: 'get',
+                    data: {txtProductId : productId},
+                    url:'viewServlet?action=getProductDetail',
+                    datatype:'text',
+                    success: function(response){
+                       
+                       // alert(datas);
+                        var htmlText = '';
+                        data = JSON.parse(response);
+                        
+                        //var image = data.productImage.toString().split(',');
+                        
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Product Id</td>' + '<td>' +data.productId+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Type</td>' +  '<td>' +data.productType+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Brand</td>' + '<td>' +data.productBrand+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Price</td>' + '<td>' +data.productPrice+ '$</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Quantity</td>' + '<td>' +data.productQuantity+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td  style="width: 100px" >Discount</td>' + '<td>' +data.productDiscount+ '</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td style="width: 100px" >Summary </td>' + '<td>' +data.productSummary +'</td>' ;
+                        htmlText += '</tr>';
+                        
+                        htmlText += '<tr>';
+                        htmlText += '<td style="width: 100px" >Orders </td>' + '<td>' +data.productOrders +'</td>' ;
+                        htmlText += '</tr>';
+                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Rating </td>' + '<td>' +data.productRating +'</td>' ;
+//                        htmlText += '</tr>';
+                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td  style="width: 100px" >Image Main</td>' + '<td>' +'<img src="'+image[0]+'" style="width: 80px; height: 80px;"/>'+ '</td>' ;
+//                        htmlText += '</tr>';
+//                       
+//                        htmlText += '<tr>';
+//                        htmlText += '<td  style="width: 100px" > Image Sub 1</td>' + '<td>' +'<img src="'+image[1]+'" style="width: 60px; height: 60px;"/>'+ '</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 2</td>' + '<td>' +'<img src="'+image[2]+'" style="width: 60px; height: 60px;"/>'+'</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 3</td>' + '<td>' +'<img src="'+image[3]+'" style="width: 60px; height: 60px;"/>' +'</td>' ;
+//                        htmlText += '</tr>';
+//                        
+//                        htmlText += '<tr>';
+//                        htmlText += '<td style="width: 100px" >Image Sub 4</td>' + '<td>' +'<img src="'+image[4]+'" style="width: 60px; height: 60px;">'+ '</td>' ;
+//                        htmlText += '</tr>';
+//                        
+                       
+                        
+                        
+                        $('#productDetailModal').empty();
+                        $('#productDetailModal').append(htmlText);
+                        
+                    }
+                });
+                
+                
+                setTimeout(function() {
+                    $('#ProductDetail').modal('show');
+                }, 230);
             }
         </script>
     
@@ -122,7 +209,7 @@
                 <div class="modal-dialog login animated">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeModal()">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Product History</h4>
                         </div>
                         <div class="modal-body">  
@@ -157,6 +244,36 @@
                 </div>
             </div>
             <!--Kết thúc dialog box Product History-->
+            
+            <!--Phần dialog box Product Details-->
+            <div class="modal fade login" id="ProductDetail">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Product Detail</h4>
+                        </div>
+                        <div class="modal-body">  
+                            <div class="box">
+                                <div class="content">
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <table class="table table-hover" id="productDetailModal">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span></span>
+                            </div>
+
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc dialog box Product Details-->
 
             <div class="main-panel">
 
@@ -189,7 +306,7 @@
                                                 <c:forEach items="<%=pageProduct.getModel()%>" var="product">
                                                     <tr>
                                                         <td><a href="viewServlet?action=sellerProductDetail&productId=${product.id}">${product.id}</a></td>
-                                                        <td>${product.name}</td>
+                                                        <td><a onclick="openProductDetailModal('${product.id}')">${product.name}</a></td>
                                                         <td>${product.brand}</td>
                                                         <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.quantity}</td>

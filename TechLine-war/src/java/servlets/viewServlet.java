@@ -748,6 +748,50 @@ public class viewServlet extends HttpServlet {
                     response.getWriter().write(json);
 
                     break;
+                case "adminGetProductHistory":
+                    String productIdA = request.getParameter("txtProductId");
+                    gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+                    List<ProductsEditHistory> lsProductHistoryA = productsEditHistory.findByProductId(productIdA);
+                    List<ProductHistory> lsConvertA = new ArrayList<>();
+                    SimpleDateFormat sdfSellerA = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+                    for(ProductsEditHistory data: lsProductHistoryA){
+                        lsConvertA.add(new ProductHistory(
+                                String.valueOf(data.getProductsEditHistoryPK().getProductId()),
+                                String.valueOf(data.getProductsEditHistoryPK().getVersion()),
+                                String.valueOf(data.getProductName()), 
+                                String.valueOf(data.getProductPrice()), 
+                                String.valueOf(data.getProductDiscount()), 
+                                String.valueOf(sdfSellerA.format(data.getEditTime()))));
+                    }
+                    
+                    String jsonA = gson.toJson(lsConvertA);
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(jsonA);
+
+                    break;
+                case "getProductDetail":
+                    idProduct = request.getParameter("txtProductId");
+                    Products productDetail = productsFacade.find(idProduct);
+                    StringBuilder data = new StringBuilder();
+                    
+                    data.append("{");
+                    data.append("\"productId\":").append("\"").append(idProduct).append("\"").append(",");
+                    data.append("\"productType\":").append("\"").append(productDetail.getTypeId().getTypeName().toString().trim()).append("\"").append(",");
+                    data.append("\"productBrand\":").append("\"").append(productDetail.getBrandId().getBrandName().toString().trim()).append("\"").append(",");
+                    data.append("\"productPrice\":").append("\"").append(productDetail.getProductPrice().toString().trim()).append("\"").append(",");
+                    data.append("\"productDiscount\":").append("\"").append(productDetail.getProductDiscount().toString().trim()).append("\"").append(",");
+                    data.append("\"productQuantity\":").append("\"").append(productDetail.getProductQuantity().toString().trim()).append("\"").append(",");
+                    //data.append("\"productRating\":").append("\"").append(productDetail.getProductRatingCollection().toString().trim()).append("\"").append(",");
+                    data.append("\"productOrders\":").append("\"").append(productDetail.getOrderDetailsCollection().size()).append("\"").append(",");
+                    data.append("\"productSummary\":").append("\"").append(productDetail.getProductSummary().toString().trim()).append("\"").append(",");
+                    data.append("\"productImage\":").append("\"").append(productDetail.getProductImage().toString().trim()).append("\"");
+                    data.append("}");
+                    
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(data.toString());
+                    break;
 
                 default:
                     request.setAttribute("error", "Page not found");
