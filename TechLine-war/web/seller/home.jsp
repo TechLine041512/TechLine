@@ -142,9 +142,9 @@
                                     <div class="error"></div>
                                     <div class="form loginBox">
                                         <form method="post" action="editSellerServlet">
-                                            <input id="oldPass" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="password" name="txtOldPassword" required="true" required title="This is your current password"><br/>
-                                            <input id="newPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtNewPass" required="true" required title="This is your new password"><br/>
-                                            <input id="confirmPass" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password"><br/>
+                                            <input id="oldPass" class="input-xlarge" pattern=".{5,20}" type="password" name="txtOldPassword" required="true" required title="This is your current password"><br/>
+                                            <input id="newPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtNewPass" required="true" required title="This is your new password"><br/>
+                                            <input id="confirmPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password"><br/>
                                             <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="sellerChangePassword" onclick="return validatePass()">Change Password</button>
                                         </form>
                                     </div>
@@ -216,7 +216,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Date</label>
-                                                        <input type="date" class="form-control" value="${user.seller.approvedDate}" min="1900-01-01" max="2100-01-01"  name="txtApprovedDate" required="required">
+                                                        <input type="date" class="form-control" value="${approvalDate}" min="1900-01-01" max="2100-01-01"  name="txtApprovedDate" required="required">
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -232,13 +232,13 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{5,100}" required="required">
+                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{20,100}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Icon</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeIcon}" name="txtStoreIcon" required="required">
+                                                        <input type="url" class="form-control" value="${user.seller.storeIcon}" name="txtStoreIcon" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

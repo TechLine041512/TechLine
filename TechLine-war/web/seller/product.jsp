@@ -30,6 +30,45 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        
+         <script>
+            function openHistoryModal(productId) {
+                
+                //ajax to get history.
+                $.ajax({
+                    type: 'get',
+                    data: {txtProductId : productId},
+                    url:'viewServlet?action=sellerGetProductHistory',
+                    datatype:'text',
+                    success: function(response){
+                       
+                       // alert(datas);
+                        var htmlText = '';
+                        data = JSON.parse(response);
+                        //$('#historyModal').remove();
+                        for(i=0; i<data.length; i++){
+                            htmlText += '<tr>';
+                            htmlText += '<td>'+data[i].productId+'</td>';
+                            htmlText += '<td>'+data[i].productName+'</td>';
+                            htmlText += '<td>'+data[i].version+'</td>';
+                            htmlText += '<td>'+data[i].productPrice+'</td>';
+                            htmlText += '<td>'+data[i].productDiscount+'</td>';
+                            htmlText += '<td>'+data[i].editTime+'</td>';
+                            htmlText += '</tr>';
+                        }
+                       
+                        $('#historyModal').append(htmlText);
+                        
+                    }
+                });
+                
+                
+                setTimeout(function() {
+                    $('#EditHistory').modal('show');
+                }, 230);
+            }
+        </script>
+    
     </head>
     <body>
 
@@ -76,6 +115,47 @@
                     </ul>
                 </div>
             </div>
+            
+            <!--Phần dialog box Product History-->
+            <div class="modal fade login" id="EditHistory">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Product History</h4>
+                        </div>
+                        <div class="modal-body">  
+                            <div class="box">
+                                <div class="content">
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <table class="table table-hover" id="myTable">
+                                            <thead class="text-primary">                     
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Version</th>
+                                            <th>Price</th>
+                                            <th>Discount</th>
+                                            <th>Edit Time</th>
+                                            </thead>
+                                            <tbody id="historyModal">
+                                                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span></span>
+                            </div>
+
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc dialog box Product History-->
 
             <div class="main-panel">
 
@@ -113,7 +193,7 @@
                                                         <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
                                                         <td>${product.quantity}</td>
                                                         <td>
-                                                            <a class="btn-instagram btn" href="#">View History</a>
+                                                            <a class="btn-instagram btn" href="#" onclick="openHistoryModal('${product.id}')">View History</a>
                                                             <a class="btn-instagram btn" href="editProductsServlet?action=sellerEditProductStatus&productId=${product.id}">${product.productStatus=='true'?'Block':'Enable'}</a>
                                                         </td>
 
