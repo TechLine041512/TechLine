@@ -50,4 +50,6 @@ public interface ProductsFacadeLocal {
     long countProductsByMonth(Date beforeMonth, Date afterMonth);
     
     List<Products> getTopProduct(String seller);
+
+    List<Products> getListProductByUserID(String userID);
 }

@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet {
         if (listCategories != null) {
             request.setAttribute("listCategories", listCategories);
         }
-        List<Brands> listBrands = brandsFacade.showAll();
+        List<Brands> listBrands = brandsFacade.showActiveBrands();
         if (listBrands != null) {
             request.setAttribute("listBrands", listBrands.subList(0, 6));
         }

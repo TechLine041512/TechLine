@@ -157,40 +157,6 @@
             </div>
         </div>
         <!--Kết thúc dialog box Login-->
-        
-        <!--Phần dialog box Change Password-->
-        <div class="modal fade login" id="PasswordModal">
-            <div class="modal-dialog login animated">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Change Password</h4>
-                    </div>
-                    <div class="modal-body">  
-                        <div class="box">
-                            <div class="content">
-                                <div class="error"></div>
-                                <div class="form loginBox">
-                                    <form method="post" action="viewServlet">
-                                        <input id="ChagePassword" class="input-xlarge" pattern="[A-Za-z0-9@a-z.com]{2,30}" type="text" name="username" required="true"><br/>
-                                        <input id="ChagePassword_confirmation" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
-                                        <input id="NewPassowrd" class="input-xlarge" pattern="[A-Za-z0-9]{2,30}" type="password"  name="password" required="true"><br/>
-                                        <input class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="Change Password">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>Note: Change the password remember</span>
-                        </div>
-
-                    </div>        
-                </div>
-            </div>
-        </div>
-        <!--Kết thúc dialog box Change Password-->
         <div id="wrapper" class="container">
             <section class="navbar main-menu">
                 <div class="navbar-inner main-menu">				
@@ -222,13 +188,13 @@
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
                     <div id="order-list-customer-info">
-                        <h4>Name: Tiến</h4>
+                        Name: <h4 style="color: #eb4800;">${OrderMaster.userId.fullname}</h4><br/>
+                        OderID: <h4 style="color: #eb4800;">${OrderMaster.orderMId}</h4>
                     </div>               
                     <div class="clearfix"></div>
 
                     <div id="order-date-select">
-                        <p>Find By Date: <input type="text" id="datepicker" onchange="searchOMbyDate($(this).val());" readonly="" autocomplete=off /> <br>or</p>
-                        <p>All Order <input type="button" id="view-all-order" value="All Order" onclick="searchOMbyDate(''); $(this).parent().siblings().children().val('');"></p>																
+                        <p><a href="viewServlet?action=OrderHistory"><input type="button" id="view-all-order" value="Back To Order"></a></p>																
                     </div>
                     <div class="clearfix"></div>
                     <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
@@ -236,30 +202,25 @@
                             <caption>Infomation Order</caption> 
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Date Order</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Total Price</th>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>Image</th>
+                                <th>Product Price</th>
+                                <th>Product Discount</th>
+                                <th>Rating</th>
                             </tr>
                             </thead>                            
-                            <tbody class="oMView">
-                                <% 
-                                    List<OrderMaster> oMList = (List<OrderMaster>) request.getAttribute("listOrderMasterCustomer");
-                                    for(OrderMaster oM : oMList){ 
-                                %>
-                                <tr>
-                                    <td class="order-number"><p><a href="searchOrderServlet?action=orderDetailCustomer&orderID=<%= oM.getOrderMId() %>"><%= oM.getOrderMId()%></a></p></td>
-                                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="<%= oM.getDateOrdered() %>"/></td>
-                                    <td><%= oM.getOrderAddress().getOrderAddressDetail() %></td>
-                                    <td><%= oM.getOrderStatus() %></td>
-                                    <td><%= oM.getOrderTotalPrice() %></td>
-                                </tr>
-                                <%
-                                    }
-                                    oMList.clear();
-                                    request.removeAttribute("oMList");
-                                %>
+                            <tbody>
+                                <c:forEach items="${OrderMaster.orderDetailsCollection}" var="order">
+                                    <tr>
+                                        <td class="order-number"><a href="viewServlet?action=productDetail&idProduct=${order.products.productId}">${order.products.productId}</a></td>
+                                        <td>${order.products.productName}</td>
+                                        <td>aaaaaaaaaaaaaa</td>
+                                        <td>${order.products.productPrice}</td>
+                                        <td>${order.products.productDiscount}</td>
+                                        <td>${order.products.productRating}</td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div><!-----   .my-orderlist-table end   ------>
@@ -341,11 +302,6 @@
                                                     });
                                                 });
                                             });
-        </script>
-        <script><!------   Calendar Select for Order List   ------>
-            $(function() {
-                $('#datepicker').datepicker({dateFormat: 'dd-mm-yy'}).val();
-            });
         </script>
     </body>
 </html>
