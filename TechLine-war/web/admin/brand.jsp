@@ -156,7 +156,7 @@
                                                         <td><a href="RedirectServlet?action=editBrand&brandId=${brand.brandId}">${brand.brandId}</a></td>
                                                         <td>${brand.brandName}</td>
                                                         <td><img src="${brand.brandIcon}" style="width: 80px; height: 80px;"/></td>
-                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockBrand&bId=${brand.brandId}&bl=${brand.brandStatus ? 'Block' : 'Unblock'}">${brand.brandStatus ? 'Block' : 'Unblock'}</a></td>
+                                                        <td><a class="btn-instagram btn" href="editProductsServlet?action=blockBrand&bId=${brand.brandId}&bl=${brand.brandStatus ? 'Block' : 'Unblock'}" onclick="return showDialog('${brand.brandStatus ? 'Block' : 'Unblock'}');">${brand.brandStatus ? 'Block' : 'Unblock'}</a></td>
                                                     </tr>
                                                 </c:forEach>        
                                             </tbody>
@@ -203,7 +203,15 @@
                 </footer>
             </div>
         </div>
-
+        <script>
+            function showDialog(isBlock) {
+                if (isBlock == 'Block') {
+                    return confirm('Can not block brand which has products\nAre you sure?');
+                } else {
+                    return confirm('Are your sure you want to unblock this brand?');
+                }
+            }
+        </script>
     </body>
 
     <!--   Core JS Files   -->

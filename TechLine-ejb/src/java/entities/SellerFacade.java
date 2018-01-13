@@ -28,13 +28,13 @@ public class SellerFacade extends AbstractFacade<Seller> implements SellerFacade
 
     @Override
     public List<Seller> showAll() {
-        Query q = em.createQuery("SELECT s FROM Seller s WHERE s.users.userStatus = TRUE");
+        Query q = em.createQuery("SELECT s FROM Seller s");
         List<Seller> list = q.getResultList();
         if (list != null ) {
             return list;
         }
         return null;
     }
-    
+
     
 }

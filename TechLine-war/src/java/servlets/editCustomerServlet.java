@@ -104,8 +104,10 @@ public class editCustomerServlet extends HttpServlet {
                     }
                     //Block customer comments
                     for (ProductsComment pc : listCm) {
-                        pc.setCommentStatus(unblock);
-                        productsCommentFacade.edit(pc);
+                        if (!unblock) {
+                            pc.setCommentStatus(unblock);
+                            productsCommentFacade.edit(pc);
+                        }
                     }
                     //Block customer
                     uBlock.setUserStatus(unblock);

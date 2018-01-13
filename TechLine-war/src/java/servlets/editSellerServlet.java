@@ -89,7 +89,8 @@ public class editSellerServlet extends HttpServlet {
                         pc.setCommentStatus(unblock);
                         productsCommentFacade.edit(pc);
                     }
-                    proB.setProductStatus(unblock);
+                    if (!unblock)
+                        proB.setProductStatus(unblock);
                     productsFacade.edit(proB);
                 }
                 //Block seller
