@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -49,13 +50,16 @@ public class report extends HttpServlet {
         
         //report-- Change this path.
         String reportpath = request.getServletContext().getRealPath(sb.toString());
+        String imagePath = request.getServletContext().getRealPath("resource/themes/images/banner1.png");
         File filePDF = new File(reportpath);
         FileInputStream fis = new FileInputStream(filePDF);
         try {
             JasperReport jasperReport = JasperCompileManager.compileReport(fis);
+            Map<String, Object> reportImage = new HashMap<>();
+            reportImage.put("reportImage", imagePath);
             List<Map<String,Object>> rows = (List<Map<String,Object>>) request.getAttribute("products");
             JRDataSource jRDataSource = new JRBeanCollectionDataSource(rows);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRDataSource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportImage, jRDataSource);
             JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
         } catch (JRException ex) {
             Logger.getLogger(report.class.getName()).log(Level.SEVERE, null, ex);
