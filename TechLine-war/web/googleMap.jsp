@@ -229,7 +229,7 @@
                     </div>
                     <div class="span5">
                         <p class="logo"><img src="themes/images/logo.png" class="site_logo" alt=""></p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
+                        <p>At this century, you can not deny the evolution of technology. It’s nearly become the air that we are breathing.</p>
                         <br/>
                         <span class="social_icons">
                             <a class="facebook" href="#">Facebook</a>
@@ -241,7 +241,7 @@
                 </div>	
             </section>
             <section id="copyright">
-                <span>Copyright 2013 bootstrappage template  All right reserved.</span>
+                <span>Copyright 2013  All right reserved.</span>
             </section>
         </div>
         <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDbmwYQw5nGav9Uu_iO0YYPW4FmD_38dwE&libraries=places&callback=initMap"

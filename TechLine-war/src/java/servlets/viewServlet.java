@@ -473,12 +473,13 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listYear", listYear);
                     request.setAttribute("customer", c);
                     request.setAttribute("listCategories", listCategories);
-                    request.setAttribute("listBrands", listBrands);
+                    request.setAttribute("listBrands", listBrands.subList(0, 6));
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "OrderHistory":
                     request.setAttribute("listOrderMasterCustomer", orderMasterFacade.getOrderByUserID(user.getUserId()));
                     request.setAttribute("listCategories", listCategories);
+                    request.setAttribute("listBrands", listBrands.subList(0, 6));
                     request.getRequestDispatcher("customerOrder.jsp").forward(request, response);
                     break;
                 case "sellerProduct":
