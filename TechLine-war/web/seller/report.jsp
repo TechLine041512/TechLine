@@ -5,13 +5,16 @@
 --%>
 
 <%@page import="utils.PageProduct"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="models.SellerOrder"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seller Product Page</title>
+        <title>Seller Report Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -25,7 +28,6 @@
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
         <link href="resource/assets/css/demo.css" rel="stylesheet" />
-        <script src="resource/assets/js/sort.js" type="text/javascript"></script>
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -55,19 +57,19 @@
                                 <p>Profile</p>
                             </a>
                         </li>   
-                        <li class="active">
+                        <li>
                             <a href="viewServlet?action=sellerProduct">
                                 <i class="material-icons">content_paste</i>
                                 <p>List Product of Seller </p>
                             </a>
                         </li>
-                        <li>
+                        <li >
                             <a href="viewServlet?action=sellerOrder">
                                 <i class="material-icons">location_on</i>
                                 <p>List Order </p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="viewServlet?action=sellerShowReport">
                                 <i class="material-icons">library_books</i>
                                 <p>Report</p>
@@ -78,75 +80,52 @@
             </div>
 
             <div class="main-panel">
-
+                <nav class="navbar navbar-transparent navbar-absolute">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>                         
+                        </div>
+                    </div>
+                </nav>
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;"> 
-                            <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=sellerAddProduct">Add</a>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card">
+                                <div class="card card-plain">
                                     <div class="card-header" data-background-color="purple">
-                                        <h4 class="title">Product List</h4>
-                                        <p class="category">Tech Line</p>
-                                    </div>
-                                    <%
-                                        PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
-                                    %>
-                                    <div class="card-content table-responsive">
-                                        <table class="table table-hover" id="myTable">
-                                            <thead class="text-primary">                     
-                                            <th onclick="sortTable(0)"><a href="#">ID</a></th>
-                                            <th onclick="sortTable(1)"><a href="#">Product Name</a></th>
-                                            <th onclick="sortTable(2)"><a href="#">Brand</a></th>
-                                            <th><a href="#">Image</a></th>
-                                            <th onclick="sortTable(4)"><a href="#">Quantity</a></th>
-                                            <th><a href="#">Action</a></th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="<%=pageProduct.getModel()%>" var="product">
-                                                    <tr>
-                                                        <td><a href="viewServlet?action=sellerProductDetail&productId=${product.id}">${product.id}</a></td>
-                                                        <td>${product.name}</td>
-                                                        <td>${product.brand}</td>
-                                                        <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
-                                                        <td>${product.quantity}</td>
-                                                        <td>
-                                                            <a class="btn-instagram btn" href="#">View History</a>
-                                                            <a class="btn-instagram btn" href="editProductsServlet?action=sellerEditProductStatus&productId=${product.id}">${product.productStatus=='true'?'Block':'Enable'}</a>
-                                                        </td>
-
-
-
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-
+                                        <h4 class="title">Seller Report</h4>
+                                        <p class="category">Line Tech</p>
                                     </div>
 
-                                    <div class="pagination pagination-small pagination-centered" style="margin-left:250px;">
-                                        <ul>
-                                            <li><a href="viewServlet?action=sellerProduct&btn=prev">Prev</a></li>
-                                                <%
-
-                                                    int pages = pageProduct.getPages();
-                                                    for (int i = 1; i <= pages; i++) {
-                                                %>
-
-                                            <li><a href="viewServlet?action=sellerProduct&page=<%=i%>"><%=i%></a></li>
-
-                                            <%
-                                                }
-                                            %>
-                                            <li><a href="viewServlet?action=sellerProduct&btn=next">Next</a></li>
-                                        </ul>
-                                    </div>
-
+                                    <form action="viewServlet" method="post">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Which Report you want to generate ?</label>
+                                                        <select class="form-control" name="txtReportType">
+                                                            <option value="topProductReport.jrxml">Top Products</option>
+                                                            <option value="orderReport.jrxml">Orders</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Hown many record you want to print</label>
+                                                        <input type="number" class="form-control" name="txtLimit" min="10" max="1000" required="">
+                                                    </div>
+                                                </div>
+                                            </div>          
+                                            <button type="submit" class="btn btn-primary" name="action" value="printReport">Report</button>
+                                            <div class="clearfix"></div>
+                                        </form>
 
                                 </div>
-                            </div>                     
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,7 +138,7 @@
                                     <a href="#">
                                         Home
                                     </a>
-                                </li>
+                                </li> 
                             </ul>
                         </nav>
                         <p class="copyright pull-right">
@@ -191,5 +170,6 @@
 
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="resource/assets/js/demo.js"></script>
+    <script src="resource/assets/js/sort.js" type="text/javascript"></script>
 
 </html>

@@ -200,6 +200,12 @@ public class addProductsServlet extends HttpServlet {
                     productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
                     products = new Products();
                     String productID2 = productsFacade.newProductID();
+                    StringBuilder image = new StringBuilder();
+                    image.append(request.getParameter("txtImageMain")).append(",");
+                    image.append(request.getParameter("txtSubImage1")).append(",");
+                    image.append(request.getParameter("txtSubImage2")).append(",");
+                    image.append(request.getParameter("txtSubImage3")).append(",");
+                    image.append(request.getParameter("txtSubImage4"));
                     if (productID2 != null) {
                         products.setProductId(productID2);
                     }
@@ -210,7 +216,7 @@ public class addProductsServlet extends HttpServlet {
                     products.setProductDesc(request.getParameter("txtDescription"));
                     products.setProductSummary(request.getParameter("txtSummary"));
                     products.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
-                    products.setProductImage(request.getParameter("txtImage"));
+                    products.setProductImage(image.toString());
                     products.setProductUnit(request.getParameter("txtUnit"));
                     products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
                     products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));

@@ -30,7 +30,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -50,8 +51,6 @@ import models.SellerOrder;
 import models.SellerReportModel;
 import models.TopProductStaticModel;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 /**
  *
@@ -526,11 +525,21 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("order", paging);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
-
+                    
+                case "sellerShowReport": 
+                    request.getRequestDispatcher("seller/report.jsp").forward(request, response);
+                    break;
                 case "sellerProductDetail":
                     request.setAttribute("listBrand", listBrands);
                     request.setAttribute("listType", productTypesFacade.showAll());
                     request.setAttribute("productDetail", productsFacade.find(request.getParameter("productId")));
+                    String image = productsFacade.find(request.getParameter("productId")).getProductImage();
+                    String[] splitImagePath = image.split(",");
+                    request.setAttribute("txtImage", splitImagePath[0]);
+                    request.setAttribute("txtSubImage1", splitImagePath[1]);
+                    request.setAttribute("txtSubImage2", splitImagePath[2]);
+                    request.setAttribute("txtSubImage3", splitImagePath[3]);
+                    request.setAttribute("txtSubImage4", splitImagePath[4]);
                     request.getRequestDispatcher("seller/editProduct.jsp").forward(request, response);
                     break;
 
@@ -569,8 +578,14 @@ public class viewServlet extends HttpServlet {
                     int limitOrder = Integer.parseInt(limit);
                     switch (reportType) {
                         case "topProductReport.jrxml":
-                            listProduct = productsFacade.getTopProduct();
+                            if (!user.getUserId().equals("admin")) {
+                                listProduct = productsFacade.getTopProduct(user.getUserId());
+                            } else {
+                                listProduct = productsFacade.getTopProduct();
+                            }
+
                             List<TopProductStaticModel> listStatic = new ArrayList<>();
+
                             for (Products p : listProduct) {
                                 TopProductStaticModel model = new TopProductStaticModel();
                                 model.setId(p.getProductId());
@@ -587,6 +602,12 @@ public class viewServlet extends HttpServlet {
                                 model.setSeller(p.getUserId().getFullname());
                                 listStatic.add(model);
                             }
+                            Collections.sort(listStatic, new Comparator<TopProductStaticModel>() {
+                                @Override
+                                public int compare(TopProductStaticModel o1, TopProductStaticModel o2) {
+                                    return Integer.valueOf(o2.getSold()).compareTo(o1.getSold());
+                                }
+                            });
                             request.setAttribute("model", "topProductReport.jrxml");
                             if (limitOrder > listStatic.size()) {
                                 limitOrder = listStatic.size();
@@ -615,6 +636,12 @@ public class viewServlet extends HttpServlet {
                                 sReport.setNumberproducts(s.getUsers().getProductsCollection().size());
                                 listSellerReport.add(sReport);
                             }
+                            Collections.sort(listSellerReport, new Comparator<SellerReportModel>() {
+                                @Override
+                                public int compare(SellerReportModel o1, SellerReportModel o2) {
+                                    return Integer.valueOf(o2.getNumberorders()).compareTo(o1.getNumberorders());
+                                }
+                            });
                             
                             request.setAttribute("model", "sellerReport.jrxml");
                             if (limitOrder > listSellerReport.size()) {
@@ -633,6 +660,12 @@ public class viewServlet extends HttpServlet {
                                 cReport.setPhone(customerC.getUsers().getPhone());
                                 listCustomerReport.add(cReport);
                             }
+                            Collections.sort(listCustomerReport, new Comparator<CustomerReportModel>() {
+                                @Override
+                                public int compare(CustomerReportModel o1, CustomerReportModel o2) {
+                                    return Integer.valueOf(o2.getNumberorders()).compareTo(o1.getNumberorders());
+                                }
+                            });
                             request.setAttribute("model", "customerReport.jrxml");
                             if (limitOrder > listCustomerReport.size()) {
                                 limitOrder = listCustomerReport.size();
@@ -656,6 +689,12 @@ public class viewServlet extends HttpServlet {
                                 oReport.setStatus(o.getOrderStatus());
                                 listOrderReportModels.add(oReport);
                             }
+                            Collections.sort(listOrderReportModels, new Comparator<OrderReportModel>() {
+                                @Override
+                                public int compare(OrderReportModel o1, OrderReportModel o2) {
+                                    return Double.valueOf(o2.getTotalprice()).compareTo(o1.getTotalprice());
+                                }
+                            });
                             request.setAttribute("model", "orderReport.jrxml");
                             if (limitOrder > listOrderReportModels.size()) {
                                 limitOrder = listOrderReportModels.size();

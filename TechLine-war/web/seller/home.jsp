@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Home Page</title>
+        <title>Seller Home Page</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -118,6 +118,12 @@
                                 <p>List Order </p>
                             </a>
                         </li>
+                        <li>
+                        <a href="viewServlet?action=sellerShowReport">
+                            <i class="material-icons">library_books</i>
+                            <p>Report</p>
+                        </a>
+                    </li>
                     </ul>
                 </div>
             </div>
