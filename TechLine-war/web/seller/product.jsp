@@ -42,10 +42,9 @@
                     datatype:'text',
                     success: function(response){
                        
-                       // alert(datas);
                         var htmlText = '';
                         data = JSON.parse(response);
-                        //$('#historyModal').remove();
+                        
                         for(i=0; i<data.length; i++){
                             htmlText += '<tr>';
                             htmlText += '<td>'+data[i].productId+'</td>';
@@ -58,7 +57,6 @@
                         }
                        
                         $('#historyModal').append(htmlText);
-                        
                     }
                 });
                 
@@ -66,6 +64,9 @@
                 setTimeout(function() {
                     $('#EditHistory').modal('show');
                 }, 230);
+            }
+            function closeModal(){
+                $('#historyModal').empty();
             }
         </script>
     
@@ -121,7 +122,7 @@
                 <div class="modal-dialog login animated">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeModal()">&times;</button>
                             <h4 class="modal-title">Product History</h4>
                         </div>
                         <div class="modal-body">  
