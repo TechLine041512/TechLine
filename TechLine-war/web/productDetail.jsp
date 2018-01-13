@@ -233,7 +233,7 @@
                             <div class="span5">
                                 <form class="form-inline" action="addOrderServlet" method="POST">                                    
                                     <label>Qty:</label>
-                                    <input type="number" value="1" class="span1" name="quantity">
+                                    <input type="number" value="1" class="span1" name="quantity" min="1" max="20">
                                     <input type="hidden" name="idProduct" value="${product.productId}"/>
                                     <button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add to cart</button>
                                 </form>
