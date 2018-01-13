@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Product Type</title>
+        <title>Report</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -129,9 +129,6 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" href="RedirectServlet?action=addProductType">Add</a>                        
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card card-plain">

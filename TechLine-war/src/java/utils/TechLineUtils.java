@@ -185,4 +185,19 @@ public class TechLineUtils {
         return returnString.toString();
     }
     
+    public String getIgnoreProducts(List<Products> listIgnore) {
+        StringBuilder sb = new StringBuilder();
+        String ignoreIds="";
+        for (Products p : listIgnore) {
+            sb.append("'");
+            sb.append(p.getProductId());
+            sb.append("',");
+        }
+        ignoreIds = sb.toString();
+        if (!ignoreIds.isEmpty()) {
+            return ignoreIds.substring(0, ignoreIds.length() -1 );
+        }
+        return ignoreIds;
+    }
+    
 }
