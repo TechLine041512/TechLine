@@ -6,6 +6,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.Brands;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
@@ -20,6 +21,8 @@ import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
 import entities.ProductsCommentFacadeLocal;
+import entities.ProductsEditHistory;
+import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsFacadeLocal;
 import entities.Seller;
 import entities.SellerFacadeLocal;
@@ -27,6 +30,7 @@ import entities.Users;
 import entities.UsersFacadeLocal;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +47,7 @@ import javax.servlet.http.HttpSession;
 import models.ChartModel;
 import models.CustomerReportModel;
 import models.OrderReportModel;
+import models.ProductHistory;
 import models.ProductInCart;
 import models.TopProductModel;
 import utils.TechLineUtils;
@@ -78,6 +83,8 @@ public class viewServlet extends HttpServlet {
     private SellerFacadeLocal sellerFacadeLocal;
     @EJB
     private BrandsFacadeLocal brandsFacade;
+    @EJB
+    private ProductsEditHistoryFacadeLocal productsEditHistory;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -102,6 +109,7 @@ public class viewServlet extends HttpServlet {
             Products product;
             String idProduct;
             String typeId;
+            Gson gson;
             switch (action) {
 
                 case "cateDetail":
@@ -110,7 +118,7 @@ public class viewServlet extends HttpServlet {
                     for (ProductTypes p : listProductTypes) {
                         listProduct.addAll(p.getProductsCollection());
                     }
-                    if ( !listProduct.isEmpty() ) {
+                    if (!listProduct.isEmpty()) {
                         paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
                         String n = request.getParameter("btn");
                         if (n != null) {
@@ -129,8 +137,7 @@ public class viewServlet extends HttpServlet {
                         }
                         request.setAttribute("pageProduct", paging);
                         request.setAttribute("listProduct", listProduct);
-                    }
-                    else {
+                    } else {
                         request.setAttribute("message", "This category haven't got any products yet");
                     }
                     request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
@@ -146,7 +153,7 @@ public class viewServlet extends HttpServlet {
                         productTypes = productTypesFacade.find(typeId);
                     }
                     listProduct = (List<Products>) productTypes.getProductsCollection();
-                    if ( !listProduct.isEmpty() ) {
+                    if (!listProduct.isEmpty()) {
                         paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
                         String n1 = request.getParameter("btn");
 
@@ -169,11 +176,10 @@ public class viewServlet extends HttpServlet {
                         request.setAttribute("productType", productTypes);
                         request.setAttribute("pageProduct", paging);
                         request.setAttribute("listProduct", listProduct);
-                    }
-                    else {
+                    } else {
                         request.setAttribute("message", "This Product Type haven't got any products yet");
                     }
-                    request.setAttribute("listTopProduct", listTopProducts.subList(0,3));
+                    request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("productTypesID", productTypes.getTypeId()); //Noted
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("typeDetail.jsp").forward(request, response);
@@ -296,7 +302,7 @@ public class viewServlet extends HttpServlet {
                 case "showReport":
                     request.getRequestDispatcher("admin/report.jsp").forward(request, response);
                     break;
-                    
+
                 case "showProductType":
                     listProductTypes = productTypesFacade.showAll();
                     paging = new PageProduct(listProductTypes, 10);
@@ -369,23 +375,23 @@ public class viewServlet extends HttpServlet {
                     Calendar cal = Calendar.getInstance();
                     int year = cal.get(cal.YEAR);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String aftermonth =(year-1) +  "-12-01" ;
+                    String aftermonth = (year - 1) + "-12-01";
                     String beforemonth;
-                    Gson gson = new Gson();
+                    gson = new Gson();
                     int[] datasProduct = new int[12];
                     int[] datasOrder = new int[12];
                     try {
-                        for (int i=1; i < 12 ; i++) {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(year);
-                        sb.append("-");
-                        sb.append(String.format("%02d", i));
-                        sb.append("-01");
-                        beforemonth = sb.toString();
-                        datasProduct[i] = (int) productsFacade.countProductsByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                        datasOrder[i] = (int) orderMasterFacade.countOrderByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                        aftermonth = beforemonth;
-                    }
+                        for (int i = 1; i < 12; i++) {
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(year);
+                            sb.append("-");
+                            sb.append(String.format("%02d", i));
+                            sb.append("-01");
+                            beforemonth = sb.toString();
+                            datasProduct[i] = (int) productsFacade.countProductsByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
+                            datasOrder[i] = (int) orderMasterFacade.countOrderByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
+                            aftermonth = beforemonth;
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -400,7 +406,7 @@ public class viewServlet extends HttpServlet {
                     chart.add(modelProducts);
                     chart.add(modelOrders);
                     String jsonChart = gson.toJson(chart);
-                    System.out.println("Json "+jsonChart.toString());
+                    System.out.println("Json " + jsonChart.toString());
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
                     response.getWriter().write(jsonChart);
@@ -426,6 +432,18 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeSeller":
+                    String approvalDate = usersFacade.find(user.getUserId()).getSeller().getApprovedDate();
+                    StringBuilder reFormatDate;
+                    if (approvalDate.contains("/")) {
+                        String[] splitDate = approvalDate.split("/");
+                        reFormatDate = new StringBuilder();
+                        reFormatDate.append(splitDate[2]).append("-");
+                        reFormatDate.append(splitDate[1]).append("-");
+                        reFormatDate.append(splitDate[0]);
+                        request.setAttribute("approvalDate", reFormatDate.toString());
+                    } else {
+                        request.setAttribute("approvalDate", approvalDate);
+                    }
                     request.setAttribute("user", usersFacade.find(user.getUserId()));
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     break;
@@ -455,7 +473,7 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listYear", listYear);
                     request.setAttribute("customer", c);
                     request.setAttribute("listCategories", listCategories);
-                    request.setAttribute("listBrands", listBrands );
+                    request.setAttribute("listBrands", listBrands);
                     request.getRequestDispatcher("customer.jsp").forward(request, response);
                     break;
                 case "OrderHistory":
@@ -525,8 +543,8 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("order", paging);
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
-                    
-                case "sellerShowReport": 
+
+                case "sellerShowReport":
                     request.getRequestDispatcher("seller/report.jsp").forward(request, response);
                     break;
                 case "sellerProductDetail":
@@ -616,15 +634,15 @@ public class viewServlet extends HttpServlet {
                             break;
                         case "sellerReport.jrxml":
                             List<SellerReportModel> listSellerReport = new ArrayList<>();
-                            
+
                             for (Seller s : sellerFacadeLocal.showAll()) {
                                 List<OrderDetails> listDetails = new ArrayList<>();
                                 SellerReportModel sReport = new SellerReportModel();
                                 sReport.setId(s.getUserId());
                                 sReport.setName(s.getUsers().getFullname());
                                 sReport.setStorename(s.getStoreName());
-                                
-                                for ( Products p : s.getUsers().getProductsCollection() ) {
+
+                                for (Products p : s.getUsers().getProductsCollection()) {
                                     for (OrderDetails o : p.getOrderDetailsCollection()) {
                                         if (listDetails.contains(o)) {
                                             continue;
@@ -642,7 +660,7 @@ public class viewServlet extends HttpServlet {
                                     return Integer.valueOf(o2.getNumberorders()).compareTo(o1.getNumberorders());
                                 }
                             });
-                            
+
                             request.setAttribute("model", "sellerReport.jrxml");
                             if (limitOrder > listSellerReport.size()) {
                                 limitOrder = listSellerReport.size();
@@ -651,7 +669,7 @@ public class viewServlet extends HttpServlet {
                             break;
                         case "customerReport.jrxml":
                             List<CustomerReportModel> listCustomerReport = new ArrayList<>();
-                            for ( Customers customerC : customersFacade.showAll() ) {
+                            for (Customers customerC : customersFacade.showAll()) {
                                 CustomerReportModel cReport = new CustomerReportModel();
                                 cReport.setId(customerC.getUsers().getUserId());
                                 cReport.setName(customerC.getUsers().getFullname());
@@ -674,7 +692,7 @@ public class viewServlet extends HttpServlet {
                             break;
                         case "orderReport.jrxml":
                             List<OrderReportModel> listOrderReportModels = new ArrayList<>();
-                            for ( OrderMaster o : orderMasterFacade.findAll() ) {
+                            for (OrderMaster o : orderMasterFacade.findAll()) {
                                 StringBuilder sb = new StringBuilder();
                                 OrderReportModel oReport = new OrderReportModel();
                                 oReport.setId(o.getOrderMId());
@@ -683,7 +701,7 @@ public class viewServlet extends HttpServlet {
                                     sb.append(oDetails.getProducts().getProductId());
                                     sb.append(" | ");
                                 }
-                                
+
                                 oReport.setProducts(sb.toString());
                                 oReport.setTotalprice(o.getOrderTotalPrice());
                                 oReport.setStatus(o.getOrderStatus());
@@ -704,18 +722,38 @@ public class viewServlet extends HttpServlet {
                         default:
                             break;
                     }
-                    
-                    
+
                     request.setAttribute("action", "report 2");
                     request.getRequestDispatcher("report").forward(request, response);
                     break;
-                
+                case "sellerGetProductHistory":
+                    String productId = request.getParameter("txtProductId");
+                    gson = new GsonBuilder().setDateFormat(DateFormat.FULL, DateFormat.FULL).create();
+                    List<ProductsEditHistory> lsProductHistory = (List<ProductsEditHistory>) productsFacade.find(productId).getProductsEditHistoryCollection();
+                    List<ProductHistory> lsConvert = new ArrayList<>();
+                    for(ProductsEditHistory data: lsProductHistory){
+                        lsConvert.add(new ProductHistory(
+                                String.valueOf(data.getProductsEditHistoryPK().getProductId()),
+                                String.valueOf(data.getProductsEditHistoryPK().getVersion()),
+                                String.valueOf(data.getProductName()), 
+                                String.valueOf(data.getProductPrice()), 
+                                String.valueOf(data.getProductDiscount()), 
+                                String.valueOf(data.getEditTime())));
+                    }
+                    
+                    String json = gson.toJson(lsConvert);
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(json);
+
+                    break;
+
                 default:
                     request.setAttribute("error", "Page not found");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

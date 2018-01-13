@@ -82,13 +82,20 @@ public class editProductsServlet extends HttpServlet {
                 editHistoryE.setEditTime(getTodayE);
                 productsEditHistoryFacade.create(editHistoryE);
 
+                StringBuilder image = new StringBuilder();
+                image.append(request.getParameter("txtImage")).append(",");
+                image.append(request.getParameter("txtSubImage1")).append(",");
+                image.append(request.getParameter("txtSubImage2")).append(",");
+                image.append(request.getParameter("txtSubImage3")).append(",");
+                image.append(request.getParameter("txtSubImage4"));
+
                 product.setTypeId(productTypesFacade.find(request.getParameter("txtProductType")));
                 product.setBrandId(brandsFacade.find(request.getParameter("txtBrand")));
                 product.setProductName(request.getParameter("txtProductName"));
                 product.setProductDesc(request.getParameter("txtDescription"));
                 product.setProductSummary(request.getParameter("txtSummary"));
                 product.setProductPrice(Double.parseDouble(request.getParameter("txtPrice")));
-                product.setProductImage(request.getParameter("txtImage"));
+                product.setProductImage(image.toString());
                 product.setProductUnit(request.getParameter("txtUnit"));
                 product.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
                 String weightE = request.getParameter("txtWeight");

@@ -136,7 +136,7 @@
                                         <input id="Regispassword" class="input-xlarge" type="password" placeholder="Password" name="txtPassword" pattern=".{5,20}" required title="Password contains 5 to 20 characters"><br/>
                                         <input id="Regispassword_confirmation" class="input-xlarge" type="password" placeholder="Repeat Password" name="password_confirmation" pattern=".{5,20}" required title="Repeat password contains 5 to 20 characters" onBlur="checkPass()"><br/>
                                         <input id="Regispassword2" class="input-xlarge" type="email" placeholder="Email" name="txtEmail" required title="Email must be in the correct format" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><br/>
-                                        <input id="Regispassword3" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" required="true"><br/>
+                                        <input id="Regispassword3" class="input-xlarge" type="text" placeholder="Full name" name="txtFullname" pattern=".{5,30}" required="true"><br/>
                                         <input id="Regispassword4" class="input-xlarge"  pattern='\d{9,15}' type="tel" placeholder="Phone" name="txtPhone" required title="Phone contains 9 to 15 digits"><br/>
                                         <input type="radio" name="role" value="customer" checked> Customer 
                                         <input type="radio" name="role" value="seller" > Seller <br/>

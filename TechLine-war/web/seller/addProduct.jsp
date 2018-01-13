@@ -95,7 +95,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Name</label>
-                                                        <input type="text" class="form-control" name="txtProductName" name="txtName" pattern=".{5,100}" required="required" />
+                                                        <input type="text" class="form-control" name="txtProductName" name="txtName" pattern=".{1,500}" required="required" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,7 +125,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Summary</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" pattern=".{5,300}" /></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtSummary" maxlength="1000" /></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,7 +133,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label>Product Description</label>
-                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" pattern=".{5,5000}" /></textarea>
+                                                        <textarea rows="10" cols="80" class="form-control" name="txtDescription" maxlength="3500"  /></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Product Price</label>
-                                                        <input type="number" class="form-control" name="txtPrice" pattern="[0-9.,]{1,5}" required="required" />
+                                                        <input type="number" class="form-control" name="txtPrice"  min="0.01" max="10000" step="0.01"  required="required" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -181,19 +181,22 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Discount</label>
-                                                        <input type="number" class="form-control" name="txtDiscount" pattern="[0-9.,]{1,5}" required="required" />
+                                                        <input type="number" class="form-control" name="txtDiscount" min="0" max="100" required="required" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Unit</label>
-                                                        <input type="text" class="form-control" name="txtUnit" pattern=".{1,10}" required="required" />
+                                                        <select class="form-control" name="txtUnit">
+                                                            <option value="item">Item</option>
+                                                            <option value="set">Set</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Quantity</label>
-                                                        <input type="number" class="form-control" name="txtQuantity" pattern="[1-9]" required="required" />
+                                                        <input type="number" class="form-control" name="txtQuantity" min="0" max="100" required="required" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,30 +204,30 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Weight</label>
-                                                        <input type="text" class="form-control" name="txtWeight" pattern="[0-9.,]{1,10}" required="required" />
+                                                        <input type="text" class="form-control" name="txtWeight" min="0.01" max="500" step="0.01" required="required" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Width</label>
-                                                        <input type="text" class="form-control" name="txtWidth" pattern="[0-9.,]{1,10}" required="required" />
+                                                        <input type="text" class="form-control" name="txtWidth" min="0.01" max="1000" step="0.01" required="required" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Height</label>
-                                                        <input type="text" class="form-control" name="txtHeight" pattern="[0-9.,]{1,10}" required="required" />
+                                                        <input type="text" class="form-control" name="txtHeight" min="0.01" max="1000" step="0.01" required="required" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Length</label>
-                                                        <input type="text" class="form-control" name="txtLength" pattern="[0-9.,]{1,10}" required="required" />
+                                                        <input type="text" class="form-control" name="txtLength" min="0.01" max="1000" step="0.01" required="required" />
                                                     </div>
                                                 </div>
                                             </div>
                                                     <button type="submit" class="btn btn-primary" name="action" value="sellerAddProduct">Save</button>
-                                                    <button type="submit" class="btn btn-primary" name="action" value="sellerCancelProduct">Cancel</button>
+                                                    <button type="button" class="btn btn-primary" name="action" value="sellerCancelProduct">Cancel</button>
                                             <div class="clearfix"></div>
                                         </form>
                                     </div>
