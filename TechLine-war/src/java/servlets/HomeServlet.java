@@ -37,13 +37,21 @@ public class HomeServlet extends HttpServlet {
         buildProductRequest("ListProductByDiscount", request, productsFacade.getListProductByDiscount());
         buildProductRequest("ListProductBySeller", request, productsFacade.getListProductSeller());
         List<Categories> listCategories = categoriesFacade.showActiveCategories();
-        if (listCategories != null) {
+        if (listCategories.isEmpty()) {
+            request.setAttribute("message", "Please run sql query to insert database correctly");
+        }
+        else {
             request.setAttribute("listCategories", listCategories);
+            
         }
         List<Brands> listBrands = brandsFacade.showActiveBrands();
-        if (listBrands != null) {
+        if (listBrands.isEmpty()) {
+            request.setAttribute("message", "Please run sql query to insert database correctly");
+        }
+        else {
             request.setAttribute("listBrands", listBrands.subList(0, 6));
         }
+        
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
@@ -87,9 +95,12 @@ public class HomeServlet extends HttpServlet {
     }// </editor-fold>
 
     private void buildProductRequest(String listName, HttpServletRequest request, List<Products> listProduct) {
-        if (listProduct != null) {
+        if (!listProduct.isEmpty()) {
             request.setAttribute(listName + "1", TechLineUtils.buidProductIndexModel(listProduct.subList(0, 4)));
             request.setAttribute(listName + "2", TechLineUtils.buidProductIndexModel(listProduct.subList(5, 9)));
+        }
+        else {
+            request.setAttribute("message", "Please run sql query to insert database correctly");
         }
     }
 

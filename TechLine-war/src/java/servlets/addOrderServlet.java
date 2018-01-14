@@ -122,12 +122,13 @@ public class addOrderServlet extends HttpServlet {
                     session.setAttribute("user", user);
                     session.setAttribute("cart", cart);
                     if ("search".equals(request.getParameter("fromjsp"))) {
-                        if (StringUtils.isBlank(message))
-                            request.setAttribute("addSuccess", "true");
                         redirect = "search.jsp";
                     }
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
+                    }
+                    else {
+                        request.setAttribute("swalMessage", "Add to Cart successfully");
                     }
                     request.getRequestDispatcher(redirect).forward(request, response);
                     break;

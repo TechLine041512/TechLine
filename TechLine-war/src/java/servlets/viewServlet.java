@@ -31,9 +31,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -42,7 +42,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.ChartModel;
 import models.CustomerReportModel;
 import models.OrderReportModel;
 import models.ProductHistory;
@@ -105,6 +104,10 @@ public class viewServlet extends HttpServlet {
             String idProduct;
             String typeId;
             Gson gson;
+            
+            Date currentDate = new Date();		
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");		
+            String toDay = sdf.format(currentDate);
             switch (action) {
 
                 case "cateDetail":
@@ -267,7 +270,8 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("activeCustomers", activeCustomers);
                     request.setAttribute("doneOrders", doneOrders);
                     request.setAttribute("productsSold", productsSold);
-
+                    request.setAttribute("toDay", toDay);
+                    
                     if (listTopProducts.size() > 5) {
                         listTopProducts = listTopProducts.subList(0, 5);
                     }
@@ -279,44 +283,6 @@ public class viewServlet extends HttpServlet {
                     request.setAttribute("listSeller", listSellers);
                     request.getRequestDispatcher("admin/home.jsp").forward(request, response);
                     response.setContentType("text/html;charset=UTF-8");
-                    Calendar cal = Calendar.getInstance();
-                    int year = cal.get(cal.YEAR);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String aftermonth = (year - 1) + "-12-01";
-                    String beforemonth;
-                    gson = new Gson();
-                    int[] datasProduct = new int[12];
-                    int[] datasOrder = new int[12];
-                    try {
-                        for (int i = 1; i < 12; i++) {
-                            StringBuilder sb = new StringBuilder();
-                            sb.append(year);
-                            sb.append("-");
-                            sb.append(String.format("%02d", i));
-                            sb.append("-01");
-                            beforemonth = sb.toString();
-                            datasProduct[i] = (int) productsFacade.countProductsByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                            datasOrder[i] = (int) orderMasterFacade.countOrderByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                            aftermonth = beforemonth;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    ChartModel modelProducts = new ChartModel();
-                    modelProducts.setName("Products");
-                    modelProducts.setData(datasProduct);
-                    ChartModel modelOrders = new ChartModel();
-                    modelOrders.setName("Orders");
-                    modelOrders.setData(datasOrder);
-                    List<ChartModel> chart = new ArrayList<>();
-                    chart.add(modelProducts);
-                    chart.add(modelOrders);
-                    String jsonChart = gson.toJson(chart);
-                    System.out.println("Json " + jsonChart.toString());
-                    response.setContentType("application/json");
-                    response.setCharacterEncoding("UTF-8");
-                    response.getWriter().write(jsonChart);
                     break;
 
                 case "Login":
