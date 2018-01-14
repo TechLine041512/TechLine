@@ -176,12 +176,15 @@
                                         <ul>
                                             <li><a href="viewServlet?action=showBrand&btn=prev">Prev</a></li>
                                                 <%
-
                                                     int pages = pageBrand.getPages();
+                                                    int currentPage = 1;
+                                                    if (session.getAttribute("currentPage") != null) {
+                                                        currentPage = (Integer)session.getAttribute("currentPage");
+                                                    }
                                                     for (int i = 1; i <= pages; i++) {
                                                 %>
 
-                                            <li><a href="viewServlet?action=showBrand&page=<%=i%>"><%=i%></a></li>
+                                            <li <% if (currentPage == i) { %> class="active" <% } %>><a href="viewServlet?action=showBrand&page=<%=i%>"><%=i%></a></li>
 
                                             <%
                                                 }

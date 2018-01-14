@@ -177,13 +177,15 @@
                                     <div class="pagination pagination-small pagination-centered" style="margin-left:400px;">
                                         <ul>
                                             <li><a href="viewServlet?action=showProductType&btn=prev">Prev</a></li>
-                                                <%
-
+                                            <%
                                                     int pages = pageProductType.getPages();
+                                                    int currentPage = 1;
+                                                    if (session.getAttribute("currentPage") != null) {
+                                                        currentPage = (Integer)session.getAttribute("currentPage");
+                                                    }
                                                     for (int i = 1; i <= pages; i++) {
-                                                %>
-
-                                            <li><a href="viewServlet?action=showProductType&page=<%=i%>"><%=i%></a></li>
+                                            %>
+                                            <li <% if (currentPage == i) { %> class="active" <% } %>><a href="viewServlet?action=showProductType&page=<%=i%>"><%=i%></a></li>
 
                                             <%
                                                 }

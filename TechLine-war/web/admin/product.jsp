@@ -387,7 +387,6 @@
                                         <ul>
                                             <li><a href="viewServlet?action=showProductAdmin&btn=prev">Prev</a></li>
                                                 <%
-
                                                     int pages = pageProduct.getPages();
                                                     int currentPage = 1;
                                                     if (session.getAttribute("currentPage") != null) {
