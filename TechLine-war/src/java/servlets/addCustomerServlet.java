@@ -82,6 +82,7 @@ public class addCustomerServlet extends HttpServlet {
                     } else if (roleRegist.equals("seller")) {
                         Seller sellRegist = new Seller(idRegist);
                         sellRegist.setStoreIcon("http://simpleicon.com/wp-content/uploads/shop-5-64x64.png");
+                        sellRegist.setApprovedDate(" ");
                         sellerFacade.create(sellRegist);
                         request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     }

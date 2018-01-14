@@ -271,14 +271,14 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeSeller":
-                    String approvalDate = usersFacade.find(user.getUserId()).getSeller().getApprovedDate();
+                    String approvalDate = sellerFacadeLocal.getSellerById(user.getUserId()).getApprovedDate();
                     StringBuilder reFormatDate;
                     if (approvalDate.contains("/")) {
                         String[] splitDate = approvalDate.split("/");
                         reFormatDate = new StringBuilder();
                         reFormatDate.append(splitDate[2]).append("-");
-                        reFormatDate.append(splitDate[1]).append("-");
-                        reFormatDate.append(splitDate[0]);
+                        reFormatDate.append(splitDate[0]).append("-");
+                        reFormatDate.append(splitDate[1]);
                         request.setAttribute("approvalDate", reFormatDate.toString());
                     } else {
                         request.setAttribute("approvalDate", approvalDate);

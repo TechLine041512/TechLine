@@ -6,9 +6,9 @@
 package servlets;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
+import entities.Users;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
+import utils.SendEmailUtils;
 
 /**
  *
@@ -42,40 +44,52 @@ public class editOrderServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
             String orderId = request.getParameter("oid");
-            String json = "";
             OrderMaster order = orderMasterFacade.find(orderId);
-            if (action.equals("countDeliveryFee")) {
-                int fee = 0;
-                int distance = (int) Double.parseDouble(request.getParameter("distance"));
-                for (int i = 1; i <= distance; i++) {
-                    if (i < 12) {
-                        fee += 2;
-                    } else {
-                        fee += 3;
-                    }
-                }
-                json = "{\"fee\":\"" + fee + "\"}";
-            } else if (action.equals("changeOrder")) {
-                String status = request.getParameter("status");
-                String newStatus = "";
-                switch (status) {
-                    case "Processing":
-                        newStatus = "Delivery";
-                        break;
-                    case "Delivery":
-                        newStatus = "Done";
-                        break;
-                    default:
-                        break;
-                }
-                order.setOrderStatus(newStatus);
-                orderMasterFacade.edit(order);
-                request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
+            Users user = (Users) request.getSession().getAttribute("user");
+            if (user == null ) {
+                request.setAttribute("message", "Please login again if you are admin");
+                request.getRequestDispatcher("viewServlet?action=showOrder&page=1").forward(request, response);
             }
-
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+            String adminEmail = user.getEmail();
+            String password = request.getParameter("txtPassword");
+            String userEmail = order.getUserId().getEmail();
+            String resultString = "Done";
+            switch(action) {
+                case "changeOrder":
+                    
+                    String status = request.getParameter("status");
+                    String newStatus = "";
+                    
+                    switch (status) {
+                        case "Processing":
+                            newStatus = "Delivery";
+                            resultString = SendEmailUtils.sendMail(adminEmail, password, userEmail, "Your Order Are Being Delivered", buildContent(order.getUserId(),order,"Delivery"));
+                            break;
+                        case "Delivery":
+                            resultString = SendEmailUtils.sendMail(adminEmail, password, userEmail, "Your Order Are Completed", buildContent(order.getUserId(),order,"Done"));
+                            newStatus = "Done";
+                            break;
+                        default:
+                            break;
+                    }
+                    if (!StringUtils.equals(resultString, "Done")) {
+                        request.setAttribute("message", "Send Mail Failed");
+                        request.getRequestDispatcher("viewServlet?action=showOrder&page=1").forward(request, response);
+                        break;
+                    }
+                    order.setOrderStatus(newStatus);
+                    orderMasterFacade.edit(order);
+                    request.getRequestDispatcher("viewServlet?action=showOrder&page=1").forward(request, response);
+                    break;
+                case "cancelOrder":
+                    order.setOrderStatus("Cancel");
+                    orderMasterFacade.edit(order);
+                    SendEmailUtils.sendMail(adminEmail, password, userEmail, "Your Order Are Canceled", buildContent(user,order,"Delivery"));
+                    request.getRequestDispatcher("viewServlet?action=showOrder").forward(request, response);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -106,30 +120,31 @@ public class editOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        int fee = 0;
-        int distance = (int) Double.parseDouble(request.getParameter("distance"));
-        for (int i = 1; i <= distance; i++) {
-            if (i < 12) {
-                fee += 2;
-            } else {
-                fee += 3;
-            }
-        }
-        String json = new Gson().toJson(fee);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-        request.getRequestDispatcher("googleMap.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    private String buildContent(Users user,OrderMaster order, String status) {
+        String content= "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Dear Mr/Mrs/Miss ");
+        sb.append(user.getFullname());
+        sb.append(",\n\n");
+        sb.append("Your Order Number ");
+        sb.append(order.getOrderMId());
+        sb.append(" has ");
+        switch (status) {
+            case "Delivery":
+                sb.append("completed verifying process. Our shippers will contact you around 24 hours");
+                break;
+            case "Done":
+                sb.append("been completed. Hope you enjoyed your ordered");
+                break;
+            case "Cancel":
+                sb.append("been cancled. We're sorry for this inconvience. We have to close your order. Please if you have any feedback, please contact us.");
+                break;
+        }
+        sb.append("\nThank you for using our services.\nTechLine");
+        content = sb.toString();
+        return content;
+    }
 
 }
