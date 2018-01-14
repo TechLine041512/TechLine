@@ -28,7 +28,9 @@
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/jquery.fancybox.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
-
+        <!--add dialog-->
+        <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+        <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
     </head>
     <body>		
         <c:if test="${not empty message}">
@@ -36,6 +38,14 @@
                 window.addEventListener("load", function() {
                     $('#MessageModal').modal('show');
                 })
+            </script>
+        </c:if>
+        <c:if test="${not empty swalMessage}">
+            <script>
+                window.addEventListener("load", function() {
+                    swal("${swalMessage}", "Thank you", "success");
+                });
+                setTimeout(function(){window.history.go(-1);}, 2000);
             </script>
         </c:if>
         <div id="top-bar" class="container">
@@ -352,8 +362,8 @@
                                             <li class="span3">
                                                 <div class="product-box">
                                                     <span class="sale_tag"></span>												
-                                                    <a href="product_detail.html"><img alt="${items.productName}" src="${items.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">${items.productName}</a><br/>
+                                                    <a href="viewServlet?action=productDetail&idProduct=${items.productId}"><img alt="${items.productName}" src="${items.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
+                                                    <a href="viewServlet?action=productDetail&idProduct=${items.productId}" class="title" style="height: 60px;">${items.productName}</a><br/>
                                                     <p class="price">${items.productPrice - (items.productPrice * items.productDiscount / 100)}</p>
                                                 </div>
                                             </li>
@@ -367,8 +377,8 @@
                                                 <li class="span3">
                                                     <div class="product-box">
                                                         <span class="sale_tag"></span>												
-                                                        <a href="product_detail.html"><img alt="${items2.productName}" src="${items2.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
-                                                        <a href="product_detail.html" class="title" style="height: 60px;">${items2.productName}</a><br/>
+                                                        <a href="viewServlet?action=productDetail&idProduct=${items2.productId}"><img alt="${items2.productName}" src="${items2.productImage[0]}" style="width: 200px; height: 200px"></a><br/>
+                                                        <a href="viewServlet?action=productDetail&idProduct=${items2.productId}" class="title" style="height: 60px;">${items2.productName}</a><br/>
                                                         <p class="price">${items2.productPrice - (items2.productPrice * items2.productDiscount / 100)}</p>
                                                     </div>
                                                 </li>

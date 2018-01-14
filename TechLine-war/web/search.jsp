@@ -184,8 +184,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                                </c:if>
-                                            </c:forEach>
+                                            </c:if>
+                                        </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -288,6 +288,22 @@
                                                 document.location.href = "checkout.html";
                                             })
                                         });
-        </script>		
+        </script>
+        <script src="resource/themes/js/common.js"></script>
+        <script src="resource/themes/js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript">
+                                            $(function() {
+                                                $(document).ready(function() {
+                                                    $('.flexslider').flexslider({
+                                                        animation: "fade",
+                                                        slideshowSpeed: 4000,
+                                                        animationSpeed: 600,
+                                                        controlNav: false,
+                                                        directionNav: true,
+                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
+                                                    });
+                                                });
+                                            });
+        </script>
     </body>
 </html>

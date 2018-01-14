@@ -253,8 +253,6 @@ public class addProductsServlet extends HttpServlet {
                     String pid = request.getParameter("pid");
                     String userId = user.getUserId();
                     products = productsFacade.find(pid);
-                    
-                    
                     int count = 1;
                     double ratingPoint;
                     
@@ -292,7 +290,7 @@ public class addProductsServlet extends HttpServlet {
                         products.setProductRating(ratingPoint);
                         productsFacade.edit(products);
                     }
-                    request.setAttribute("message", "Thank you for voting");
+                    request.setAttribute("swalMessage", "Voting Success");
                     request.getRequestDispatcher("viewServlet?action=productDetail&idProduct="+pid).forward(request, response);
                     break;
                 default:
