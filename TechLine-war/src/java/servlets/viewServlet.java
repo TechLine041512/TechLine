@@ -271,7 +271,9 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeSeller":
-                    String approvalDate = sellerFacadeLocal.getSellerById(user.getUserId()).getApprovedDate();
+                    Seller seller = sellerFacadeLocal.getSellerById(user.getUserId());
+                    user = usersFacade.getUserById(user.getUserId());
+                    String approvalDate = seller.getApprovedDate();
                     StringBuilder reFormatDate;
                     if (approvalDate.contains("/")) {
                         String[] splitDate = approvalDate.split("/");
@@ -283,7 +285,16 @@ public class viewServlet extends HttpServlet {
                     } else {
                         request.setAttribute("approvalDate", approvalDate);
                     }
-                    request.setAttribute("user", usersFacade.find(user.getUserId()));
+                    
+                    
+                    request.setAttribute("txtStoreName", seller.getStoreName());
+                    request.setAttribute("txtIdentityCard", seller.getIdentityCard());
+                    request.setAttribute("txtApprovedPlace", seller.getApprovedPlace());
+                    request.setAttribute("txtStoreAddress", seller.getStoreAddress());
+                    request.setAttribute("txtStoreIcon", seller.getStoreIcon());
+                    request.setAttribute("txtStoreSummary", seller.getStoreSummary());
+                    
+                    request.setAttribute("user", user);
                     request.getRequestDispatcher("seller/home.jsp").forward(request, response);
                     break;
 
