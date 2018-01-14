@@ -1,34 +1,204 @@
-﻿use TechLine
+﻿use master 
+go
+
+IF EXISTS(select * from sys.databases where name='TechLine')
+DROP DATABASE TechLine
+
+create database TechLine
+go
+
+use TechLine
+go
+
+--Status 0: FALSE, 1: TRUE
+
+create table Categories
+(
+	categoryId varchar(10) primary key,
+	categoryName nvarchar(100),
+	categoryDesc nvarchar(500),
+	categoryStatus bit,
+	categoryIcon varchar(200)
+)
+go
+
+create table ProductTypes
+(
+	typeId varchar(10) primary key,
+	categoryId varchar(10) foreign key references Categories(categoryId),
+	typeName nvarchar(50) unique,
+	typeDesc nvarchar(300),
+	typeIcon varchar(200),
+	typeStatus bit 
+)
+go
+
+create table Users
+(
+	userId varchar(30) primary key,
+	[password] varchar(20),
+	email varchar(50),
+	fullname nvarchar(100),
+	phone varchar(20),
+	[role] varchar(20), --select box for seller or customer
+	userStatus bit --manage user is banned or not.
+)
+go
+
+create table Customers
+(
+	userId varchar(30) foreign key references Users(userId) primary key,
+	dob varchar(50),
+	gender varchar(10),
+	[address] nvarchar(1000),
+	point int
+)
+go
+
+create table Seller
+(
+	userId varchar(30) foreign key references Users(userId) primary key,
+	storeName nvarchar(1000),
+	identityCard varchar(20), -- CMND -- unseen on Customer
+	approvedDate varchar(50), -- CMND approved date -- unseen on Customer
+	approvedPlace nvarchar(100), -- CMND approved place -- unseen on Customer
+	storeAddress nvarchar(100), -- unseen on Customer
+	storeIcon varchar(200), 
+	storeSummary nvarchar(1000)
+)
+go
+
+create table Brands
+(
+	brandId varchar(10) primary key,
+	brandName nvarchar(100),
+	brandIcon varchar(200),
+	brandStatus bit 
+)
+go
+
+create table Products
+(
+	productId varchar(10) primary key,
+	typeId varchar(10) foreign key references ProductTypes(typeId),
+	userId varchar(30) foreign key references Users(userId),
+	brandId varchar(10) foreign key references Brands(brandId),
+	productName nvarchar(500),
+	productDesc nvarchar(3500),
+	productSummary nvarchar(1000),
+	productPrice float,
+	productUnit nvarchar(50),
+	productWeight	float,
+	productWidth	float,
+	productHeigth	float,
+	productLength	float,
+	productQuantity int,
+	productImage varchar(4000),
+	productDiscount int,
+	productRating float,
+	isApproved bit,
+	datePosted datetime not null default getdate(),
+	votedUsers varchar(4000),
+	productStatus bit
+)
+go
+
+
+
+create table ProductRating 
+(
+	productId varchar(10) foreign key references Products(productId),
+	ratingPoint int,
+	[count] int,
+	primary key (productId, ratingPoint)
+)
+go
+
+create table ProductsEditHistory
+(
+	productId varchar(10) foreign key references Products(productId),
+	[version] int,
+	productName nvarchar(500),
+	productPrice float,
+	productDiscount int,
+	editTime datetime not null default getdate(),
+	primary key([version], productId)
+)
+go
+
+create table ProductsComment
+(
+	commentID varchar(10) primary key,
+	userId varchar(30) foreign key references Users(userId),
+	productId varchar(10) foreign key references Products(productId),
+	commentContent nvarchar(3000),
+	commentStatus bit
+)
+go
+
+create table OrderMaster
+(
+	orderMId	varchar(10) primary key,
+	userId varchar(30) foreign key references Users(userId),
+	orderTotalPrice float,
+	DeliveryPrice float,
+	orderNote	nvarchar(1000),
+	orderStatus	varchar(10), --Processing , Cancelled , Delievery , Done
+	dateOrdered	datetime not null default getdate()
+)
+go
+
+create table OrderDetails
+(
+	orderMId	varchar(10) foreign key references OrderMaster(orderMId),
+	productId varchar(10) foreign key references Products(productId),
+	quantity	int,
+	primary key(orderMId,productId)
+)
+go
+
+create table OrderAddress
+(
+	orderMId	varchar(10) foreign key references OrderMaster(orderMid) primary key,
+	userId varchar(30) foreign key references Users(userId),
+	orderAddressLat float,
+	orderAddressLng	float,
+	orderAddressDetail	nvarchar(1000),
+	orderPhone varchar(20)
+)
+go
+
+use TechLine
 go
 
 -- Users
-insert into Users VALUES('admin','admin','tatyuki@gmail.com',N'Tiến','0909882230','admin',1);
-insert into Users VALUES('raejas','raejas','nth151293@gmail.com',N'Huân','0937752028','admin',1);
-insert into Users VALUES('venky','venky','venky@gmail.com',N'Vương','0909882230','admin',1);
-insert into Users VALUES('uypoko','uypoko','uypoko@gmail.com',N'Uy','0909882230','admin',1);
-insert into Users VALUES('tuyetbich','123456','tuyetbich@mailinator.com',N'Tuyết','0909882231','customer',1);
-insert into Users VALUES('tungchaien','123456','tungchaien@mailinator.com',N'Tùng','0909882232','customer',1);
-insert into Users VALUES('ducchau','123456','ducchau@mailinator.com',N'Đức','0909882233','customer',1);
-insert into Users VALUES('dieunhi','123456','dieunhi@mailinator.com',N'Nhi','0909882234','customer',1);
-insert into Users VALUES('thixuka','123456','thixuka@mailinator.com',N'Thi','0909882235','customer',1);
-insert into Users VALUES('rainyday','123456','rainyday@mailinator.com',N'Danny','0909882236','customer',1);
-insert into Users VALUES('linhnhi','123456','linhnhinhanh@mailinator.com',N'Linh','0909882237','customer',1);
-insert into Users VALUES('tuanka','123456','tuanka@mailinator.com',N'Tuấn','0909882238','customer',1);
-insert into Users VALUES('HungDung','123456','hung@mailinator.com',N'Hùng','0909882239','customer',1);
-insert into Users VALUES('Thanh','123456','thanh@mailinator.com',N'Thành','0909882240','customer',1);
-insert into Users VALUES('Giangnhi','123456','giang@mailinator.com',N'Giang','0909882241','customer',1);
-insert into Users VALUES('dave','123456','david@mailinator.com',N'David','0909882242','customer',1);
-insert into Users VALUES('josh','123456','joshua@mailinator.com',N'Joshua','0909882243','customer',1);
-insert into Users VALUES('quocanh','123abca','quocanh@mailinator.com',N'Quốc Anh','0909882244','seller',1);
-insert into Users VALUES('tienminh','123abca','tienminh@mailinator.com',N'Minh Tiến','0909882245','seller',1);
-insert into Users VALUES('thanhlong','123abca','thanhlong@mailinator.com',N'Long Thành','0909882246','seller',1);
-insert into Users VALUES('lylienkiet','123abca','lylienkiet@mailinator.com',N'Thành Kiệt','0909882247','seller',1);
-insert into Users VALUES('uyenle','123abca','uyenle@mailinator.com',N'Lê Uyên','0909882248','seller',1);
-insert into Users VALUES('andy','123abca','andytruong@mailinator.com',N'Andy','0909882249','seller',1);
-insert into Users VALUES('kenny','123abca','kenny@mailinator.com',N'Kenny','0909882250','seller',1);
-insert into Users VALUES('sonmai','123abca','sonmai@mailinator.com',N'Mai Sơn','0909882251','seller',1);
-insert into Users VALUES('ringu','123abca','ringu@mailinator.com',N'Ring','0909882252','seller',1);
-insert into Users VALUES('taidy','123abca','taidy@mailinator.com',N'Tai','0909882253','seller',1);
+insert into Users VALUES('admin','admin','techline.tatyuky@gmail.com',N'Tiến','0909882230','admin',1);
+insert into Users VALUES('raejas','raejas','techline.raejas@gmail.com',N'Huân','0937752028','admin',1);
+insert into Users VALUES('venky','venky','techline.venky@gmail.com',N'Vương','0909882230','admin',1);
+insert into Users VALUES('uypoko','uypoko','techline.uypoko@gmail.com',N'Uy','0909882230','admin',1);
+insert into Users VALUES('tuyetbich','123456','tuyetbich123@mailinator.com',N'Tuyết','0909882231','customer',1);
+insert into Users VALUES('tungchaien','123456','tungchaien456@mailinator.com',N'Tùng','0909882232','customer',1);
+insert into Users VALUES('ducchau','123456','ducchau778899@mailinator.com',N'Đức','0909882233','customer',1);
+insert into Users VALUES('dieunhi','123456','dieunhi998877@mailinator.com',N'Nhi','0909882234','customer',1);
+insert into Users VALUES('thixuka','123456','thixukaaa1@mailinator.com',N'Thi','0909882235','customer',1);
+insert into Users VALUES('rainyday','123456','rainydayyy1@mailinator.com',N'Danny','0909882236','customer',1);
+insert into Users VALUES('linhnhi','123456','linhnhinhanhhh111@mailinator.com',N'Linh','0909882237','customer',1);
+insert into Users VALUES('tuanka','123456','tuankaa@mailinator.com',N'Tuấn','0909882238','customer',1);
+insert into Users VALUES('HungDung','123456','hungg@mailinator.com',N'Hùng','0909882239','customer',1);
+insert into Users VALUES('Thanh','123456','thanhh@mailinator.com',N'Thành','0909882240','customer',1);
+insert into Users VALUES('Giangnhi','123456','gianng@mailinator.com',N'Giang','0909882241','customer',1);
+insert into Users VALUES('dave','123456','daviddda@mailinator.com',N'David','0909882242','customer',1);
+insert into Users VALUES('josh','123456','joshuaaad@mailinator.com',N'Joshua','0909882243','customer',1);
+insert into Users VALUES('quocanh','123abca','quocanhhnhn@mailinator.com',N'Quốc Anh','0909882244','seller',1);
+insert into Users VALUES('tienminh','123abca','tienminhh@mailinator.com',N'Minh Tiến','0909882245','seller',1);
+insert into Users VALUES('thanhlong','123abca','thanhlongg@mailinator.com',N'Long Thành','0909882246','seller',1);
+insert into Users VALUES('lylienkiet','123abca','lylienkiett@mailinator.com',N'Thành Kiệt','0909882247','seller',1);
+insert into Users VALUES('uyenle','123abca','uyenlee@mailinator.com',N'Lê Uyên','0909882248','seller',1);
+insert into Users VALUES('andy','123abca','andytruongg@mailinator.com',N'Andy','0909882249','seller',1);
+insert into Users VALUES('kenny','123abca','kennyyy@mailinator.com',N'Kenny','0909882250','seller',1);
+insert into Users VALUES('sonmai','123abca','sonmaiii@mailinator.com',N'Mai Sơn','0909882251','seller',1);
+insert into Users VALUES('ringu','123abca','ringuuu@mailinator.com',N'Ring','0909882252','seller',1);
+insert into Users VALUES('taidy','123abca','taidyyy@mailinator.com',N'Tai','0909882253','seller',1);
 
 
 -- Customers
