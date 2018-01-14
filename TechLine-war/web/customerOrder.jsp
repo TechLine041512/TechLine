@@ -222,7 +222,6 @@
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
                     <div id="order-list-customer-info">
-                        <h4>Name: ${user.fullname}</h4>
                     </div>               
                     <div class="clearfix"></div>
 
@@ -231,9 +230,10 @@
                         <p>All Order <input type="button" id="view-all-order" value="All Order" onclick="searchOMbyDate(''); $(this).parent().siblings().children().val('');"></p>																
                     </div>
                     <div class="clearfix"></div>
+                    <hr/>
                     <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
                         <table class="orderlist-table" id="myTable">
-                            <caption>Infomation Order</caption> 
+                            <caption>Infomation Order Of <b style="color: #ff6666">${user.fullname}</b></caption> 
                             <thead>
                             <tr>
                                 <th onclick="sortTable(0)">ID</th>

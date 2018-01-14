@@ -188,7 +188,6 @@
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
                     <div id="order-list-customer-info">
-                        Name: <h4 style="color: #eb4800;">${OrderMaster.userId.fullname}</h4><br/>
                         OderID: <h4 style="color: #eb4800;">${OrderMaster.orderMId}</h4>
                     </div>               
                     <div class="clearfix"></div>
@@ -197,9 +196,10 @@
                         <p><a href="viewServlet?action=OrderHistory"><input type="button" id="view-all-order" value="Back To Order"></a></p>																
                     </div>
                     <div class="clearfix"></div>
+                    <hr/>
                     <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
                         <table class="orderlist-table">
-                            <caption>Infomation Order</caption> 
+                            <caption>Infomation Order Of <b style="color: #ff6666">${OrderMaster.userId.fullname}</b></caption> 
                             <thead>
                             <tr>
                                 <th>Product ID</th>
