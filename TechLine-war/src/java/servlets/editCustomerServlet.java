@@ -53,8 +53,16 @@ public class editCustomerServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
             session.setAttribute("user", user);
+            if (user == null) {
+                request.setAttribute("message", "Please log in");
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return;
+            }
+            String roleUser = user.getRole();
             switch (action) {
                 case "editProfileCustomer":
+                    if (wrongRole(roleUser, "customer", request, response))
+                        return;
                     user.setFullname(request.getParameter("txtName"));
                     user.setEmail(request.getParameter("txtEmail"));
                     user.setPhone(request.getParameter("txtPhone"));
@@ -84,6 +92,8 @@ public class editCustomerServlet extends HttpServlet {
                     request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
                     break;
                 case "cusChangePassword":
+                    if (wrongRole(roleUser, "customer", request, response))
+                        return;
                     String inputPass = request.getParameter("txtOldPassword");
                     if (!inputPass.equals(user.getPassword())) {
                         request.setAttribute("message", "Incorrect password!");
@@ -95,6 +105,8 @@ public class editCustomerServlet extends HttpServlet {
                     request.getRequestDispatcher("viewServlet?action=homeCustomer").forward(request, response);
                     break;
                 case "blockCustomer":
+                    if (wrongRole(roleUser, "admin", request, response))
+                        return;
                     String cusIdBlock = request.getParameter("cusId");
                     Users uBlock = usersFacade.find(cusIdBlock);
                     List<ProductsComment> listCm = (List<ProductsComment>) uBlock.getProductsCommentCollection();
@@ -176,4 +188,15 @@ public class editCustomerServlet extends HttpServlet {
         request.setAttribute("listYear", listYear);
     }
 
+    private boolean wrongRole(String role, String check, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (!role.equals(check)) {
+                request.setAttribute("message", "Please log in as " + check);
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return true;
+            }
+        } catch (ServletException | IOException e) {
+        }
+        return false;
+    }
 }

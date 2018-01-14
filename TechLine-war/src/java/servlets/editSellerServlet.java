@@ -53,8 +53,16 @@ public class editSellerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            request.setAttribute("message", "Please log in");
+            request.getRequestDispatcher("HomeServlet").forward(request, response);
+            return;
+        }
+        String roleUser = user.getRole();
         switch (action) {
             case "updateSellerProfile":
+                if (wrongRole(roleUser, "seller", request, response))
+                    return;
                 Seller seller = sellerFacadeLocal.find(user.getUserId());
                 seller.setStoreName(request.getParameter("txtStoreName"));
                 seller.setIdentityCard(request.getParameter("txtIdentityCard"));
@@ -74,6 +82,8 @@ public class editSellerServlet extends HttpServlet {
 
                 break;
             case "blockSeller":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String sellerIdBlock = request.getParameter("sellerId");
                 Users uS = usersFacadeLocal.find(sellerIdBlock);
                 //Block seller's products
@@ -89,8 +99,9 @@ public class editSellerServlet extends HttpServlet {
                         pc.setCommentStatus(unblock);
                         productsCommentFacade.edit(pc);
                     }
-                    if (!unblock)
+                    if (!unblock) {
                         proB.setProductStatus(unblock);
+                    }
                     productsFacade.edit(proB);
                 }
                 //Block seller
@@ -100,6 +111,8 @@ public class editSellerServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showSeller").forward(request, response);
                 break;
             case "sellerChangePassword":
+                if (wrongRole(roleUser, "seller", request, response))
+                    return;
                 String newPassword = request.getParameter("txtNewPass");
                 user.setPassword(newPassword);
                 usersFacadeLocal.edit(user);
@@ -111,6 +124,18 @@ public class editSellerServlet extends HttpServlet {
                 break;
         }
 
+    }
+    
+    private boolean wrongRole(String role, String check, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (!role.equals(check)) {
+                request.setAttribute("message", "Please log in as " + check);
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return true;
+            }
+        } catch (ServletException | IOException e) {
+        }
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

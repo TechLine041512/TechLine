@@ -33,6 +33,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 
 public class addProductsServlet extends HttpServlet {
+
     @EJB
     private ProductRatingFacadeLocal productRatingFacade;
     @EJB
@@ -47,7 +48,6 @@ public class addProductsServlet extends HttpServlet {
     private BrandsFacadeLocal brandsFacade;
     @EJB
     private ProductsFacadeLocal productsFacade;
-    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,8 +60,16 @@ public class addProductsServlet extends HttpServlet {
             ProductTypes productTypes = null;
             Products products = null;
             Users user = (Users) request.getSession().getAttribute("user");
+            if (user == null) {
+                request.setAttribute("message", "Please log in");
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return;
+            }
+            String roleUser = user.getRole();
             switch (action) {
                 case "addProduct":
+                    if (wrongRole(roleUser, "admin", request, response))
+                        return;
                     today = new Date();
                     brands = brandsFacade.find(request.getParameter("txtBrand"));
                     productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
@@ -79,33 +87,39 @@ public class addProductsServlet extends HttpServlet {
                     //Append strings to save to database
                     String imageChain = request.getParameter("txtImage");
                     for (int i = 1; i < 5; i++) {
-                        if (!request.getParameter("txtImage" + i).equals(""))
+                        if (!request.getParameter("txtImage" + i).equals("")) {
                             imageChain += "," + request.getParameter("txtImage" + i);
+                        }
                     }
                     products.setProductImage(imageChain);
                     products.setProductUnit(request.getParameter("txtUnit"));
                     products.setProductQuantity(Integer.parseInt(request.getParameter("txtQuantity")));
-                    if (!request.getParameter("txtWeight").equals(""))
+                    if (!request.getParameter("txtWeight").equals("")) {
                         products.setProductWeight(Double.parseDouble(request.getParameter("txtWeight")));
-                    else
+                    } else {
                         products.setProductWeight(0.0);
-                    if (!request.getParameter("txtWidth").equals(""))
+                    }
+                    if (!request.getParameter("txtWidth").equals("")) {
                         products.setProductWidth(Double.parseDouble(request.getParameter("txtWidth")));
-                    else
+                    } else {
                         products.setProductWidth(0.0);
-                    if (!request.getParameter("txtHeight").equals(""))
+                    }
+                    if (!request.getParameter("txtHeight").equals("")) {
                         products.setProductHeigth(Double.parseDouble(request.getParameter("txtHeight")));
-                    else
+                    } else {
                         products.setProductHeigth(0.0);
-                    if (!request.getParameter("txtLength").equals(""))
+                    }
+                    if (!request.getParameter("txtLength").equals("")) {
                         products.setProductLength(Double.parseDouble(request.getParameter("txtLength")));
-                    else
+                    } else {
                         products.setProductLength(0.0);
+                    }
                     String discountAdd = request.getParameter("txtDiscount");
-                    if (!discountAdd.equals(""))
+                    if (!discountAdd.equals("")) {
                         products.setProductDiscount(Integer.parseInt(discountAdd));
-                    else
+                    } else {
                         products.setProductDiscount(0);
+                    }
                     products.setProductRating(0.0);
                     products.setIsApproved(true);
                     products.setDatePosted(today);
@@ -124,8 +138,11 @@ public class addProductsServlet extends HttpServlet {
                 case "cancelProduct":
                     request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                     break;
-                    
+
                 case "addCategory":
+                    if (wrongRole(roleUser, "admin", request, response)) {
+                        return;
+                    }
                     Categories categories = new Categories();
                     String catId = categoriesFacade.newId();
                     if (catId != null) {
@@ -142,8 +159,11 @@ public class addProductsServlet extends HttpServlet {
                 case "cancelCategories":
                     request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                     break;
-                    
+
                 case "addProductType":
+                    if (wrongRole(roleUser, "admin", request, response)) {
+                        return;
+                    }
                     Categories categories2 = categoriesFacade.find(request.getParameter("txtCategory"));
                     ProductTypes productTypes2 = new ProductTypes();
                     String typeId = productTypesFacade.newId();
@@ -161,8 +181,11 @@ public class addProductsServlet extends HttpServlet {
                     request.setAttribute("message", "Add type successfully");
                     request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                     break;
-                    
+
                 case "addBrand":
+                    if (wrongRole(roleUser, "admin", request, response)) {
+                        return;
+                    }
                     Brands brand = new Brands();
                     String brandId = brandsFacade.newBrandId();
                     if (brandId != null) {
@@ -198,10 +221,13 @@ public class addProductsServlet extends HttpServlet {
                     usersFacade.edit(users);
                     products.getProductsCommentCollection().add(productsComment);
                     productsFacade.edit(products);
-                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct="+id).forward(request, response);
+                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct=" + id).forward(request, response);
                     break;
 
                 case "sellerAddProduct":
+                    if (wrongRole(roleUser, "seller", request, response)) {
+                        return;
+                    }
                     today = new Date();
                     brands = brandsFacade.find(request.getParameter("txtBrand"));
                     productTypes = productTypesFacade.find(request.getParameter("txtProductType"));
@@ -241,8 +267,8 @@ public class addProductsServlet extends HttpServlet {
                     break;
                 case "sellerCancelProduct":
                     request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
-                    break;    
-                    
+                    break;
+
                 case "rating":
                     if (user == null || user.getCustomers() == null) {
                         request.setAttribute("message", "Please login as customer to vote.");
@@ -255,15 +281,14 @@ public class addProductsServlet extends HttpServlet {
                     products = productsFacade.find(pid);
                     int count = 1;
                     double ratingPoint;
-                    
-                    if (products != null){
+
+                    if (products != null) {
                         boolean alreadyVoted = checkAlreadyVotedUser(userId, products.getVotedUsers());
                         if (alreadyVoted) {
                             request.setAttribute("message", "You have voted for this product");
                             request.getRequestDispatcher("HomeServlet").forward(request, response);
                             break;
-                        }
-                        else {
+                        } else {
                             StringBuilder sb = new StringBuilder();
                             sb.append(products.getVotedUsers());
                             sb.append(",");
@@ -272,26 +297,25 @@ public class addProductsServlet extends HttpServlet {
                         }
                         ProductRatingPK pRatingPK = new ProductRatingPK(pid, Integer.parseInt(point));
                         ProductRating pRating = productRatingFacade.find(pRatingPK);
-                        if ( pRating != null) {
+                        if (pRating != null) {
                             count += pRating.getCount();
                             pRating.setCount(count);
                             productRatingFacade.edit(pRating);
-                        }
-                        else {
+                        } else {
                             pRating = new ProductRating();
                             pRating.setProductRatingPK(pRatingPK);
                             pRating.setCount(count);
                             pRating.setProducts(products);
                             productRatingFacade.create(pRating);
                         }
-                        
+
                         ratingPoint = calProductRating(productRatingFacade.findRatingByProductId(pid));
-                        System.out.println("Rating pount "+ratingPoint);
+                        System.out.println("Rating pount " + ratingPoint);
                         products.setProductRating(ratingPoint);
                         productsFacade.edit(products);
                     }
                     request.setAttribute("swalMessage", "Voting Success");
-                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct="+pid).forward(request, response);
+                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct=" + pid).forward(request, response);
                     break;
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -342,7 +366,7 @@ public class addProductsServlet extends HttpServlet {
     private double calProductRating(List<ProductRating> listRatings) {
         double ratingPoint = 0.0;
         int totalVote = 0;
-        for (ProductRating pr: listRatings) {
+        for (ProductRating pr : listRatings) {
             ratingPoint += pr.getProductRatingPK().getRatingPoint() * pr.getCount();
             totalVote += pr.getCount();
         }
@@ -353,7 +377,7 @@ public class addProductsServlet extends HttpServlet {
     private boolean checkAlreadyVotedUser(String userId, String votedUsers) {
         if (StringUtils.isNotBlank(votedUsers)) {
             String[] listUsers = votedUsers.split(",");
-            for (String s: listUsers) {
+            for (String s : listUsers) {
                 if (StringUtils.equals(userId, s)) {
                     return true;
                 }
@@ -362,4 +386,15 @@ public class addProductsServlet extends HttpServlet {
         return false;
     }
 
+    private boolean wrongRole(String role, String check, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (!role.equals(check)) {
+                request.setAttribute("message", "Please log in as " + check);
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return true;
+            }
+        } catch (ServletException | IOException e) {
+        }
+        return false;
+    }
 }
