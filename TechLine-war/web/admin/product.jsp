@@ -247,7 +247,7 @@
                                 <div class="content">
                                     <div class="error"></div>
                                     <div class="form loginBox">
-                                        <table class="table table-hover" id="myTable">
+                                        <table class="table table-hover">
                                             <thead class="text-primary">                     
                                             <th>Version</th>
                                             <th>Product ID</th>
@@ -437,9 +437,6 @@
 
     <!--  Notifications Plugin    -->
     <script src="resource/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Material Dashboard javascript methods -->
     <script src="resource/assets/js/material-dashboard.js"></script>
