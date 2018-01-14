@@ -87,6 +87,7 @@ public class viewServlet extends HttpServlet {
         try {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
+            String referer = request.getHeader("referer");
             Users user = (Users) request.getSession().getAttribute("user");
             session.setAttribute("user", user);
 
@@ -206,108 +207,33 @@ public class viewServlet extends HttpServlet {
                     String sellerID = request.getParameter("sellerID");
                     List<Products> listProductSeller = productsFacade.getListProductByUserID(sellerID);
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listProductSeller), 10);
-                    String nproductSeller = request.getParameter("btn");
-                    if (nproductSeller != null) {
-                        if (nproductSeller.equals("next")) {
-                            paging.next();
-                        }
-                        if (nproductSeller.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pagesSellerProduct = request.getParameter("page");
-                    if (pagesSellerProduct != null) {
-                        int m = Integer.parseInt(pagesSellerProduct);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-                    request.setAttribute("pageProduct", paging);
+                    buildPaging(request, session, paging, referer, "pageProduct");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
                 case "showCustomer":
                     listCustomer = customersFacade.showAll();
                     PageProduct pageCustomer = new PageProduct(listCustomer, 5);
-                    String nCus = request.getParameter("btn");
-                    if (nCus != null) {
-                        if (nCus.equals("next")) {
-                            pageCustomer.next();
-                        }
-                        if (nCus.equals("prev")) {
-                            pageCustomer.prev();
-                        }
-                    }
-                    String pagesCus = request.getParameter("page");
-                    if (pagesCus != null) {
-                        int m = Integer.parseInt(pagesCus);
-                        pageCustomer.setPageIndex(m);
-                        pageCustomer.updateModel();
-                    }
-                    request.setAttribute("pageCus", pageCustomer);
+                    buildPaging(request, session, pageCustomer, referer, "pageCus");
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
 
                 case "showSeller":
                     listSellers = sellerFacadeLocal.showAll();
                     PageProduct pageSeller = new PageProduct(listSellers, 5);
-                    String nSeller = request.getParameter("btn");
-                    if (nSeller != null) {
-                        if (nSeller.equals("next")) {
-                            pageSeller.next();
-                        }
-                        if (nSeller.equals("prev")) {
-                            pageSeller.prev();
-                        }
-                    }
-                    String pageSell = request.getParameter("page");
-                    if (pageSell != null) {
-                        int m = Integer.parseInt(pageSell);
-                        pageSeller.setPageIndex(m);
-                        pageSeller.updateModel();
-                    }
-                    request.setAttribute("pageSeller", pageSeller);
+                    buildPaging(request, session, pageSeller, referer, "pageSeller");
                     request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
                     break;
 
                 case "showProductAdmin":
                     List<Products> listDateposted = productsFacade.showAll();
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
-                    String n3 = request.getParameter("btn");
-                    if (n3 != null) {
-                        if (n3.equals("next")) {
-                            paging.next();
-                        }
-                        if (n3.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pages3 = request.getParameter("page");
-                    if (pages3 != null) {
-                        int m = Integer.parseInt(pages3);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-                    request.setAttribute("pageProduct", paging);
+                    buildPaging(request,session,paging,referer,"pageProduct");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
                 case "showBrand":
                     paging = new PageProduct(listBrands, 10);
-                    String nBrand = request.getParameter("btn");
-                    if (nBrand != null) {
-                        if (nBrand.equals("next")) {
-                            paging.next();
-                        }
-                        if (nBrand.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pagesBrand = request.getParameter("page");
-                    if (pagesBrand != null) {
-                        int m = Integer.parseInt(pagesBrand);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-                    request.setAttribute("pageBrands", paging);
+                    buildPaging(request, session, paging, referer, "pageBrands");
                     request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
                     break;
 
@@ -323,46 +249,13 @@ public class viewServlet extends HttpServlet {
                 case "showProductType":
                     listProductTypes = productTypesFacade.showAll();
                     paging = new PageProduct(listProductTypes, 10);
-                    String nProductType = request.getParameter("btn");
-                    if (nProductType != null) {
-                        if (nProductType.equals("next")) {
-                            paging.next();
-                        }
-                        if (nProductType.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pagesProductType = request.getParameter("page");
-                    if (pagesProductType != null) {
-                        int m = Integer.parseInt(pagesProductType);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-                    request.setAttribute("pageProductType", paging);
+                    buildPaging(request, session, paging, referer, "pageProductType");
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;
 
                 case "showOrder":
-
                     paging = new PageProduct(listOrderMaster, 15);
-                    String nOrderMaster = request.getParameter("btn");
-                    if (nOrderMaster != null) {
-                        if (nOrderMaster.equals("next")) {
-                            paging.next();
-                        }
-                        if (nOrderMaster.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pagesOrderMaster = request.getParameter("page");
-
-                    if (pagesOrderMaster != null) {
-                        int m = Integer.parseInt(pagesOrderMaster);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-
-                    request.setAttribute("pageOrderMaster", paging);
+                    buildPaging(request, session, paging, referer, "pageOrderMaster");
                     request.getRequestDispatcher("admin/order.jsp").forward(request, response);
                     break;
 
@@ -502,22 +395,7 @@ public class viewServlet extends HttpServlet {
                 case "sellerProduct":
                     List<Products> sellerProduct = productsFacade.getListProductBySeller(user.getUserId());
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(sellerProduct), 10);
-                    String n3S = request.getParameter("btn");
-                    if (n3S != null) {
-                        if (n3S.equals("next")) {
-                            paging.next();
-                        }
-                        if (n3S.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pages3S = request.getParameter("page");
-                    if (pages3S != null) {
-                        int m = Integer.parseInt(pages3S);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-                    request.setAttribute("pageProduct", paging);
+                    buildPaging(request, session, paging, referer, "pageProduct");
                     request.getRequestDispatcher("seller/product.jsp").forward(request, response);
                     break;
 
@@ -539,26 +417,7 @@ public class viewServlet extends HttpServlet {
                     }
 
                     paging = new PageProduct(sellerOrder, 15);
-                    String nOrderMasterS = request.getParameter("btn");
-                    if (nOrderMasterS != null) {
-                        if (nOrderMasterS.equals("next")) {
-                            paging.next();
-                        }
-                        if (nOrderMasterS.equals("prev")) {
-                            paging.prev();
-                        }
-                    }
-                    String pagesOrderMasterS = request.getParameter("page");
-
-                    if (pagesOrderMasterS != null) {
-                        int m = Integer.parseInt(pagesOrderMasterS);
-                        paging.setPageIndex(m);
-                        paging.updateModel();
-                    }
-
-//                     = util.getSellerOrdered(user.getUserId());
-                    //Adapt to new model with JPQL and for loop
-                    request.setAttribute("order", paging);
+                    buildPaging(request, session, paging, referer, "order");
                     request.getRequestDispatcher("seller/order.jsp").forward(request, response);
                     break;
 
@@ -859,5 +718,40 @@ public class viewServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void buildPaging(HttpServletRequest request, HttpSession session, PageProduct paging, String referer, String AttributeName) {
+        String n3 = request.getParameter("btn");
+        String nextCurrent = request.getParameter("page");
+        int nextPage = 1;
+        int current = 1;
+        if (StringUtils.isNotBlank(nextCurrent)) {
+            nextPage = Integer.parseInt(nextCurrent);
+            current = nextPage;
+        }
+        else if (session.getAttribute("currentPage") != null) {
+            current = (int) session.getAttribute("currentPage");
+        }
+        else {
+            String currentPage = StringUtils.substringAfterLast(referer,"page=");
+            if (StringUtils.isNotBlank(currentPage) ) {
+                current = Integer.parseInt(currentPage);
+            }
+        }
+        paging.setPageIndex(current);
+
+        if (n3 != null) {
+            if (n3.equals("next")) {
+                paging.next();
+                nextPage = current >= paging.getPages() ? paging.getPages() : current+1;
+            }
+            if (n3.equals("prev")) {
+                paging.prev();
+                nextPage = current == 1 ? current : current-1;
+            }
+        }
+        paging.updateModel();
+        session.setAttribute("currentPage", nextPage);
+        request.setAttribute(AttributeName, paging);
+    }
 
 }

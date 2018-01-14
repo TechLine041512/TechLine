@@ -367,14 +367,17 @@
                                                 <%
 
                                                     int pages = pageProduct.getPages();
+                                                    int currentPage = 1;
+                                                    if (session.getAttribute("currentPage") != null) {
+                                                        currentPage = (Integer)session.getAttribute("currentPage");
+                                                    }
                                                     for (int i = 1; i <= pages; i++) {
                                                 %>
 
-                                            <li><a href="viewServlet?action=showProductAdmin&page=<%=i%>"><%=i%></a></li>
-
-                                            <%
-                                                }
-                                            %>
+                                            <li><a <% if (currentPage == i) { %> style="color: red;" <% } %> href="viewServlet?action=showProductAdmin&page=<%=i%>"><%=i%></a></li>
+                                                <%
+                                                    }
+                                                %>
                                             <li><a href="viewServlet?action=showProductAdmin&btn=next">Next</a></li>
                                         </ul>
                                     </div>
