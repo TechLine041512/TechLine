@@ -33,7 +33,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             directionsDisplay.setDirections(response);
             computeTotalDistance(directionsDisplay.getDirections());
         } else {
-            window.alert('Directions request failed due to ' + status);
+            sweetAlert("Oops...", "Please input address correctly", "error");
         }
     });
 }

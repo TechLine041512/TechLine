@@ -232,15 +232,15 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
-                        <table class="orderlist-table">
+                        <table class="orderlist-table" id="myTable">
                             <caption>Infomation Order</caption> 
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Date Order</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Total Price</th>
+                                <th onclick="sortTable(0)">ID</th>
+                                <th onclick="sortTable(1)">Date Order</th>
+                                <th onclick="sortTable(2)">Address</th>
+                                <th onclick="sortTable(3)">Status</th>
+                                <th onclick="sortTable(4)">Total Price</th>
                             </tr>
                             </thead>                            
                             <tbody class="oMView">
@@ -328,6 +328,7 @@
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
         <link href="resource/themes/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script src="resource/assets/js/sort.js" type="text/javascript"></script>
         <script type="text/javascript">
                                             $(function() {
                                                 $(document).ready(function() {

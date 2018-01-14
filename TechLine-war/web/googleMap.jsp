@@ -20,7 +20,7 @@
         <link href="resource/themes/css/flexslider.css" rel="stylesheet"/>
         <link href="resource/themes/css/main.css" rel="stylesheet"/>
         <link href="resource/themes/css/my-style.css" rel="stylesheet"/>  
-
+        <link href="resource/themes/css/sweetalert.css" rel="stylesheet"/>
         <!-- scripts -->
         <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
         <script src="resource/bootstrap/js/bootstrap.min.js"></script>				
@@ -28,6 +28,7 @@
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
         <script src="resource/themes/js/google-map.js" type="text/javascript"></script>
+        <script src="resource/themes/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -138,7 +139,7 @@
                                 <h3 style="font-weight:lighter; margin-top:0; background-color: #34495e; color: #FFF;">Provided Your Address</h3>
 
                                 <b>Address :</b>
-                                <input type="text" name="end" id="end" style="width:350px;"/>                              
+                                <input type="text" name="end" id="end" style="width:350px;" pattern="[A-Za-z0-9]{4,100}"/>                              
                                 <div>
                                     <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Distance : </h4>
                                     <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="distanceID"></h4> <b>Km</b> 
