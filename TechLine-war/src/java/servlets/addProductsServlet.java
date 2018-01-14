@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
+import utils.SendEmailUtils;
 
 public class addProductsServlet extends HttpServlet {
 
@@ -315,6 +316,10 @@ public class addProductsServlet extends HttpServlet {
                         productsFacade.edit(products);
                     }
                     request.setAttribute("swalMessage", "Voting Success");
+                    StringBuffer requestString = request.getRequestURL();
+                    requestString.append("viewServlet?action=productDetail&idProduct=");
+                    requestString.append(pid);
+                    SendEmailUtils.sendMail("techline.raejas@gmail.com", "123456a@", user.getEmail(), "Thank you for your vote", buildContent(products.getProductName(),requestString,user.getFullname()));
                     request.getRequestDispatcher("viewServlet?action=productDetail&idProduct=" + pid).forward(request, response);
                     break;
                 default:
@@ -396,5 +401,18 @@ public class addProductsServlet extends HttpServlet {
         } catch (ServletException | IOException e) {
         }
         return false;
+    }
+
+    private String buildContent(String pid, StringBuffer requestString, String fullname) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Dear Mr/Mrs/Miss ");
+        sb.append(fullname);
+        sb.append("\n\nThank you for your voting. If you still interested in this product: ");
+        sb.append(pid);
+        sb.append(". Please follow this link to check. ");
+        sb.append(requestString);
+        sb.append("\n\nThank you for support our services");
+        sb.append("\n\nTechLine");
+        return sb.toString();
     }
 }

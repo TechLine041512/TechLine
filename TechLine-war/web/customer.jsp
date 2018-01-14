@@ -47,7 +47,7 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                            <li><a class="btn" href="viewServlet?action=viewShoppingCart">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>

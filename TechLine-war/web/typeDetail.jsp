@@ -248,29 +248,22 @@
                             </h4>
                             <div id="myCarousel" class="carousel slide">
                                 <div class="carousel-inner">
-                                    <div class="active item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">
-                                                    <span class="sale_tag"></span>												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">Kingston DataTraveler 100 G3</a><br/>
-                                                    <p class="price">$261</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg"><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">Ring Video Doorbell Pro</a><br/>
-                                                    <p class="price">$134</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <c:if test="${randomizes != null}">
+                                        <c:forEach items="${randomizes}" var="rd" varStatus="rdCount">
+                                            <div class="${rdCount.index == 0 ? "active item" : "item"}">
+                                                <ul class="thumbnails listing-products">
+                                                    <li class="span3">
+                                                        <div class="product-box">
+                                                            <span class="sale_tag"></span>												
+                                                            <img alt="${rd.productName}" src="${rd.productImage[0]}" style="width: 150px; height: 150px;"><br/>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${rd.productId}" class="title" style="height: 60px;">${rd.productName}</a><br/>
+                                                            <p class="price">${rd.productPrice - (rd.productPrice * rd.productDiscount / 100)}</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -297,11 +290,9 @@
                     <div class="span3">
                         <h4>Navigation</h4>
                         <ul class="nav">
-                            <li><a href="./index.html">Homepage</a></li>  
-                            <li><a href="./about.html">About Us</a></li>
-                            <li><a href="./contact.html">Contac Us</a></li>
-                            <li><a href="./cart.html">Your Cart</a></li>
-                            <li><a href="./register.html">Login</a></li>							
+                            <li><a href="HomeServlet">Homepage</a></li>  
+                            <li><a href="viewServlet?action=viewShoppingCart">Your Cart</a></li>
+                            <li><a href="HomeServlet">Login</a></li>							
                         </ul>					
                     </div>
                     <div class="span4">

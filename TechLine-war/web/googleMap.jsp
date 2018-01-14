@@ -198,6 +198,7 @@
                                     <tr>
                                         <td> 
                                             <input type="hidden" name="txtTotalPrice" id="txtTotalPrice"/>
+                                            <input type="hidden" name="txtMemberDiscount" value="${memberDiscount}" id="memberDiscount"/>
                                             <input type="hidden" name="txtDeliveryPrice" id="deliveryFee"/>
                                             <input type="hidden" name="txtAddress" id="end"/>
                                             <p style="font-weight:bold; color:#900;">TOTAL($)</p></td>

@@ -59,7 +59,7 @@
                 <div class="span8">
                     <div class="account pull-right">
                         <ul class="user-menu">	
-                            <li><a class="btn" href="cart.jsp">Cart</a></li>
+                            <li><a class="btn" href="viewServlet?action=viewShoppingCart">Cart</a></li>
                                 <%
                                     if (session.getAttribute("user") == null) {
                                 %>
@@ -235,8 +235,8 @@
                                     <strong>Width:</strong> <span>${product.productWidth} (cm)</span><br>
                                     <strong>Height:</strong> <span>${product.productHeigth} (cm)</span><br>
                                     <strong>Length:</strong> <span>${product.productLength} (cm)</span><br>
-                                    <strong>Rating Points:</strong> ${product.productRating}
-                                        <c:forEach begin="1" end="${product.productRating}" varStatus="point">
+                                    <strong>Rating Points:</strong> ${product.productRating} / 
+                                        <c:forEach begin="1" end="5" varStatus="point">
                                             <a href="addProductsServlet?action=rating&point=${point.index}&pid=${product.productId}"><i class="fa fa-star" style="color: yellow; font-size: 20px"></i></a>
                                         </c:forEach> <br/>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
@@ -272,7 +272,7 @@
                                 <div class="accordion-panel"><!---.accordion-panel--->
                                     <div id="comments-section"><!---Start #comments-section Binh luan cua khach hang ve san pham--->
                                         <c:forEach items="${product.productsCommentCollection}" var="productComment">
-                                            <h4>${productComment.userId.userId}</h4>
+                                            <h4>${productComment.userId.fullname}</h4>
                                             <p>${productComment.commentContent}</p>
                                             <hr/>
                                         </c:forEach>
@@ -301,29 +301,22 @@
                             </h4>
                             <div id="myCarousel" class="carousel slide">
                                 <div class="carousel-inner">
-                                    <div class="active item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">
-                                                    <span class="sale_tag"></span>												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41krBhgsduL._SS150_.jpg" style="width: 150px; height: 150px;"><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">ZOZO Laptop Power Adapter</a><br/>
-                                                    <p class="price">$261</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="thumbnails listing-products">
-                                            <li class="span3">
-                                                <div class="product-box">												
-                                                    <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/41%2B8ufOMeeL._SS150_.jpg" style="width: 150px; height: 150px;"><br/>
-                                                    <a href="product_detail.html" class="title" style="height: 60px;">Ring Video Doorbell Pro</a><br/>
-                                                    <p class="price">$134</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <c:if test="${randomizes != null}">
+                                        <c:forEach items="${randomizes}" var="rd" varStatus="rdCount">
+                                            <div class="${rdCount.index == 0 ? "active item" : "item"}">
+                                                <ul class="thumbnails listing-products">
+                                                    <li class="span3">
+                                                        <div class="product-box">
+                                                            <span class="sale_tag"></span>												
+                                                            <img alt="${rd.productName}" src="${rd.productImage[0]}" style="width: 150px; height: 150px;"><br/>
+                                                            <a href="viewServlet?action=productDetail&idProduct=${rd.productId}" class="title" style="height: 60px;">${rd.productName}</a><br/>
+                                                            <p class="price">${rd.productPrice - (rd.productPrice * rd.productDiscount / 100)}</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -397,11 +390,9 @@
                     <div class="span3">
                         <h4>Navigation</h4>
                         <ul class="nav">
-                            <li><a href="./index.html">Homepage</a></li>  
-                            <li><a href="./about.html">About Us</a></li>
-                            <li><a href="./contact.html">Contac Us</a></li>
-                            <li><a href="./cart.html">Your Cart</a></li>
-                            <li><a href="./register.html">Login</a></li>							
+                            <li><a href="HomeServlet">Homepage</a></li>  
+                            <li><a href="viewServlet?action=viewShoppingCart">Your Cart</a></li>
+                            <li><a href="HomeServlet">Login</a></li>							
                         </ul>					
                     </div>
                     <div class="span4">

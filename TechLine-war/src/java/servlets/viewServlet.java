@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -122,6 +123,7 @@ public class viewServlet extends HttpServlet {
                     } else {
                         request.setAttribute("message", "This category haven't got any products yet");
                     }
+                    buildRandomizeProducts(request, productsFacade.getListProductByDatePost());
                     request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("category", categories);
                     request.setAttribute("listCategories", listCategories);
@@ -143,6 +145,7 @@ public class viewServlet extends HttpServlet {
                     } else {
                         request.setAttribute("message", "This Product Type haven't got any products yet");
                     }
+                    buildRandomizeProducts(request, productsFacade.getListProductByDatePost());
                     request.setAttribute("listTopProduct", listTopProducts.subList(0, 3));
                     request.setAttribute("productTypesID", productTypes.getTypeId()); //Noted
                     request.setAttribute("listCategories", listCategories);
@@ -151,6 +154,7 @@ public class viewServlet extends HttpServlet {
 
                 case "productDetail":
                     idProduct = request.getParameter("idProduct");
+                    buildRandomizeProducts(request, productsFacade.getListProductByDatePost());
                     product = new Products();
                     if (StringUtils.isNotBlank(idProduct)) {
                         product = productsFacade.find(idProduct);
@@ -404,6 +408,7 @@ public class viewServlet extends HttpServlet {
                         request.setAttribute("message", "Please select some products");
                         request.getRequestDispatcher("HomeServlet").forward(request, response);
                     }
+                    buildRandomizeProducts(request, productsFacade.getListProductByDatePost());
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("cart.jsp").forward(request, response);
                     break;
@@ -692,6 +697,21 @@ public class viewServlet extends HttpServlet {
         paging.updateModel();
         session.setAttribute("currentPage", nextPage);
         request.setAttribute(AttributeName, paging);
+    }
+
+    private void buildRandomizeProducts(HttpServletRequest request, List<Products> listProductByDatePost) {
+        List<Products> listReturn = new ArrayList<>();
+        Random rd = new Random();
+        if (!listProductByDatePost.isEmpty()) {
+            for (int i = 0; i < 2; i++) {
+                int random = rd.nextInt(listProductByDatePost.size()-1);
+                listReturn.add(listProductByDatePost.get(random));
+            }
+        }
+        
+        if (!listReturn.isEmpty()) {
+            request.setAttribute("randomizes", TechLineUtils.buidProductIndexModel(listReturn));
+        }
     }
 
 }

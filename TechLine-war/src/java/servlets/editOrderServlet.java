@@ -73,7 +73,7 @@ public class editOrderServlet extends HttpServlet {
                             break;
                     }
                     if (!StringUtils.equals(resultString, "Done")) {
-                        request.setAttribute("message", "Send Mail Failed");
+                        request.setAttribute("message", "Send Mail Failed. Please update your email in account");
                         request.getRequestDispatcher("viewServlet?action=showOrder&page=1").forward(request, response);
                         break;
                     }

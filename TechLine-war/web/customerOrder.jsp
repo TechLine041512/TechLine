@@ -221,7 +221,7 @@
                         <div class="my-main"><!-----!!!!!!!!!!!!!!!!!!!!!!!!.my-main Phan than noi dung trang!!!!!!!!!!!!!!!!!!!!!!!!!!!!----->
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
-                    <div id="order-list-customer-info">
+                    <div id="order-list-customer-info" style="margin-bottom: 10px;">
                     </div>               
                     <div class="clearfix"></div>
 
@@ -298,11 +298,9 @@
                     <div class="span3">
                         <h4>Navigation</h4>
                         <ul class="nav">
-                            <li><a href="./index.html">Homepage</a></li>  
-                            <li><a href="./about.html">About Us</a></li>
-                            <li><a href="./contact.html">Contac Us</a></li>
-                            <li><a href="./cart.html">Your Cart</a></li>
-                            <li><a href="./register.html">Login</a></li>							
+                            <li><a href="HomeServlet">Homepage</a></li>  
+                            <li><a href="viewServlet?action=viewShoppingCart">Your Cart</a></li>
+                            <li><a href="HomeServlet">Login</a></li>							
                         </ul>					
                     </div>
                     <div class="span4">

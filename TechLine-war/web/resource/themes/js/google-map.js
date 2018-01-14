@@ -60,9 +60,10 @@ function computeTotalDistance(result) {
         var tongFEE2 = jsonResponse.fee;
         document.getElementById("deliveryFee").innerHTML = tongFEE;
         document.getElementById("deliveryFee2").innerHTML = tongFEE2;
-        document.getElementById("totalPriceOrder").innerHTML = parseInt(tongFEE2) + parseInt(productSubTotal) + parseInt(memberDiscount);
-        document.getElementById("txtTotalPrice").value = parseInt(tongFEE2) + parseInt(productSubTotal) + parseInt(memberDiscount);
+        document.getElementById("totalPriceOrder").innerHTML = parseInt(tongFEE2) + parseInt(productSubTotal) - parseInt(memberDiscount);
+        document.getElementById("txtTotalPrice").value = parseInt(tongFEE2) + parseInt(productSubTotal) - parseInt(memberDiscount);
     });
     document.getElementById("hourID").innerHTML = hour;
     document.getElementById("distanceID").innerHTML = total;
+    document.getElementById("btnCheckOut").disabled = false;
 }

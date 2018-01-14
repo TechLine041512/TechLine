@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import entities.Customers;
+import entities.CustomersFacadeLocal;
 import entities.OrderAddress;
 import entities.OrderAddressFacadeLocal;
 import entities.OrderDetails;
@@ -34,7 +36,8 @@ import org.apache.commons.lang3.StringUtils;
  * @author nth15
  */
 public class addOrderServlet extends HttpServlet {
-
+    @EJB
+    private CustomersFacadeLocal customersFacade;
     @EJB
     private OrderAddressFacadeLocal orderAddressFacade;
     @EJB
@@ -137,6 +140,7 @@ public class addOrderServlet extends HttpServlet {
                         break;
                     }
                     String totalPrice = request.getParameter("txtTotalPrice");
+                    String memberDiscount = request.getParameter("txtMemberDiscount");
                     String deliveryFee = request.getParameter("txtDeliveryPrice") + ".0";
                     String orderNote = request.getParameter("deliveryRequest");
                     String phone = request.getParameter("txtPhone");
@@ -185,6 +189,17 @@ public class addOrderServlet extends HttpServlet {
                     orderAddressFacade.create(orderAddress);
                     orderMaster.setOrderAddress(orderAddress);
                     orderMasterFacade.edit(orderMaster);
+                    Customers c = user.getCustomers();
+                    if (c == null ) {
+                        message = "You must login as customer";
+                        request.setAttribute("message", message);
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                        break;
+                    }
+                    int morePoint = (int) (orderMaster.getOrderTotalPrice()/10);
+                    int remainPoint = c.getPoint() - (Integer.parseInt(memberDiscount)*10) + morePoint;
+                    c.setPoint(remainPoint);
+                    customersFacade.edit(c);
                     message = "Your order completed. Please wait for our delivery team call... Thank you";
                     session.setAttribute("cart", null);
                     session.removeAttribute("cart");

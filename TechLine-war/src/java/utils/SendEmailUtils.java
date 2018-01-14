@@ -46,7 +46,6 @@ public class SendEmailUtils {
                         InternetAddress.parse(mailTo));
                 message.setSubject(subject);
                 message.setText(content);
-
                 Transport.send(message);
 
         } catch (MessagingException e) {
