@@ -89,7 +89,7 @@ public class editCustomerServlet extends HttpServlet {
                     request.setAttribute("customer", customer);
                     request.setAttribute("message", "Edit successful!");
                     session.setAttribute("user", user);
-                    request.getRequestDispatcher("viewServlet?action=showCustomer").forward(request, response);
+                    request.getRequestDispatcher("viewServlet?action=homeCustomer").forward(request, response);
                     break;
                 case "cusChangePassword":
                     if (wrongRole(roleUser, "customer", request, response))
