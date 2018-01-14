@@ -271,7 +271,7 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "homeSeller":
-                    String approvalDate = usersFacade.find(user.getUserId()).getSeller().getApprovedDate();
+                    String approvalDate = sellerFacadeLocal.getSellerById(user.getUserId()).getApprovedDate();
                     StringBuilder reFormatDate;
                     if (approvalDate.contains("/")) {
                         String[] splitDate = approvalDate.split("/");
