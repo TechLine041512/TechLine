@@ -20,7 +20,7 @@
         <link href="resource/themes/css/flexslider.css" rel="stylesheet"/>
         <link href="resource/themes/css/main.css" rel="stylesheet"/>
         <link href="resource/themes/css/my-style.css" rel="stylesheet"/>  
-
+        <link href="resource/themes/css/sweetalert.css" rel="stylesheet"/>
         <!-- scripts -->
         <script src="resource/themes/js/jquery-1.7.2.min.js"></script>
         <script src="resource/bootstrap/js/bootstrap.min.js"></script>				
@@ -28,6 +28,7 @@
         <script src="resource/themes/js/jquery.scrolltotop.js"></script>
         <script src="resource/themes/js/login-register.js" type="text/javascript"></script>
         <script src="resource/themes/js/google-map.js" type="text/javascript"></script>
+        <script src="resource/themes/js/sweetalert.min.js" type="text/javascript"></script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -131,14 +132,16 @@
             </section>
             <section class="main-content">				
                 <div class="row">
-                    <div class="span12">					
+                    <form method="POST" action="addOrderServlet">
+                    <div class="span12">	
+                       
                         <h4 class="title"><span class="text"><strong>Transaction </strong> Service</span></h4>
                         <div class="delivery-panel"><!----- delivery-panel ----->
                             <div class="deliver-address"><!------deliver-address----->
                                 <h3 style="font-weight:lighter; margin-top:0; background-color: #34495e; color: #FFF;">Provided Your Address</h3>
 
                                 <b>Address :</b>
-                                <input type="text" name="end" id="end" style="width:350px;"/>                              
+                                <input type="text" name="end" id="end" style="width:350px" required="true" maxlength="100"/>                              
                                 <div>
                                     <h4 style="margin:10px 0 10px 20px; font-weight:lighter;display:inline;">Distance : </h4>
                                     <h4 style="margin:10px 0 10px 24px; font-weight:lighter;display:inline;" id="distanceID"></h4> <b>Km</b> 
@@ -161,7 +164,7 @@
                             </div><!-----deliver-map end----->
                         </div><!----- delivery-panel end-----><br/>
 
-                        <form method="POST" action="addOrderServlet">
+                        
                             <div class="note-request"><!----- note-request ----->
                                 <h3 style="background-color: #34495e; color: #FFF; margin:0;">Information Delivery </h3>
                                 <h4 style="margin:10px 0 10px 20px; font-weight:lighter;">Provided the delivery note</h4>
@@ -205,12 +208,10 @@
                             </div><!----- note-request end----->
                             <hr/>
                             <p class="buttons center">				
-                                <button class="btn" type="button">Back</button>
-                                <button class="btn btn-inverse" type="submit" name="action" value="checkout">Check Out</button>
-                            </p>
-                        </form>
-                        					
+                                <button class="btn btn-inverse" type="submit" name="action" value="checkout" id="btnCheckOut">Check Out</button>
+                            </p>    					
                     </div>
+                  </form>
                 </div>
             </section>  
             <section id="footer-bar">

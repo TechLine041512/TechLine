@@ -222,7 +222,7 @@
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
                     <div id="order-list-customer-info">
-                        <h4>Name: Tiến</h4>
+                        <h4>Name: ${user.fullname}</h4>
                     </div>               
                     <div class="clearfix"></div>
 
@@ -236,11 +236,11 @@
                             <caption>Infomation Order</caption> 
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Date Order</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Total Price</th>
+                                <th onclick="sortTable(0)">ID</th>
+                                <th onclick="sortTable(1)">Date Order</th>
+                                <th onclick="sortTable(2)">Address</th>
+                                <th onclick="sortTable(3)">Status</th>
+                                <th onclick="sortTable(4)">Total Price</th>
                             </tr>
                             </thead>                            
                             <tbody class="oMView">

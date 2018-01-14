@@ -236,7 +236,7 @@
                                     <strong>Height:</strong> <span>${product.productHeigth} (cm)</span><br>
                                     <strong>Length:</strong> <span>${product.productLength} (cm)</span><br>
                                     <strong>Rating Points:</strong> ${product.productRating}
-                                        <c:forEach begin="1" end="5" varStatus="point">
+                                        <c:forEach begin="1" end="${product.productRating}" varStatus="point">
                                             <a href="addProductsServlet?action=rating&point=${point.index}&pid=${product.productId}"><i class="fa fa-star" style="color: yellow; font-size: 20px"></i></a>
                                         </c:forEach> <br/>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
@@ -274,6 +274,7 @@
                                         <c:forEach items="${product.productsCommentCollection}" var="productComment">
                                             <h4>${productComment.userId.userId}</h4>
                                             <p>${productComment.commentContent}</p>
+                                            <hr/>
                                         </c:forEach>
                                     </div><!---End #comments-section--->
                                     <div id="write-review-rating"><!---Start #write-review-rating Phan viet binh luan va cham sao cho product--->

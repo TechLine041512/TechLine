@@ -5,8 +5,8 @@ function  searchOMbyDate($date) {
         var tableOM = $('.oMView');
         $(tableOM).empty();
         $.each($oDMList, function(key, oderMaster) {
-            var tr = $('<tr><td></td><td></td><td></td><td></td><td></td></tr>');
-            $(tr).children().eq(0).addClass('order-number').append('<a href="#">' + oderMaster[0] + '</a>');
+            var tr = $('<tr><td><p></p></td><td><p></p></td><td><p></p></td><td><p></p></td><td><p></p></td></tr>');
+            $(tr).children().eq(0).addClass('order-number').append('<a href="searchOrderServlet?action=orderDetailCustomer&orderID='+oderMaster[0]+'">' + oderMaster[0] + '</a>');
             $date = null;
             $date = new Date(oderMaster[1]);
             $(tr).children().eq(1).append(('0' + $date.getDate()).slice(-2) + '/' + ('0' + ($date.getMonth() + 1)).slice(-2) + '/' + $date.getFullYear());

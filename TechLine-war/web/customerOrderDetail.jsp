@@ -211,14 +211,18 @@
                             </tr>
                             </thead>                            
                             <tbody>
-                                <c:forEach items="${OrderMaster.orderDetailsCollection}" var="order">
+                                <c:forEach items="${ListProduct}" var="order">
                                     <tr>
-                                        <td class="order-number"><a href="viewServlet?action=productDetail&idProduct=${order.products.productId}">${order.products.productId}</a></td>
-                                        <td>${order.products.productName}</td>
-                                        <td>aaaaaaaaaaaaaa</td>
-                                        <td>${order.products.productPrice}</td>
-                                        <td>${order.products.productDiscount}</td>
-                                        <td>${order.products.productRating}</td>
+                                        <td class="order-number"><a href="viewServlet?action=productDetail&idProduct=${order.productId}">${order.productId}</a></td>
+                                        <td>${order.productName}</td>
+                                        <td><img src="${order.productImage[0]}" style="width: 100px; height: 100px"/></td>
+                                        <td>${order.productPrice}</td>
+                                        <td>${order.productDiscount}</td>
+                                        <td>
+                                            <c:forEach begin="1" end="${order.productRating}" varStatus="point">
+                                                <i class="fa fa-star" style="color: yellow; font-size: 20px"></i>
+                                            </c:forEach> 
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

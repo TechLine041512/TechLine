@@ -123,6 +123,7 @@ public class RedirectServlet extends HttpServlet {
                         request.setAttribute("subtotal", subtotal);
                         request.setAttribute("memberDiscount", memDiscount);
                     }
+                    request.setAttribute("listCategories", categoriesFacade.showActiveCategories());
                     request.getRequestDispatcher("googleMap.jsp").forward(request, response);
                     break;
                 default:
