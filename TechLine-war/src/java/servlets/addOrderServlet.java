@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
 import entities.OrderAddress;
@@ -35,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author nth15
  */
 public class addOrderServlet extends HttpServlet {
+
     @EJB
     private OrderAddressFacadeLocal orderAddressFacade;
     @EJB
@@ -66,7 +66,7 @@ public class addOrderServlet extends HttpServlet {
             }
             List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
             ProductInCart pInCart = new ProductInCart();
-            
+
             switch (action) {
                 case "addToCart":
                     StringBuilder sb = new StringBuilder();
@@ -77,8 +77,7 @@ public class addOrderServlet extends HttpServlet {
                     String redirect = "HomeServlet";
                     if (StringUtils.isBlank(request.getParameter("quantity"))) {
                         quantityDemand = 1;
-                    }
-                    else {
+                    } else {
                         quantityDemand = Integer.parseInt(request.getParameter("quantity"));
                     }
                     if (quantityDemand > currentP.getProductQuantity()) {
@@ -86,11 +85,10 @@ public class addOrderServlet extends HttpServlet {
                         sb.append(currentP.getProductQuantity());
                         sb.append(" ");
                         sb.append(currentP.getProductUnit());
-                        message =  sb.toString();
-                    }
-                    else {
+                        message = sb.toString();
+                    } else {
                         if (cart != null) {
-                            for (ProductInCart p : cart ) {
+                            for (ProductInCart p : cart) {
                                 if (p != null && StringUtils.equals(p.getProductId(), id)) {
                                     int quantity = p.getQuantity() + quantityDemand;
                                     double total = p.getPrice() * quantity;
@@ -102,8 +100,7 @@ public class addOrderServlet extends HttpServlet {
                                     break;
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             cart = new ArrayList<>();
                         }
                         if (!isExisted) {
@@ -118,7 +115,7 @@ public class addOrderServlet extends HttpServlet {
                             cart.add(pInCart);
                         }
                     }
-                    
+
                     session.setAttribute("user", user);
                     session.setAttribute("cart", cart);
                     if ("search".equals(request.getParameter("fromjsp"))) {
@@ -126,13 +123,12 @@ public class addOrderServlet extends HttpServlet {
                     }
                     if (StringUtils.isNotBlank(message)) {
                         request.setAttribute("message", message);
-                    }
-                    else {
+                    } else {
                         request.setAttribute("swalMessage", "Add to Cart successfully");
                     }
                     request.getRequestDispatcher(redirect).forward(request, response);
                     break;
-                    
+
                 case "checkout":
                     if (user == null || cart == null) {
                         message = "Your session is ended. Please login and select product again.";
@@ -141,7 +137,7 @@ public class addOrderServlet extends HttpServlet {
                         break;
                     }
                     String totalPrice = request.getParameter("txtTotalPrice");
-                    String deliveryFee = request.getParameter("txtDeliveryPrice")+".0";
+                    String deliveryFee = request.getParameter("txtDeliveryPrice") + ".0";
                     String orderNote = request.getParameter("deliveryRequest");
                     String phone = request.getParameter("txtPhone");
                     OrderMaster orderMaster = new OrderMaster();
@@ -160,7 +156,7 @@ public class addOrderServlet extends HttpServlet {
                         if (p.getQuantity() > productAvailable.getProductQuantity()) {
                             orderMasterFacade.remove(orderMaster);
                             cart.remove(p);
-                            message = "We're sorry. Your selected product: "+ productAvailable.getProductName()+ " is out of stock. Please choose another";
+                            message = "We're sorry. Your selected product: " + productAvailable.getProductName() + " is out of stock. Please choose another";
                             request.setAttribute("message", message);
                             request.getRequestDispatcher("HomeServlet").forward(request, response);
                             break;
@@ -192,6 +188,32 @@ public class addOrderServlet extends HttpServlet {
                     session.setAttribute("cart", null);
                     session.removeAttribute("cart");
                     request.setAttribute("message", message);
+                    // Set standard HTTP/1.1 no-cache headers.
+                    response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+                    // Set standard HTTP/1.0 no-cache header.
+                    response.setHeader("Pragma", "no-cache");
+                    out.println("<html>");
+                    out.println("<header>");
+                    out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/themes/css/sweetalert.css\">");
+                    out.println("<script src=\"resource/themes/js/sweetalert.min.js\"></script>");
+                    out.println("</header>");
+                    out.println("<body>");
+                    out.println("<script type='text/javascript'>");
+                    out.println("swal({\n"
+                            + "  title: \'Successfull\',\n"
+                            + "  text: \'You have order success!\',\n"
+                            + "  timer: 2000,\n"
+                            + "  showConfirmButton: false,\n"
+                            + "  type: \'success\' \n"
+                            + "},function(){window.location.replace(window.location.protocol+'//'+window.location.host+'/TechLine-war/');});"
+                            + "window.location.hash = \"\";\n"
+                            + "window.location.hash = \"Again-No-back-button\";//again because google chrome don't insert first hash into history\n"
+                            + "window.onhashchange = function() {\n"
+                            + "window.location.hash = \"\";\n"
+                            + "};");
+                    out.println("</script>");
+                    out.println("</body>");
+                    out.close();
                     request.getRequestDispatcher("HomeServlet").forward(request, response);
                     break;
                 default:
