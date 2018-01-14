@@ -178,6 +178,7 @@ public class addOrderServlet extends HttpServlet {
                     orderAddress.setOrderMId(newOrderId);
                     orderAddress.setOrderMaster(orderMaster);
                     orderAddress.setOrderPhone(phone);
+                    orderAddress.setOrderAddressDetail(request.getParameter("end"));
                     orderAddress.setOrderAddressLat(Double.MIN_VALUE);
                     orderAddress.setOrderAddressLng(Double.MIN_VALUE);
                     orderAddress.setUserId(user);

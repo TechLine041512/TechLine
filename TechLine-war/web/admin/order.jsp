@@ -30,14 +30,6 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-        <script>
-            function showSendMail() {
-                setTimeout(function() {
-                    $('#MessageModal').modal('show');
-                }, 230);
-
-            }
-        </script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -134,38 +126,7 @@
                             </button>                         
                         </div>
                     </div>
-                </nav>
-                <!--Phần dialog box Product History-->
-                <div class="modal fade login" id="MessageModal">
-                    <div class="modal-dialog login animated">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Send Mail</h4>
-                            </div>
-                            <div class="modal-body">  
-                                <div class="box">
-                                    <div class="content">
-                                        <div class="error"></div>
-                                        <div class="form loginBox">
-                                            <table class="table table-hover">
-                                                <input type="password" name="txtPassword">
-                                                <input type="submit" value="Send Mail" name="btnPassword">
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="forgot login-footer">
-                                    <span></span>
-                                </div>
-
-                            </div>        
-                        </div>
-                    </div>
-                </div>
-                <!--Kết thúc dialog box Product History-->        
+                </nav>       
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -210,12 +171,15 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
-                                                            <td>
-                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px;">Delivery</a>
-                                                                <a href="javascript: showSendMail();" class="btn-info btn" style="width:136.45px;">Send Mail</a>
-                                                                <a class="btn-danger btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px;">Cancel</a>
-                                                            </td>
-
+                                                            <form method="POST" action="editOrderServlet">
+                                                                <td style="width: 20%">
+                                                                    <input type="hidden" name="oid" value="${order.orderMId}"/>
+                                                                    <input type="hidden" name="status" value="${order.orderStatus}"/>
+                                                                    <input type="hidden" name="txtPassword" value="123456a@"/>
+                                                                    <button class="btn-instagram btn" name="action" value="changeOrder" style="width:136.45px; background-color: #4edc14">Delivery</button>
+                                                                    <button class="btn-instagram btn" name="action" value="cancelOrder" style="width:136.45px; background-color: red;">Cancel</button>
+                                                                </td>
+                                                            </form>
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Delivery'}">
@@ -226,11 +190,16 @@
                                                             <td>${order.orderNote}</td>
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
-                                                            <td>
-                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px; background-color: #4edc14">Done</a>
-                                                                <a href="javascript: showSendMail();" class="btn-info btn" style="width:136.45px;">Send Mail</a>
-                                                                <a class="btn-danger btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px;">Cancel</a>
-                                                            </td>
+                                                            <form method="POST" action="editOrderServlet">
+                                                                <td style="width: 20%">
+                                                                    <input type="hidden" name="oid" value="${order.orderMId}"/>
+                                                                    <input type="hidden" name="status" value="${order.orderStatus}"/>
+                                                                    <input type="hidden" name="txtPassword" value="123456a@"/>
+                                                                    <button class="btn-instagram btn" name="action" value="changeOrder" style="width:136.45px; background-color: #4edc14">Done</button>
+                                                                    <button class="btn-instagram btn" name="action" value="cancelOrder" style="width:136.45px; background-color: red;">Cancel</button>
+                                                                </td>
+                                                            </form>
+
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Cancel'}">
