@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "Products", catalog = "TechLine", schema = "dbo")
@@ -48,6 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Products.findByProductRating", query = "SELECT p FROM Products p WHERE p.productRating = :productRating"),
     @NamedQuery(name = "Products.findByIsApproved", query = "SELECT p FROM Products p WHERE p.isApproved = :isApproved"),
     @NamedQuery(name = "Products.findByDatePosted", query = "SELECT p FROM Products p WHERE p.datePosted = :datePosted"),
+    @NamedQuery(name = "Products.findByVotedUsers", query = "SELECT p FROM Products p WHERE p.votedUsers = :votedUsers"),
     @NamedQuery(name = "Products.findByProductStatus", query = "SELECT p FROM Products p WHERE p.productStatus = :productStatus")})
 public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -96,6 +96,9 @@ public class Products implements Serializable {
     @Column(name = "datePosted", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date datePosted;
+    @Size(max = 4000)
+    @Column(name = "votedUsers", length = 4000)
+    private String votedUsers;
     @Column(name = "productStatus")
     private Boolean productStatus;
     @JoinColumn(name = "userId", referencedColumnName = "userId")
@@ -115,10 +118,9 @@ public class Products implements Serializable {
     private Collection<ProductRating> productRatingCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private Collection<ProductsEditHistory> productsEditHistoryCollection;
-
     public Products() {
     }
-
+    
     public Products(String productId) {
         this.productId = productId;
     }
@@ -256,6 +258,14 @@ public class Products implements Serializable {
         this.datePosted = datePosted;
     }
 
+    public String getVotedUsers() {
+        return votedUsers;
+    }
+
+    public void setVotedUsers(String votedUsers) {
+        this.votedUsers = votedUsers;
+    }
+
     public Boolean getProductStatus() {
         return productStatus;
     }
@@ -288,7 +298,6 @@ public class Products implements Serializable {
         this.brandId = brandId;
     }
 
-    @XmlTransient
     public Collection<ProductsComment> getProductsCommentCollection() {
         return productsCommentCollection;
     }
@@ -297,7 +306,6 @@ public class Products implements Serializable {
         this.productsCommentCollection = productsCommentCollection;
     }
 
-    @XmlTransient
     public Collection<OrderDetails> getOrderDetailsCollection() {
         return orderDetailsCollection;
     }
@@ -306,7 +314,6 @@ public class Products implements Serializable {
         this.orderDetailsCollection = orderDetailsCollection;
     }
 
-    @XmlTransient
     public Collection<ProductRating> getProductRatingCollection() {
         return productRatingCollection;
     }
@@ -315,7 +322,6 @@ public class Products implements Serializable {
         this.productRatingCollection = productRatingCollection;
     }
 
-    @XmlTransient
     public Collection<ProductsEditHistory> getProductsEditHistoryCollection() {
         return productsEditHistoryCollection;
     }
