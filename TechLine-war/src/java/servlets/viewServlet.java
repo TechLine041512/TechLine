@@ -277,8 +277,8 @@ public class viewServlet extends HttpServlet {
                         String[] splitDate = approvalDate.split("/");
                         reFormatDate = new StringBuilder();
                         reFormatDate.append(splitDate[2]).append("-");
-                        reFormatDate.append(splitDate[1]).append("-");
-                        reFormatDate.append(splitDate[0]);
+                        reFormatDate.append(splitDate[0]).append("-");
+                        reFormatDate.append(splitDate[1]);
                         request.setAttribute("approvalDate", reFormatDate.toString());
                     } else {
                         request.setAttribute("approvalDate", approvalDate);
