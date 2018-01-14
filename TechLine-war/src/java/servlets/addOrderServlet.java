@@ -61,8 +61,8 @@ public class addOrderServlet extends HttpServlet {
             String message = "";
             HttpSession session = request.getSession();
             Users user = (Users) session.getAttribute("user");
-            if (user == null) {
-                message = "Please log in";
+            if (user == null || user.getCustomers() == null) {
+                message = "Please log in as customer";
             }
             List<ProductInCart> cart = (List<ProductInCart>) session.getAttribute("cart");
             ProductInCart pInCart = new ProductInCart();

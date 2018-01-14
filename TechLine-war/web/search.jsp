@@ -39,7 +39,7 @@
                 });
             </script>
         </c:if>
-        <c:if test="${not empty addSuccess}">
+        <c:if test="${not empty swalMessage}">
             <script>
                 window.addEventListener("load", function() {
                     swal("${swalMessage}", "", "success");
