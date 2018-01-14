@@ -168,7 +168,7 @@
                 <div class="content"> 
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Product</h4>
@@ -325,26 +325,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card card-profile">                                  
-                                    <div class="card-avatar">
-                                        <a href="#pablo">
-                                            <img class="img" src="client/assetsclient/img/${information.imgAccount}" alt="Avatar"/>
-                                        </a>
-                                    </div>
-
-                                    <div class="content">
-                                        <h4 class="card-title">
-                                            ${information.name}<br/>
-                                            <small>${information.userID}</small>
-                                        </h4>
-                                        <p class="card-content">
-                                            ${information.biography}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div>               
                         </div>
                     </div>    
                 </div>

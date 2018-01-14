@@ -232,7 +232,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="my-orderlist-table"><!-----   .my-orderlist-table   ------>
-                        <table class="orderlist-table">
+                        <table class="orderlist-table" id="myTable">
                             <caption>Infomation Order</caption> 
                             <thead>
                             <tr>
@@ -328,6 +328,7 @@
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
         <link href="resource/themes/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script src="resource/assets/js/sort.js" type="text/javascript"></script>
         <script type="text/javascript">
                                             $(function() {
                                                 $(document).ready(function() {

@@ -278,7 +278,7 @@
                                         }
                                     %>
                                 <li>
-                                    <% if (action.equals("search")) {%> <a href="searchProductsServlet?action=Search&btn=next&txtProductName=${keyword}">Prev</a></li> <%}%>
+                                    <% if (action.equals("search")) {%> <a href="searchProductsServlet?action=Search&btn=next&txtProductName=${keyword}">Next</a></li> <%}%>
                                 <% if (action.equals("filter")) {%> <a href="searchProductsServlet?action=filter&btn=next&txtTypeName=${typeIdSelected}&txtMin=${strMin}&txtMax=${strMax}">Prev</a></li> <%}%>
                                 </c:if>
 
