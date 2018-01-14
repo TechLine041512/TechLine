@@ -27,6 +27,8 @@ public interface SellerFacadeLocal {
     int count();
 
     List<Seller> showAll();
+    
+    Seller getSellerById(String seller);
 
     
 }

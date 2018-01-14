@@ -36,5 +36,12 @@ public class SellerFacade extends AbstractFacade<Seller> implements SellerFacade
         return null;
     }
 
+    @Override
+    public Seller getSellerById(String seller) {
+        Query q = em.createQuery("SELECT s FROM Seller s where s.userId = :seller");
+        q.setParameter("seller", seller);
+        return (Seller) q.getSingleResult();
+    }
+
     
 }
