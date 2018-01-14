@@ -118,23 +118,7 @@ public class viewServlet extends HttpServlet {
                     }
                     if (!listProduct.isEmpty()) {
                         paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 12);
-                        String n = request.getParameter("btn");
-                        if (n != null) {
-                            if (n.equals("next")) {
-                                paging.next();
-                            }
-                            if (n.equals("prev")) {
-                                paging.prev();
-                            }
-                        }
-                        String pages = request.getParameter("page");
-                        if (pages != null) {
-                            int m = Integer.parseInt(pages);
-                            paging.setPageIndex(m);
-                            paging.updateModel();
-                        }
-                        request.setAttribute("pageProduct", paging);
-                        request.setAttribute("listProduct", listProduct);
+                        buildPaging(request, session, paging, referer, "pageProduct");                 
                     } else {
                         request.setAttribute("message", "This category haven't got any products yet");
                     }
@@ -153,26 +137,8 @@ public class viewServlet extends HttpServlet {
                     listProduct = (List<Products>) productTypes.getProductsCollection();
                     if (!listProduct.isEmpty()) {
                         paging = new PageProduct(TechLineUtils.buidProductIndexModel(listProduct), 6);
-                        String n1 = request.getParameter("btn");
-
-                        if (n1 != null) {
-                            if (n1.equals("next")) {
-                                paging.next();
-                            }
-                            if (n1.equals("prev")) {
-                                paging.prev();
-                            }
-                        }
-                        String pages1 = request.getParameter("page");
-
-                        if (pages1 != null) {
-                            int m = Integer.parseInt(pages1);
-                            paging.setPageIndex(m);
-                            paging.updateModel();
-                        }
-
+                        buildPaging(request, session, paging, referer, "pageProduct");                      
                         request.setAttribute("productType", productTypes);
-                        request.setAttribute("pageProduct", paging);
                         request.setAttribute("listProduct", listProduct);
                     } else {
                         request.setAttribute("message", "This Product Type haven't got any products yet");

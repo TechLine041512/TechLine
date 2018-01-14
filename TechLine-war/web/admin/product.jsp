@@ -396,7 +396,7 @@
                                                     for (int i = 1; i <= pages; i++) {
                                                 %>
 
-                                            <li><a <% if (currentPage == i) { %> style="color: red;" <% } %> href="viewServlet?action=showProductAdmin&page=<%=i%>"><%=i%></a></li>
+                                            <li <% if (currentPage == i) { %> class="active" <% } %>><a href="viewServlet?action=showProductAdmin&page=<%=i%>"><%=i%></a></li>
                                                 <%
                                                     }
                                                 %>

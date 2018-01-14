@@ -220,12 +220,15 @@
                                 <c:if test="${pageProduct !=null}">
                                     <li><a href="viewServlet?action=typeDetail&btn=prev&idType=${productTypesID}">Prev</a></li>
                                         <%
-
                                             int pages = pageProduct.getPages();
+                                            int currentPage = 1;
+                                            if (session.getAttribute("currentPage") != null) {
+                                                currentPage = (Integer) session.getAttribute("currentPage");
+                                            }
                                             for (int i = 1; i <= pages; i++) {
                                         %>
 
-                                    <li><a href="viewServlet?action=typeDetail&page=<%=i%>&idType=${productTypesID}"><%=i%></a></li>
+                                    <li <% if (currentPage == i) { %> class="active" <% } %>><a href="viewServlet?action=typeDetail&page=<%=i%>&idType=${productTypesID}"><%=i%></a></li>
 
                                     <%
                                         }

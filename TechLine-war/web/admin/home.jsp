@@ -350,8 +350,6 @@
     <!-- Material Dashboard javascript methods -->
     <script src="resource/assets/js/material-dashboard.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
 
 

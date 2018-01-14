@@ -19,6 +19,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
+import utils.PageProduct;
+import utils.TechLineUtils;
 
 public class searchProductsServlet extends HttpServlet {
 
@@ -32,12 +36,17 @@ public class searchProductsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         List<Products> listProductSearch;
+        HttpSession session = request.getSession();
+        String referer = request.getHeader("referer");
+        PageProduct paging;
         List<Categories> listCategories = categoriesFacade.showActiveCategories();
         try (PrintWriter out = response.getWriter()) {
             switch (action) {
                 case "Search":
                     String keyword = request.getParameter("txtProductName");
                     listProductSearch = productsFacade.getListProductsByName(keyword);
+                    paging = new PageProduct(listProductSearch, 12);
+                    buildPaging(request, session, paging, referer, "pageProduct");
                     List<ProductTypes> listTypeSearch = productsFacade.getListTypeByName(keyword);
                     ProductTypes fakeSelect = new ProductTypes("Select");
                     fakeSelect.setTypeName("All Product Type");
@@ -47,6 +56,7 @@ public class searchProductsServlet extends HttpServlet {
                     getServletContext().setAttribute("listTypeSearch", listTypeSearch);
                     request.setAttribute("listProductSearch", listProductSearch);
                     request.setAttribute("listCategories", listCategories);
+                    request.setAttribute("action", "search");
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
                 case "filter":
@@ -76,12 +86,15 @@ public class searchProductsServlet extends HttpServlet {
                             listForward = filterByPrice(listForward, strMin, strMax);
                         }
                     }
+                     paging = new PageProduct(listForward, 12);
+                    buildPaging(request, session, paging, referer, "pageProduct");
                     request.setAttribute("listProductSearch", listForward);
                     getServletContext().setAttribute("listForward", listForward);
                     request.setAttribute("strMin", strMin);
                     request.setAttribute("strMax", strMax);
                     request.setAttribute("typeIdSelected", typeIdSelected);
                     request.setAttribute("listCategories", listCategories);
+                    request.setAttribute("action", "filter");
                     request.getRequestDispatcher("search.jsp").forward(request, response);
                     break;
             }
@@ -156,5 +169,39 @@ public class searchProductsServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private void buildPaging(HttpServletRequest request, HttpSession session, PageProduct paging, String referer, String AttributeName) {
+        String n3 = request.getParameter("btn");
+        String nextCurrent = request.getParameter("page");
+        int nextPage = 1;
+        int current = 1;
+        if (StringUtils.isNotBlank(nextCurrent)) {
+            nextPage = Integer.parseInt(nextCurrent);
+            current = nextPage;
+        }
+        else if (session.getAttribute("currentPage") != null) {
+            current = (int) session.getAttribute("currentPage");
+        }
+        else {
+            String currentPage = StringUtils.substringAfterLast(referer,"page=");
+            if (StringUtils.isNotBlank(currentPage) ) {
+                current = Integer.parseInt(currentPage);
+            }
+        }
+        paging.setPageIndex(current);
 
+        if (n3 != null) {
+            if (n3.equals("next")) {
+                paging.next();
+                nextPage = current >= paging.getPages() ? paging.getPages() : current+1;
+            }
+            if (n3.equals("prev")) {
+                paging.prev();
+                nextPage = current == 1 ? current : current-1;
+            }
+        }
+        paging.updateModel();
+        session.setAttribute("currentPage", nextPage);
+        request.setAttribute(AttributeName, paging);
+    }
 }

@@ -4,6 +4,7 @@
     Author     : tatyuki1209
 --%>
 
+<%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,7 +45,9 @@
                 window.addEventListener("load", function() {
                     swal("${swalMessage}", "", "success");
                 });
-                setTimeout(function(){window.history.go(-1);}, 2000);
+                setTimeout(function() {
+                    window.history.go(-1);
+                }, 2000);
             </script>
         </c:if>
         <div id="top-bar" class="container">
@@ -184,8 +187,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                            </c:if>
-                                        </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -230,23 +233,56 @@
                                     <th>Add to Cart</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${listProductSearch}" var="product">
-                                <form class="form-inline" action="addOrderServlet" method="POST">
-                                    <tr>
-                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="Product Image" src="${product.productImage.split(",")[0]}" style="width:200px; height:200px;"></a></td>
-                                        <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
-                                        <td><input type="number" placeholder="1" class="input-mini" min="1" max="20" name="quantity" value="1"></td>
-                                        <td>$${product.productPrice}</td>
-                                        <td>${product.brandId.brandName}</td>
-                                        <td><button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add</button></td>
-                                    <input type="hidden" name="idProduct" value="${product.productId}">
-                                    <input type="hidden" name="fromjsp" value="search">
-                                    </tr>
-                                </form>
-                            </c:forEach>
-                            </tbody>
+                            <%
+                                PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
+                                String action = (String) request.getAttribute("action");
+                            %>
+                            <c:if test="${pageProduct !=null}">
+                                <tbody>
+                                    <c:forEach items="<%=pageProduct.getModel()%>" var="product">
+                                    <form class="form-inline" action="addOrderServlet" method="POST">
+                                        <tr>
+                                            <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}"><img alt="Product Image" src="${product.productImage.split(",")[0]}" style="width:200px; height:200px;"></a></td>
+                                            <td><a href="viewServlet?action=productDetail&idProduct=${product.productId}">${product.productName}</a></td>
+                                            <td><input type="number" placeholder="1" class="input-mini" min="1" max="20" name="quantity" value="1"></td>
+                                            <td>$${product.productPrice}</td>
+                                            <td>${product.brandId.brandName}</td>
+                                            <td><button class="btn btn-inverse" name="action" value="addToCart" type="submit">Add</button></td>
+                                        <input type="hidden" name="idProduct" value="${product.productId}">
+                                        <input type="hidden" name="fromjsp" value="search">
+                                        </tr>
+                                    </form>
+                                </c:forEach>
+                                </tbody>
+                            </c:if>
                         </table>			                					
+                    </div>
+                    <div class="pagination pagination-small pagination-centered">
+                        <ul>
+                            <c:if test="${pageProduct !=null}">
+                                <li><% if (action.equals("search")) {%> <a href="searchProductsServlet?action=Search&btn=prev&txtProductName=${keyword}">Prev</a></li> <%}%>
+                                <% if (action.equals("filter")) {%> <a href="searchProductsServlet?action=filter&btn=prev&txtTypeName=${typeIdSelected}&txtMin=${strMin}&txtMax=${strMax}">Prev</a></li> <%}%>
+                                    <%
+                                        int pages = pageProduct.getPages();
+                                        int currentPage = 1;                            
+                                        if (session.getAttribute("currentPage") != null) {
+                                            currentPage = (Integer) session.getAttribute("currentPage");
+                                        }
+                                        for (int i = 1; i <= pages; i++) {
+                                    %>
+                                <li <% if (currentPage == i) { %> class="active" <% }%>>
+                                    <% if (action.equals("search")) {%> <a href="searchProductsServlet?action=Search&page=<%=i%>&txtProductName=${keyword}"><%=i%></a></li> <% }%>
+                                <% if (action.equals("filter")){%> <a href="searchProductsServlet?action=filter&page=<%=i%>&txtTypeName=${typeIdSelected}&txtMin=${strMin}&txtMax=${strMax}"><%=i%></a></li> <% }%>
+                                
+                                    <%
+                                        }
+                                    %>
+                                <li>
+                                    <% if (action.equals("search")) {%> <a href="searchProductsServlet?action=Search&btn=next&txtProductName=${keyword}">Prev</a></li> <%}%>
+                                <% if (action.equals("filter")) {%> <a href="searchProductsServlet?action=filter&btn=next&txtTypeName=${typeIdSelected}&txtMin=${strMin}&txtMax=${strMax}">Prev</a></li> <%}%>
+                                </c:if>
+
+                        </ul>
                     </div>
                 </div>
             </section>			
@@ -292,18 +328,18 @@
         <script src="resource/themes/js/common.js"></script>
         <script src="resource/themes/js/jquery.flexslider-min.js"></script>
         <script type="text/javascript">
-                                            $(function() {
-                                                $(document).ready(function() {
-                                                    $('.flexslider').flexslider({
-                                                        animation: "fade",
-                                                        slideshowSpeed: 4000,
-                                                        animationSpeed: 600,
-                                                        controlNav: false,
-                                                        directionNav: true,
-                                                        controlsContainer: ".flex-container" // the container that holds the flexslider
-                                                    });
+                                        $(function() {
+                                            $(document).ready(function() {
+                                                $('.flexslider').flexslider({
+                                                    animation: "fade",
+                                                    slideshowSpeed: 4000,
+                                                    animationSpeed: 600,
+                                                    controlNav: false,
+                                                    directionNav: true,
+                                                    controlsContainer: ".flex-container" // the container that holds the flexslider
                                                 });
                                             });
+                                        });
         </script>
     </body>
 </html>

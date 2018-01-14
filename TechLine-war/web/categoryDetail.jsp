@@ -65,15 +65,15 @@
                                     if (session.getAttribute("user") != null) {
                                 %>
                                 <c:if test="${user.role=='admin'}">
-                                    <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
+                                <li><a href="viewServlet?action=homeAdmin">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='seller'}">
-                                    <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='seller'}">
+                                <li><a href="seller/home.jsp">Hi, ${user.fullname}</a></li>  
                                 </c:if>
 
-                                <c:if test="${user.role=='customer'}">
-                                    <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
+                            <c:if test="${user.role=='customer'}">
+                                <li><a href="viewServlet?action=homeCustomer">Hi, ${user.fullname}</a></li>  
                                 </c:if>
                             <li><a class="btn" href="viewServlet?action=Logout">Log out</a></li>
                                 <%
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <!--Phần dialog box Message-->
         <div class="modal fade login" id="MessageModal">
             <div class="modal-dialog login animated">
@@ -109,7 +109,7 @@
             </div>
         </div>
         <!--Kết thúc dialog box Message-->                  
-                        
+
         <!--Phần dialog box Login-->
         <div class="modal fade login" id="loginModal">
             <div class="modal-dialog login animated">
@@ -172,7 +172,7 @@
                     <nav id="menu" class="pull-right">
                         <ul>
                             <li>
-                              <a href="RedirectServlet?action=backToHome">Home</a>	          
+                                <a href="RedirectServlet?action=backToHome">Home</a>	          
                             </li>
                             <c:forEach items="${listCategories}" var="item">
                                 <li>
@@ -181,8 +181,8 @@
                                         <c:forEach items="${item.productTypesCollection}" var="type">
                                             <c:if test="${type.typeStatus}">
                                                 <li><a href="viewServlet?action=typeDetail&idType=${type.typeId}">${type.typeName}</a></li>	
-                                            </c:if>
-                                        </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
                                     </ul>
                                 </li>
                             </c:forEach>
@@ -203,7 +203,7 @@
                                 PageProduct pageProduct = (PageProduct) request.getAttribute("pageProduct");
                             %>
                             <c:if test="${pageProduct !=null}">
-                               
+
                                 <c:forEach items="<%=pageProduct.getModel()%>" var="item">
                                     <li class="span3">
                                         <div class="product-box">
@@ -222,19 +222,21 @@
                                 <c:if test="${pageProduct !=null}">
                                     <li><a href="viewServlet?action=cateDetail&btn=prev&idCate=${category.categoryId}">Prev</a></li>
                                         <%
-
                                             int pages = pageProduct.getPages();
+                                            int currentPage = 1;
+                                            if (session.getAttribute("currentPage") != null) {
+                                                currentPage = (Integer) session.getAttribute("currentPage");
+                                            }
                                             for (int i = 1; i <= pages; i++) {
                                         %>
+                                    <li <% if (currentPage == i) { %> class="active" <% } %>>
+                                        <a href="viewServlet?action=cateDetail&page=<%=i%>&idCate=${category.categoryId}"><%=i%></a></li>
+                                    <%
+                                        }
+                                    %>
+                                    <li><a href="viewServlet?action=cateDetail&btn=next&idCate=${category.categoryId}">Next</a></li>
+                                    </c:if>
 
-                                        <li><a href="viewServlet?action=cateDetail&page=<%=i%>&idCate=${category.categoryId}"><%=i%></a></li>
-
-                                        <%
-                                            }
-                                        %>
-                                        <li><a href="viewServlet?action=cateDetail&btn=next&idCate=${category.categoryId}">Next</a></li>
-                                </c:if>
-                                
                             </ul>
                         </div>
                     </div>
