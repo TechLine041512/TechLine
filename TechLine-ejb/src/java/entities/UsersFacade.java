@@ -86,4 +86,11 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
         }
         return (long) q.getSingleResult();
     }
+
+    @Override
+    public Users getUserById(String user) {
+         Query q = em.createQuery("SELECT u FROM Users u WHERE u.userId = :user");
+         q.setParameter("user", user);
+         return (Users) q.getSingleResult();
+    }
 }

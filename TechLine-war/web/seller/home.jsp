@@ -142,9 +142,9 @@
                                     <div class="error"></div>
                                     <div class="form loginBox">
                                         <form method="post" action="editSellerServlet">
-                                            <input id="oldPass" class="input-xlarge" pattern=".{5,20}" type="password" name="txtOldPassword" required="true" required title="This is your current password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
-                                            <input id="newPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtNewPass" required="true" required title="This is your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
-                                            <input id="confirmPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            Old Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp<input id="oldPass" class="input-xlarge" pattern=".{5,20}" type="password" name="txtOldPassword" required="true" required title="This is your current password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            New Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input id="newPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtNewPass" required="true" required title="This is your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            Confirm Password: <input id="confirmPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
                                             <button class="btn btn-instagram" type="submit" name="action" value="sellerChangePassword" onclick="return validatePass()">Change Password</button>
                                         </form>
                                     </div>
@@ -202,13 +202,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Name</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeName}" name="txtStoreName" name="txtName" pattern=".{5,50}" required="required">
+                                                        <input type="text" class="form-control" value="${txtStoreName}" name="txtStoreName" name="txtName" pattern=".{5,50}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Identity Card</label>
-                                                        <input type="text" class="form-control" value="${user.seller.identityCard}" name="txtIdentityCard" pattern='\d{9,20}' required="required">
+                                                        <input type="text" class="form-control" value="${txtIdentityCard}" name="txtIdentityCard" pattern='\d{9,20}' required="required">
                                                     </div>
                                                 </div>    
                                             </div>
@@ -223,7 +223,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group label-floating">
                                                         <label>Approved Place</label>
-                                                        <input type="text" class="form-control" value="${user.seller.approvedPlace}" name="txtApprovedPlace" pattern=".{5,50}" required="required">
+                                                        <input type="text" class="form-control" value="${txtApprovedPlace}" name="txtApprovedPlace" pattern=".{5,50}" required="required">
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -232,19 +232,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Address</label>
-                                                        <input type="text" class="form-control" value="${user.seller.storeAddress}" name="txtStoreAddress" pattern=".{20,100}" required="required">
+                                                        <input type="text" class="form-control" value="${txtStoreAddress}" name="txtStoreAddress" pattern=".{20,100}" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Icon</label>
-                                                        <input type="url" class="form-control" value="${user.seller.storeIcon}" name="txtStoreIcon" required="required">
+                                                        <input type="url" class="form-control" value="${txtStoreIcon}" name="txtStoreIcon" required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Icon</label>
-                                                        <img src="${user.seller.storeIcon}" alt="store Icon" style="width: 80px; height: 80px;" required="required"/>
+                                                        <img src="${txtStoreIcon}" alt="store Icon" style="width: 80px; height: 80px;" required="required"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,7 +252,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Store Summary</label>
-                                                        <textarea name="txtStoreSummary" rows="9" cols="200" style="margin: 0px 0px 10px; width: 605px; height: 181px;">${user.seller.storeSummary}</textarea>
+                                                        <textarea name="txtStoreSummary" rows="9" cols="200" style="margin: 0px 0px 10px; width: 605px; height: 181px;">${txtStoreSummary}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,17 +267,17 @@
                                 <div class="card card-profile">                                  
                                     <div class="card-avatar">
                                         <a href="#pablo">
-                                            <img class="img" src="${user.seller.storeIcon}" alt="Avatar"/>
+                                            <img class="img" src="${txtStoreIcon}" alt="Avatar"/>
                                         </a>
                                     </div>
 
                                     <div class="content">
                                         <h4 class="card-title">
-                                            ${user.seller.storeName}<br/>
-                                            <small>${user.seller.storeAddress}</small>
+                                            ${txtStoreName}<br/>
+                                            <small>${txtStoreAddress}</small>
                                         </h4>
                                         <p class="card-content">
-                                            ${user.seller.storeSummary}
+                                            ${txtStoreSummary}
                                         </p>
                                     </div>
                                 </div>

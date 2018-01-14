@@ -35,4 +35,6 @@ public interface UsersFacadeLocal {
     long countActiveSeller();
 
     long countActiveCustomer();
+    
+    Users getUserById(String user);
 }
