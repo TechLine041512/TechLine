@@ -4,6 +4,7 @@
     Author     : tatyuki1209
 --%>
 
+<%@page import="entities.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,15 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
+        <%
+            if (session.getAttribute("user") == null)
+                response.sendRedirect("http://localhost:8080/TechLine-war/");
+            else {
+                Users checkUser = (Users) session.getAttribute("user");
+                if (!checkUser.getRole().equals("admin"))
+                    response.sendRedirect("http://localhost:8080/TechLine-war/");
+            }
+        %>
         <div class="wrapper">
             <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
                 <!--

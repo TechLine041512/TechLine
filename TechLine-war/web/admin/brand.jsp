@@ -4,6 +4,7 @@
     Author     : Tien
 --%>
 
+<%@page import="entities.Users"%>
 <%@page import="utils.PageProduct"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,6 +32,15 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     </head>
     <body>
+        <%
+            if (session.getAttribute("user") == null)
+                response.sendRedirect("http://localhost:8080/TechLine-war/");
+            else {
+                Users checkUser = (Users) session.getAttribute("user");
+                if (!checkUser.getRole().equals("admin"))
+                    response.sendRedirect("http://localhost:8080/TechLine-war/");
+            }
+        %>
         <c:if test="${not empty message}">
             <script>
                 window.addEventListener("load", function() {
