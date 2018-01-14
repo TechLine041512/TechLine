@@ -2796,44 +2796,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   border-radius: 6px;
   border: none;
 }
-.modal-content .modal-header {
-  border-bottom: none;
-  padding-top: 24px;
-  padding-right: 24px;
-  padding-bottom: 0;
-  padding-left: 24px;
-}
-.modal-content .modal-body {
-  padding-top: 24px;
-  padding-right: 24px;
-  padding-bottom: 16px;
-  padding-left: 24px;
-}
-.modal-content .modal-footer {
-  border-top: none;
-  padding: 7px;
-}
-.modal-content .modal-footer.text-center {
-  text-align: center;
-}
-.modal-content .modal-footer button {
-  margin: 0;
-  padding-left: 16px;
-  padding-right: 16px;
-  width: auto;
-}
-.modal-content .modal-footer button.pull-left {
-  padding-left: 5px;
-  padding-right: 5px;
-  position: relative;
-  left: -5px;
-}
-.modal-content .modal-footer button + button {
-  margin-bottom: 16px;
-}
-.modal-content .modal-body + .modal-footer {
-  padding-top: 0;
-}
+
+
 
 .modal-backdrop {
   background: rgba(0, 0, 0, 0.3);
@@ -2841,15 +2805,6 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .modal .modal-dialog {
   margin-top: 100px;
-}
-.modal .modal-header .close {
-  color: #999999;
-}
-.modal .modal-header .close:hover, .modal .modal-header .close:focus {
-  opacity: 1;
-}
-.modal .modal-header .close i {
-  font-size: 16px;
 }
 
 .modal-notice .instruction {
