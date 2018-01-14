@@ -36,11 +36,11 @@
             </script>
         </c:if>
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-image="resource/assets/img/sidebar-1.jpg">
                 <!--
-                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+            Tip 2: you can also add an image using data-image tag
 
-                Tip 2: you can also add an image using data-image tag
                 -->
 
                 <div class="logo">
@@ -48,6 +48,7 @@
                         <img src="resource/assets/img/tim_80x80.png"/>
                     </a>
                 </div>
+
 
                 <div class="sidebar-wrapper">
                     <ul class="nav">
@@ -161,7 +162,7 @@
                 <div class="content"> 
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Category</h4>
@@ -205,25 +206,6 @@
                                             <a href="viewServlet?action=showCategories" class="btn btn-primary">Cancel</a>   
                                             <div class="clearfix"></div>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card card-profile">                                  
-                                    <div class="card-avatar">
-                                        <a href="#pablo">
-                                            <img class="img" src="client/assetsclient/img/${information.imgAccount}" alt="Avatar"/>
-                                        </a>
-                                    </div>
-
-                                    <div class="content">
-                                        <h4 class="card-title">
-                                            ${information.name}<br/>
-                                            <small>${information.userID}</small>
-                                        </h4>
-                                        <p class="card-content">
-                                            ${information.biography}
-                                        </p>
                                     </div>
                                 </div>
                             </div>

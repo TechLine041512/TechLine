@@ -30,6 +30,14 @@
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+        <script>
+            function showSendMail() {
+                setTimeout(function() {
+                    $('#MessageModal').modal('show');
+                }, 230);
+
+            }
+        </script>
     </head>
     <body>
         <c:if test="${not empty message}">
@@ -127,7 +135,37 @@
                         </div>
                     </div>
                 </nav>
+                <!--Phần dialog box Product History-->
+                <div class="modal fade login" id="MessageModal">
+                    <div class="modal-dialog login animated">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Send Mail</h4>
+                            </div>
+                            <div class="modal-body">  
+                                <div class="box">
+                                    <div class="content">
+                                        <div class="error"></div>
+                                        <div class="form loginBox">
+                                            <table class="table table-hover">
+                                                <input type="password" name="txtPassword">
+                                                <input type="submit" value="Send Mail" name="btnPassword">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="forgot login-footer">
+                                    <span></span>
+                                </div>
 
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+                <!--Kết thúc dialog box Product History-->        
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -173,14 +211,15 @@
                                                             <td>${order.orderTotalPrice}</td>
                                                             <td>${order.orderStatus}</td>
                                                             <td>
-                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px; background-color: blue;">Delivery</a>
-                                                                <a class="btn-instagram btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px; background-color: red;">Cancel</a>
+                                                                <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px;">Delivery</a>
+                                                                <a href="javascript: showSendMail();" class="btn-info btn" style="width:136.45px;">Send Mail</a>
+                                                                <a class="btn-danger btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px;">Cancel</a>
                                                             </td>
-                                                            
+
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Delivery'}">
-                                                        <tr style="background-color: blue; color: #ffffff;"> 
+                                                        <tr style="background-color: #4141f2; color: #ffffff;"> 
                                                             <td>${order.orderMId}</td>
                                                             <td>${order.userId.fullname}</td>
                                                             <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
@@ -189,12 +228,13 @@
                                                             <td>${order.orderStatus}</td>
                                                             <td>
                                                                 <a class="btn-instagram btn" href="editOrderServlet?action=changeOrder&oid=${order.orderMId}&status=${order.orderStatus}" style="width:136.45px; background-color: #4edc14">Done</a>
-                                                                <a class="btn-instagram btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px; background-color: red;">Cancel</a>
+                                                                <a href="javascript: showSendMail();" class="btn-info btn" style="width:136.45px;">Send Mail</a>
+                                                                <a class="btn-danger btn" href="editOrderServlet?action=cancelOrder&oid=${order.orderMId}" style="width:136.45px;">Cancel</a>
                                                             </td>
                                                         </tr>
                                                     </c:if>     
                                                     <c:if test="${order.orderStatus eq 'Cancel'}">
-                                                        <tr style="background-color: red; color: #ffffff;"> 
+                                                        <tr style="background-color: #f73b3b; color: #ffffff;"> 
                                                             <td>${order.orderMId}</td>
                                                             <td>${order.userId.fullname}</td>
                                                             <td><fmt:formatDate pattern="dd/MM/yyyy kk:mm:ss" value="${order.dateOrdered}"/></td>
@@ -215,12 +255,12 @@
                                                     int pages = pageOrder.getPages();
                                                     int currentPage = 1;
                                                     if (session.getAttribute("currentPage") != null) {
-                                                        currentPage = (Integer)session.getAttribute("currentPage");
+                                                        currentPage = (Integer) session.getAttribute("currentPage");
                                                     }
                                                     for (int i = 1; i <= pages; i++) {
                                                 %>
 
-                                            <li <% if (currentPage == i) { %> class="active" <% } %>><a href="viewServlet?action=showOrder&page=<%=i%>"><%=i%></a></li>
+                                            <li <% if (currentPage == i) { %> class="active" <% }%>><a href="viewServlet?action=showOrder&page=<%=i%>"><%=i%></a></li>
 
                                             <%
                                                 }
@@ -254,7 +294,6 @@
         </div>
 
     </body>
-
     <!--   Core JS Files   -->
     <script src="resource/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
     <script src="resource/assets/js/bootstrap.min.js" type="text/javascript"></script>
