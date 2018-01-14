@@ -200,7 +200,7 @@
                                         <div id="container" style="width: 900px; height: 500px;"></div>
                                     </div>
                                     <div class="card-content">
-                                        <h4 class="title">Chart For Order And Product</h4>
+                                        <h4 class="title">Chart For Order And Product at year - <%=Integer.parseInt(((String)request.getAttribute("toDay")).substring(0,4)) - 1 %></h4>
                                     </div>                              
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                     <fmt:formatDate var="year" value="${now}" pattern="dd MMM yyyy" />
                                     <div class="card-header" data-background-color="orange">
                                         <h4 class="title">Top Products</h4>
-                                        <p class="category">Top Products on ${year}</p>
+                                        <p class="category">Top Products till ${toDay}</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
@@ -242,7 +242,7 @@
                                 <div class="card">
                                     <div class="card-header" data-background-color="purple">
                                         <h4 class="title">Seller</h4>
-                                        <p class="category">New employees on 15th September, 2016</p>
+                                        <p class="category">New registered seller till ${toDay}</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                         <table class="table table-hover">
