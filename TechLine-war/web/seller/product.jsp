@@ -208,7 +208,7 @@
             <div class="modal fade login" id="EditHistory">
                 <div class="modal-dialog login animated">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" style="background-color: #3366ff; color: #FFF">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Product History</h4>
                         </div>
@@ -236,7 +236,7 @@
                         </div>
                         <div class="modal-footer">
                             <div class="forgot login-footer">
-                                <span></span>
+                                <span>Tech Line In The Best</span>
                             </div>
 
                         </div>        
@@ -249,7 +249,7 @@
             <div class="modal fade login" id="ProductDetail">
                 <div class="modal-dialog login animated">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" style="background-color: #3366ff; color: #FFF">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Product Detail</h4>
                         </div>
@@ -266,7 +266,7 @@
                         </div>
                         <div class="modal-footer">
                             <div class="forgot login-footer">
-                                <span></span>
+                                <span>Tech Line In The Best</span>
                             </div>
 
                         </div>        

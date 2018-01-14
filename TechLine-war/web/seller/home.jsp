@@ -132,7 +132,7 @@
             <div class="modal fade login" id="PasswordModal">
                 <div class="modal-dialog login animated">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" style="background-color: #3366ff; color: #FFF">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Change Password</h4>
                         </div>
@@ -142,10 +142,10 @@
                                     <div class="error"></div>
                                     <div class="form loginBox">
                                         <form method="post" action="editSellerServlet">
-                                            <input id="oldPass" class="input-xlarge" pattern=".{5,20}" type="password" name="txtOldPassword" required="true" required title="This is your current password"><br/>
-                                            <input id="newPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtNewPass" required="true" required title="This is your new password"><br/>
-                                            <input id="confirmPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password"><br/>
-                                            <button class="btn btn-inverse" style="width:285px;" type="submit" name="action" value="sellerChangePassword" onclick="return validatePass()">Change Password</button>
+                                            <input id="oldPass" class="input-xlarge" pattern=".{5,20}" type="password" name="txtOldPassword" required="true" required title="This is your current password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            <input id="newPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtNewPass" required="true" required title="This is your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            <input id="confirmPass" class="input-xlarge" pattern=".{5,20}" type="password"  name="txtConfirmPass" required="true" required title="Please re-type your new password" style="margin-bottom: 10px; width: 270px; border-radius: 4px;"><br/>
+                                            <button class="btn btn-instagram" type="submit" name="action" value="sellerChangePassword" onclick="return validatePass()">Change Password</button>
                                         </form>
                                     </div>
                                 </div>
