@@ -150,12 +150,4 @@ public class ProductsFacade extends AbstractFacade<Products> implements Products
         return null;
     }
 
-    @Override
-    public List<Products> getListProductByUserID(String userID) {
-        Query q = em.createQuery("SELECT p FROM Products p WHERE p.userId.userId = :userID and p.productStatus = TRUE");
-        q.setParameter("userID", userID);
-        return q.getResultList();
-    }
-    
-    
 }

@@ -14,13 +14,11 @@ import entities.CategoriesFacadeLocal;
 import entities.Customers;
 import entities.CustomersFacadeLocal;
 import entities.OrderDetails;
-import entities.OrderDetailsFacadeLocal;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
-import entities.ProductsCommentFacadeLocal;
 import entities.ProductsEditHistory;
 import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsFacadeLocal;
@@ -205,40 +203,40 @@ public class viewServlet extends HttpServlet {
                     break;
                 case "viewProductSeller":
                     String sellerID = request.getParameter("sellerID");
-                    List<Products> listProductSeller = productsFacade.getListProductByUserID(sellerID);
+                    List<Products> listProductSeller = productsFacade.getListProductBySeller(sellerID);
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listProductSeller), 10);
                     buildPaging(request, session, paging, referer, "pageProduct");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
                 case "showCustomer":
-                    listCustomer = customersFacade.showAll();
+                    listCustomer = customersFacade.findAll();
                     PageProduct pageCustomer = new PageProduct(listCustomer, 5);
                     buildPaging(request, session, pageCustomer, referer, "pageCus");
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
 
                 case "showSeller":
-                    listSellers = sellerFacadeLocal.showAll();
+                    listSellers = sellerFacadeLocal.findAll();
                     PageProduct pageSeller = new PageProduct(listSellers, 5);
                     buildPaging(request, session, pageSeller, referer, "pageSeller");
                     request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
                     break;
 
                 case "showProductAdmin":
-                    List<Products> listDateposted = productsFacade.showAll();
+                    List<Products> listDateposted = productsFacade.findAll();
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
                     buildPaging(request,session,paging,referer,"pageProduct");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
 
                 case "showBrand":
-                    paging = new PageProduct(listBrands, 10);
+                    paging = new PageProduct(brandsFacade.findAll(), 10);
                     buildPaging(request, session, paging, referer, "pageBrands");
                     request.getRequestDispatcher("admin/brand.jsp").forward(request, response);
                     break;
 
                 case "showCategories":
-                    request.setAttribute("listCategories", listCategories);
+                    request.setAttribute("listCategories", categoriesFacade.findAll());
                     request.getRequestDispatcher("admin/categories.jsp").forward(request, response);
                     break;
 
@@ -247,8 +245,7 @@ public class viewServlet extends HttpServlet {
                     break;
 
                 case "showProductType":
-                    listProductTypes = productTypesFacade.showAll();
-                    paging = new PageProduct(listProductTypes, 10);
+                    paging = new PageProduct(productTypesFacade.findAll(), 10);
                     buildPaging(request, session, paging, referer, "pageProductType");
                     request.getRequestDispatcher("admin/type.jsp").forward(request, response);
                     break;

@@ -51,5 +51,4 @@ public interface ProductsFacadeLocal {
     
     List<Products> getTopProduct(String seller);
 
-    List<Products> getListProductByUserID(String userID);
 }
