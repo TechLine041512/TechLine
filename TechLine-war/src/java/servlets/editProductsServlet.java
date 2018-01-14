@@ -203,20 +203,27 @@ public class editProductsServlet extends HttpServlet {
             case "blockProduct":
                 productId = request.getParameter("pid");
                 product = productsFacade.find(productId);
+                String userRole = product.getUserId().getRole();
                 product.getTypeId().getProductsCollection().remove(product);
                 product.getBrandId().getProductsCollection().remove(product);
                 boolean unblock = false;
                 if (request.getParameter("bl").equals("Unblock")) {
                     unblock = true;
                 }
+                String forwardUrl = "viewServlet?action=showProductAdmin";
+                //Check whether this is seller's product
+                if (!userRole.equals("admin")) {
+                    String sellerId = product.getUserId().getUserId();
+                    forwardUrl = "viewServlet?action=viewProductSeller&sellerID=" + sellerId;
+                }
                 if (unblock) {
                     if (!product.getTypeId().getTypeStatus()) {
                         request.setAttribute("message", "The Type of this product is blocked. Unblock or change type before unblock this product!");
-                        request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                        request.getRequestDispatcher(forwardUrl).forward(request, response);
                         break;
                     } else if (!product.getBrandId().getBrandStatus()) {
                         request.setAttribute("message", "The brand of this product is blocked. Unblock or change brand before unblock this product!");
-                        request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                        request.getRequestDispatcher(forwardUrl).forward(request, response);
                         break;
                     }
                 }
@@ -226,7 +233,7 @@ public class editProductsServlet extends HttpServlet {
                 product.getTypeId().getProductsCollection().add(product);
                 product.getBrandId().getProductsCollection().add(product);
                 request.setAttribute("message", unblock ? "Unblock product successful!" : "Block product successful!");
-                request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
+                request.getRequestDispatcher(forwardUrl).forward(request, response);
                 break;
             case "cancelProduct":
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);

@@ -84,5 +84,15 @@ public class OrderMasterFacade extends AbstractFacade<OrderMaster> implements Or
             return q.getResultList();
         }
     }
+
+    @Override
+    public List<OrderMaster> showAll() {
+        Query q = em.createQuery("SELECT o FROM OrderMaster o ORDER BY o.orderMId DESC");
+        List<OrderMaster> list = q.getResultList();
+        if (list != null) {
+            return list;
+        }
+        return null;
+    }
 }
 

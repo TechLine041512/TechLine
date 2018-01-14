@@ -37,4 +37,6 @@ public interface OrderMasterFacadeLocal {
     
     List<Object> searchOrderMastersByDate(String customerID, String date);
 
+    List<OrderMaster> showAll();
+
 }

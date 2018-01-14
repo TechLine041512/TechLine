@@ -11,11 +11,8 @@ import entities.Categories;
 import entities.CategoriesFacadeLocal;
 import entities.Products;
 import entities.ProductsFacadeLocal;
-
 import java.io.IOException;
-
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

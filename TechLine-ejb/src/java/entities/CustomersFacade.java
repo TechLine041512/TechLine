@@ -28,7 +28,7 @@ public class CustomersFacade extends AbstractFacade<Customers> implements Custom
 
     @Override
     public List<Customers> showAll() {
-        Query q = em.createQuery("SELECT c FROM Customers c");
+        Query q = em.createQuery("SELECT c FROM Customers c ORDER BY c.userId DESC");
         List<Customers> list = q.getResultList();
         if (list != null) {
             return list;
