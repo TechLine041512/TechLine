@@ -221,11 +221,14 @@
                                 <address>
                                     <strong>Product Code:</strong> <span>${product.productId}</span><br>
                                     <strong>Brand:</strong> <span>${product.brandName}</span><br>
-                                    <strong>Weight:</strong> <span>${product.productWeight}(cm)</span><br>
-                                    <strong>Width:</strong> <span>${product.productWidth}(cm)</span><br>
-                                    <strong>Heigth:</strong> <span>${product.productHeigth}(cm)</span><br>
-                                    <strong>Length:</strong> <span>${product.productLength}(cm)</span><br>
-                                    <strong>Rating Points:</strong> 12 <a href="#"><span style="color: yellow"><i class="fa fa-star"></i></span></a><br>
+                                    <strong>Weight:</strong> <span>${product.productWeight} (kg)</span><br>
+                                    <strong>Width:</strong> <span>${product.productWidth} (cm)</span><br>
+                                    <strong>Height:</strong> <span>${product.productHeigth} (cm)</span><br>
+                                    <strong>Length:</strong> <span>${product.productLength} (cm)</span><br>
+                                    <strong>Rating Points:</strong> ${product.productRating}
+                                        <c:forEach begin="1" end="5" varStatus="point">
+                                            <a href="addProductsServlet?action=rating&point=${point.index}&pid=${product.productId}"><i class="fa fa-star" style="color: yellow; font-size: 20px"></i></a>
+                                        </c:forEach> <br/>
                                     <strong>Availability:</strong> ${product.productQuantity>0?'<span style="color: green;">- Còn Hàng</span>':'<span style="color: red;">Out Of Stock -</span>'}<br>								
                                 </address>									
                                 <h4>Price: <strong style="color: red;">&#36;${product.productPrice - (product.productPrice * product.productDiscount / 100)}</strong> <strong><strike> ${product.productPrice}</strike></strong></h4>

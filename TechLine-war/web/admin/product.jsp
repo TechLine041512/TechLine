@@ -193,49 +193,49 @@
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showCustomer">
+                            <a href="viewServlet?action=showCustomer&page=1">
                                 <i class="material-icons">person</i>
                                 <p>Customer List</p>
                             </a>
                         </li>
                         <li ${not empty param.sellerID ? 'class="active"' : ''}>
-                            <a href="viewServlet?action=showSeller">
+                            <a href="viewServlet?action=showSeller&page=1">
                                 <i class="material-icons">person</i>
                                 <p>Seller List</p>
                             </a>
                         </li>
                         <li ${empty param.sellerID ? 'class="active"' : ''}>
-                            <a href="viewServlet?action=showProductAdmin">
+                            <a href="viewServlet?action=showProductAdmin&page=1">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showCategories">
+                            <a href="viewServlet?action=showCategories&page=1">
                                 <i class="material-icons">library_books</i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showProductType">
+                            <a href="viewServlet?action=showProductType&page=1">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Type Product</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showBrand">
+                            <a href="viewServlet?action=showBrand&page=1">
                                 <i class="material-icons">bubble_chart</i>
                                 <p>Brand</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showOrder">
+                            <a href="viewServlet?action=showOrder&page=1">
                                 <i class="material-icons">location_on</i>
                                 <p>Orders</p>
                             </a>
                         </li>
                         <li>
-                            <a href="viewServlet?action=showReport">
+                            <a href="viewServlet?action=showReport&page=1">
                                 <i class="material-icons">library_books</i>
                                 <p>Report</p>
                             </a>

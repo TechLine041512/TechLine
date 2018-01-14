@@ -6,9 +6,11 @@
 
 package entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 public class ProductRatingFacade extends AbstractFacade<ProductRating> implements ProductRatingFacadeLocal {
@@ -23,5 +25,17 @@ public class ProductRatingFacade extends AbstractFacade<ProductRating> implement
     public ProductRatingFacade() {
         super(ProductRating.class);
     }
+
+    @Override
+    public List<ProductRating> findRatingByProductId(String productId) {
+        Query q = em.createQuery("SELECT p FROM ProductRating p WHERE p.productRatingPK.productId = ?1");
+        q.setParameter(1, productId);
+        List<ProductRating> listResult = q.getResultList();
+        if ( listResult != null ) {
+            return listResult;
+        }
+        return null;
+    }
+    
     
 }

@@ -9,6 +9,9 @@ import entities.Brands;
 import entities.BrandsFacadeLocal;
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.ProductRating;
+import entities.ProductRatingFacadeLocal;
+import entities.ProductRatingPK;
 import entities.ProductTypes;
 import entities.ProductTypesFacadeLocal;
 import entities.Products;
@@ -20,27 +23,31 @@ import entities.UsersFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 
 public class addProductsServlet extends HttpServlet {
+    @EJB
+    private ProductRatingFacadeLocal productRatingFacade;
     @EJB
     private UsersFacadeLocal usersFacade;
     @EJB
     private ProductsCommentFacadeLocal productsCommentFacade;
     @EJB
     private CategoriesFacadeLocal categoriesFacade;
-
     @EJB
     private ProductTypesFacadeLocal productTypesFacade;
     @EJB
     private BrandsFacadeLocal brandsFacade;
     @EJB
     private ProductsFacadeLocal productsFacade;
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -235,6 +242,59 @@ public class addProductsServlet extends HttpServlet {
                 case "sellerCancelProduct":
                     request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
                     break;    
+                    
+                case "rating":
+                    if (user == null || user.getCustomers() == null) {
+                        request.setAttribute("message", "Please login as customer to vote.");
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                        break;
+                    }
+                    String point = request.getParameter("point");
+                    String pid = request.getParameter("pid");
+                    String userId = user.getUserId();
+                    products = productsFacade.find(pid);
+                    
+                    
+                    int count = 1;
+                    double ratingPoint;
+                    
+                    if (products != null){
+                        boolean alreadyVoted = checkAlreadyVotedUser(userId, products.getVotedUsers());
+                        if (alreadyVoted) {
+                            request.setAttribute("message", "You have voted for this product");
+                            request.getRequestDispatcher("HomeServlet").forward(request, response);
+                            break;
+                        }
+                        else {
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(products.getVotedUsers());
+                            sb.append(",");
+                            sb.append(user.getUserId());
+                            products.setVotedUsers(sb.toString());
+                        }
+                        ProductRatingPK pRatingPK = new ProductRatingPK(pid, Integer.parseInt(point));
+                        ProductRating pRating = productRatingFacade.find(pRatingPK);
+                        if ( pRating != null) {
+                            count += pRating.getCount();
+                            pRating.setCount(count);
+                            productRatingFacade.edit(pRating);
+                        }
+                        else {
+                            pRating = new ProductRating();
+                            pRating.setProductRatingPK(pRatingPK);
+                            pRating.setCount(count);
+                            pRating.setProducts(products);
+                            productRatingFacade.create(pRating);
+                        }
+                        
+                        ratingPoint = calProductRating(productRatingFacade.findRatingByProductId(pid));
+                        System.out.println("Rating pount "+ratingPoint);
+                        products.setProductRating(ratingPoint);
+                        productsFacade.edit(products);
+                    }
+                    request.setAttribute("message", "Thank you for voting");
+                    request.getRequestDispatcher("viewServlet?action=productDetail&idProduct="+pid).forward(request, response);
+                    break;
                 default:
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                     break;
@@ -280,5 +340,28 @@ public class addProductsServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private double calProductRating(List<ProductRating> listRatings) {
+        double ratingPoint = 0.0;
+        int totalVote = 0;
+        for (ProductRating pr: listRatings) {
+            ratingPoint += pr.getProductRatingPK().getRatingPoint() * pr.getCount();
+            totalVote += pr.getCount();
+        }
+        ratingPoint /= totalVote;
+        return ratingPoint;
+    }
+
+    private boolean checkAlreadyVotedUser(String userId, String votedUsers) {
+        if (StringUtils.isNotBlank(votedUsers)) {
+            String[] listUsers = votedUsers.split(",");
+            for (String s: listUsers) {
+                if (StringUtils.equals(userId, s)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

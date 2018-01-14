@@ -50,24 +50,24 @@ public class chartServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             response.setContentType("text/html;charset=UTF-8");
                     Calendar cal = Calendar.getInstance();
-                    int year = cal.get(cal.YEAR);
+                    int year = cal.get(cal.YEAR) - 1;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String aftermonth =(year-1) +  "-12-01" ;
-                    String beforemonth;
+                    String beforemonth =(year+1) +  "-01-01" ;
+                    String aftermonth;
                     Gson gson = new Gson();
                     int[] datasProduct = new int[12];
                     int[] datasOrder = new int[12];
                     try {
-                        for (int i=1; i < 12 ; i++) {
+                        for (int i=12; i > 0 ; i--) {
                         StringBuilder sb = new StringBuilder();
                         sb.append(year);
                         sb.append("-");
                         sb.append(String.format("%02d", i));
                         sb.append("-01");
-                        beforemonth = sb.toString();
-                        datasProduct[i] = (int) productsFacade.countProductsByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                        datasOrder[i] = (int) orderMasterFacade.countOrderByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
-                        aftermonth = beforemonth;
+                        aftermonth = sb.toString();
+                        datasProduct[i-1] = (int) productsFacade.countProductsByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
+                        datasOrder[i-1] = (int) orderMasterFacade.countOrderByMonth(sdf.parse(aftermonth), sdf.parse(beforemonth));
+                        beforemonth = aftermonth;
                     }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -83,7 +83,6 @@ public class chartServlet extends HttpServlet {
                     chart.add(modelProducts);
                     chart.add(modelOrders);
                     String jsonChart = gson.toJson(chart);
-                    System.out.println("Json "+jsonChart.toString());
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
                     response.getWriter().write(jsonChart);

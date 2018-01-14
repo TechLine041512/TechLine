@@ -42,7 +42,7 @@
         <c:if test="${not empty addSuccess}">
             <script>
                 window.addEventListener("load", function() {
-                    swal("Add to cart successfully", "", "success");
+                    swal("${swalMessage}", "", "success");
                 });
                 setTimeout(function(){window.history.go(-1);}, 2000);
             </script>

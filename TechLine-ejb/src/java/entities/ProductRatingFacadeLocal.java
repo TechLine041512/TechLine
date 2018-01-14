@@ -25,5 +25,7 @@ public interface ProductRatingFacadeLocal {
     List<ProductRating> findRange(int[] range);
 
     int count();
+
+    List<ProductRating> findRatingByProductId(String productId);
     
 }

@@ -25,6 +25,16 @@ public class ProductIndexModel {
     private double productLength;
     private int productQuantity;
     private double productDiscount;
+    private String productRating;
+
+    public String getProductRating() {
+        return productRating;
+    }
+
+    public void setProductRating(String productRating) {
+        this.productRating = productRating;
+    }
+    
     public Collection<ProductsComment> getProductsCommentCollection() {  
         return productsCommentCollection;
     }
