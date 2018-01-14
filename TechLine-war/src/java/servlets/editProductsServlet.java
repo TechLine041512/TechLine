@@ -16,6 +16,7 @@ import entities.ProductsEditHistory;
 import entities.ProductsEditHistoryFacadeLocal;
 import entities.ProductsEditHistoryPK;
 import entities.ProductsFacadeLocal;
+import entities.Users;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -51,8 +52,17 @@ public class editProductsServlet extends HttpServlet {
         String productId;
         Products product = null;
         Date today = null;
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            request.setAttribute("message", "Please log in");
+            request.getRequestDispatcher("HomeServlet").forward(request, response);
+            return;
+        }
+        String roleUser = user.getRole();
         switch (action) {
             case "sellerEditProductStatus":
+                if (wrongRole(roleUser, "seller", request, response))
+                    return;
                 productId = request.getParameter("productId");
                 product = productsFacade.find(productId);
                 if (product.getProductStatus()) {
@@ -64,6 +74,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
                 break;
             case "sellerEditProductDetail":
+                if (wrongRole(roleUser, "seller", request, response))
+                    return;
                 productId = request.getParameter("txtProductID");
                 ProductsEditHistoryPK editHistoryPKE = new ProductsEditHistoryPK(productId, 1);
                 ProductsEditHistory editHistoryE = productsEditHistoryFacade.find(editHistoryPKE);
@@ -135,6 +147,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=sellerProduct").forward(request, response);
                 break;
             case "editProduct":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 productId = request.getParameter("txtProductID");
                 ProductsEditHistoryPK editHistoryPK = new ProductsEditHistoryPK(productId, 1);
                 ProductsEditHistory editHistory = productsEditHistoryFacade.find(editHistoryPK);
@@ -201,6 +215,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showProductAdmin").forward(request, response);
                 break;
             case "blockProduct":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 productId = request.getParameter("pid");
                 product = productsFacade.find(productId);
                 String userRole = product.getUserId().getRole();
@@ -240,6 +256,8 @@ public class editProductsServlet extends HttpServlet {
                 break;
             //admin edit product type
             case "editProductType":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String typeId = request.getParameter("txtTypeId");
                 ProductTypes type = productTypesFacade.find(typeId);
                 type.setTypeName(request.getParameter("txtTypeName"));
@@ -252,6 +270,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showProductType").forward(request, response);
                 break;
             case "editBrand":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String brandId = request.getParameter("txtBrandId");
                 Brands brand = brandsFacade.find(brandId);
                 brand.setBrandName(request.getParameter("txtBrandName"));
@@ -261,6 +281,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
             case "blockBrand":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String blockBrandId = request.getParameter("bId");
                 Brands blockBr = brandsFacade.find(blockBrandId);
                 List<Products> listProBrand = (List<Products>) blockBr.getProductsCollection();
@@ -292,6 +314,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showBrand").forward(request, response);
                 break;
             case "blockType":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String typeIdBlock = request.getParameter("typeId");
                 ProductTypes typeBlock = productTypesFacade.find(typeIdBlock);
                 List<Products> listProType = (List<Products>) typeBlock.getProductsCollection();
@@ -342,6 +366,8 @@ public class editProductsServlet extends HttpServlet {
                 break;
             //admin edit category
             case "editCategory":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String catId = request.getParameter("txtCategoryId");
                 Categories catEdit = categoriesFacade.find(catId);
                 catEdit.setCategoryName(request.getParameter("txtCategoryName"));
@@ -352,6 +378,8 @@ public class editProductsServlet extends HttpServlet {
                 request.getRequestDispatcher("viewServlet?action=showCategories").forward(request, response);
                 break;
             case "blockCategory":
+                if (wrongRole(roleUser, "admin", request, response))
+                    return;
                 String catIdBlock = request.getParameter("catId");
                 Categories catBlock = categoriesFacade.find(catIdBlock);
                 List<ProductTypes> listTypeCat = (List<ProductTypes>) catBlock.getProductTypesCollection();
@@ -404,6 +432,18 @@ public class editProductsServlet extends HttpServlet {
                 break;
 
         }
+    }
+
+    private boolean wrongRole(String role, String check, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (!role.equals(check)) {
+                request.setAttribute("message", "Please log in as " + check);
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return true;
+            }
+        } catch (ServletException | IOException e) {
+        }
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
