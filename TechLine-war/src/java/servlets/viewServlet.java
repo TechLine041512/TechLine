@@ -93,7 +93,7 @@ public class viewServlet extends HttpServlet {
             List<Products> listProductRelated = new ArrayList<>();
             List<Categories> listCategories = categoriesFacade.showActiveCategories();
             List<Brands> listBrands = brandsFacade.showActiveBrands();
-            List<OrderMaster> listOrderMaster = orderMasterFacade.findAll();
+            List<OrderMaster> listOrderMaster = orderMasterFacade.showAll();
             List<Customers> listCustomer;
             List<Seller> listSellers;
             List<ProductTypes> listProductTypes;
@@ -209,21 +209,21 @@ public class viewServlet extends HttpServlet {
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);
                     break;
                 case "showCustomer":
-                    listCustomer = customersFacade.findAll();
+                    listCustomer = customersFacade.showAll();
                     PageProduct pageCustomer = new PageProduct(listCustomer, 5);
                     buildPaging(request, session, pageCustomer, referer, "pageCus");
                     request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     break;
 
                 case "showSeller":
-                    listSellers = sellerFacadeLocal.findAll();
+                    listSellers = sellerFacadeLocal.showAll();
                     PageProduct pageSeller = new PageProduct(listSellers, 5);
                     buildPaging(request, session, pageSeller, referer, "pageSeller");
                     request.getRequestDispatcher("admin/seller.jsp").forward(request, response);
                     break;
 
                 case "showProductAdmin":
-                    List<Products> listDateposted = productsFacade.findAll();
+                    List<Products> listDateposted = productsFacade.showAll();
                     paging = new PageProduct(TechLineUtils.buildProductAdmin(listDateposted), 10);
                     buildPaging(request,session,paging,referer,"pageProduct");
                     request.getRequestDispatcher("admin/product.jsp").forward(request, response);

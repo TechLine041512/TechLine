@@ -188,13 +188,13 @@
                                 <p>Customer List</p>
                             </a>
                         </li>
-                        <li>
+                        <li ${not empty param.sellerID ? 'class="active"' : ''}>
                             <a href="viewServlet?action=showSeller">
                                 <i class="material-icons">person</i>
                                 <p>Seller List</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li ${empty param.sellerID ? 'class="active"' : ''}>
                             <a href="viewServlet?action=showProductAdmin">
                                 <i class="material-icons">content_paste</i>
                                 <p>Product List</p>
@@ -322,7 +322,12 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row" style="text-align: center;">
-                            <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=addProduct">Add</a>
+                            <c:if test="${empty param.sellerID}">
+                                <a class="btn-instagram btn" value="permissions" href="RedirectServlet?action=addProduct">Add</a>
+                            </c:if>
+                            <c:if test="${not empty param.sellerID}">
+                                <button class="btn-instagram btn" onclick="window.history.back();">Back</button>
+                            </c:if>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -347,7 +352,14 @@
                                             <tbody>
                                                 <c:forEach items="<%=pageProduct.getModel()%>" var="product">
                                                     <tr>
-                                                        <td><a href="RedirectServlet?action=editProduct&pid=${product.id}">${product.id}</a></td>
+                                                        <td>
+                                                            <c:if test="${empty param.sellerID}">
+                                                                <a href="RedirectServlet?action=editProduct&pid=${product.id}">${product.id}</a>
+                                                            </c:if>
+                                                            <c:if test="${not empty param.sellerID}">
+                                                                ${product.id}
+                                                            </c:if>
+                                                        </td>
                                                         <td><a onclick="openProductDetailModal('${product.id}')">${product.name}</a></td>
                                                         <td>${product.brand}</td>
                                                         <td><img src="${product.image}" style="width: 80px; height: 80px;"/></td>
