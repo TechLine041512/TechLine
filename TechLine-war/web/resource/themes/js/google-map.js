@@ -34,6 +34,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             computeTotalDistance(directionsDisplay.getDirections());
         } else {
             sweetAlert("Oops...", "Please input address correctly", "error");
+            document.getElementById('btnCheckOut').disabled = true;
         }
     });
 }

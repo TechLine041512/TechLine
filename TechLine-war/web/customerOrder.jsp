@@ -222,7 +222,7 @@
                 <div class="table-cart"><!----- Table cart ----->
                     <h3>Orders</h3>
                     <div id="order-list-customer-info">
-                        <h4>Name: Tiến</h4>
+                        <h4>Name: ${user.fullname}</h4>
                     </div>               
                     <div class="clearfix"></div>
 

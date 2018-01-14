@@ -8,16 +8,20 @@ package servlets;
 
 import entities.Categories;
 import entities.CategoriesFacadeLocal;
+import entities.OrderDetails;
 import entities.OrderMaster;
 import entities.OrderMasterFacadeLocal;
+import entities.Products;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.TechLineUtils;
 
 /**
  *
@@ -37,10 +41,16 @@ public class searchOrderServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch(action){
                 case "orderDetailCustomer":
-                    String orderID = request.getParameter("orderID");
-                    OrderMaster ODM =  orderMasterFacade.find(orderID);
                     List<Categories> listCategories = categoriesFacade.showActiveCategories();
+                    List<Products> listProducts = new ArrayList<>();
+                    String orderID = request.getParameter("orderID");
+                    OrderMaster ODM =  orderMasterFacade.find(orderID);       
+                    List<OrderDetails> listOrderDetail = (List<OrderDetails>) ODM.getOrderDetailsCollection();
+                    for (OrderDetails orderDetails : listOrderDetail) {
+                        listProducts.add(orderDetails.getProducts());
+                    }
                     request.setAttribute("OrderMaster", ODM);
+                    request.setAttribute("ListProduct", TechLineUtils.buidProductIndexModel(listProducts));
                     request.setAttribute("listCategories", listCategories);
                     request.getRequestDispatcher("customerOrderDetail.jsp").forward(request, response);
                     break;
