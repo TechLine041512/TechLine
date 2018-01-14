@@ -98,6 +98,7 @@ create table Products
 	productRating float,
 	isApproved bit,
 	datePosted datetime not null default getdate(),
+	votedUsers varchar(4000),
 	productStatus bit
 )
 go
